@@ -1,0 +1,127 @@
+@import "./_variables";
+
+a {
+  text-decoration: none;
+}
+
+
+.v-application ol,
+.v-application ul {
+  padding-left: 0;
+  list-style: none;
+}
+
+
+.app-headline {
+  color: $secondary;
+  font-size: 25px;
+  user-select: none;
+}
+
+
+.truncate {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  width: 240px;
+}
+
+.submit-btn {
+  max-width: 250px;
+  margin: 0 auto;
+  text-transform: uppercase;
+}
+
+.button-text {
+  text-transform: uppercase;
+  font-size: 12px;
+  color: $secondary;
+}
+
+
+#app {
+  .v-content__wrap {
+    background-color: $bg;
+  }
+  .link {
+    color: $accent;
+    text-decoration: underline;
+  }
+  .v-toolbar__content {
+    padding-left: 0;
+    padding-right: 0;
+  }
+  .app-container {
+    color: #fff;
+    padding: 10px;
+    @media #{$tablet} {
+      padding: 40px 10px;
+    }
+  }
+  .v-dialog .v-sheet {
+    background-color: $light-grey;
+  }
+  .v-btn.secondary .v-btn__content {
+    color: $primary;
+  }
+  .v-data-footer__pagination {
+    margin: 0;
+    @media #{$tablet} {
+      margin: 0 20px;
+    }
+  }
+  .v-input--radio-group--column .v-input--radio-group__input > .v-label {
+    margin-bottom: 8px;
+  }
+}
+
+.header-title {
+  user-select: none;
+  color: $secondary;
+  font-size: 22px;
+  font-weight: 600;
+  text-shadow: 2px -2px 0px #000;
+}
+
+// animations
+
+.slide-enter-active,
+.slide-leave-active {
+  transition: 0.3s;
+}
+.slide-enter,
+.slide-leave-to {
+  opacity: 0;
+  will-change: opacity;
+}
+
+.fade-down-enter-active,
+.fade-down-leave-active {
+  transition: 1s ease;
+  will-change: transition;
+}
+.fade-down-enter,
+.fade-down-leave-to {
+  opacity: 0;
+  will-change: transform, opacity;
+  transform: translateY(-30px);
+}
+
+// firebase UI
+
+.firebaseui-card-content {
+  padding: 0;
+}
+
+.firebaseui-idp-button,
+.firebaseui-tenant-button {
+  max-width: 250px;
+}
+
+.firebaseui-idp-text.firebaseui-idp-text-long {
+  display: none;
+}
+
+.firebaseui-idp-text.firebaseui-idp-text-short {
+  display: table-cell;
+}
