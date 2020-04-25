@@ -1,5 +1,7 @@
 
+// TODO:remove db after refactor with node js
 import db from "@/db";
+import axios from 'axios'
 
 export default {
     namespaced: true,
@@ -27,23 +29,25 @@ export default {
             commit('SET_LOADING', true, { root: true })
             const user = rootState.user.user.id
             if (user) {
-                db.database().ref('users').child(user).child('games').once('value')
-                    .then((data) => {
-                        const games = []
-                        const obj = data.val()
-                        for (let key in obj) {
-                            games.push({
-                                id: key,
-                                name: obj[key].name,
-                                coop: obj[key].coop,
-                                imageUrl: obj[key].imageUrl,
-                                bggURL: obj[key].bggURL,
-                                melodiceURL: obj[key].melodiceURL,
-                                rulesURL: obj[key].rulesURL,
-                                teams: obj[key].teams,
-                                favorite: obj[key].favorite ? obj[key].favorite : false,
-                            })
-                        }
+                axios.get('http://localhost:3000/games')
+                    // db.database().ref('users').child(user).child('games').once('value')
+                    .then((res) => {
+                        const games = res.data
+                        // const games = []
+                        // const obj = data.val()
+                        // for (let key in obj) {
+                        //     games.push({
+                        //         id: key,
+                        //         name: obj[key].name,
+                        //         coop: obj[key].coop,
+                        //         imageUrl: obj[key].imageUrl,
+                        //         bggURL: obj[key].bggURL,
+                        //         melodiceURL: obj[key].melodiceURL,
+                        //         rulesURL: obj[key].rulesURL,
+                        //         teams: obj[key].teams,
+                        //         favorite: obj[key].favorite ? obj[key].favorite : false,
+                        //     })
+                        // }
                         commit('SET_LOADED_GAMES', games)
                         commit('SET_LOADING', false, { root: true })
                     })
@@ -53,17 +57,18 @@ export default {
                     })
             }
         },
-        createGame({ commit, rootState }, payload) {
+        createGame({ commit }, payload) {
             commit('SET_LOADING', true, { root: true })
-            const user = rootState.user.user.id
+            const id = `f${(~~(Math.random() * 1e8)).toString(16)}`;
             const game = {
+                id,
                 ...payload,
                 favorite: false
             }
             game.imageUrl = 'https://firebasestorage.googleapis.com/v0/b/geekstat-v.appspot.com/o/common%2Fgame.jpg?alt=media&token=1b405b29-57f5-4b59-9ec2-01308dce1d6d'
-            db.database().ref('users').child(user).child('games').push(game)
-                .then((data) => {
-                    commit("CREATE_GAME", { ...game, id: data.key })
+            axios.post('http://localhost:3000/games', game)
+                .then(() => {
+                    commit("CREATE_GAME", { ...game })
                     commit('SET_LOADING', false, { root: true })
                 })
                 .catch((e) => {
