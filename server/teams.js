@@ -31,4 +31,14 @@ router.post('/', async (req, res) => {
     }
 })
 
+router.delete('/:id', async (req, res) => {
+    try {
+        await Team.findByIdAndRemove(req.params.id);
+        res.status(200).json({ state: 'deleted' });
+    } catch (err) {
+        res.status(400).json({ message: err.message });
+    }
+});
+
+
 module.exports = router;

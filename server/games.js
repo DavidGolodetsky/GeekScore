@@ -12,10 +12,10 @@ router.get('/', async (req, res) => {
     }
 });
 
+
 router.post('/', async (req, res) => {
-    const { name, coop, favorite, id, imageUrl } = req.body
+    const { name, coop, favorite, imageUrl } = req.body
     const game = new Game({
-        id,
         name,
         coop,
         favorite,
@@ -28,5 +28,14 @@ router.post('/', async (req, res) => {
         res.status(400).json({ message: err.message });
     }
 })
+
+router.delete('/:id', async (req, res) => {
+    try {
+        await Game.findByIdAndRemove(req.params.id);
+        res.status(200).json({ state: 'deleted' });
+    } catch (err) {
+        res.status(400).json({ message: err.message });
+    }
+});
 
 module.exports = router;

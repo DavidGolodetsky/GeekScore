@@ -54,7 +54,6 @@ export default {
         },
         createTeam({ commit }, payload) {
             commit('SET_LOADING', true, { root: true })
-            const id = `f${(~~(Math.random() * 1e8)).toString(16)}`;
             // const user = rootState.user.user.id
             // TODO:remove image
             const imageUrl = 'https://www.talismanisland.com/bigbang_s01e17_tal1.jpg'
@@ -62,13 +61,13 @@ export default {
             const team = {
                 ...payload,
                 imageUrl,
-                id,
                 rounds: {},
                 favorite: false
             }
             axios.post('http://localhost:3000/teams', team)
-                .then(() => {
-                    commit("CREATE_TEAM", { ...team })
+                .then((res) => {
+                    const id = res.data._id
+                    commit("CREATE_TEAM", { ...team, id })
                     commit('SET_LOADING', false, { root: true })
                 })
                 .catch((e) => {
@@ -117,13 +116,9 @@ export default {
                     console.log(e)
                 })
         },
-        deleteTeam({ commit, rootState }, payload) {
+        deleteTeam({ commit }, payload) {
             commit('SET_LOADING', true, { root: true })
-            const user = rootState.user.user.id
-            if (db.storage().ref('users').child(user).child('teams').child(`${payload.id}${payload.ext}`)) {
-                db.storage().ref('users').child(user).child('teams').child(`${payload.id}${payload.ext}`).delete()
-            }
-            db.database().ref('users').child(user).child('games').child(payload.gameId).child('teams').child(payload.id).remove()
+            axios.delete(`http://localhost:3000/teams/${payload._id}`)
                 .then(() => {
                     commit("DELETE_TEAM", payload)
                     commit('SET_LOADING', false, { root: true })

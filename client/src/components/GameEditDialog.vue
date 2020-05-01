@@ -82,7 +82,7 @@ export default {
       const game = {
         name: this.name,
         imageUrl: this.imageUrl,
-        id: this.game.id,
+        _id: this.game._id,
         bggURL: this.bggURL,
         melodiceURL: this.melodiceURL,
         rulesURL: this.rulesURL

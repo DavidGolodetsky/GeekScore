@@ -59,17 +59,16 @@ export default {
         },
         createGame({ commit }, payload) {
             commit('SET_LOADING', true, { root: true })
-            const id = `f${(~~(Math.random() * 1e8)).toString(16)}`;
             const game = {
-                id,
                 ...payload,
                 favorite: false
             }
             //  TODO: static image if not specified another
             game.imageUrl = 'https://aptgadget.com/wp-content/uploads/2019/04/Board-game-carrying-bags.jpg'
             axios.post('http://localhost:3000/games', game)
-                .then(() => {
-                    commit("CREATE_GAME", { ...game })
+                .then((res) => {
+                    const _id = res.data._id
+                    commit("CREATE_GAME", { ...game, _id })
                     commit('SET_LOADING', false, { root: true })
                 })
                 .catch((e) => {
@@ -94,8 +93,7 @@ export default {
         },
         deleteGame({ commit }, payload) {
             commit('SET_LOADING', true, { root: true })
-
-                // db.database().ref('users').child(user).child('games').child(payload.id).remove()
+            axios.delete(`http://localhost:3000/games/${payload._id}`)
                 .then(() => {
                     commit("DELETE_GAME", payload.id)
                     commit('SET_LOADING', false, { root: true })
@@ -113,7 +111,7 @@ export default {
         game(state) {
             return (gameId) => {
                 return state.games.find((game) => {
-                    return game.id === gameId
+                    return game._id === gameId
                 })
             }
         },

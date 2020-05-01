@@ -21,8 +21,8 @@
           min-height="200"
           transition="fade-transition"
         >
-          <v-card dark :key="item.id" raised class="mx-auto app-card">
-            <router-link :to="setRoute(item.id)">
+          <v-card dark :key="item._id" raised class="mx-auto app-card">
+            <router-link :to="setRoute(item._id)">
               <div class="title-wrap">
                 <v-card-title class="d-flex justify-space-between">
                   <span class="card-list-name">{{ item.name }}</span>
@@ -168,7 +168,7 @@ export default {
       const favorite = !item.favorite;
       const data = {
         favorite,
-        id: item.id
+        _id: item._id
       };
       this.$emit("favorite", data);
     }

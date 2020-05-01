@@ -56,7 +56,6 @@ export default {
         ...data,
         gameId: this.gameId
       };
-      console.log(payload);
       this.updateTeam(payload);
     }
   }

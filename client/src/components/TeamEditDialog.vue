@@ -69,7 +69,7 @@ export default {
     // },
     onSubmit() {
       const team = {
-        id: this.team.id,
+        _id: this.team._id,
         gameId: this.team.gameId,
         image: this.imageFile,
         name: this.name
