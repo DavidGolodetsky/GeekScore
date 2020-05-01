@@ -65,7 +65,8 @@ export default {
                 ...payload,
                 favorite: false
             }
-            game.imageUrl = 'https://firebasestorage.googleapis.com/v0/b/geekstat-v.appspot.com/o/common%2Fgame.jpg?alt=media&token=1b405b29-57f5-4b59-9ec2-01308dce1d6d'
+            //  TODO: static image if not specified another
+            game.imageUrl = 'https://aptgadget.com/wp-content/uploads/2019/04/Board-game-carrying-bags.jpg'
             axios.post('http://localhost:3000/games', game)
                 .then(() => {
                     commit("CREATE_GAME", { ...game })
@@ -91,10 +92,10 @@ export default {
                     console.log(e)
                 })
         },
-        deleteGame({ commit, rootState }, payload) {
+        deleteGame({ commit }, payload) {
             commit('SET_LOADING', true, { root: true })
-            const user = rootState.user.user.id
-            db.database().ref('users').child(user).child('games').child(payload.id).remove()
+
+                // db.database().ref('users').child(user).child('games').child(payload.id).remove()
                 .then(() => {
                     commit("DELETE_GAME", payload.id)
                     commit('SET_LOADING', false, { root: true })

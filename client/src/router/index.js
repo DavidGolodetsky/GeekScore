@@ -23,18 +23,6 @@ const routes = [
     name: 'game',
     props: true,
     component: () => import(/* webpackChunkName: "game" */ '../views/GameDetails'),
-    beforeEnter: (to, from, next) => {
-      // TODO:rewrite with game getter, same for team
-      const isGame = store.getters['games/games'].find(game => game.id === to.params.gameId);
-      if (isGame) {
-        next()
-      } else {
-        next({ name: "NotFound" })
-      }
-      if (from.name === 'games') {
-        store.dispatch('teams/setTeams', to.params.gameId)
-      }
-    },
     meta: { requiresAuth: true },
   },
   {

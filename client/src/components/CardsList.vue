@@ -29,6 +29,16 @@
                   <slot name="action" :item="item" />
                 </v-card-title>
               </div>
+              <v-list dense disabled v-if="item.players" class="players">
+                <v-list-item-group>
+                  <v-list-item v-for="(player, i) in item.players" :key="i">
+                    <v-list-item-icon>
+                      <v-icon v-text="'mdi-account'"></v-icon>
+                    </v-list-item-icon>
+                    <v-list-item-content v-text="player.name"></v-list-item-content>
+                  </v-list-item>
+                </v-list-item-group>
+              </v-list>
               <v-img class="white--text align-end" height="350" :src="item.imageUrl">
                 <div class="title-wrap">
                   <v-card-title class="card-list-actions">
@@ -192,6 +202,13 @@ export default {
     display: flex;
     justify-content: flex-end;
     width: 100%;
+  }
+  .players {
+    position: absolute;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 5px;
+    z-index: 2;
   }
 }
 </style>

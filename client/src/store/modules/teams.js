@@ -1,4 +1,5 @@
 import db from "@/db";
+import axios from 'axios'
 import Vue from "vue";
 
 export default {
@@ -7,7 +8,7 @@ export default {
         teams: []
     },
     mutations: {
-        SET_TEAMS(state, payload) {
+        LOAD_TEAMS(state, payload) {
             state.teams = payload
         },
         CREATE_TEAM(state, payload) {
@@ -37,35 +38,37 @@ export default {
         }
     },
     actions: {
-        setTeams({ commit, rootGetters }, payload) {
-            const game = rootGetters['games/game'](payload)
-            let data = []
-            if (game.teams) {
-                const teams = game.teams
-                data = Object.keys(teams).map(key => {
-                    return { ...teams[key], id: key }
-                })
-            }
-            commit("SET_TEAMS", data)
-        },
-        createTeam({ commit, rootState }, payload) {
+        loadTeams({ commit }) {
             commit('SET_LOADING', true, { root: true })
-            const user = rootState.user.user.id
-
-            const imageUrl = 'https://firebasestorage.googleapis.com/v0/b/geekstat-v.appspot.com/o/common%2Fteam.jpg?alt=media&token=74d21226-02b7-4ad6-aa88-220c960f82c3'
+            // TODO:user specific
+            axios.get('http://localhost:3000/teams')
+                .then((res) => {
+                    const teams = res.data
+                    commit("LOAD_TEAMS", teams)
+                    commit('SET_LOADING', false, { root: true })
+                })
+                .catch((e) => {
+                    commit('SET_LOADING', false, { root: true })
+                    console.log(e)
+                })
+        },
+        createTeam({ commit }, payload) {
+            commit('SET_LOADING', true, { root: true })
+            const id = `f${(~~(Math.random() * 1e8)).toString(16)}`;
+            // const user = rootState.user.user.id
+            // TODO:remove image
+            const imageUrl = 'https://www.talismanisland.com/bigbang_s01e17_tal1.jpg'
+            // TODO:map with games
             const team = {
                 ...payload,
                 imageUrl,
+                id,
                 rounds: {},
                 favorite: false
             }
-            db.database().ref('users').child(user).child('games')
-                .child(payload.gameId)
-                .child('teams')
-                .push(team)
-                .then((data) => {
-                    const key = data.key;
-                    commit("CREATE_TEAM", { ...team, id: key })
+            axios.post('http://localhost:3000/teams', team)
+                .then(() => {
+                    commit("CREATE_TEAM", { ...team })
                     commit('SET_LOADING', false, { root: true })
                 })
                 .catch((e) => {

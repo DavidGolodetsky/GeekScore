@@ -13,8 +13,11 @@ server.use(express.json());
 server.use(cors());
 
 
-const router = require('./games');
-server.use('/games', router);
+const games = require('./games');
+server.use('/games', games);
+
+const teams = require('./teams');
+server.use('/teams', teams);
 
 
 server.listen(3000, () => console.log("Server started!"));
