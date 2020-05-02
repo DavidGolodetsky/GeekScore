@@ -21,11 +21,13 @@ const teamSchema = new mongoose.Schema({
         type: Array,
         required: true
     },
-    // TODO:remove image
-    imageUrl: {
-        type: String,
+    games: {
+        type: Array,
         required: true
     },
+    imageUrl: {
+        type: String,
+    }
 });
 
 module.exports = mongoose.model('Team', teamSchema);

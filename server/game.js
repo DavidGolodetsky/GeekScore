@@ -13,8 +13,12 @@ const gameSchema = new mongoose.Schema({
         type: Boolean,
         required: true
     },
+    teams: {
+        type: Array,
+        required: true
+    },
     imageUrl: {
-        type: String
+        type: String,
     },
     bggURL: {
         type: String

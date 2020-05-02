@@ -15,12 +15,12 @@ export default {
             state.teams.push(payload)
         },
         UPDATE_TEAM(state, payload) {
-            const team = state.teams.find(team => team.id === payload.id)
-            state.teams = state.teams.filter(team => team.id !== payload.id)
+            const team = state.teams.find(team => team._id === payload._id)
+            state.teams = state.teams.filter(team => team._id !== payload._id)
             state.teams.push({ ...team, ...payload })
         },
         DELETE_TEAM(state, payload) {
-            state.teams = state.teams.filter(team => team.id !== payload.id)
+            state.teams = state.teams.filter(team => team._id !== payload._id)
         },
         DELETE_ROUND(state, payload) {
             state.teams = state.teams.map(team => {
@@ -29,10 +29,11 @@ export default {
                 return { ...team }
             })
         },
+        // TODO:rewrite this part as separete table for rounds
         CREATE_ROUND(state, payload) {
-            const team = state.teams.find((team) => team.id === payload.teamId);
+            const team = state.teams.find((team) => team._id === payload.teamId);
             const round = {
-                [payload.id]: payload
+                [payload._id]: payload
             }
             Vue.set(team, 'rounds', { ...team.rounds, ...round })
         }
@@ -40,7 +41,6 @@ export default {
     actions: {
         loadTeams({ commit }) {
             commit('SET_LOADING', true, { root: true })
-            // TODO:user specific
             axios.get('http://localhost:3000/teams')
                 .then((res) => {
                     const teams = res.data
@@ -54,20 +54,17 @@ export default {
         },
         createTeam({ commit }, payload) {
             commit('SET_LOADING', true, { root: true })
-            // const user = rootState.user.user.id
-            // TODO:remove image
-            const imageUrl = 'https://www.talismanisland.com/bigbang_s01e17_tal1.jpg'
-            // TODO:map with games
             const team = {
                 ...payload,
-                imageUrl,
+                imageUrl: "",
+                games: [],
                 rounds: {},
                 favorite: false
             }
             axios.post('http://localhost:3000/teams', team)
                 .then((res) => {
-                    const id = res.data._id
-                    commit("CREATE_TEAM", { ...team, id })
+                    const _id = res.data._id
+                    commit("CREATE_TEAM", { ...team, _id })
                     commit('SET_LOADING', false, { root: true })
                 })
                 .catch((e) => {
@@ -75,40 +72,11 @@ export default {
                     console.log(e)
                 })
         },
-        updateTeam({ commit, rootState }, payload) {
+        updateTeam({ commit }, payload) {
             commit('SET_LOADING', true, { root: true })
-            const user = rootState.user.user.id
-            // eslint-disable-next-line no-unused-vars
-            const getTeam = ({ gameId, ...rest }) => rest
-            db.database().ref('users').child(user).child('games').child(payload.gameId).child('teams').child(payload.id).update(getTeam(payload))
+            axios.put(`http://localhost:3000/teams/${payload._id}`, payload)
                 .then(() => {
                     commit("UPDATE_TEAM", payload)
-                    commit('SET_LOADING', false, { root: true })
-                })
-                .catch((e) => {
-                    commit('SET_LOADING', false, { root: true })
-                    console.log(e)
-                })
-        },
-        updateTeamImage({ commit, rootState }, payload) {
-            commit('SET_LOADING', true, { root: true })
-            const user = rootState.user.user.id
-            const ext = payload.ext
-            let imageUrl
-            const imagePath = db.storage().ref('users').child(user).child('teams').child(`${payload.id}${ext}`)
-            if (db.storage().ref('users').child(user).child('teams').child(`${payload.teamId}${ext}`)) {
-                db.storage().ref('users').child(user).child('teams').child(`${payload.teamId}${ext}`).delete()
-            }
-            imagePath.put(payload.image)
-                .then(() => {
-                    return imagePath.getDownloadURL()
-                })
-                .then((url) => {
-                    imageUrl = url
-                    return db.database().ref('users').child(user).child('games').child(payload.gameId).child('teams').child(payload.id).update({ imageUrl })
-                })
-                .then(() => {
-                    commit("UPDATE_TEAM", { ...payload, ext, imageUrl })
                     commit('SET_LOADING', false, { root: true })
                 })
                 .catch((e) => {

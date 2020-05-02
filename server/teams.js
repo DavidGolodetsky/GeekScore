@@ -13,10 +13,11 @@ router.get('/', async (req, res) => {
 });
 
 router.post('/', async (req, res) => {
-    const { name, coop, favorite, id, players, rounds, imageUrl } = req.body
+    const { name, coop, favorite, id, players, rounds, games, imageUrl } = req.body
     const team = new Team({
         id,
         name,
+        games,
         coop,
         favorite,
         players,
@@ -35,6 +36,15 @@ router.delete('/:id', async (req, res) => {
     try {
         await Team.findByIdAndRemove(req.params.id);
         res.status(200).json({ state: 'deleted' });
+    } catch (err) {
+        res.status(400).json({ message: err.message });
+    }
+});
+
+router.put('/:id', async (req, res) => {
+    try {
+        await Team.findByIdAndUpdate(req.params.id, req.body);
+        res.json({ state: 'updated' });
     } catch (err) {
         res.status(400).json({ message: err.message });
     }

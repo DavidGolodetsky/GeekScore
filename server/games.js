@@ -14,9 +14,10 @@ router.get('/', async (req, res) => {
 
 
 router.post('/', async (req, res) => {
-    const { name, coop, favorite, imageUrl } = req.body
+    const { name, coop, teams, favorite, imageUrl } = req.body
     const game = new Game({
         name,
+        teams,
         coop,
         favorite,
         imageUrl
@@ -33,6 +34,15 @@ router.delete('/:id', async (req, res) => {
     try {
         await Game.findByIdAndRemove(req.params.id);
         res.status(200).json({ state: 'deleted' });
+    } catch (err) {
+        res.status(400).json({ message: err.message });
+    }
+});
+
+router.put('/:id', async (req, res) => {
+    try {
+        await Game.findByIdAndUpdate(req.params.id, req.body);
+        res.json({ state: 'updated' });
     } catch (err) {
         res.status(400).json({ message: err.message });
     }

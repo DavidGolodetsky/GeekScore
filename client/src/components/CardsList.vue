@@ -39,7 +39,7 @@
                   </v-list-item>
                 </v-list-item-group>
               </v-list>
-              <v-img class="white--text align-end" height="350" :src="item.imageUrl">
+              <v-img class="white--text align-end" height="350" :src="imagePath(item)">
                 <div class="title-wrap">
                   <v-card-title class="card-list-actions">
                     <template v-if="getActions(item).length">
@@ -152,6 +152,15 @@ export default {
         });
       }
       return actions;
+    },
+    imagePath(item) {
+      if (item.imageUrl) {
+        return item.imageUrl;
+      } else if (item.teams) {
+        return require(`@/assets/img/game.jpg`);
+      } else {
+        return require(`@/assets/img/team.jpg`);
+      }
     },
     getItemsOrder(items) {
       const reversed = items.slice().reverse();
