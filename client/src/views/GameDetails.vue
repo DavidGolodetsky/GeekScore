@@ -36,10 +36,13 @@ export default {
     return {};
   },
   computed: {
-    ...mapGetters("teams", ["teams"]),
+    ...mapGetters("teams", { getTeams: "gameTeams" }),
     ...mapGetters("games", { getGame: "game" }),
     game() {
       return this.getGame(this.gameId);
+    },
+    teams() {
+      return this.getTeams(this.gameId);
     },
     gameName() {
       return this.game.name;

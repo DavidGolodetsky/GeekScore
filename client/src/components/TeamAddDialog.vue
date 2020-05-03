@@ -1,10 +1,5 @@
 <template>
-  <the-dialog
-    activator="plus"
-    header="Add new team"
-    button-text="New team"
-    :submitLogic="onSubmit"
-  >
+  <the-dialog activator="plus" header="Add new team" button-text="New team" :submitLogic="onSubmit">
     <v-text-field
       clearable
       :rules="fieldRules"
@@ -31,13 +26,7 @@
         :label="`Player #${i + 1}`"
       ></v-text-field>
     </template>
-    <v-switch
-      v-if="!game.coop"
-      v-model="coop"
-      label="Cooperative"
-      color="secondary"
-      hide-details
-    ></v-switch>
+    <v-switch v-if="!game.coop" v-model="coop" label="Cooperative" color="secondary" hide-details></v-switch>
   </the-dialog>
 </template>
 
@@ -98,7 +87,7 @@ export default {
     },
     onSubmit() {
       const team = {
-        gameId: this.gameId,
+        games: [this.gameId],
         gameName: this.game.name,
         name: this.name,
         coop: this.setCoop(),

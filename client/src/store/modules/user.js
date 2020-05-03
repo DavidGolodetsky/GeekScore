@@ -18,7 +18,7 @@ export default {
     },
     actions: {
         logout({ commit, rootState }) {
-            rootState.games = rootState.teams = []
+            rootState.games.games = rootState.teams.teams = []
             firebase.auth().signOut()
             commit('SET_USER', null)
         },

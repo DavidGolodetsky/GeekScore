@@ -60,7 +60,6 @@ export default {
                 ...payload,
                 user,
                 imageUrl: "",
-                games: [],
                 rounds: {},
                 favorite: false
             }
@@ -139,9 +138,12 @@ export default {
             return state.teams
         },
         team(state) {
-            return (teamId) => {
-                return state.teams.find((team) => {
-                    return team.id === teamId
+            return (teamId) => state.teams.find((team) => team.id === teamId)
+        },
+        gameTeams(state) {
+            return (gameId) => {
+                return state.teams.filter((team) => {
+                    return team.games.includes(gameId)
                 })
             }
         },
