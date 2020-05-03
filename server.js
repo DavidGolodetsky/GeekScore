@@ -1,7 +1,6 @@
 require('dotenv').config();
 const express = require('express');
 const app = express();
-const path = require('path');
 const cors = require('cors');
 const mongoose = require('mongoose');
 const games = require('./routes/games');
@@ -12,6 +11,7 @@ const PORT = process.env.PORT || 3000
 
 mongoose.connect(process.env.DATABASE_URL, { useNewUrlParser: true, useFindAndModify: false, useUnifiedTopology: true });
 const db = mongoose.connection;
+
 db.on('error', (error) => console.error(error));
 db.once('open', () => console.log('Connected to database!'));
 
