@@ -26,22 +26,21 @@ export default {
             commit('SET_LOADING', true, { root: true })
             commit('CLEAR_ERROR', null, { root: true })
             firebase.auth().createUserWithEmailAndPassword(payload.email, payload.password)
-                .then(
-                    user => {
-                        commit('SET_LOADING', false, { root: true })
-                        if (user.user) {
-                            const newUser = {
-                                id: user.user.uid,
-                            }
-                            axios.post('http://localhost:3000/users', newUser)
-                                .then(() => {
-                                    commit('SET_USER', newUser)
-                                })
-                                .catch((e) => {
-                                    console.log(e)
-                                })
+                .then(user => {
+                    commit('SET_LOADING', false, { root: true })
+                    if (user.user) {
+                        const newUser = {
+                            id: user.user.uid,
                         }
+                        axios.post('api/users', newUser)
+                            .then(() => {
+                                commit('SET_USER', newUser)
+                            })
+                            .catch((e) => {
+                                console.log(e)
+                            })
                     }
+                }
                 )
                 .catch(
                     error => {

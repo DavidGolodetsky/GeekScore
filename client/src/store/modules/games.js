@@ -26,7 +26,7 @@ export default {
         loadGames({ commit, rootState }) {
             commit('SET_LOADING', true, { root: true })
             const user = rootState.user.user.id
-            axios.get('http://localhost:3000/games', { params: { user } })
+            axios.get('api/games', { params: { user } })
                 .then((res) => {
                     const games = res.data
                     commit('SET_LOADED_GAMES', games)
@@ -47,7 +47,7 @@ export default {
                 teams: [],
                 favorite: false
             }
-            axios.post('http://localhost:3000/games', game)
+            axios.post('api/games', game)
                 .then((res) => {
                     const _id = res.data._id
                     commit("CREATE_GAME", { ...game, _id })
@@ -60,7 +60,7 @@ export default {
         },
         updateGame({ commit }, payload) {
             commit('SET_LOADING', true, { root: true })
-            axios.put(`http://localhost:3000/games/${payload._id}`, payload)
+            axios.put(`api/games/${payload._id}`, payload)
                 .then(() => {
                     commit("UPDATE_GAME", payload)
                     commit('SET_LOADING', false, { root: true })
@@ -72,7 +72,7 @@ export default {
         },
         deleteGame({ commit }, payload) {
             commit('SET_LOADING', true, { root: true })
-            axios.delete(`http://localhost:3000/games/${payload._id}`)
+            axios.delete(`games/${payload._id}`)
                 .then(() => {
                     commit("DELETE_GAME", payload._id)
                     commit('SET_LOADING', false, { root: true })

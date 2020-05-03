@@ -3,15 +3,14 @@ const express = require('express')
 const User = require('../models/user');
 const router = express.Router();
 
-// TODO:get info when more user info would be
-// router.get('/', async (req, res) => {
-//     try {
-//         const games = await Game.find();
-//         res.json(games);
-//     } catch (err) {
-//         res.status(500).json({ message: err.message });
-//     }
-// });
+router.get('/', async (req, res) => {
+    try {
+        const users = await User.find();
+        res.json(users);
+    } catch (err) {
+        res.status(500).json({ message: err.message });
+    }
+});
 
 
 router.post('/', async (req, res) => {

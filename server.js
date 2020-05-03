@@ -19,9 +19,9 @@ app.use(express.json());
 app.use(cors());
 
 
-app.use('/games', games);
-app.use('/teams', teams);
-app.use('/users', users);
+app.use('/api/games', games);
+app.use('/api/teams', teams);
+app.use('/api/users', users);
 
 if (process.env.NODE_ENV === 'production') {
     app.use(express.static('./client/dist'))
