@@ -6,6 +6,7 @@ const cors = require('cors');
 const mongoose = require('mongoose');
 const games = require('./routes/games');
 const teams = require('./routes/teams');
+const users = require('./routes/users');
 
 const PORT = process.env.PORT || 3000
 
@@ -20,6 +21,7 @@ app.use(cors());
 
 app.use('/games', games);
 app.use('/teams', teams);
+app.use('/users', users);
 
 if (process.env.NODE_ENV === 'production') {
     app.use(express.static('./client/dist'))

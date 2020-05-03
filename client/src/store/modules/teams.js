@@ -39,9 +39,10 @@ export default {
         }
     },
     actions: {
-        loadTeams({ commit }) {
+        loadTeams({ commit, rootState }) {
             commit('SET_LOADING', true, { root: true })
-            axios.get('http://localhost:3000/teams')
+            const user = rootState.user.user.id
+            axios.get('http://localhost:3000/teams', { params: { user } })
                 .then((res) => {
                     const teams = res.data
                     commit("LOAD_TEAMS", teams)
@@ -52,10 +53,12 @@ export default {
                     console.log(e)
                 })
         },
-        createTeam({ commit }, payload) {
+        createTeam({ commit, rootState }, payload) {
             commit('SET_LOADING', true, { root: true })
+            const user = rootState.user.user.id
             const team = {
                 ...payload,
+                user,
                 imageUrl: "",
                 games: [],
                 rounds: {},

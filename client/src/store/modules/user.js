@@ -1,4 +1,5 @@
 import firebase from 'firebase/app';
+import axios from 'axios'
 
 
 export default {
@@ -16,7 +17,8 @@ export default {
         }
     },
     actions: {
-        logout({ commit }) {
+        logout({ commit, rootState }) {
+            rootState.games = rootState.teams = []
             firebase.auth().signOut()
             commit('SET_USER', null)
         },
@@ -31,7 +33,13 @@ export default {
                             const newUser = {
                                 id: user.user.uid,
                             }
-                            commit('SET_USER', newUser)
+                            axios.post('http://localhost:3000/users', newUser)
+                                .then(() => {
+                                    commit('SET_USER', newUser)
+                                })
+                                .catch((e) => {
+                                    console.log(e)
+                                })
                         }
                     }
                 )
@@ -53,7 +61,13 @@ export default {
                             const loggedUser = {
                                 id: user.user.uid,
                             }
-                            commit('SET_USER', loggedUser)
+                            axios.post('http://localhost:3000/users', loggedUser)
+                                .then(() => {
+                                    commit('SET_USER', loggedUser)
+                                })
+                                .catch((e) => {
+                                    console.log(e)
+                                })
                         }
                     }
                 )

@@ -5,6 +5,10 @@ const gameSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    user: {
+        type: String,
+        required: true
+    },
     coop: {
         type: Boolean,
         required: true

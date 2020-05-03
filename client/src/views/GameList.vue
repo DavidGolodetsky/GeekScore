@@ -43,8 +43,8 @@ export default {
       this.updateGame(data);
     },
     shouldLoadData() {
-      this.games.length ? "" : this.loadGames();
-      this.teams.length ? "" : this.loadTeams();
+      this.games ? "" : this.loadGames();
+      this.teams ? "" : this.loadTeams();
     }
   }
 };

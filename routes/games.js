@@ -4,9 +4,11 @@ const Game = require('../models/game');
 const router = express.Router();
 
 router.get('/', async (req, res) => {
+    user = req.query.user
     try {
         const games = await Game.find();
-        res.json(games);
+        const userGames = games.filter(game => game.user === user)
+        res.json(userGames);
     } catch (err) {
         res.status(500).json({ message: err.message });
     }
@@ -14,9 +16,10 @@ router.get('/', async (req, res) => {
 
 
 router.post('/', async (req, res) => {
-    const { name, coop, teams, favorite, imageUrl } = req.body
+    const { name, coop, teams, user, favorite, imageUrl } = req.body
     const game = new Game({
         name,
+        user,
         teams,
         coop,
         favorite,
