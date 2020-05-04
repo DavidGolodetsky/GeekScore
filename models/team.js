@@ -28,9 +28,6 @@ const teamSchema = new mongoose.Schema({
     games: {
         type: Array,
         required: true
-    },
-    imageUrl: {
-        type: String,
     }
 });
 
