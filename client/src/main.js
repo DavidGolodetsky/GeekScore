@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import App from './App';
 import vuetify from './plugins/vuetify';
-import './registerServiceWorker';
+// import './registerServiceWorker';
 import router from './router';
 import store from './store';
 import VueOffline from 'vue-offline';
@@ -20,10 +20,3 @@ new Vue({
   store,
   render: h => h(App),
 }).$mount('#app')
-
-
-// const shouldSW = 'serviceWorker' in navigator
-// const prod = process.env.NODE_ENV === 'production'
-// if (shouldSW && prod) {
-//   navigator.serviceWorker.register('/service-worker.js')
-// }
