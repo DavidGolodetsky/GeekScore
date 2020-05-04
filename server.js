@@ -10,7 +10,7 @@ const users = require('./routes/api/users');
 
 const PORT = process.env.PORT || 3000
 
-mongoose.connect(process.env.DATABASE_LOCAL, { useNewUrlParser: true, useFindAndModify: false, useUnifiedTopology: true });
+mongoose.connect(process.env.DATABASE_URL, { useNewUrlParser: true, useFindAndModify: false, useUnifiedTopology: true });
 
 const db = mongoose.connection;
 db.on('error', (error) => console.error(error));
