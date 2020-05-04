@@ -32,7 +32,7 @@ export default {
                         const newUser = {
                             id: user.user.uid,
                         }
-                        axios.post('api/users', newUser)
+                        axios.post('/api/users', newUser)
                             .then(() => {
                                 commit('SET_USER', newUser)
                             })
@@ -60,13 +60,7 @@ export default {
                             const loggedUser = {
                                 id: user.user.uid,
                             }
-                            axios.post('http://localhost:3000/users', loggedUser)
-                                .then(() => {
-                                    commit('SET_USER', loggedUser)
-                                })
-                                .catch((e) => {
-                                    console.log(e)
-                                })
+                            commit('SET_USER', loggedUser)
                         }
                     }
                 )

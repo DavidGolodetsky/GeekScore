@@ -42,7 +42,7 @@ export default {
         loadTeams({ commit, rootState }) {
             commit('SET_LOADING', true, { root: true })
             const user = rootState.user.user.id
-            axios.get('api/teams', { params: { user } })
+            axios.get('/api/teams', { params: { user } })
                 .then((res) => {
                     const teams = res.data
                     commit("LOAD_TEAMS", teams)
@@ -59,11 +59,10 @@ export default {
             const team = {
                 ...payload,
                 user,
-                imageUrl: "",
                 rounds: {},
                 favorite: false
             }
-            axios.post('api/teams', team)
+            axios.post('/api/teams', team)
                 .then((res) => {
                     const _id = res.data._id
                     commit("CREATE_TEAM", { ...team, _id })
@@ -76,7 +75,7 @@ export default {
         },
         updateTeam({ commit }, payload) {
             commit('SET_LOADING', true, { root: true })
-            axios.put(`api/teams/${payload._id}`, payload)
+            axios.put(`/api/teams/${payload._id}`, payload)
                 .then(() => {
                     commit("UPDATE_TEAM", payload)
                     commit('SET_LOADING', false, { root: true })
@@ -88,7 +87,7 @@ export default {
         },
         deleteTeam({ commit }, payload) {
             commit('SET_LOADING', true, { root: true })
-            axios.delete(`api/teams/${payload._id}`)
+            axios.delete(`/api/teams/${payload._id}`)
                 .then(() => {
                     commit("DELETE_TEAM", payload)
                     commit('SET_LOADING', false, { root: true })
