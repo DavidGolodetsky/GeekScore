@@ -2,20 +2,13 @@
 const express = require('express')
 const Game = require('../models/game');
 const router = express.Router();
-const mongodb = require('mongodb')
-
-async function getGames() {
-    const client = await mongodb.MongoClient.connect('mongodb+srv://davidGo1995:secret123#D@cluster0-kzfo9.mongodb.net/test?retryWrites=true&w=majority',
-        { useNewUrlParser: true })
-    return client.db('Cluster0').collection('games')
-}
 
 router.get('/', async (req, res) => {
-    // user = req.query.user
+    user = req.query.user
     try {
-        const games = await getGames();
-        // const userGames = games.filter(game => game.user === user)
-        res.send(await games.find({}).toArray())
+        const games = await Game.find();
+        const userGames = games.filter(game => game.user === user)
+        res.json(userGames);
     } catch (err) {
         res.status(500).json({ message: err.message });
     }
