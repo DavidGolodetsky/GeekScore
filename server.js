@@ -20,9 +20,9 @@ app.use(express.json());
 app.use(cors());
 
 
-app.use('api/games', games);
-app.use('api/teams', teams);
-app.use('api/users', users);
+app.use('/api/games', games);
+app.use('/api/teams', teams);
+app.use('/api/users', users);
 
 if (process.env.NODE_ENV === 'production') {
     app.use(serveStatic(path.join(__dirname, 'public')));
