@@ -1,6 +1,7 @@
 require('dotenv').config();
 const express = require('express');
 const app = express();
+const path = require('path');
 const serveStatic = require("serve-static");
 const cors = require('cors');
 const mongoose = require('mongoose');
@@ -25,7 +26,7 @@ app.use('/api/teams', teams);
 app.use('/api/users', users);
 
 if (process.env.NODE_ENV === 'production') {
-    app.use(serveStatic(path.join(__dirname, 'public')));
+    app.use(serveStatic(path.join(__dirname, 'client', 'dist')));
 }
 
 
