@@ -6,8 +6,8 @@ const router = express.Router();
 router.get('/', async (req, res) => {
     user = req.query.user
     try {
-        const teams = await Team.find();
-        const userTeams = teams.filter(team => team.user === user)
+        const userTeams = await Team.find(user);
+        // const userTeams = teams.filter(team => team.user === user)
         res.json(userTeams);
     } catch (err) {
         res.status(500).json({ message: err.message });
