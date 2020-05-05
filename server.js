@@ -26,7 +26,7 @@ app.use('/api/teams', teams);
 app.use('/api/users', users);
 
 if (process.env.NODE_ENV === 'production') {
-    app.use(serveStatic(path.join(__dirname, 'client', 'dist')));
+    app.use(serveStatic(path.join(__dirname, 'public')));
 }
 
 
