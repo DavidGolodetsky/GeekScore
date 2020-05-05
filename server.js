@@ -27,6 +27,7 @@ app.use('/api/users', users);
 
 if (process.env.NODE_ENV === 'production') {
     app.use(serveStatic(path.join(__dirname, 'public')));
+    app.get('*', (req, res) => res.sendFile(__dirname + '/public/index.html'))
 }
 
 
