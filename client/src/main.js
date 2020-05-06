@@ -7,7 +7,11 @@ import store from './store';
 import VueOffline from 'vue-offline';
 import '@/globalComponents';
 
+
+const isDev = process.env.NODE_ENV !== "production";
+
 Vue.config.productionTip = false
+Vue.config.performance = isDev;
 
 Vue.use(VueOffline, {
   mixin: false,
