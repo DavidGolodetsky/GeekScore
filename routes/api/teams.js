@@ -4,11 +4,22 @@ const Team = require('../../models/team');
 const router = express.Router();
 
 router.get('/', async (req, res) => {
-    user = req.query.user
+    const user = req.query.user
     try {
-        const userTeams = await Team.find(user);
-        // const userTeams = teams.filter(team => team.user === user)
-        res.json(userTeams);
+        const teams = await Team.find({ user });
+        res.json(teams);
+    } catch (err) {
+        res.status(500).json({ message: err.message });
+    }
+});
+
+router.get('/game', async (req, res) => {
+    const user = req.query.user
+    const gameId = req.query.gameId
+    try {
+        const teams = await Team.find({ user });
+        const gameTeams = teams.filter(team => team.games.includes(gameId))
+        res.json(gameTeams);
     } catch (err) {
         res.status(500).json({ message: err.message });
     }

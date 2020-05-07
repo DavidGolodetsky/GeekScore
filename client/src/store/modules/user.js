@@ -27,7 +27,6 @@ export default {
             commit('CLEAR_ERROR', null, { root: true })
             firebase.auth().createUserWithEmailAndPassword(payload.email, payload.password)
                 .then(user => {
-                    commit('SET_LOADING', false, { root: true })
                     if (user.user) {
                         const newUser = {
                             id: user.user.uid,
@@ -36,40 +35,29 @@ export default {
                             .then(() => {
                                 commit('SET_USER', newUser)
                             })
-                            .catch((e) => {
-                                console.log(e)
-                            })
+                            .catch(e => console.log(e))
+                            .finally(() => commit('SET_LOADING', false, { root: true }))
                     }
                 }
                 )
-                .catch(
-                    error => {
-                        commit('SET_LOADING', false, { root: true })
-                        commit('SET_ERROR', error, { root: true })
-                    }
-                )
+                .catch(e => commit('SET_ERROR', e, { root: true }))
+                .finally(() => commit('SET_LOADING', false, { root: true }))
         },
         signInUser({ commit }, payload) {
             commit('SET_LOADING', true, { root: true })
             commit('CLEAR_ERROR', null, { root: true })
             firebase.auth().signInWithEmailAndPassword(payload.email, payload.password)
-                .then(
-                    user => {
-                        commit('SET_LOADING', false, { root: true })
-                        if (user.user) {
-                            const loggedUser = {
-                                id: user.user.uid,
-                            }
-                            commit('SET_USER', loggedUser)
+                .then(user => {
+                    if (user.user) {
+                        const loggedUser = {
+                            id: user.user.uid,
                         }
+                        commit('SET_USER', loggedUser)
                     }
+                }
                 )
-                .catch(
-                    error => {
-                        commit('SET_LOADING', false, { root: true })
-                        commit('SET_ERROR', error, { root: true })
-                    }
-                )
+                .catch(e => commit('SET_ERROR', e, { root: true }))
+                .finally(() => commit('SET_LOADING', false, { root: true }))
         },
         autoSignIn({ commit }, payload) {
             commit('SET_LOADING', true, { root: true })
@@ -79,16 +67,9 @@ export default {
         resetPassword({ commit }, payload) {
             commit('SET_LOADING', true, { root: true })
             firebase.auth().sendPasswordResetEmail(payload)
-                .then(() => {
-                    commit('RESET_PASSWORD');
-                    commit('SET_LOADING', false, { root: true })
-                })
-                .catch(
-                    error => {
-                        commit('SET_ERROR', error, { root: true })
-                        commit('SET_LOADING', false, { root: true })
-                    }
-                )
+                .then(() => commit('RESET_PASSWORD'))
+                .catch(e => commit('SET_ERROR', e, { root: true }))
+                .finally(() => commit('SET_LOADING', false, { root: true }))
         }
     },
     getters: {

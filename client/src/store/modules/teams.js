@@ -5,7 +5,7 @@ import Vue from "vue";
 export default {
     namespaced: true,
     state: {
-        teams: []
+        teams: null
     },
     mutations: {
         LOAD_TEAMS(state, payload) {
@@ -46,12 +46,9 @@ export default {
                 .then((res) => {
                     const teams = res.data
                     commit("LOAD_TEAMS", teams)
-                    commit('SET_LOADING', false, { root: true })
                 })
-                .catch((e) => {
-                    commit('SET_LOADING', false, { root: true })
-                    console.log(e)
-                })
+                .catch(e => console.log(e))
+                .finally(() => commit('SET_LOADING', false, { root: true }))
         },
         createTeam({ commit, rootState }, payload) {
             commit('SET_LOADING', true, { root: true })
@@ -66,36 +63,23 @@ export default {
                 .then((res) => {
                     const _id = res.data._id
                     commit("CREATE_TEAM", { ...team, _id })
-                    commit('SET_LOADING', false, { root: true })
                 })
-                .catch((e) => {
-                    commit('SET_LOADING', false, { root: true })
-                    console.log(e)
-                })
+                .catch(e => console.log(e))
+                .finally(() => commit('SET_LOADING', false, { root: true }))
         },
         updateTeam({ commit }, payload) {
             commit('SET_LOADING', true, { root: true })
             axios.put(`/api/teams/${payload._id}`, payload)
-                .then(() => {
-                    commit("UPDATE_TEAM", payload)
-                    commit('SET_LOADING', false, { root: true })
-                })
-                .catch((e) => {
-                    commit('SET_LOADING', false, { root: true })
-                    console.log(e)
-                })
+                .then(() => commit("UPDATE_TEAM", payload))
+                .catch(e => console.log(e))
+                .finally(() => commit('SET_LOADING', false, { root: true }))
         },
         deleteTeam({ commit }, payload) {
             commit('SET_LOADING', true, { root: true })
             axios.delete(`/api/teams/${payload._id}`)
-                .then(() => {
-                    commit("DELETE_TEAM", payload)
-                    commit('SET_LOADING', false, { root: true })
-                })
-                .catch((e) => {
-                    commit('SET_LOADING', false, { root: true })
-                    console.log(e)
-                })
+                .then(() => commit("DELETE_TEAM", payload))
+                .catch(e => console.log(e))
+                .finally(() => commit('SET_LOADING', false, { root: true }))
 
         },
         createRound({ commit, rootState }, payload) {
@@ -110,26 +94,17 @@ export default {
                 .then((data) => {
                     const key = data.key;
                     commit("CREATE_ROUND", { ...payload, id: key })
-                    commit('SET_LOADING', false, { root: true })
                 })
-                .catch((e) => {
-                    commit('SET_LOADING', false, { root: true })
-                    console.log(e)
-                })
+                .catch(e => console.log(e))
+                .finally(() => commit('SET_LOADING', false, { root: true }))
         },
         deleteRound({ commit, rootState }, payload) {
             commit('SET_LOADING', true, { root: true })
             const user = rootState.user.user.id
             db.database().ref('users').child(user).child('games').child(payload.gameId).child('teams').child(payload.teamId).child('rounds').child(payload.roundId).remove()
-                .then(() => {
-                    commit("DELETE_ROUND", payload)
-                    commit('SET_LOADING', false, { root: true })
-                })
-                .catch((e) => {
-                    commit('SET_LOADING', false, { root: true })
-                    console.log(e)
-                })
-
+                .then(() => commit("DELETE_ROUND", payload))
+                .catch(e => console.log(e))
+                .finally(() => commit('SET_LOADING', false, { root: true }))
         },
     },
     getters: {
@@ -139,11 +114,19 @@ export default {
         team(state) {
             return (teamId) => state.teams.find((team) => team.id === teamId)
         },
-        gameTeams(state) {
+        gameTeams(state, getters, rootState) {
+            const user = rootState.user.user.id
             return (gameId) => {
-                return state.teams.filter((team) => {
-                    return team.games.includes(gameId)
-                })
+                if (state.teams) {
+                    return state.teams.filter((team) => {
+                        return team.games.includes(gameId)
+                    })
+                }
+                else {
+                    axios.get('/api/teams/game', { params: { user, gameId } })
+                        .then(res => res.data)
+                        .catch((e) => console.log(e))
+                }
             }
         },
         rounds(state) {

@@ -30,12 +30,9 @@ export default {
                 .then((res) => {
                     const games = res.data
                     commit('SET_LOADED_GAMES', games)
-                    commit('SET_LOADING', false, { root: true })
                 })
-                .catch((e) => {
-                    commit('SET_LOADING', false, { root: true })
-                    console.log(e)
-                })
+                .catch(e => console.log(e))
+                .finally(() => commit('SET_LOADING', false, { root: true }))
         },
         createGame({ commit, rootState }, payload) {
             commit('SET_LOADING', true, { root: true })
@@ -51,36 +48,23 @@ export default {
                 .then((res) => {
                     const _id = res.data._id
                     commit("CREATE_GAME", { ...game, _id })
-                    commit('SET_LOADING', false, { root: true })
                 })
-                .catch((e) => {
-                    commit('SET_LOADING', false, { root: true })
-                    console.log(e)
-                })
+                .catch(e => console.log(e))
+                .finally(() => commit('SET_LOADING', false, { root: true }))
         },
         updateGame({ commit }, payload) {
             commit('SET_LOADING', true, { root: true })
             axios.put(`/api/games/${payload._id}`, payload)
-                .then(() => {
-                    commit("UPDATE_GAME", payload)
-                    commit('SET_LOADING', false, { root: true })
-                })
-                .catch((e) => {
-                    commit('SET_LOADING', false, { root: true })
-                    console.log(e)
-                })
+                .then(() => commit("UPDATE_GAME", payload))
+                .catch(e => console.log(e))
+                .finally(() => commit('SET_LOADING', false, { root: true }))
         },
         deleteGame({ commit }, payload) {
             commit('SET_LOADING', true, { root: true })
             axios.delete(`/api/games/${payload._id}`)
-                .then(() => {
-                    commit("DELETE_GAME", payload._id)
-                    commit('SET_LOADING', false, { root: true })
-                })
-                .catch((e) => {
-                    commit('SET_LOADING', false, { root: true })
-                    console.log(e)
-                })
+                .then(() => commit("DELETE_GAME", payload._id))
+                .catch(e => console.log(e))
+                .finally(() => commit('SET_LOADING', false, { root: true }))
         }
     },
     getters: {

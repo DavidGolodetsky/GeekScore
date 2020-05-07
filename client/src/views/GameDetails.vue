@@ -2,7 +2,7 @@
   <div class="game-details">
     <the-title title="Teams" icon="account-group" :props="{ gameId }" component="team-add-dialog" />
     <cards-list
-      v-if="teams.length"
+      v-if="teams"
       :items="teams"
       @favorite="toggleFavorite"
       :route="{ name: 'team', params: { teamId: '' } }"
@@ -42,6 +42,7 @@ export default {
       return this.getGame(this.gameId);
     },
     teams() {
+      console.log(this.getTeams(this.gameId));
       return this.getTeams(this.gameId);
     },
     gameName() {
