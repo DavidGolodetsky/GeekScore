@@ -5,7 +5,7 @@
       :rules="fieldRules"
       prepend-icon="mdi-account-group"
       label="Name"
-      v-model="name"
+      v-model.trim="name"
     ></v-text-field>
     <v-select
       prepend-icon="mdi-account-multiple-plus"
@@ -17,7 +17,7 @@
     <template v-if="players.length">
       <v-text-field
         v-for="(player, i) in players"
-        v-model="player.name"
+        v-model.trim="player.name"
         :readonly="isMe(player)"
         :clearable="!isMe(player)"
         prepend-icon="mdi-account"
@@ -49,6 +49,9 @@ export default {
       fieldRules: [
         v => !!v || "Field is required",
         v => v.length <= 40 || "Field is too long",
+        v =>
+          !!(v && v.replace(/\s/g, "").length) ||
+          "Field contains only whitespaces",
         v => {
           let pl = this.players.filter(player => player.name === v);
           return (!!v && pl.length < 2) || "Player name should be unique";

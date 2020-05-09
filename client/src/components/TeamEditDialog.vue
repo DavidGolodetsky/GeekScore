@@ -27,7 +27,10 @@ export default {
       isDelete: false,
       fieldRules: [
         v => !!v || "Field is required",
-        v => (!!v && v.length <= 60) || "Field is too long"
+        v => (!!v && v.length <= 60) || "Field is too long",
+        v =>
+          !!(v && v.replace(/\s/g, "").length) ||
+          "Field contains only whitespaces"
       ]
     };
   },

@@ -5,7 +5,9 @@
         <slot name="title" />
         <v-card-text>
           <div id="firebaseui-auth-container"></div>
-          <div id="loader">Loading...</div>
+          <div id="loader" class="d-flex justify-center">
+            <v-progress-circular size="30" indeterminate color="secondary" />
+          </div>
           <div class="d-md-flex d-none or-wrapper">
             <span class="or">OR</span>
           </div>
@@ -14,7 +16,7 @@
             label="Email"
             type="email"
             prepend-icon="mdi-email"
-            v-model="email"
+            v-model.trim="email"
             :rules="EmailRules"
             required
           />
@@ -26,7 +28,7 @@
             @click:append="showPassword = !showPassword"
             :rules="passwordRules"
             required
-            v-model="password"
+            v-model.trim="password"
           />
           <v-text-field
             v-if="signupMode"
@@ -37,7 +39,7 @@
             @click:append="showPassword = !showPassword"
             :rules="[comparePasswords]"
             required
-            v-model="confirmPassword"
+            v-model.trim="confirmPassword"
           />
         </v-card-text>
         <v-divider></v-divider>
@@ -81,7 +83,10 @@ export default {
       ],
       passwordRules: [
         v => !!v || "Field is required",
-        v => (!!v && v.length >= 6) || "Password is too short"
+        v => (!!v && v.length >= 6) || "Password is too short",
+        v =>
+          !!(v && v.replace(/\s/g, "").length) ||
+          "Field contains only whitespaces"
       ]
     };
   },

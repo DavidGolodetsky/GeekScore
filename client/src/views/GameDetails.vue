@@ -42,7 +42,6 @@ export default {
       return this.getGame(this.gameId);
     },
     teams() {
-      console.log(this.getTeams(this.gameId));
       return this.getTeams(this.gameId);
     },
     gameName() {

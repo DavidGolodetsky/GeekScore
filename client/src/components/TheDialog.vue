@@ -68,12 +68,15 @@ export default {
     };
   },
   watch: {
-    dialog() {
-      if (this.dialog) {
-        this.renderDialog = true;
-      } else {
-        setTimeout((this.renderDialog = false), 1000);
-      }
+    dialog: {
+      handler(value) {
+        if (value) {
+          this.renderDialog = true;
+        } else {
+          setTimeout((this.renderDialog = false), 1000);
+        }
+      },
+      immediate: true
     }
   },
   methods: {

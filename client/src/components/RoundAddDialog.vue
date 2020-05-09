@@ -65,7 +65,7 @@
         <v-textarea
           class="comment"
           label="Comment"
-          v-model="comment"
+          v-model.trim="comment"
           auto-grow
           filled
           clearable

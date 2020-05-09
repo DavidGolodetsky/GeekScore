@@ -2,7 +2,7 @@
   <div>
     <the-title title="Games" icon="dice-multiple" component="game-add-dialog" />
     <cards-list
-      v-if="games.length"
+      v-if="games"
       :items="games"
       @favorite="toggleFavorite"
       :route="{name: 'game', params: {gameId: ''}}"
@@ -41,7 +41,7 @@ export default {
       this.updateGame(data);
     },
     shouldLoadData() {
-      this.games.length ? "" : this.loadGames();
+      this.games ? "" : this.loadGames();
     }
   }
 };

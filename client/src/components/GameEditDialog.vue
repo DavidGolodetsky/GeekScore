@@ -11,35 +11,35 @@
       :rules="fieldRules"
       prepend-icon="mdi-dice-multiple"
       label="Name"
-      v-model="name"
+      v-model.trim="name"
     ></v-text-field>
     <v-text-field
       clearable
       :rules="linkRules"
       label="Board geek game URL"
       prepend-icon="mdi-cards"
-      v-model="bggURL"
+      v-model.trim="bggURL"
     ></v-text-field>
     <v-text-field
       clearable
       :rules="linkRules"
       label="Melodice URL"
       prepend-icon="mdi-music"
-      v-model="melodiceURL"
+      v-model.trim="melodiceURL"
     ></v-text-field>
     <v-text-field
       clearable
       :rules="linkRules"
       label="Rules URL"
       prepend-icon="mdi-book-open-variant"
-      v-model="rulesURL"
+      v-model.trim="rulesURL"
     ></v-text-field>
     <v-text-field
       clearable
       :rules="linkRules"
       prepend-icon="mdi-image"
       label="Image URL"
-      v-model="imageUrl"
+      v-model.trim="imageUrl"
     ></v-text-field>
     <v-img v-if="imageUrl" :src="imageUrl" height="200" contain></v-img>
     <v-switch v-model="isDelete" label="Delete game" color="error" hide-details></v-switch>
@@ -65,7 +65,13 @@ export default {
       isDelete: false,
       imageUrl: this.game.imageUrl,
       imageFile: null,
-      fieldRules: [v => (!!v && v.length <= 60) || "Field is too long"],
+      fieldRules: [
+        v => !!v || "Field is required",
+        v => (!!v && v.length <= 60) || "Field is too long",
+        v =>
+          !!(v && v.replace(/\s/g, "").length) ||
+          "Field contains only whitespaces"
+      ],
       linkRules: [
         v => {
           if (v) {

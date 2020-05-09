@@ -4,14 +4,18 @@ import axios from 'axios'
 export default {
     namespaced: true,
     state: {
-        games: [],
+        games: null,
     },
     mutations: {
         SET_LOADED_GAMES(state, payload) {
             state.games = payload
         },
         CREATE_GAME(state, payload) {
-            state.games.push(payload)
+            if (state.games) {
+                state.games = [...state.games, payload]
+            } else {
+                state.games = [payload]
+            }
         },
         UPDATE_GAME(state, payload) {
             const game = state.games.find(game => game._id === payload._id)
@@ -19,7 +23,12 @@ export default {
             state.games.push({ ...game, ...payload })
         },
         DELETE_GAME(state, payload) {
-            state.games = state.games.filter(game => game._id !== payload)
+            const games = state.games.filter(game => game._id !== payload)
+            if (games.length) {
+                state.games = games
+            } else {
+                state.games = null
+            }
         }
     },
     actions: {
@@ -28,8 +37,7 @@ export default {
             const user = rootState.user.user.id
             axios.get('/api/games', { params: { user } })
                 .then((res) => {
-                    const games = res.data
-                    commit('SET_LOADED_GAMES', games)
+                    if (res.data.length) commit('SET_LOADED_GAMES', res.data)
                 })
                 .catch(e => console.log(e))
                 .finally(() => commit('SET_LOADING', false, { root: true }))

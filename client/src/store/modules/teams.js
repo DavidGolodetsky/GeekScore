@@ -12,7 +12,11 @@ export default {
             state.teams = payload
         },
         CREATE_TEAM(state, payload) {
-            state.teams.push(payload)
+            if (state.teams) {
+                state.teams = [...state.teams, payload]
+            } else {
+                state.teams = [payload]
+            }
         },
         UPDATE_TEAM(state, payload) {
             const team = state.teams.find(team => team._id === payload._id)
@@ -20,7 +24,12 @@ export default {
             state.teams.push({ ...team, ...payload })
         },
         DELETE_TEAM(state, payload) {
-            state.teams = state.teams.filter(team => team._id !== payload._id)
+            const teams = state.teams.filter(team => team._id !== payload)
+            if (teams.length) {
+                state.teams = teams
+            } else {
+                state.teams = null
+            }
         },
         DELETE_ROUND(state, payload) {
             state.teams = state.teams.map(team => {
@@ -44,8 +53,7 @@ export default {
             const user = rootState.user.user.id
             axios.get('/api/teams', { params: { user } })
                 .then((res) => {
-                    const teams = res.data
-                    commit("LOAD_TEAMS", teams)
+                    if (res.data.length) commit('LOAD_TEAMS', res.data)
                 })
                 .catch(e => console.log(e))
                 .finally(() => commit('SET_LOADING', false, { root: true }))

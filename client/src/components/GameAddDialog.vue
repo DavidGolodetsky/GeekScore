@@ -5,7 +5,7 @@
       :rules="fieldRules"
       prepend-icon="mdi-dice-multiple"
       label="Name"
-      v-model="name"
+      v-model.trim="name"
     ></v-text-field>
     <v-switch v-model="coop" label="Cooperative" color="secondary" hide-details></v-switch>
   </the-dialog>
@@ -21,7 +21,10 @@ export default {
       coop: false,
       fieldRules: [
         v => !!v || "Field is required",
-        v => (!!v && v.length <= 40) || "Field is too long"
+        v => (!!v && v.length <= 40) || "Field is too long",
+        v =>
+          !!(v && v.replace(/\s/g, "").length) ||
+          "Field contains only whitespaces"
       ]
     };
   },
