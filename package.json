@@ -9,8 +9,7 @@
   "scripts": {
     "dev": "nodemon server.js",
     "start": "node server.js",
-    "install-client": "cd client && npm install",
-    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm run install-client"
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false"
   },
   "author": "",
   "license": "ISC",
