@@ -48,7 +48,7 @@ describe('TestToTest', () => {
         wrapper.setData({
             items: ['hi']
         })
-        expect(wrapper.html()).toMatchSnapshot()
+        expect(wrapper).toMatchSnapshot()
     })
 
 
@@ -58,7 +58,7 @@ describe('TestToTest', () => {
                 value: 'blabla'
             }
         })
-        expect(wrapper.html()).toMatchSnapshot()
+        expect(wrapper).toMatchSnapshot()
     })
 
 
