@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/precache-manifest.dd73635a154344c67a6ee7adbdf9ef3c.js"
+  "/precache-manifest.6887465689dc6604a12ef756d9ca2fed.js"
 );
 
 workbox.core.setCacheNameDetails({prefix: "geek"});
@@ -32,3 +32,6 @@ self.addEventListener('message', (event) => {
  */
 self.__precacheManifest = [].concat(self.__precacheManifest || []);
 workbox.precaching.precacheAndRoute(self.__precacheManifest, {});
+
+workbox.routing.registerRoute(/(http)?s?:?(\/\/[^"']*\.(?:png|jpg|jpeg))/g, new workbox.strategies.NetworkFirst({ "cacheName":"img-cache","networkTimeoutSeconds":20, plugins: [new workbox.cacheableResponse.Plugin({ statuses: [ 0, 200 ] })] }), 'GET');
+workbox.routing.registerRoute(/^https:\/\/(fonts)/, new workbox.strategies.NetworkFirst({ "cacheName":"fonts-cache","networkTimeoutSeconds":20, plugins: [new workbox.cacheableResponse.Plugin({ statuses: [ 0, 200 ] })] }), 'GET');
