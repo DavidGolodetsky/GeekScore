@@ -120,28 +120,22 @@ export default {
             return state.teams
         },
         team(state) {
-            return (teamId) => state.teams.find((team) => team.id === teamId)
+            return (teamId) => state.teams.find(team => team.id === teamId)
         },
-        gameTeams(state, getters, rootState) {
-            const user = rootState.user.user.id
+        gameTeams(state) {
             return (gameId) => {
                 if (state.teams) {
-                    return state.teams.filter((team) => {
-                        return team.games.includes(gameId)
-                    })
-                }
-                else {
-                    axios.get('/api/teams/game', { params: { user, gameId } })
-                        .then(res => res.data)
-                        .catch((e) => console.log(e))
+                    return state.teams.filter(team => team.games.includes(gameId))
+                } else {
+                    return null
                 }
             }
-        },
-        rounds(state) {
-            return (teamId) => {
-                const team = state.teams.find((team) => team.id === teamId)
-                return team.rounds ? team.rounds : null
-            }
+        }
+    },
+    rounds(state) {
+        return (teamId) => {
+            const team = state.teams.find((team) => team.id === teamId)
+            return team.rounds ? team.rounds : null
         }
     }
 }

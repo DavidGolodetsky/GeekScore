@@ -2,8 +2,8 @@
   <div class="game-details">
     <the-title title="Teams" icon="account-group" :props="{ gameId }" component="team-add-dialog" />
     <cards-list
-      v-if="teams"
-      :items="teams"
+      v-if="getGameTeams"
+      :items="getGameTeams"
       @favorite="toggleFavorite"
       :route="{ name: 'team', params: { teamId: '' } }"
     >
@@ -19,6 +19,7 @@ import TheTitle from "@/components/TheTitle";
 import TeamEditDialog from "@/components/TeamEditDialog";
 import CardsList from "@/components/CardsList";
 import { mapActions, mapGetters } from "vuex";
+import axios from "axios";
 
 export default {
   components: {
@@ -33,22 +34,26 @@ export default {
     }
   },
   data() {
-    return {};
+    return {
+      teams: null
+    };
   },
   computed: {
     ...mapGetters("teams", { getTeams: "gameTeams" }),
     ...mapGetters("games", { getGame: "game" }),
+    ...mapGetters("user", ["user"]),
     game() {
       return this.getGame(this.gameId);
     },
-    teams() {
-      return this.getTeams(this.gameId);
+    getGameTeams() {
+      return this.teams ? this.teams : "";
     },
     gameName() {
       return this.game.name;
     }
   },
   mounted() {
+    this.setTeams();
     this.backTitle(this.game.name);
   },
   methods: {
@@ -60,6 +65,17 @@ export default {
         gameId: this.gameId
       };
       this.updateTeam(payload);
+    },
+    setTeams() {
+      this.teams = this.getTeams(this.gameId);
+      if (!this.teams) {
+        this.getTeamsFromApi().then(res => (this.teams = res.data));
+      }
+    },
+    getTeamsFromApi() {
+      const gameId = this.gameId;
+      const user = this.user;
+      return axios.get("/api/teams/game", { params: { user, gameId } });
     }
   }
 };
