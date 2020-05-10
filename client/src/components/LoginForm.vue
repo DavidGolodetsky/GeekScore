@@ -5,7 +5,7 @@
         <slot name="title" />
         <v-card-text>
           <div id="firebaseui-auth-container"></div>
-          <div id="loader" class="d-flex justify-center">
+          <div id="loader" class="text-center">
             <v-progress-circular size="30" indeterminate color="secondary" />
           </div>
           <div class="d-md-flex d-none or-wrapper">
