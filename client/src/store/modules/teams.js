@@ -124,11 +124,7 @@ export default {
         },
         gameTeams(state) {
             return (gameId) => {
-                if (state.teams) {
-                    return state.teams.filter(team => team.games.includes(gameId))
-                } else {
-                    return null
-                }
+                return state.teams.filter(team => team.games.includes(gameId))
             }
         }
     },

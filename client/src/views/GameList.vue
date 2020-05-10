@@ -28,6 +28,7 @@ export default {
   },
   computed: {
     ...mapGetters("games", ["games"]),
+    ...mapGetters("teams", ["teams"]),
     ...mapGetters("user", ["user"])
   },
   created() {
@@ -36,12 +37,14 @@ export default {
   },
   methods: {
     ...mapActions("games", ["loadGames", "updateGame"]),
+    ...mapActions("teams", ["loadTeams"]),
     ...mapActions(["clearBackTitle"]),
     toggleFavorite(data) {
       this.updateGame(data);
     },
     shouldLoadData() {
       this.games ? "" : this.loadGames();
+      this.teams ? "" : this.loadTeams();
     }
   }
 };
