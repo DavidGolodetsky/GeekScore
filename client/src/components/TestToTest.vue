@@ -12,9 +12,12 @@
 </template>
 
 <script>
-// import db from "@/db";
-
 export default {
+  props: {
+    value: {
+      type: String
+    }
+  },
   data: () => ({
     items: ["o"],
     name: ""
@@ -27,12 +30,5 @@ export default {
       this.$emit("submitted", { name: this.name });
     }
   }
-  // async created() {
-  //   try {
-  //     this.items = await db.database().ref("users");
-  //   } catch (err) {
-  //     console.log(err);
-  //   }
-  // }
 };
 </script>

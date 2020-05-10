@@ -1,13 +1,5 @@
 import TestToTest from "@/components/TestToTest"
 import { mount } from '@vue/test-utils'
-// import flushPromises from 'flush-promises'
-// import db from "@/db";
-
-
-// jest.mock(db)
-// beforeEach(() => {
-//     jest.clearAllMocks()
-// })
 
 describe('TestToTest', () => {
 
@@ -80,40 +72,5 @@ describe('TestToTest', () => {
         await wrapper.vm.$nextTick()
         expect(wrapper.find('ul').isVisible()).toBe(false)
     })
-
-    // Emit test
-
-    // TODO:finalize this
-
-    // it('If form submitted - emit event', () => {
-    //     const wrapper = mount(TestToTest)
-    //     const input = wrapper.find('[data-testid="name"]')
-
-    //     input.setValue('David')
-    //     wrapper.trigger('submit')
-
-    //     // const formSubmittedCalls = wrapper.emitted('formSubmitted')
-    //     // expect(formSubmittedCalls).toHaveLength(1)
-
-    //     const expectedPayload = { name: "David" }
-    //     expect(wrapper.emitted('submitted')[0][0]).toMatchObject(expectedPayload)
-
-    // })
-
-
-    // Mock API calls
-
-
-    // it('If API called - display list with items', async () => {
-    //     const call = db.database().ref("users")
-
-    //     call.mockResolvedValueOnce()
-    //     const wrapper = mount(TestToTest)
-
-    //     await wrapper.vm.$nextTick()
-
-    //     expect(call).toHaveBeenCalledTimes(1)
-    //     expect(wrapper.find('ul').isVisible()).toBe(true)
-    // })
 
 })

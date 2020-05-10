@@ -10,7 +10,7 @@ exports[`TestToTest Snapshot test 1`] = `
 `;
 
 exports[`TestToTest Snapshot test 2`] = `
-<div value="blabla">
+<div>
   <ul>
     <li>o</li>
   </ul> <button type="reset">Reset</button>
