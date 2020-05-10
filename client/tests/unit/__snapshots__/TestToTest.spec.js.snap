@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`TestToTest Snapshot test 1`] = `
+<div>
+  <ul>
+    <li>o</li>
+  </ul> <button type="reset">Reset</button>
+  <form><input data-testid="name" type="text"> <button type="submit">Get name</button></form>
+</div>
+`;
+
+exports[`TestToTest Snapshot test 2`] = `
+<div value="blabla">
+  <ul>
+    <li>o</li>
+  </ul> <button type="reset">Reset</button>
+  <form><input data-testid="name" type="text"> <button type="submit">Get name</button></form>
+</div>
+`;

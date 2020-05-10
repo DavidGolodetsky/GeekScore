@@ -49,6 +49,28 @@ describe('TestToTest', () => {
         expect(wrapper.find('li').element.textContent).toBe('hi')
     })
 
+    // Snapshot testing
+
+    it('Snapshot test', async () => {
+        const wrapper = mount(TestToTest)
+        wrapper.setData({
+            items: ['hi']
+        })
+        expect(wrapper.html()).toMatchSnapshot()
+    })
+
+
+    it('Snapshot test', async () => {
+        const wrapper = mount(TestToTest, {
+            propsData: {
+                value: 'blabla'
+            }
+        })
+        expect(wrapper.html()).toMatchSnapshot()
+    })
+
+
+
     // Event tests
 
 
@@ -63,20 +85,20 @@ describe('TestToTest', () => {
 
     // TODO:finalize this
 
-    it('If form submitted - emit event', () => {
-        const wrapper = mount(TestToTest)
-        const input = wrapper.find('[data-testid="name"]')
+    // it('If form submitted - emit event', () => {
+    //     const wrapper = mount(TestToTest)
+    //     const input = wrapper.find('[data-testid="name"]')
 
-        input.setValue('David')
-        wrapper.trigger('submit')
+    //     input.setValue('David')
+    //     wrapper.trigger('submit')
 
-        // const formSubmittedCalls = wrapper.emitted('formSubmitted')
-        // expect(formSubmittedCalls).toHaveLength(1)
+    //     // const formSubmittedCalls = wrapper.emitted('formSubmitted')
+    //     // expect(formSubmittedCalls).toHaveLength(1)
 
-        const expectedPayload = { name: "David" }
-        expect(wrapper.emitted('submitted')[0][0]).toMatchObject(expectedPayload)
+    //     const expectedPayload = { name: "David" }
+    //     expect(wrapper.emitted('submitted')[0][0]).toMatchObject(expectedPayload)
 
-    })
+    // })
 
 
     // Mock API calls
