@@ -2,7 +2,6 @@
 /*/node_modules
 /client/dist
 node_modules
-public
 
 # local env files
 .env.local
