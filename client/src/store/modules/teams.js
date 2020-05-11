@@ -5,11 +5,15 @@ import Vue from "vue";
 export default {
     namespaced: true,
     state: {
-        teams: null
+        teams: null,
+        gameTeams: null
     },
     mutations: {
         LOAD_TEAMS(state, payload) {
             state.teams = payload
+        },
+        LOAD_GAME_TEAMS(state, payload) {
+            state.gameTeams = payload
         },
         CREATE_TEAM(state, payload) {
             if (state.teams) {
@@ -54,6 +58,17 @@ export default {
             axios.get('/api/teams', { params: { user } })
                 .then((res) => {
                     if (res.data.length) commit('LOAD_TEAMS', res.data)
+                })
+                .catch(e => console.log(e))
+                .finally(() => commit('SET_LOADING', false, { root: true }))
+        },
+        loadGameTeams({ commit, rootState }, payload) {
+            commit('SET_LOADING', true, { root: true })
+            const user = rootState.user.user.id
+            const gameId = payload
+            axios.get("/api/teams/game", { params: { user, gameId } })
+                .then((res) => {
+                    if (res.data.length) commit('LOAD_GAME_TEAMS', res.data)
                 })
                 .catch(e => console.log(e))
                 .finally(() => commit('SET_LOADING', false, { root: true }))
@@ -124,9 +139,14 @@ export default {
         },
         gameTeams(state) {
             return (gameId) => {
-                return state.teams.filter(team => team.games.includes(gameId))
+                if (state.teams) {
+                    return state.teams.filter(team => team.games.includes(gameId))
+                }
             }
-        }
+        },
+        gameTeamsAPI(state) {
+            return state.gameTeams
+        },
     },
     rounds(state) {
         return (teamId) => {

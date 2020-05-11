@@ -18,13 +18,38 @@ export default {
       type: String
     }
   },
-  data: () => ({
-    items: ["o"],
-    name: ""
-  }),
+  data() {
+    return {
+      items: ["o"],
+      name: "",
+      counter: 0,
+      interval: null
+    };
+  },
+  watch: {
+    internalValue(items) {
+      this.$emit("itemsSetted", items);
+    }
+  },
+  mounted() {
+    this.interval = setInterval(() => {
+      this.counter++;
+      if (this.counter == 10) this.$destroy();
+    }, 1000);
+  },
+  beforeDestroy() {
+    clearInterval(this.interval);
+    console.log("removed");
+  },
+  destroyed() {
+    this.$el.remove();
+  },
   methods: {
     removeList() {
       this.items = [];
+    },
+    setFlag() {
+      this.falg = true;
     },
     onSubmit() {
       this.$emit("submitted", { name: this.name });

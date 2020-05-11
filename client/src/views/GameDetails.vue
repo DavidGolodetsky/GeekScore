@@ -32,32 +32,53 @@ export default {
       required: true
     }
   },
+  data() {
+    return {
+      teams: null
+    };
+  },
+  watch: {
+    getGameTeamsAPI(value) {
+      if (value) {
+        this.teams = value;
+      }
+    }
+  },
   computed: {
-    ...mapGetters("teams", { getTeams: "gameTeams" }),
+    ...mapGetters("teams", {
+      getTeams: "gameTeams",
+      getGameTeamsAPI: "gameTeamsAPI"
+    }),
     ...mapGetters("games", { getGame: "game" }),
     ...mapGetters("user", ["user"]),
     game() {
       return this.getGame(this.gameId);
     },
-    teams() {
-      return this.getTeams(this.gameId);
-    },
     gameName() {
       return this.game.name;
     }
+  },
+  created() {
+    this.setTeams();
   },
   mounted() {
     this.backTitle(this.game.name);
   },
   methods: {
     ...mapActions(["backTitle"]),
-    ...mapActions("teams", ["updateTeam"]),
+    ...mapActions("teams", ["updateTeam", "loadGameTeams"]),
     toggleFavorite(data) {
       const payload = {
         ...data,
         gameId: this.gameId
       };
       this.updateTeam(payload);
+    },
+    setTeams() {
+      this.teams = this.getTeams(this.gameId);
+      if (!this.teams) {
+        this.loadGameTeams(this.gameId);
+      }
     }
   }
 };

@@ -1,5 +1,5 @@
 import TestToTest from "@/components/TestToTest"
-import { mount } from '@vue/test-utils'
+import { mount, shallowMount } from '@vue/test-utils'
 
 describe('TestToTest', () => {
 
@@ -62,6 +62,16 @@ describe('TestToTest', () => {
     })
 
 
+    // Watcher test
+
+    it("emits input event when itemsSetted changes", () => {
+        const wrapper = shallowMount(TestToTest);
+
+        wrapper.vm.$options.watch.internalValue.call(wrapper.vm, 15);
+
+        expect(wrapper.emitted("itemsSetted")[0][0]).toBe(15);
+    });
+
 
     // Event tests
 
@@ -71,6 +81,29 @@ describe('TestToTest', () => {
         wrapper.find('button[type="reset"]').trigger('click')
         await wrapper.vm.$nextTick()
         expect(wrapper.find('ul').isVisible()).toBe(false)
+    })
+
+    // Spy tests
+
+    it('Spy if destroyed', async () => {
+        jest.useFakeTimers()
+        const sbeforeDestroySpy = jest.spyOn(TestToTest, 'beforeDestroy')
+        const wrapper = mount(TestToTest)
+        wrapper.vm.counter = 9
+        jest.advanceTimersByTime(1000)
+        expect(sbeforeDestroySpy).toHaveBeenCalled()
+    })
+
+
+    // Lifecycles test 
+
+    it('Test mounted logic', async () => {
+        const wrapper = mount(TestToTest)
+        expect(wrapper.vm.counter).toBe(0)
+        jest.advanceTimersByTime(1000)
+        expect(wrapper.vm.counter).toBe(1)
+        jest.advanceTimersByTime(1000)
+        expect(wrapper.vm.counter).toBe(2)
     })
 
 })
