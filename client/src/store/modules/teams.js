@@ -16,6 +16,9 @@ export default {
             state.gameTeams = payload
         },
         CREATE_TEAM(state, payload) {
+            if (state.gameTeams) {
+                state.gameTeams.push(payload)
+            }
             if (state.teams) {
                 state.teams = [...state.teams, payload]
             } else {

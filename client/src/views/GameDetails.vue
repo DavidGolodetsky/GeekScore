@@ -34,23 +34,23 @@ export default {
   },
   data() {
     return {
-      teams: null
+      teamsFromCache: null
     };
-  },
-  watch: {
-    getGameTeamsAPI(value) {
-      if (value) {
-        this.teams = value;
-      }
-    }
   },
   computed: {
     ...mapGetters("teams", {
-      getTeams: "gameTeams",
+      getTeamsfromCache: "gameTeams",
       getGameTeamsAPI: "gameTeamsAPI"
     }),
     ...mapGetters("games", { getGame: "game" }),
     ...mapGetters("user", ["user"]),
+    teams() {
+      if (this.teamsFromCache) {
+        return this.teamsFromCache;
+      } else {
+        return this.getGameTeamsAPI;
+      }
+    },
     game() {
       return this.getGame(this.gameId);
     },
@@ -75,8 +75,8 @@ export default {
       this.updateTeam(payload);
     },
     setTeams() {
-      this.teams = this.getTeams(this.gameId);
-      if (!this.teams) {
+      this.teamsFromCache = this.getTeamsfromCache(this.gameId);
+      if (!this.teamsFromCache) {
         this.loadGameTeams(this.gameId);
       }
     }
