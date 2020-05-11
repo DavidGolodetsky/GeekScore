@@ -1,5 +1,10 @@
 import TestToTest from "@/components/TestToTest"
-import { mount, shallowMount } from '@vue/test-utils'
+import { mount, shallowMount, createLocalVue } from '@vue/test-utils'
+import Vuex from 'vuex'
+// import store from '@/store/index'
+
+// const VueWithVuex = createLocalVue()
+// VueWithVuex.use(Vuex)
 
 describe('TestToTest', () => {
 
@@ -105,5 +110,19 @@ describe('TestToTest', () => {
         jest.advanceTimersByTime(1000)
         expect(wrapper.vm.counter).toBe(2)
     })
+
+
+    // Vuex
+
+    // it("Add item to store", () => {
+    //     const st = new Vuex.Store(store)
+    //     const wrapper = shallowMount(TestToTest, {
+    //         localVue: VueWithVuex,
+    //         st
+    //     });
+
+    //     wrapper.vm.setBackTitle('blabla')
+    //     expect(wrapper.vm.backTitle).toEqual('blabla')
+    // });
 
 })

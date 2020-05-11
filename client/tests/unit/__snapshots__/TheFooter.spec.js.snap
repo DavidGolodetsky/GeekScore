@@ -1,9 +1,0 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
-
-exports[`TheFooter Shallow test 1`] = `
-<v-footer padless="" class="the-footer">
-  <v-layout justify-space-between="" py-2="" wrap="" primary="" text-center="" white--text="" xs12="">
-    <v-container class="d-flex flex-wrap justify-space-between footer-text"><span class="mr-6">© 2020 — Geek Score</span> <span>geekscore.info@gmail.com</span></v-container>
-  </v-layout>
-</v-footer>
-`;

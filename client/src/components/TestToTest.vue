@@ -12,6 +12,8 @@
 </template>
 
 <script>
+import { mapActions, mapGetters } from "vuex";
+
 export default {
   props: {
     value: {
@@ -31,6 +33,9 @@ export default {
       this.$emit("itemsSetted", items);
     }
   },
+  computed: {
+    ...mapGetters(["backTitle"])
+  },
   mounted() {
     this.interval = setInterval(() => {
       this.counter++;
@@ -45,6 +50,7 @@ export default {
     this.$el.remove();
   },
   methods: {
+    ...mapActions({ setBackTitle: "backTitle" }),
     removeList() {
       this.items = [];
     },

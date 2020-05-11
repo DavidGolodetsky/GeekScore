@@ -2,7 +2,7 @@
   <div>
     <v-app-bar app color="primary" dense dark>
       <v-container class="d-flex align-center app-container space-between">
-        <the-go-back v-if="getbackTitle" :title="getbackTitle" />
+        <the-go-back v-if="backTitle" :title="backTitle" />
         <router-link v-else class="d-flex align-center" :to="{ name: 'home' }">
           <v-img class="mr-1" :src="require(`@/assets/img/logo.svg`)" height="35" width="35"></v-img>
           <span class="header-title">Geek Score</span>
@@ -59,7 +59,7 @@ export default {
   },
   computed: {
     ...mapGetters("user", ["user"]),
-    ...mapGetters({ getbackTitle: "backTitle" }),
+    ...mapGetters(["backTitle"]),
     navItems() {
       return [
         {
@@ -71,13 +71,13 @@ export default {
     }
   },
   methods: {
-    ...mapActions(["backTitle"]),
+    ...mapActions({ setBackTitle: "backTitle" }),
     ...mapActions("user", ["logout"]),
     onLogout() {
       if (this.$route.fullPath === "/") {
         this.sideNav = false;
       } else {
-        this.backTitle(null);
+        this.setBackTitle(null);
       }
       this.logout();
     }
