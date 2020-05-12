@@ -1,5 +1,5 @@
 <template>
-  <div class="game-details">
+  <section class="game-details">
     <the-title title="Teams" icon="account-group" :props="{ gameId }" component="team-add-dialog" />
     <cards-list
       v-if="teams"
@@ -11,7 +11,7 @@
         <team-edit-dialog :team="item" />
       </template>
     </cards-list>
-  </div>
+  </section>
 </template>
 
 <script>

@@ -41,7 +41,7 @@
       label="Image URL"
       v-model.trim="imageUrl"
     ></v-text-field>
-    <v-img v-if="imageUrl" :src="imageUrl" height="200" contain></v-img>
+    <v-img v-if="imageUrl" :src="imageUrl" :alt="name" height="200" contain></v-img>
     <v-switch v-model="isDelete" label="Delete game" color="error" hide-details></v-switch>
   </the-dialog>
 </template>

@@ -1,5 +1,5 @@
 <template>
-  <div class="the-table">
+  <section class="the-table">
     <v-card class="mb-4">
       <v-card-title class="table-title">
         <v-spacer class="d-none d-sm-flex"></v-spacer>
@@ -33,7 +33,7 @@
         </template>
       </v-data-table>
     </v-card>
-  </div>
+  </section>
 </template>
 
 <script>

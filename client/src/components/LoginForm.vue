@@ -1,5 +1,5 @@
 <template>
-  <div class="login-form">
+  <section class="login-form">
     <v-card width="400" raised outlined dark color="primary" class="mx-auto my-4 px-4 pt-4">
       <v-form v-model="valid" lazy-validation ref="form" @submit.prevent="onSubmit">
         <slot name="title" />
@@ -57,7 +57,7 @@
       <slot name="forgot" />
       <slot name="redirect" />
     </v-card>
-  </div>
+  </section>
 </template>
 
 <script>

@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <section>
     <v-btn
       class="px-0"
       :small="simple"
@@ -34,7 +34,7 @@
         </v-form>
       </v-card>
     </v-dialog>
-  </div>
+  </section>
 </template>
 
 <script>

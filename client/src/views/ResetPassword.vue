@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <section>
     <the-alert v-if="error" type="error" @dismissed="onDismiss" key="singin" :text="error.message" />
     <div v-if="resettedPassword">
       <h3 class="mb-5">Check your email for a new password</h3>
@@ -37,7 +37,7 @@
         </v-card-actions>
       </v-form>
     </v-card>
-  </div>
+  </section>
 </template>
 
 <script>

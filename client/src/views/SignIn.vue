@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <section>
     <the-alert v-if="error" type="error" @dismissed="onDismiss" key="singin" :text="error.message" />
     <login-form class="mt-12">
       <template #title>
@@ -20,7 +20,7 @@
         </div>
       </template>
     </login-form>
-  </div>
+  </section>
 </template>
 
 <script>

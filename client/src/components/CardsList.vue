@@ -1,5 +1,5 @@
 <template>
-  <div class="cards-list">
+  <section class="cards-list">
     <v-row>
       <v-col sm="6" md="4" cols="12">
         <v-text-field
@@ -39,7 +39,12 @@
                   </v-list-item>
                 </v-list-item-group>
               </v-list>
-              <v-img class="white--text align-end" height="350" :src="imagePath(item)">
+              <v-img
+                class="white--text align-end"
+                height="350"
+                :src="imagePath(item)"
+                :alt="item.name"
+              >
                 <div class="title-wrap">
                   <v-card-title class="card-list-actions">
                     <template v-if="getActions(item).length">
@@ -86,7 +91,7 @@
         </v-lazy>
       </v-col>
     </v-row>
-  </div>
+  </section>
 </template>
 
 <script>

@@ -1,5 +1,5 @@
 <template>
-  <div class="the-alert">
+  <section class="the-alert">
     <transition appear name="fade-down">
       <v-alert dismissible :value="true" :type="type" @input="onClose()">
         {{
@@ -7,7 +7,7 @@
         }}
       </v-alert>
     </transition>
-  </div>
+  </section>
 </template>
 
 <script>

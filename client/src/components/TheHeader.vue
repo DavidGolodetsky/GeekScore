@@ -4,27 +4,32 @@
       <v-container class="d-flex align-center app-container space-between">
         <the-go-back v-if="backTitle" :title="backTitle" />
         <router-link v-else class="d-flex align-center" :to="{ name: 'home' }">
-          <v-img class="mr-1" :src="require(`@/assets/img/logo.svg`)" height="35" width="35"></v-img>
+          <v-img
+            class="mr-1"
+            :src="require(`@/assets/img/logo.svg`)"
+            height="35"
+            alt="Geek Score"
+            width="35"
+          ></v-img>
           <span class="header-title">Geek Score</span>
         </router-link>
         <v-spacer />
         <template v-if="user">
-          <div class="d-none d-sm-flex">
-            <v-btn
-              v-for="(item, index) in navItems"
-              :key="index"
-              :small="$vuetify.breakpoint.smOnly"
-              :to="item.link"
-              text
-              rounded
-            >
-              <v-icon left>mdi-{{ item.icon }}</v-icon>
-              {{ item.text }}
-            </v-btn>
-            <v-btn :small="$vuetify.breakpoint.smOnly" text rounded @click="onLogout">
-              <v-icon>mdi-logout</v-icon>Log out
-            </v-btn>
-          </div>
+          <nav>
+            <ul class="d-none d-sm-flex">
+              <li v-for="(item, index) in navItems" :key="index">
+                <v-btn :small="$vuetify.breakpoint.smOnly" :to="item.link" text rounded>
+                  <v-icon left>mdi-{{ item.icon }}</v-icon>
+                  {{ item.text }}
+                </v-btn>
+              </li>
+              <li>
+                <v-btn :small="$vuetify.breakpoint.smOnly" text rounded @click="onLogout">
+                  <v-icon>mdi-logout</v-icon>Log out
+                </v-btn>
+              </li>
+            </ul>
+          </nav>
           <v-app-bar-nav-icon class="d-sm-none" @click.stop="sideNav = !sideNav"></v-app-bar-nav-icon>
         </template>
       </v-container>

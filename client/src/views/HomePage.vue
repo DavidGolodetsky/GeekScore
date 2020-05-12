@@ -1,5 +1,5 @@
 <template>
-  <div class="home-page">
+  <section class="home-page">
     <h1 class="app-headline text-center mb-6">Welcome to Geek Score!</h1>
     <v-timeline class="mb-10" dark align-top :dense="$vuetify.breakpoint.smAndDown">
       <v-timeline-item
@@ -27,7 +27,7 @@
         :to="{name: user ? 'games' : 'signIn'}"
       >{{ user ? 'Games' : 'Sign In' }}</v-btn>
     </div>
-  </div>
+  </section>
 </template>
 
 <script>
@@ -71,9 +71,3 @@ export default {
 };
 </script>
 
-
-<style scoped lang="scss">
-.home-page {
-  padding-top: 20px;
-}
-</style>

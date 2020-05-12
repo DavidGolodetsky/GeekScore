@@ -1,5 +1,5 @@
 <template>
-  <div class="round-add">
+  <section class="round-add">
     <the-dialog activator="plus" header="Add new round" :submitLogic="onSubmit">
       <v-row>
         <v-col cols="6">
@@ -73,7 +73,7 @@
         ></v-textarea>
       </v-row>
     </the-dialog>
-  </div>
+  </section>
 </template>
 
 <script>

@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <section>
     <the-title title="Games" icon="dice-multiple" component="game-add-dialog" />
     <cards-list
       v-if="$log(games) || games"
@@ -11,7 +11,7 @@
         <game-edit-dialog :game="item" />
       </template>
     </cards-list>
-  </div>
+  </section>
 </template>
 
 <script>
