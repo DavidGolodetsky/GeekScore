@@ -12,6 +12,7 @@ const isDev = process.env.NODE_ENV !== "production";
 
 Vue.config.productionTip = isDev
 Vue.config.performance = isDev;
+Vue.prototype.$log = console.log
 
 Vue.use(VueOffline, {
   mixin: false,
