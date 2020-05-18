@@ -3,7 +3,10 @@
     <v-layout justify-space-between py-2 wrap primary text-center white--text xs12>
       <v-container class="d-flex flex-wrap justify-space-between footer-text">
         <span class="mr-6">&copy; {{ new Date().getFullYear() }} — Geek Score</span>
-        <a class="email" href="mailto:geekscore.info@gmail.com">geekscore.info@gmail.com</a>
+        <span>
+          Build by
+          <a class="link" href="https://twitter.com/david_go__">@David_Go__</a>
+        </span>
       </v-container>
     </v-layout>
   </v-footer>
@@ -21,8 +24,8 @@ export default {};
       font-size: 14px;
     }
   }
-  .email {
-    color: #fff;
+  .link {
+    color: $secondary;
   }
 }
 </style>
