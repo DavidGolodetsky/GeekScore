@@ -26,6 +26,8 @@ export default {};
   }
   .link {
     color: $secondary;
+    margin-left: 5px;
+    text-decoration: none;
   }
 }
 </style>
