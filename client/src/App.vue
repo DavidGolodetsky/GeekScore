@@ -11,7 +11,7 @@
           <v-progress-circular :size="50" indeterminate color="secondary" />
         </div>
         <v-btn
-          :class="{ active: showTop }"
+          v-if="showTop"
           class="go-top"
           aria-label="Go to top"
           dark
@@ -64,7 +64,7 @@ export default {
     onScroll() {
       if (window.pageYOffset > 500) {
         this.showTop = true;
-      } else {
+      } else if (this.showTop && window.pageYOffset < 500) {
         this.showTop = false;
       }
     }
@@ -95,7 +95,7 @@ export default {
   .go-top {
     position: fixed;
     z-index: 10;
-    opacity: 0;
+    opacity: 0.8;
     transition: 0.3;
     right: 10px;
     bottom: 20px;
@@ -103,10 +103,6 @@ export default {
     @media #{$tablet} {
       right: 50px;
       bottom: 80px;
-    }
-    &.active {
-      transition: 0.3;
-      opacity: 0.8;
     }
   }
 }
