@@ -32,9 +32,7 @@ export default {
                             id: user.user.uid,
                         }
                         axios.post('/api/users', newUser)
-                            .then(() => {
-                                commit('SET_USER', newUser)
-                            })
+                            .then(() => commit('SET_USER', newUser))
                             .catch(e => console.log(e))
                             .finally(() => commit('SET_LOADING', false, { root: true }))
                     }
