@@ -1,6 +1,8 @@
 {
-  "name": "geek",
-  "version": "0.1.0",
+  "name": "geek-score",
+  "version": "0.2.0",
+  "author": "david_go__",
+  "description": "A PWA for board games fans. It allows you to store your games, create teams and collect statistics.",
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
