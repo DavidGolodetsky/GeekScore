@@ -1,4 +1,5 @@
 <template>
+  <!-- TODO: reomve root element for vue3 -->
   <div>
     <v-app-bar app color="primary" dense dark>
       <v-container class="d-flex align-center app-container space-between">
