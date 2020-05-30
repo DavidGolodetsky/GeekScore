@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import rounds from "./modules/rounds"
 import games from "./modules/games"
 import teams from "./modules/teams"
 import user from "./modules/user"
@@ -12,9 +13,10 @@ export default new Vuex.Store({
   // strict: process.env.NODE_ENV !== 'production',
 
   modules: {
+    user,
     games,
     teams,
-    user
+    rounds
   },
   state: {
     error: null,

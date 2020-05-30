@@ -2,7 +2,7 @@
   <section>
     <the-title title="Games" icon="dice-multiple" component="game-add-dialog" />
     <cards-list
-      v-if="$log(games) || games"
+      v-if="games"
       :items="games"
       @favorite="toggleFavorite"
       :route="{name: 'game', params: {gameId: ''}}"

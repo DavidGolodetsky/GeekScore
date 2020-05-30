@@ -5,7 +5,7 @@
       v-if="teams"
       :items="teams"
       @favorite="toggleFavorite"
-      :route="{ name: 'team', params: { teamId: '' } }"
+      :route="{ name: 'team', params: { teamId: '' }, query: { gameId } }"
     >
       <template #action="{ item }">
         <team-edit-dialog :team="item" />

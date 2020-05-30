@@ -102,7 +102,7 @@ export default {
     }
   },
   methods: {
-    ...mapActions("teams", ["createRound"]),
+    ...mapActions("rounds", ["createRound"]),
     onSubmit() {
       const round = this.cookRound();
       this.createRound(round);

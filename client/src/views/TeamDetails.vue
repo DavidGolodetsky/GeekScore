@@ -1,12 +1,12 @@
 <template>
   <section>
-    <the-title
+    <!-- <the-title
       title="Rounds"
       icon="sword-cross"
       class="mb-4"
       :props="{ teamId: this.team.id }"
       component="round-add-dialog"
-    />
+    />-->
     <div v-if="showTable">
       <v-tabs v-model="tab" background-color="primary" centered dark icons-and-text>
         <v-tabs-slider color="secondary"></v-tabs-slider>
@@ -24,7 +24,7 @@
 
       <v-tabs-items v-model="tab">
         <v-tab-item value="tab-1">
-          <the-table :team="team" :rounds="rounds" />
+          <!-- <the-table :team="team" :rounds="rounds" /> -->
         </v-tab-item>
         <v-tab-item value="tab-2">
           <v-card>
@@ -37,16 +37,16 @@
 </template>
 
 <script>
-import TheTitle from "@/components/TheTitle";
-import TheTable from "@/components/TheTable";
+// import TheTitle from "@/components/TheTitle";
+// import TheTable from "@/components/TheTable";
 import ChartBars from "@/components/ChartBars";
 import { mapActions, mapGetters } from "vuex";
 
 export default {
   components: {
-    ChartBars,
-    TheTable,
-    TheTitle
+    ChartBars
+    // TheTable
+    // TheTitle
   },
   props: {
     teamId: {
@@ -61,38 +61,43 @@ export default {
     };
   },
   computed: {
-    ...mapGetters("teams", { getTeam: "team", getRounds: "rounds" }),
+    ...mapGetters("teams", { getTeam: "gameTeam" }),
+    ...mapGetters("games", { getGame: "game" }),
+    ...mapGetters("rounds", ["rounds"]),
     team() {
       return this.getTeam(this.teamId);
+    },
+    game() {
+      return this.getGame(this.$route.query.gameId);
     },
     showTable() {
       if (this.rounds && this.rounds.length) {
         return true;
       }
       return false;
-    },
-    rounds() {
-      const rounds = this.getRounds(this.teamId);
-      if (rounds) {
-        return Object.keys(rounds).map(key => {
-          return { ...rounds[key], id: key };
-        });
-      }
-      return [];
     }
+    // rounds() {
+    //   const rounds = this.getRounds(this.teamId);
+    //   if (rounds) {
+    //     return Object.keys(rounds).map(key => {
+    //       return { ...rounds[key], id: key };
+    //     });
+    //   }
+    //   return [];
+    // }
   },
   mounted() {
-    this.backTitle(`${this.team.name}: ${this.team.gameName}`);
+    this.backTitle(`${this.team.name}: ${this.game.name}`);
   },
   methods: {
     ...mapActions(["backTitle"])
   },
   watch: {
-    rounds(value, newValue) {
-      if (newValue) {
-        this.statistics++;
-      }
-    }
+    // rounds(value, newValue) {
+    //   if (newValue) {
+    //     this.statistics++;
+    //   }
+    // }
   }
 };
 </script>
