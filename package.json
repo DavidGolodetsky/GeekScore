@@ -1,13 +1,14 @@
 {
-  "name": "server",
-  "version": "1.0.0",
-  "description": "",
+  "name": "geek-score-server",
+  "version": "0.1.0",
+  "author": "david_go__",
+  "description": "Server for Geek Score on node.js and mongoDB",
   "engines": {
     "node": "12.16.x"
   },
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon server.js",
+    "serve": "nodemon server.js",
     "start": "node server.js"
   },
   "author": "",
