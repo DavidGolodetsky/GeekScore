@@ -1,10 +1,5 @@
 import TestToTest from "@/components/TestToTest"
-import { mount, shallowMount, createLocalVue } from '@vue/test-utils'
-import Vuex from 'vuex'
-// import store from '@/store/index'
-
-// const VueWithVuex = createLocalVue()
-// VueWithVuex.use(Vuex)
+import { mount, shallowMount } from '@vue/test-utils'
 
 describe('TestToTest', () => {
 
@@ -69,12 +64,12 @@ describe('TestToTest', () => {
 
     // Watcher test
 
-    it("emits input event when itemsSetted changes", () => {
+    it("emits input event when items-set changes", () => {
         const wrapper = shallowMount(TestToTest);
 
         wrapper.vm.$options.watch.internalValue.call(wrapper.vm, 15);
 
-        expect(wrapper.emitted("itemsSetted")[0][0]).toBe(15);
+        expect(wrapper.emitted("items-set")[0][0]).toBe(15);
     });
 
 
@@ -112,17 +107,5 @@ describe('TestToTest', () => {
     })
 
 
-    // Vuex
-
-    // it("Add item to store", () => {
-    //     const st = new Vuex.Store(store)
-    //     const wrapper = shallowMount(TestToTest, {
-    //         localVue: VueWithVuex,
-    //         st
-    //     });
-
-    //     wrapper.vm.setBackTitle('blabla')
-    //     expect(wrapper.vm.backTitle).toEqual('blabla')
-    // });
 
 })
