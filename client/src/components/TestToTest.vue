@@ -30,7 +30,7 @@ export default {
   },
   watch: {
     internalValue(items) {
-      this.$emit("items-set", items);
+      this.$emit("itemsSetted", items);
     }
   },
   computed: {

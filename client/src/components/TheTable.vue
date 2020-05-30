@@ -18,7 +18,7 @@
         :search="search"
         single-expand
         :items-per-page="5"
-        v-model:expanded="expanded"
+        :expanded.sync="expanded"
         show-expand
         class="app-table elevation-1"
       >
@@ -28,7 +28,7 @@
             <div v-if="item.comment">Comment: {{ item.comment }}</div>
           </td>
         </template>
-        <template #item="{ item }">
+        <template #item.action="{ item }">
           <round-edit-dialog :item="item" />
         </template>
       </v-data-table>

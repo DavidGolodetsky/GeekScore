@@ -1,12 +1,12 @@
 <script>
 import { VIcon } from "vuetify/lib";
-import { h } from vue
 
 export default {
+  functional: true,
   props: {
     title: String
   },
-  render(ctx) {
+  render(h, ctx) {
     const title = ctx.props.title;
     const media = ctx.parent.$vuetify.breakpoint.xsOnly;
     const router = ctx.parent.$router;

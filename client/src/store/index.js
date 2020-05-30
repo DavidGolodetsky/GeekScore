@@ -1,10 +1,13 @@
+import Vue from 'vue'
 import Vuex from 'vuex'
 import games from "./modules/games"
 import teams from "./modules/teams"
 import user from "./modules/user"
 
 
-export default Vuex.createStore({
+Vue.use(Vuex)
+
+export default new Vuex.Store({
   // TODO: comment out and fix issues
   // strict: process.env.NODE_ENV !== 'production',
 
@@ -57,4 +60,4 @@ export default Vuex.createStore({
       return state.backTitle
     }
   }
-});
+})
