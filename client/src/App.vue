@@ -73,10 +73,6 @@ export default {
 </script>
 
 <style scoped lang="scss">
-[v-cloak] {
-  display: none;
-}
-
 .app {
   .loader-wrap {
     width: 100%;

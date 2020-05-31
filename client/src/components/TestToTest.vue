@@ -12,6 +12,8 @@
 </template>
 
 <script>
+// TODO:remove for production
+
 import { mapActions, mapGetters } from "vuex";
 
 export default {
@@ -44,7 +46,6 @@ export default {
   },
   beforeDestroy() {
     clearInterval(this.interval);
-    console.log("removed");
   },
   destroyed() {
     this.$el.remove();

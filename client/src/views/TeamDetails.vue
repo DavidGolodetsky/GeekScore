@@ -77,32 +77,14 @@ export default {
       }
       return false;
     }
-    // rounds() {
-    //   const rounds = this.getRounds(this.teamId);
-    //   if (rounds) {
-    //     return Object.keys(rounds).map(key => {
-    //       return { ...rounds[key], id: key };
-    //     });
-    //   }
-    //   return [];
-    // }
   },
   created() {
     this.loadRounds({ teamId: this.teamId, gameId: this.gameId });
-  },
-  mounted() {
     this.backTitle(`${this.team.name}: ${this.game.name}`);
   },
   methods: {
     ...mapActions(["backTitle"]),
     ...mapActions("rounds", ["loadRounds"])
-  },
-  watch: {
-    // rounds(value, newValue) {
-    //   if (newValue) {
-    //     this.statistics++;
-    //   }
-    // }
   }
 };
 </script>

@@ -20,7 +20,6 @@ router.get('/', async (req, res) => {
     // const gameId = req.query.gameId
     try {
         const rounds = await Round.find({ user });
-        console.log(rounds)
         // const teamRounds = rounds.filter(round => round.games.includes(gameId))
         res.json(rounds);
     } catch (err) {

@@ -60,8 +60,6 @@ export default {
   },
   created() {
     this.setTeams();
-  },
-  mounted() {
     this.backTitle(this.game.name);
   },
   methods: {

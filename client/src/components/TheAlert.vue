@@ -1,11 +1,7 @@
 <template>
   <section class="the-alert">
     <transition appear name="fade-down">
-      <v-alert dismissible :value="true" :type="type" @input="onClose()">
-        {{
-        text
-        }}
-      </v-alert>
+      <v-alert dismissible :value="true" :type="type" @input="onClose()">{{ text }}</v-alert>
     </transition>
   </section>
 </template>

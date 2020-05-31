@@ -1,5 +1,10 @@
 @import "./_variables";
 
+
+[v-cloak] {
+  display: none;
+}
+
 a {
   text-decoration: none;
 }

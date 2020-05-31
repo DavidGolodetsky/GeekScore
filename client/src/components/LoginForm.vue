@@ -90,6 +90,13 @@ export default {
       ]
     };
   },
+  computed: {
+    comparePasswords() {
+      return this.password !== this.confirmPassword
+        ? "Passwords don't match"
+        : true;
+    }
+  },
   mounted() {
     fbStart();
   },
@@ -114,14 +121,6 @@ export default {
           this.signInUser(userInfo);
         }
       }
-    }
-  },
-
-  computed: {
-    comparePasswords() {
-      return this.password !== this.confirmPassword
-        ? "Passwords don't match"
-        : true;
     }
   }
 };
