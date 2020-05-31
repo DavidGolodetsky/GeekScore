@@ -6,12 +6,7 @@
     simple
     :submitLogic="onSubmit"
   >
-    <v-switch
-      v-model="isDelete"
-      label="Delete round"
-      color="error"
-      hide-details
-    ></v-switch>
+    <v-switch v-model="isDelete" label="Delete round" color="error" hide-details></v-switch>
   </the-dialog>
 </template>
 
@@ -41,6 +36,10 @@ export default {
         this.deleteRound(round);
       }
     }
+  },
+  errorCaptured(err, vm, info) {
+    console.warn(err, vm, info);
+    return false;
   }
 };
 </script>

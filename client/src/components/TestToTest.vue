@@ -61,6 +61,10 @@ export default {
     onSubmit() {
       this.$emit("submitted", { name: this.name });
     }
+  },
+  errorCaptured(err, vm, info) {
+    console.warn(err, vm, info);
+    return false;
   }
 };
 </script>

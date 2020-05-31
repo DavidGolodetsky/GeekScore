@@ -99,6 +99,10 @@ export default {
       }
       this.updateGame(game);
     }
+  },
+  errorCaptured(err, vm, info) {
+    console.warn(err, vm, info);
+    return false;
   }
 };
 </script>

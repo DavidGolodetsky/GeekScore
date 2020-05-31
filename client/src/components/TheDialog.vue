@@ -95,6 +95,10 @@ export default {
     close() {
       this.dialog = false;
     }
+  },
+  errorCaptured(err, vm, info) {
+    console.warn(err, vm, info);
+    return false;
   }
 };
 </script>
