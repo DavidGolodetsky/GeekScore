@@ -1,12 +1,12 @@
 <template>
   <section>
-    <!-- <the-title
+    <the-title
       title="Rounds"
       icon="sword-cross"
       class="mb-4"
-      :props="{ teamId: this.team.id }"
+      :props="{ teamId: this.team._id, gameId: this.gameId }"
       component="round-add-dialog"
-    />-->
+    />
     <div v-if="showTable">
       <v-tabs v-model="tab" background-color="primary" centered dark icons-and-text>
         <v-tabs-slider color="secondary"></v-tabs-slider>
@@ -24,7 +24,7 @@
 
       <v-tabs-items v-model="tab">
         <v-tab-item value="tab-1">
-          <!-- <the-table :team="team" :rounds="rounds" /> -->
+          <the-table :team="team" :rounds="rounds" />
         </v-tab-item>
         <v-tab-item value="tab-2">
           <v-card>
@@ -37,16 +37,16 @@
 </template>
 
 <script>
-// import TheTitle from "@/components/TheTitle";
-// import TheTable from "@/components/TheTable";
+import TheTitle from "@/components/TheTitle";
+import TheTable from "@/components/TheTable";
 import ChartBars from "@/components/ChartBars";
 import { mapActions, mapGetters } from "vuex";
 
 export default {
   components: {
-    ChartBars
-    // TheTable
-    // TheTitle
+    ChartBars,
+    TheTable,
+    TheTitle
   },
   props: {
     teamId: {
@@ -57,7 +57,8 @@ export default {
   data() {
     return {
       statistics: 0,
-      tab: null
+      tab: null,
+      gameId: this.$route.query.gameId
     };
   },
   computed: {
@@ -68,7 +69,7 @@ export default {
       return this.getTeam(this.teamId);
     },
     game() {
-      return this.getGame(this.$route.query.gameId);
+      return this.getGame(this.gameId);
     },
     showTable() {
       if (this.rounds && this.rounds.length) {
@@ -86,11 +87,15 @@ export default {
     //   return [];
     // }
   },
+  created() {
+    this.loadRounds({ teamId: this.teamId, gameId: this.gameId });
+  },
   mounted() {
     this.backTitle(`${this.team.name}: ${this.game.name}`);
   },
   methods: {
-    ...mapActions(["backTitle"])
+    ...mapActions(["backTitle"]),
+    ...mapActions("rounds", ["loadRounds"])
   },
   watch: {
     // rounds(value, newValue) {

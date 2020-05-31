@@ -6,9 +6,6 @@ import { VIcon } from "vuetify/lib";
 
 export default {
   props: {
-    icon: {
-      type: String
-    },
     title: {
       type: String,
       required: true
@@ -16,6 +13,9 @@ export default {
     component: {
       type: String,
       required: true
+    },
+    icon: {
+      type: String
     },
     props: {
       type: Object

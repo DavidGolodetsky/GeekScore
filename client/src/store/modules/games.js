@@ -7,15 +7,15 @@ export default {
         games: null,
     },
     mutations: {
-        SET_LOADED_GAMES(state, payload) {
-            state.games = payload
-        },
         CREATE_GAME(state, payload) {
             if (state.games) {
                 state.games = [...state.games, payload]
             } else {
                 state.games = [payload]
             }
+        },
+        SET_LOADED_GAMES(state, payload) {
+            state.games = payload
         },
         UPDATE_GAME(state, payload) {
             const game = state.games.find(game => game._id === payload._id)
@@ -32,16 +32,6 @@ export default {
         }
     },
     actions: {
-        loadGames({ commit, rootState }) {
-            commit('SET_LOADING', true, { root: true })
-            const user = rootState.user.user.id
-            axios.get('/api/games', { params: { user } })
-                .then((res) => {
-                    if (res.data.length) commit('SET_LOADED_GAMES', res.data)
-                })
-                .catch(e => console.log(e))
-                .finally(() => commit('SET_LOADING', false, { root: true }))
-        },
         createGame({ commit, rootState }, payload) {
             commit('SET_LOADING', true, { root: true })
             const user = rootState.user.user.id
@@ -56,6 +46,16 @@ export default {
                 .then((res) => {
                     const _id = res.data._id
                     commit("CREATE_GAME", { ...game, _id })
+                })
+                .catch(e => console.log(e))
+                .finally(() => commit('SET_LOADING', false, { root: true }))
+        },
+        loadGames({ commit, rootState }) {
+            commit('SET_LOADING', true, { root: true })
+            const user = rootState.user.user.id
+            axios.get('/api/games', { params: { user } })
+                .then((res) => {
+                    if (res.data.length) commit('SET_LOADED_GAMES', res.data)
                 })
                 .catch(e => console.log(e))
                 .finally(() => commit('SET_LOADING', false, { root: true }))

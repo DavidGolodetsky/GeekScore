@@ -83,6 +83,10 @@ export default {
     teamId: {
       type: String,
       required: true
+    },
+    gameId: {
+      type: String,
+      required: true
     }
   },
   data() {
@@ -96,7 +100,7 @@ export default {
     };
   },
   computed: {
-    ...mapGetters("teams", { getTeam: "team" }),
+    ...mapGetters("teams", { getTeam: "gameTeam" }),
     team() {
       return this.getTeam(this.teamId);
     }
@@ -111,7 +115,7 @@ export default {
       const round = {
         date: this.date,
         turn: this.turn,
-        gameId: this.team.gameId,
+        gameId: this.gameId,
         teamId: this.teamId,
         comment: this.comment
       };
@@ -121,6 +125,7 @@ export default {
         if (this.result === "tie") {
           round.tie = "TIE";
         } else {
+          // TODO: check mongoose map for dynamic key
           round[this.result.toLowerCase()] = "VICTORY";
         }
       }

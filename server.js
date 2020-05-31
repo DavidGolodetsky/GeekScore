@@ -5,9 +5,10 @@ const path = require('path');
 const serveStatic = require("serve-static");
 const cors = require('cors');
 const mongoose = require('mongoose');
+const users = require('./routes/api/users');
 const games = require('./routes/api/games');
 const teams = require('./routes/api/teams');
-const users = require('./routes/api/users');
+const rounds = require('./routes/api/rounds');
 
 const PORT = process.env.PORT || 3000
 
@@ -21,9 +22,10 @@ app.use(express.json());
 app.use(cors());
 
 
+app.use('/api/users', users);
 app.use('/api/games', games);
 app.use('/api/teams', teams);
-app.use('/api/users', users);
+app.use('/api/rounds', rounds);
 
 if (process.env.NODE_ENV === 'production') {
     app.use(serveStatic(path.join(__dirname, 'public')));

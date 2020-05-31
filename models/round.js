@@ -5,6 +5,10 @@ const schema = new mongoose.Schema({
         type: String,
         required: true
     },
+    user: {
+        type: String,
+        required: true
+    },
     gameId: {
         type: String,
         required: true
@@ -18,8 +22,13 @@ const schema = new mongoose.Schema({
     },
     comment: {
         type: String
+    },
+    turn: {
+        type: String
+    },
+    tie: {
+        type: String
     }
-
 });
 
 module.exports = mongoose.model('Round', schema);

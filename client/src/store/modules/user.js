@@ -17,11 +17,6 @@ export default {
         }
     },
     actions: {
-        logout({ commit, rootState }) {
-            rootState.games.games = rootState.teams.teams = []
-            firebase.auth().signOut()
-            commit('SET_USER', null)
-        },
         signUpUser({ commit }, payload) {
             commit('SET_LOADING', true, { root: true })
             commit('CLEAR_ERROR', null, { root: true })
@@ -68,6 +63,11 @@ export default {
                 .then(() => commit('RESET_PASSWORD'))
                 .catch(e => commit('SET_ERROR', e, { root: true }))
                 .finally(() => commit('SET_LOADING', false, { root: true }))
+        },
+        logout({ commit, rootState }) {
+            rootState.games.games = rootState.teams.teams = []
+            firebase.auth().signOut()
+            commit('SET_USER', null)
         }
     },
     getters: {

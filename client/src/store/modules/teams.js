@@ -7,12 +7,6 @@ export default {
         gameTeams: null
     },
     mutations: {
-        LOAD_TEAMS(state, payload) {
-            state.teams = payload
-        },
-        LOAD_GAME_TEAMS(state, payload) {
-            state.gameTeams = payload
-        },
         CREATE_TEAM(state, payload) {
             if (state.gameTeams) {
                 state.gameTeams.push(payload)
@@ -23,6 +17,13 @@ export default {
                 state.teams = [payload]
             }
         },
+        LOAD_TEAMS(state, payload) {
+            state.teams = payload
+        },
+        LOAD_GAME_TEAMS(state, payload) {
+            state.gameTeams = payload
+        },
+        // TODO: is it works?
         UPDATE_TEAM(state, payload) {
             const team = state.teams.find(team => team._id === payload._id)
             state.teams = state.teams.filter(team => team._id !== payload._id)
@@ -38,6 +39,23 @@ export default {
         },
     },
     actions: {
+        createTeam({ commit, rootState }, payload) {
+            commit('SET_LOADING', true, { root: true })
+            const user = rootState.user.user.id
+            const team = {
+                ...payload,
+                user,
+                rounds: {},
+                favorite: false
+            }
+            axios.post('/api/teams', team)
+                .then((res) => {
+                    const _id = res.data._id
+                    commit("CREATE_TEAM", { ...team, _id })
+                })
+                .catch(e => console.log(e))
+                .finally(() => commit('SET_LOADING', false, { root: true }))
+        },
         loadTeams({ commit, rootState }) {
             commit('SET_LOADING', true, { root: true })
             const user = rootState.user.user.id
@@ -55,23 +73,6 @@ export default {
             axios.get("/api/teams/game", { params: { user, gameId } })
                 .then((res) => {
                     if (res.data.length) commit('LOAD_GAME_TEAMS', res.data)
-                })
-                .catch(e => console.log(e))
-                .finally(() => commit('SET_LOADING', false, { root: true }))
-        },
-        createTeam({ commit, rootState }, payload) {
-            commit('SET_LOADING', true, { root: true })
-            const user = rootState.user.user.id
-            const team = {
-                ...payload,
-                user,
-                rounds: {},
-                favorite: false
-            }
-            axios.post('/api/teams', team)
-                .then((res) => {
-                    const _id = res.data._id
-                    commit("CREATE_TEAM", { ...team, _id })
                 })
                 .catch(e => console.log(e))
                 .finally(() => commit('SET_LOADING', false, { root: true }))
@@ -96,17 +97,17 @@ export default {
         teams(state) {
             return state.teams
         },
-        gameTeam(state) {
-            return (teamId) => {
-                if (state.gameTeams) {
-                    return state.gameTeams.find(team => team._id === teamId)
-                }
-            }
-        },
         gameTeams(state) {
             return (gameId) => {
                 if (state.teams) {
                     return state.teams.filter(team => team.games.includes(gameId))
+                }
+            }
+        },
+        gameTeam(state) {
+            return (teamId) => {
+                if (state.gameTeams) {
+                    return state.gameTeams.find(team => team._id === teamId)
                 }
             }
         },
