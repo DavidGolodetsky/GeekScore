@@ -13,7 +13,7 @@
       </v-col>
     </v-row>
     <v-row>
-      <v-col sm="6" md="4" cols="12" v-for="(item, i) in filteredItems" :key="i" class="mb-6">
+      <v-col sm="6" md="4" cols="12" v-for="item in filteredItems" :key="item._id" class="mb-6">
         <v-lazy
           :options="{
             threshold: 0.5
