@@ -11,13 +11,10 @@
   </the-dialog>
 </template>
 
-<script lang='ts'>
-import Vue from "vue";
-
+<script>
 import { mapActions } from "vuex";
-import { Game } from "@/types";
 
-export default Vue.extend({
+export default {
   data() {
     return {
       name: "",
@@ -34,7 +31,7 @@ export default Vue.extend({
   methods: {
     ...mapActions("games", ["createGame"]),
     onSubmit() {
-      const game: Game = {
+      const game = {
         coop: this.coop,
         name: this.name
       };
@@ -45,5 +42,5 @@ export default Vue.extend({
     console.warn(err, vm, info);
     return false;
   }
-});
+};
 </script>
