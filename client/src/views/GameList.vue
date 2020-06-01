@@ -14,13 +14,15 @@
   </section>
 </template>
 
-<script>
+<script lang='ts'>
+import Vue from "vue";
+
 import TheTitle from "@/components/TheTitle";
 import GameEditDialog from "@/components/GameEditDialog";
 import CardsList from "@/components/CardsList";
 import { mapGetters, mapActions } from "vuex";
 
-export default {
+export default Vue.extend({
   components: {
     TheTitle,
     GameEditDialog,
@@ -37,12 +39,12 @@ export default {
   methods: {
     ...mapActions("games", ["loadGames", "updateGame"]),
     ...mapActions(["clearBackTitle"]),
-    toggleFavorite(data) {
-      this.updateGame(data);
+    toggleFavorite(game) {
+      this.updateGame(game);
     },
     shouldLoadData() {
       this.games ? "" : this.loadGames();
     }
   }
-};
+});
 </script>
