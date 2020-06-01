@@ -14,13 +14,7 @@
     </v-row>
     <v-row>
       <v-col sm="6" md="4" cols="12" v-for="item in filteredItems" :key="item._id" class="mb-6">
-        <v-lazy
-          :options="{
-            threshold: 0.5
-          }"
-          min-height="200"
-          transition="fade-transition"
-        >
+        <v-lazy :options="{ threshold: 0.5 }" min-height="200" transition="fade-transition">
           <v-card dark :key="item._id" raised class="mx-auto app-card">
             <router-link :to="setRoute(item._id)">
               <div class="title-wrap">
@@ -31,7 +25,7 @@
               </div>
               <v-list dense disabled v-if="item.players" class="players">
                 <v-list-item-group>
-                  <v-list-item v-for="(player, i) in item.players" :key="i">
+                  <v-list-item v-for="player in item.players" :key="player.name">
                     <v-list-item-icon>
                       <v-icon v-text="'mdi-account'"></v-icon>
                     </v-list-item-icon>

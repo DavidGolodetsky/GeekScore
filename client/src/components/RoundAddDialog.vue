@@ -15,8 +15,8 @@
           </v-radio-group>
           <v-radio-group label="Result:" v-else class="mb-4" :rules="fieldRules" v-model="result">
             <v-radio
-              v-for="(player, i) in team.players"
-              :key="i"
+              v-for="player in team.players"
+              :key="player.name"
               :label="player.name"
               :value="player.name"
             ></v-radio>

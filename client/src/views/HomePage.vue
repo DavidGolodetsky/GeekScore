@@ -3,8 +3,8 @@
     <h1 class="app-headline text-center mb-6">Welcome to Geek Score!</h1>
     <v-timeline class="mb-10" dark align-top :dense="$vuetify.breakpoint.smAndDown">
       <v-timeline-item
-        v-for="(item, i) in items"
-        :key="i"
+        v-for="item in items"
+        :key="item.title"
         color="secondary"
         :icon="`mdi-${item.icon}`"
         fill-dot
