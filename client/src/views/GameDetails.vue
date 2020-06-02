@@ -73,7 +73,7 @@ export default {
       this.updateTeam(payload);
     },
     setTeams() {
-      // TODO: fix adding teams refresh take a look at rounds
+      // TODO: fix adding teams refresh take a look at rounds. Remove api for game teams.
       this.teamsFromCache = this.getTeamsfromCache(this.gameId);
       if (!this.teamsFromCache) {
         this.loadGameTeams(this.gameId);
