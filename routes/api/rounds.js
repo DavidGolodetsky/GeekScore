@@ -16,11 +16,8 @@ const router = express.Router();
 
 router.get('/', async (req, res) => {
     const user = req.query.user
-    // const teamId = req.query.teamId
-    // const gameId = req.query.gameId
     try {
         const rounds = await Round.find({ user });
-        // const teamRounds = rounds.filter(round => round.games.includes(gameId))
         res.json(rounds);
     } catch (err) {
         res.status(500).json({ message: err.message });

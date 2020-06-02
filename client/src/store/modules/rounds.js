@@ -40,11 +40,10 @@ export default {
                 .catch(e => console.log(e))
                 .finally(() => commit('SET_LOADING', false, { root: true }))
         },
-        loadRounds({ commit, rootState }, payload) {
+        loadRounds({ commit, rootState }) {
             commit('SET_LOADING', true, { root: true })
-            const { gameId, teamId } = payload;
             const user = rootState.user.user.id;
-            axios.get('/api/rounds', { params: { user, gameId, teamId } })
+            axios.get('/api/rounds', { params: { user } })
                 .then((res) => {
                     if (res.data.length) commit('LOAD_ROUNDS', res.data)
                 })
@@ -62,7 +61,12 @@ export default {
     },
     getters: {
         rounds(state) {
-            return state.rounds
+            return (query) => {
+                if (state.rounds) {
+                    const teamRounds = state.rounds.filter(round => round.teamId === query.teamId)
+                    return teamRounds.filter(round => round.gameId === query.gameId)
+                }
+            }
         },
     }
 }

@@ -16,13 +16,13 @@
     ></v-select>
     <template v-if="players.length">
       <v-text-field
-        v-for="player in players"
+        v-for="(player, i) in players"
         v-model.trim="player.name"
         :readonly="isMe(player)"
         :clearable="!isMe(player)"
         prepend-icon="mdi-account"
         :rules="fieldRules"
-        :key="player.name"
+        :key="i"
         :label="`Player #${i + 1}`"
       ></v-text-field>
     </template>

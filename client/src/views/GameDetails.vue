@@ -73,6 +73,7 @@ export default {
       this.updateTeam(payload);
     },
     setTeams() {
+      // TODO: fix adding teams refresh take a look at rounds
       this.teamsFromCache = this.getTeamsfromCache(this.gameId);
       if (!this.teamsFromCache) {
         this.loadGameTeams(this.gameId);

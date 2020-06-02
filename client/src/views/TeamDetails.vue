@@ -64,9 +64,13 @@ export default {
   computed: {
     ...mapGetters("teams", { getTeam: "gameTeam" }),
     ...mapGetters("games", { getGame: "game" }),
-    ...mapGetters("rounds", ["rounds"]),
+    ...mapGetters("rounds", { getRounds: "rounds" }),
     team() {
       return this.getTeam(this.teamId);
+    },
+    rounds() {
+      const query = { teamId: this.teamId, gameId: this.gameId };
+      return this.getRounds(query);
     },
     game() {
       return this.getGame(this.gameId);
@@ -79,7 +83,7 @@ export default {
     }
   },
   created() {
-    this.loadRounds({ teamId: this.teamId, gameId: this.gameId });
+    this.loadRounds();
     this.backTitle(`${this.team.name}: ${this.game.name}`);
   },
   methods: {
