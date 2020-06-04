@@ -15,7 +15,13 @@
     <v-row>
       <v-col sm="6" md="4" cols="12" v-for="item in filteredItems" :key="item._id" class="mb-6">
         <v-lazy :options="{ threshold: 0.5 }" min-height="200" transition="fade-transition">
-          <v-card dark :key="item._id" raised class="mx-auto app-card">
+          <v-card
+            dark
+            :key="item._id"
+            raised
+            class="mx-auto app-card"
+            :aria-describedby="item.name"
+          >
             <router-link :to="setRoute(item._id)">
               <div class="title-wrap">
                 <v-card-title class="d-flex justify-space-between">
