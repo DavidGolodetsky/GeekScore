@@ -27,9 +27,7 @@
           <the-table :team="team" :rounds="rounds" />
         </v-tab-item>
         <v-tab-item value="tab-2">
-          <v-card>
-            <chart-bars :key="statistics" :team="team" />
-          </v-card>
+          <chart-bars :key="statistics" :team="team" />
         </v-tab-item>
       </v-tabs-items>
     </div>
