@@ -9,7 +9,7 @@ import user from "./modules/user"
 Vue.use(Vuex)
 
 export default new Vuex.Store({
-  // TODO: comment out and fix issues
+  // TODO:  uncomment and fix issues
   // strict: process.env.NODE_ENV !== 'production',
 
   modules: {

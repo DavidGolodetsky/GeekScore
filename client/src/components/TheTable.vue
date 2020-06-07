@@ -29,7 +29,7 @@
           </td>
         </template>
         <template #item.action="{ item }">
-          <round-edit-dialog :item="item" />
+          <round-edit-dialog :round="item" />
         </template>
       </v-data-table>
     </v-card>

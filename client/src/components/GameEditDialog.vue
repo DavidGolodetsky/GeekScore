@@ -94,7 +94,7 @@ export default {
         rulesURL: this.rulesURL
       };
       if (this.isDelete) {
-        this.deleteGame(game);
+        this.deleteGame(this.game._id);
         return;
       }
       this.updateGame(game);

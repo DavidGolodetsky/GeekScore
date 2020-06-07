@@ -3,16 +3,6 @@ const express = require('express')
 const Team = require('../../models/team');
 const router = express.Router();
 
-router.get('/', async (req, res) => {
-    const user = req.query.user
-    try {
-        const teams = await Team.find({ user });
-        res.status(200).json(teams);
-    } catch (err) {
-        res.status(500).json({ message: err.message });
-    }
-});
-
 router.post('/', async (req, res) => {
     const { name, coop, favorite, id, players, user, rounds, games } = req.body
     const team = new Team({
@@ -33,12 +23,13 @@ router.post('/', async (req, res) => {
     }
 })
 
-router.delete('/:id', async (req, res) => {
+router.get('/', async (req, res) => {
+    const user = req.query.user
     try {
-        await Team.findByIdAndRemove(req.params.id);
-        res.status(200).json({ state: 'deleted' });
+        const teams = await Team.find({ user });
+        res.status(200).json(teams);
     } catch (err) {
-        res.status(400).json({ message: err.message });
+        res.status(500).json({ message: err.message });
     }
 });
 
@@ -51,5 +42,14 @@ router.patch('/:id', async (req, res) => {
     }
 });
 
+
+router.delete('/:id', async (req, res) => {
+    try {
+        await Team.findByIdAndRemove(req.params.id);
+        res.status(200).json({ state: 'deleted' });
+    } catch (err) {
+        res.status(400).json({ message: err.message });
+    }
+});
 
 module.exports = router;

@@ -43,7 +43,7 @@ export default {
         name: this.name
       };
       if (this.isDelete) {
-        this.deleteTeam(team);
+        this.deleteTeam(this.team._id);
         return;
       }
       this.updateTeam(team);

@@ -14,7 +14,7 @@
 import { mapActions } from "vuex";
 export default {
   props: {
-    item: {
+    round: {
       type: Object,
       required: true
     }
@@ -25,15 +25,10 @@ export default {
     };
   },
   methods: {
-    ...mapActions("teams", ["deleteRound"]),
+    ...mapActions("rounds", ["deleteRound"]),
     onSubmit() {
-      const round = {
-        gameId: this.item.gameId,
-        teamId: this.item.teamId,
-        roundId: this.item.id
-      };
       if (this.isDelete) {
-        this.deleteRound(round);
+        this.deleteRound(this.round._id);
       }
     }
   },

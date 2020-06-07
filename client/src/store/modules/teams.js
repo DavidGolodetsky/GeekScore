@@ -19,7 +19,6 @@ export default {
         LOAD_TEAMS(state, payload) {
             state.teams = payload
         },
-        // TODO: is it works?
         UPDATE_TEAM(state, payload) {
             const team = state.teams.find(team => team._id === payload._id)
             state.teams = state.teams.filter(team => team._id !== payload._id)
@@ -71,7 +70,7 @@ export default {
         },
         deleteTeam({ commit }, payload) {
             commit('SET_LOADING', true, { root: true })
-            axios.delete(`/api/teams/${payload._id}`)
+            axios.delete(`/api/teams/${payload}`)
                 .then(() => commit("DELETE_TEAM", payload))
                 .catch(e => console.log(e))
                 .finally(() => commit('SET_LOADING', false, { root: true }))

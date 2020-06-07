@@ -69,8 +69,8 @@ export default {
         },
         deleteGame({ commit }, payload) {
             commit('SET_LOADING', true, { root: true })
-            axios.delete(`/api/games/${payload._id}`)
-                .then(() => commit("DELETE_GAME", payload._id))
+            axios.delete(`/api/games/${payload}`)
+                .then(() => commit("DELETE_GAME", payload))
                 .catch(e => console.log(e))
                 .finally(() => commit('SET_LOADING', false, { root: true }))
         }

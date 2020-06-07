@@ -16,13 +16,14 @@ export default {
         LOAD_ROUNDS(state, payload) {
             state.rounds = payload
         },
-        // DELETE_ROUND(state, payload) {
-        // state.teams = state.teams.map(team => {
-        //     const round = team.rounds[payload.roundId];
-        //     if (round) delete team.rounds[payload.roundId];
-        //     return { ...team }
-        // })
-        // },
+        DELETE_ROUND(state, payload) {
+            const rounds = state.rounds.filter(round => round._id !== payload)
+            if (rounds.length) {
+                state.rounds = rounds
+            } else {
+                state.rounds = null
+            }
+        },
     },
     actions: {
         createRound({ commit, rootState }, payload) {
@@ -50,14 +51,13 @@ export default {
                 .catch(e => console.log(e))
                 .finally(() => commit('SET_LOADING', false, { root: true }))
         },
-        // deleteRound({ commit, rootState }, payload) {
-        // commit('SET_LOADING', true, { root: true })
-        // const user = rootState.user.user.id
-        // db.database().ref('users').child(user).child('games').child(payload.gameId).child('teams').child(payload.teamId).child('rounds').child(payload.roundId).remove()
-        //     .then(() => commit("DELETE_ROUND", payload))
-        //     .catch(e => console.log(e))
-        //     .finally(() => commit('SET_LOADING', false, { root: true }))
-        // },
+        deleteRound({ commit }, payload) {
+            commit('SET_LOADING', true, { root: true })
+            axios.delete(`/api/rounds/${payload}`)
+                .then(() => commit("DELETE_ROUND", payload))
+                .catch(e => console.log(e))
+                .finally(() => commit('SET_LOADING', false, { root: true }))
+        },
     },
     getters: {
         rounds(state) {
