@@ -21,10 +21,6 @@ const schema = new mongoose.Schema({
         type: Array,
         required: true
     },
-    rounds: {
-        type: Array,
-        required: true
-    },
     games: {
         type: Array,
         required: true

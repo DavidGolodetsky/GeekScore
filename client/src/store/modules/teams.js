@@ -40,7 +40,6 @@ export default {
             const team = {
                 ...payload,
                 user,
-                rounds: {},
                 favorite: false
             }
             axios.post('/api/teams', team)

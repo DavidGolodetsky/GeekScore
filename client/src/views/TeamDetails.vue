@@ -27,7 +27,7 @@
           <the-table :team="team" :rounds="rounds" />
         </v-tab-item>
         <v-tab-item value="tab-2">
-          <chart-bars :key="statistics" :team="team" />
+          <chart-bars :team="team" :rounds="rounds" />
         </v-tab-item>
       </v-tabs-items>
     </div>
@@ -54,7 +54,6 @@ export default {
   },
   data() {
     return {
-      statistics: 0,
       tab: null,
       gameId: this.$route.query.gameId
     };

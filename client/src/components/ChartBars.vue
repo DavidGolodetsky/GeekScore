@@ -7,29 +7,45 @@ export default {
     team: {
       type: Object,
       required: true
+    },
+    rounds: {
+      type: Array,
+      required: true
     }
   },
-  data() {
-    return {
-      rounds: this.team.rounds
-    };
+  watch: {
+    rounds: {
+      handler: function(value) {
+        if (value) {
+          this.setChart();
+        } else {
+          this._chart.destroy();
+        }
+      }
+    }
   },
   mounted() {
-    this.renderChart(
-      {
-        labels: this.team.coop ? ["Victories", "Defeats"] : this.getPlayers(),
-        datasets: [
-          {
-            label: "Victories",
-            backgroundColor: "#ec8506",
-            data: this.team.coop ? this.getCoopStat() : this.getPlayersStat()
-          }
-        ]
-      },
-      { responsive: true, maintainAspectRatio: false }
-    );
+    this.setChart();
   },
   methods: {
+    setChart() {
+      this.renderChart(
+        {
+          labels: this.team.coop ? ["Victories", "Defeats"] : this.getPlayers(),
+          datasets: [
+            {
+              label: "Victories",
+              backgroundColor: "#ec8506",
+              data: this.team.coop ? this.getCoopStat() : this.getPlayersStat()
+            }
+          ]
+        },
+        {
+          responsive: true,
+          maintainAspectRatio: false
+        }
+      );
+    },
     getCoopStat() {
       let victories = null;
       let defeats = null;

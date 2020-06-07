@@ -4,7 +4,7 @@ const Team = require('../../models/team');
 const router = express.Router();
 
 router.post('/', async (req, res) => {
-    const { name, coop, favorite, id, players, user, rounds, games } = req.body
+    const { name, coop, favorite, id, players, user, games } = req.body
     const team = new Team({
         id,
         name,
@@ -12,8 +12,7 @@ router.post('/', async (req, res) => {
         games,
         coop,
         favorite,
-        players,
-        rounds
+        players
     });
     const newTeam = await team.save();
     res.status(201).json(newTeam);
