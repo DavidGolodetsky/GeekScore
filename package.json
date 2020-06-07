@@ -11,13 +11,15 @@
     "serve": "nodemon server.js",
     "start": "node server.js"
   },
-  "author": "",
   "license": "ISC",
   "dependencies": {
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
-    "mongoose": "^5.9.9",
-    "nodemon": "^2.0.3"
+    "mongoose": "^5.9.9"
+  },
+  "devDependencies": {
+    "morgan": "^1.10.0",
+    "nodemon": "^2.0.4"
   }
 }

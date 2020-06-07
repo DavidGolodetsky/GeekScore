@@ -13,34 +13,22 @@ router.post('/', async (req, res) => {
         result,
         comment
     });
-    try {
-        const newRound = await round.save();
-        res.status(201).json(newRound);
-        console.log(newRound)
-    } catch (err) {
-        res.status(400).json({ message: err.message });
-    }
+    const newRound = await round.save();
+    res.status(201).json(newRound);
+    console.log(newRound)
 })
 
 
 router.get('/', async (req, res) => {
     const user = req.query.user
-    try {
-        const rounds = await Round.find({ user });
-        res.status(200).json(rounds);
-    } catch (err) {
-        res.status(500).json({ message: err.message });
-    }
+    const rounds = await Round.find({ user });
+    res.status(200).json(rounds);
 });
 
 
 router.delete('/:id', async (req, res) => {
-    try {
-        await Round.findByIdAndRemove(req.params.id);
-        res.status(200).json({ state: 'deleted' });
-    } catch (err) {
-        res.status(400).json({ message: err.message });
-    }
+    await Round.findByIdAndRemove(req.params.id);
+    res.status(200).json({ state: 'deleted' });
 });
 
 

@@ -10,21 +10,13 @@ router.post('/', async (req, res) => {
     const user = new User({
         id
     });
-    try {
-        const newUser = await user.save();
-        res.status(201).json(newUser);
-    } catch (err) {
-        res.status(400).json({ message: err.message });
-    }
+    const newUser = await user.save();
+    res.status(201).json(newUser);
 })
 
 router.get('/', async (req, res) => {
-    try {
-        const users = await User.find();
-        res.status(200).json(users);
-    } catch (err) {
-        res.status(500).json({ message: err.message });
-    }
+    const users = await User.find();
+    res.status(200).json(users);
 });
 
 
