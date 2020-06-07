@@ -4,7 +4,6 @@ export default {
     namespaced: true,
     state: {
         teams: null,
-        gameTeams: null
     },
     mutations: {
         CREATE_TEAM(state, payload) {
@@ -19,9 +18,6 @@ export default {
         },
         LOAD_TEAMS(state, payload) {
             state.teams = payload
-        },
-        LOAD_GAME_TEAMS(state, payload) {
-            state.gameTeams = payload
         },
         // TODO: is it works?
         UPDATE_TEAM(state, payload) {
@@ -66,20 +62,9 @@ export default {
                 .catch(e => console.log(e))
                 .finally(() => commit('SET_LOADING', false, { root: true }))
         },
-        loadGameTeams({ commit, rootState }, payload) {
-            commit('SET_LOADING', true, { root: true })
-            const user = rootState.user.user.id
-            const gameId = payload
-            axios.get("/api/teams/game", { params: { user, gameId } })
-                .then((res) => {
-                    if (res.data.length) commit('LOAD_GAME_TEAMS', res.data)
-                })
-                .catch(e => console.log(e))
-                .finally(() => commit('SET_LOADING', false, { root: true }))
-        },
         updateTeam({ commit }, payload) {
             commit('SET_LOADING', true, { root: true })
-            axios.put(`/api/teams/${payload._id}`, payload)
+            axios.patch(`/api/teams/${payload._id}`, payload)
                 .then(() => commit("UPDATE_TEAM", payload))
                 .catch(e => console.log(e))
                 .finally(() => commit('SET_LOADING', false, { root: true }))
@@ -97,22 +82,19 @@ export default {
         teams(state) {
             return state.teams
         },
+        team(state) {
+            return (teamId) => {
+                if (state.teams) {
+                    return state.teams.find(team => team._id === teamId)
+                }
+            }
+        },
         gameTeams(state) {
             return (gameId) => {
                 if (state.teams) {
                     return state.teams.filter(team => team.games.includes(gameId))
                 }
             }
-        },
-        gameTeam(state) {
-            return (teamId) => {
-                if (state.gameTeams) {
-                    return state.gameTeams.find(team => team._id === teamId)
-                }
-            }
-        },
-        gameTeamsAPI(state) {
-            return state.gameTeams
-        },
+        }
     },
 }

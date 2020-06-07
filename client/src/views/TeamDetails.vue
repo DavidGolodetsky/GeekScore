@@ -60,7 +60,7 @@ export default {
     };
   },
   computed: {
-    ...mapGetters("teams", { getTeam: "gameTeam" }),
+    ...mapGetters("teams", { getTeam: "team" }),
     ...mapGetters("games", { getGame: "game" }),
     ...mapGetters("rounds", { getRounds: "rounds" }),
     team() {

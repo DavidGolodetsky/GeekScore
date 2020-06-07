@@ -62,7 +62,7 @@ export default {
         },
         updateGame({ commit }, payload) {
             commit('SET_LOADING', true, { root: true })
-            axios.put(`/api/games/${payload._id}`, payload)
+            axios.patch(`/api/games/${payload._id}`, payload)
                 .then(() => commit("UPDATE_GAME", payload))
                 .catch(e => console.log(e))
                 .finally(() => commit('SET_LOADING', false, { root: true }))

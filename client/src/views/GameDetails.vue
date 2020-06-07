@@ -39,17 +39,12 @@ export default {
   },
   computed: {
     ...mapGetters("teams", {
-      getTeamsfromCache: "gameTeams",
-      getGameTeamsAPI: "gameTeamsAPI"
+      getTeams: "gameTeams"
     }),
     ...mapGetters("games", { getGame: "game" }),
     ...mapGetters("user", ["user"]),
     teams() {
-      if (this.teamsFromCache) {
-        return this.teamsFromCache;
-      } else {
-        return this.getGameTeamsAPI;
-      }
+      return this.getTeams(this.gameId);
     },
     game() {
       return this.getGame(this.gameId);
@@ -59,7 +54,6 @@ export default {
     }
   },
   created() {
-    this.setTeams();
     this.backTitle(this.game.name);
   },
   methods: {
@@ -71,13 +65,6 @@ export default {
         gameId: this.gameId
       };
       this.updateTeam(payload);
-    },
-    setTeams() {
-      // TODO: fix adding teams refresh take a look at rounds. Remove api for game teams.
-      this.teamsFromCache = this.getTeamsfromCache(this.gameId);
-      if (!this.teamsFromCache) {
-        this.loadGameTeams(this.gameId);
-      }
     }
   }
 };

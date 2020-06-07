@@ -7,19 +7,7 @@ router.get('/', async (req, res) => {
     const user = req.query.user
     try {
         const teams = await Team.find({ user });
-        res.json(teams);
-    } catch (err) {
-        res.status(500).json({ message: err.message });
-    }
-});
-
-router.get('/game', async (req, res) => {
-    const user = req.query.user
-    const gameId = req.query.gameId
-    try {
-        const teams = await Team.find({ user });
-        const gameTeams = teams.filter(team => team.games.includes(gameId))
-        res.json(gameTeams);
+        res.status(200).json(teams);
     } catch (err) {
         res.status(500).json({ message: err.message });
     }
@@ -54,10 +42,10 @@ router.delete('/:id', async (req, res) => {
     }
 });
 
-router.put('/:id', async (req, res) => {
+router.patch('/:id', async (req, res) => {
     try {
         await Team.findByIdAndUpdate(req.params.id, req.body);
-        res.json({ state: 'updated' });
+        res.status(200).json({ state: 'updated' });
     } catch (err) {
         res.status(400).json({ message: err.message });
     }
