@@ -73,7 +73,7 @@ export default {
       return this.getGame(this.gameId);
     },
     showTable() {
-      if (this.rounds && this.rounds.length) {
+      if (this.rounds?.length) {
         return true;
       }
       return false;
