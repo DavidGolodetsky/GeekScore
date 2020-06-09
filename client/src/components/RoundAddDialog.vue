@@ -14,12 +14,7 @@
             <v-radio label="Victory" value="VICTORY"></v-radio>
           </v-radio-group>
           <v-radio-group label="Result:" v-else class="mb-4" :rules="fieldRules" v-model="result">
-            <v-radio
-              v-for="player in team.players"
-              :key="player.name"
-              :label="player.name"
-              :value="player.name"
-            ></v-radio>
+            <v-radio v-for="{name} in team.players" :key="name" :label="name" :value="name"></v-radio>
             <v-radio label="Tie" value="tie"></v-radio>
           </v-radio-group>
         </v-col>
@@ -30,12 +25,7 @@
             class="mb-4"
             v-model="turn"
           >
-            <v-radio
-              v-for="(player, i) in team.players"
-              :key="i"
-              :label="player.name"
-              :value="player.name"
-            ></v-radio>
+            <v-radio v-for="{name} in team.players" :key="name" :label="name" :value="name"></v-radio>
           </v-radio-group>
         </v-col>
       </v-row>

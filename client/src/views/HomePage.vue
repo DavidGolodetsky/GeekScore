@@ -3,16 +3,16 @@
     <h1 class="app-headline text-center mb-6" id="greeting">Welcome to Geek Score!</h1>
     <v-timeline class="mb-10" dark align-top :dense="$vuetify.breakpoint.smAndDown">
       <v-timeline-item
-        v-for="item in items"
-        :key="item.title"
+        v-for="{title, icon, text} in items"
+        :key="title"
         color="secondary"
-        :icon="`mdi-${item.icon}`"
+        :icon="`mdi-${icon}`"
         fill-dot
       >
         <v-card color="silver" light>
-          <v-card-title class="title">{{ item.title }}</v-card-title>
+          <v-card-title class="title">{{ title }}</v-card-title>
           <v-card-text class="white text--primary">
-            <p>{{ item.text }}</p>
+            <p>{{ text }}</p>
           </v-card-text>
         </v-card>
       </v-timeline-item>

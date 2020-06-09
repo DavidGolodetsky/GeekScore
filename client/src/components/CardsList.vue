@@ -31,11 +31,11 @@
               </div>
               <v-list dense disabled v-if="item.players" class="players">
                 <v-list-item-group>
-                  <v-list-item v-for="player in item.players" :key="player.name">
+                  <v-list-item v-for="{name} in item.players" :key="name">
                     <v-list-item-icon>
                       <v-icon v-text="'mdi-account'"></v-icon>
                     </v-list-item-icon>
-                    <v-list-item-content v-text="player.name"></v-list-item-content>
+                    <v-list-item-content v-text="name"></v-list-item-content>
                   </v-list-item>
                 </v-list-item-group>
               </v-list>

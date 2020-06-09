@@ -17,10 +17,10 @@
         <template v-if="user">
           <nav>
             <ul class="d-none d-sm-flex">
-              <li v-for="item in navItems" :key="item.text">
-                <v-btn :small="$vuetify.breakpoint.smOnly" :to="item.link" text rounded>
-                  <v-icon left>mdi-{{ item.icon }}</v-icon>
-                  {{ item.text }}
+              <li v-for="{icon, text, link} in navItems" :key="text">
+                <v-btn :small="$vuetify.breakpoint.smOnly" :to="link" text rounded>
+                  <v-icon left>mdi-{{ icon }}</v-icon>
+                  {{ text }}
                 </v-btn>
               </li>
               <li>
@@ -36,11 +36,11 @@
     </v-app-bar>
     <v-navigation-drawer app right dark fixed temporary v-model="sideNav">
       <v-list>
-        <v-list-item :to="item.link" v-for="item in navItems" :key="item.text">
+        <v-list-item :to="link" v-for="{text, icon, link} in navItems" :key="text">
           <v-list-item-icon>
-            <v-icon>mdi-{{ item.icon }}</v-icon>
+            <v-icon>mdi-{{ icon }}</v-icon>
           </v-list-item-icon>
-          <v-list-item-content>{{ item.text }}</v-list-item-content>
+          <v-list-item-content>{{ text }}</v-list-item-content>
         </v-list-item>
         <v-list-item @click="onLogout">
           <v-list-item-icon>
