@@ -151,7 +151,7 @@ export default {
     border-radius: 50%;
     position: absolute;
     z-index: 1;
-    &:after {
+    &::after {
       content: "";
       z-index: -1;
       position: absolute;
