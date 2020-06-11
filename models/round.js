@@ -20,6 +20,9 @@ const schema = new mongoose.Schema({
     result: {
         type: String
     },
+    winner: {
+        type: String
+    },
     comment: {
         type: String
     },

@@ -115,8 +115,9 @@ export default {
         if (this.result === "tie") {
           round.tie = "TIE";
         } else {
+          round.winner = this.result.toLowerCase();
           // TODO: check mongoose map for dynamic key
-          round[this.result.toLowerCase()] = "VICTORY";
+          // round[this.result.toLowerCase()] = "VICTORY";
         }
       }
       return round;
