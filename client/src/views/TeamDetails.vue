@@ -68,10 +68,8 @@ export default {
     rounds() {
       const query = { teamId: this.teamId, gameId: this.gameId };
       const rounds = this.getRounds(query);
-      console.log(rounds);
       if (rounds) {
         rounds.forEach(round => (round[round.winner] = "VICTORY"));
-        console.log(rounds);
         return rounds;
       }
       return [];

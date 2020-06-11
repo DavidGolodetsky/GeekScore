@@ -107,18 +107,13 @@ export default {
         turn: this.turn,
         gameId: this.gameId,
         teamId: this.teamId,
-        comment: this.comment
+        comment: this.comment,
+        winner = this.result.toLowerCase()
       };
       if (this.team.coop) {
         round.result = this.result;
-      } else {
-        if (this.result === "tie") {
+      } else if(this.result === "tie") {
           round.tie = "TIE";
-        } else {
-          round.winner = this.result.toLowerCase();
-          // TODO: check mongoose map for dynamic key
-          // round[this.result.toLowerCase()] = "VICTORY";
-        }
       }
       return round;
     }
