@@ -1,12 +1,7 @@
 <template>
   <section class="game-details">
     <the-title title="Teams" icon="account-group" :props="{ gameId }" component="team-add-dialog" />
-    <cards-list
-      v-if="teams"
-      :items="teams"
-      @favorite="toggleFavorite"
-      :route="{ name: 'team', params: { teamId: '' }, query: { gameId } }"
-    >
+    <cards-list v-if="teams" :items="teams" @favorite="toggleFavorite" :route="gameRoute">
       <template #action="{ item }">
         <team-edit-dialog :team="item" />
       </template>
@@ -38,23 +33,25 @@ export default {
     };
   },
   computed: {
-    ...mapGetters("teams", {
-      getTeams: "gameTeams"
-    }),
-    ...mapGetters("games", { getGame: "game" }),
+    ...mapGetters("teams", ["gameTeams"]),
+    ...mapGetters("games", ["game"]),
     ...mapGetters("user", ["user"]),
     teams() {
-      return this.getTeams(this.gameId);
+      return this.gameTeams(this.gameId);
     },
-    game() {
-      return this.getGame(this.gameId);
+    getGame() {
+      return this.game(this.gameId);
     },
-    gameName() {
-      return this.game.name;
+    gameRoute() {
+      return {
+        name: "team",
+        params: { teamId: "" },
+        query: { gameId: this.gameId }
+      };
     }
   },
   created() {
-    this.setBackTitle(this.game.name);
+    this.setBackTitle(this.getGame.name);
   },
   methods: {
     ...mapActions(["setBackTitle"]),
