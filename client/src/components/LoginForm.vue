@@ -93,6 +93,9 @@ export default {
   computed: {
     comparePasswords() {
       return this.password === this.confirmPassword || "Passwords don't match";
+    },
+    loginMethod() {
+      return this.signupMode ? this.signUpUser : this.signInUser;
     }
   },
   mounted() {
@@ -101,18 +104,13 @@ export default {
   methods: {
     ...mapActions("user", ["signUpUser", "signInUser"]),
     onSubmit() {
-      // TODO:refactor
       const valid = this.$refs.form.validate();
       if (valid) {
         const userInfo = {
           email: this.email,
           password: this.password
         };
-        if (this.signupMode) {
-          this.signUpUser(userInfo);
-        } else {
-          this.signInUser(userInfo);
-        }
+        this.loginMethod(userInfo);
       }
     }
   }

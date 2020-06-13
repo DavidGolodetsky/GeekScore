@@ -1,5 +1,4 @@
 import firebase from 'firebase/app';
-import router from '@/router/index'
 import axios from 'axios'
 
 
@@ -29,7 +28,6 @@ export default {
                         }
                         axios.post('/api/users', newUser)
                             .then(() => commit('SET_USER', newUser))
-                            .then(() => router.push("/games"))
                             .catch(e => console.log(e))
                             .finally(() => commit('LOADING', false, { root: true }))
                     }
@@ -50,7 +48,6 @@ export default {
                         commit('SET_USER', loggedUser)
                     }
                 })
-                .then(() => router.push("/games"))
                 .catch(e => commit('ERROR', e, { root: true }))
                 .finally(() => commit('LOADING', false, { root: true }))
         },
