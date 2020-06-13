@@ -22,10 +22,6 @@ export default {
     onClose() {
       this.$emit("dismissed");
     }
-  },
-  errorCaptured(err, vm, info) {
-    console.warn(err, vm, info);
-    return false;
   }
 };
 </script>

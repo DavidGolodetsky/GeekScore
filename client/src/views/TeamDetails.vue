@@ -86,10 +86,10 @@ export default {
   },
   created() {
     this.loadRounds();
-    this.backTitle(`${this.team.name}: ${this.game.name}`);
+    this.setBackTitle(`${this.team.name}: ${this.game.name}`);
   },
   methods: {
-    ...mapActions(["backTitle"]),
+    ...mapActions(["setBackTitle"]),
     ...mapActions("rounds", ["loadRounds"])
   }
 };

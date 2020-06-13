@@ -33,7 +33,7 @@ export default {
     },
     actions: {
         createGame({ commit, rootState }, payload) {
-            commit('SET_LOADING', true, { root: true })
+            commit('LOADING', true, { root: true })
             const user = rootState.user.user.id
             const game = {
                 ...payload,
@@ -48,31 +48,31 @@ export default {
                     commit("CREATE_GAME", { ...game, _id })
                 })
                 .catch(e => console.log(e))
-                .finally(() => commit('SET_LOADING', false, { root: true }))
+                .finally(() => commit('LOADING', false, { root: true }))
         },
         loadGames({ commit, rootState }) {
-            commit('SET_LOADING', true, { root: true })
+            commit('LOADING', true, { root: true })
             const user = rootState.user.user.id
             axios.get('/api/games', { params: { user } })
                 .then((res) => {
                     if (res.data.length) commit('SET_LOADED_GAMES', res.data)
                 })
                 .catch(e => console.log(e))
-                .finally(() => commit('SET_LOADING', false, { root: true }))
+                .finally(() => commit('LOADING', false, { root: true }))
         },
         updateGame({ commit }, payload) {
-            commit('SET_LOADING', true, { root: true })
+            commit('LOADING', true, { root: true })
             axios.patch(`/api/games/${payload._id}`, payload)
                 .then(() => commit("UPDATE_GAME", payload))
                 .catch(e => console.log(e))
-                .finally(() => commit('SET_LOADING', false, { root: true }))
+                .finally(() => commit('LOADING', false, { root: true }))
         },
         deleteGame({ commit }, payload) {
-            commit('SET_LOADING', true, { root: true })
+            commit('LOADING', true, { root: true })
             axios.delete(`/api/games/${payload}`)
                 .then(() => commit("DELETE_GAME", payload))
                 .catch(e => console.log(e))
-                .finally(() => commit('SET_LOADING', false, { root: true }))
+                .finally(() => commit('LOADING', false, { root: true }))
         }
     },
     getters: {

@@ -1,7 +1,7 @@
 <template>
   <section>
     <the-alert v-if="error" type="error" @dismissed="onDismiss" key="singin" :text="error.message" />
-    <div v-if="resettedPassword">
+    <div v-if=" resetPassword">
       <h3 class="mb-5">Check your email for a new password</h3>
       <the-go-back title="Back to Sign in" />
     </div>
@@ -62,32 +62,20 @@ export default {
   },
   computed: {
     ...mapGetters(["error"]),
-    ...mapGetters("user", ["resettedPassword"]),
-    comparePasswords() {
-      return this.password !== this.confirmPassword
-        ? "Passwords don't match"
-        : true;
-    }
+    ...mapGetters("user", [" resetPassword"])
   },
   beforeDestroy() {
     this.onDismiss();
   },
   methods: {
-    ...mapActions(["clearError"]),
+    ...mapActions(["setError"]),
     ...mapActions("user", ["resetPassword"]),
     onDismiss() {
-      this.clearError();
-    },
-    validateForm() {
-      let form = this.$refs.form;
-      if (form.validate()) {
-        return true;
-      }
+      this.setError();
     },
     onSubmit() {
-      if (this.validateForm()) {
-        this.resetPassword(this.email);
-      }
+      const valid = this.$refs.form.validate();
+      if (valid) this.resetPassword(this.email);
     }
   }
 };

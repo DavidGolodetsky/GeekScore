@@ -33,14 +33,14 @@ export default {
   },
   created() {
     this.shouldLoadData();
-    this.clearBackTitle();
+    this.setBackTitle();
   },
   methods: {
     ...mapActions("games", ["loadGames", "updateGame"]),
     ...mapActions("teams", ["loadTeams"]),
-    ...mapActions(["clearBackTitle"]),
-    toggleFavorite(data) {
-      this.updateGame(data);
+    ...mapActions(["setBackTitle"]),
+    toggleFavorite(game) {
+      this.updateGame(game);
     },
     shouldLoadData() {
       this.games ? "" : this.loadGames();

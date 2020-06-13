@@ -108,19 +108,15 @@ export default {
         gameId: this.gameId,
         teamId: this.teamId,
         comment: this.comment,
-        winner = this.result.toLowerCase()
+        winner: this.result.toLowerCase()
       };
       if (this.team.coop) {
         round.result = this.result;
-      } else if(this.result === "tie") {
-          round.tie = "TIE";
+      } else if (this.result === "tie") {
+        round.tie = "TIE";
       }
       return round;
     }
-  },
-  errorCaptured(err, vm, info) {
-    console.warn(err, vm, info);
-    return false;
   }
 };
 </script>

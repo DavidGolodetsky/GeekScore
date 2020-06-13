@@ -24,32 +24,26 @@ export default new Vuex.Store({
     loading: false
   },
   mutations: {
-    SET_LOADING(state, payload) {
+    LOADING(state, payload) {
       state.loading = payload
     },
-    SET_ERROR(state, payload) {
+    ERROR(state, payload) {
       state.error = payload
-    },
-    CLEAR_ERROR(state) {
-      state.error = null
-    },
-    CLEAR_BACK_TITLE(state) {
-      state.backTitle = null
     },
     BACK_TITLE(state, payload) {
       state.backTitle = payload
     }
   },
   actions: {
-    clearError({ commit }) {
-      commit('CLEAR_ERROR')
+    setError({ commit }, payload = null) {
+      commit('ERROR', payload)
     },
-    backTitle({ commit }, payload) {
+    setBackTitle({ commit }, payload = null) {
       commit('BACK_TITLE', payload)
     },
-    clearBackTitle({ commit }) {
-      commit('CLEAR_BACK_TITLE')
-    }
+    setLoading({ commit }, payload = null) {
+      commit('LOADING', payload)
+    },
   },
   getters: {
     loading(state) {

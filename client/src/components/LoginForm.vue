@@ -92,9 +92,7 @@ export default {
   },
   computed: {
     comparePasswords() {
-      return this.password !== this.confirmPassword
-        ? "Passwords don't match"
-        : true;
+      return this.password === this.confirmPassword || "Passwords don't match";
     }
   },
   mounted() {
@@ -102,15 +100,10 @@ export default {
   },
   methods: {
     ...mapActions("user", ["signUpUser", "signInUser"]),
-    validateForm() {
-      let form = this.$refs.form;
-      if (form.validate()) {
-        return true;
-      }
-    },
-
     onSubmit() {
-      if (this.validateForm()) {
+      // TODO:refactor
+      const valid = this.$refs.form.validate();
+      if (valid) {
         const userInfo = {
           email: this.email,
           password: this.password
@@ -122,10 +115,6 @@ export default {
         }
       }
     }
-  },
-  errorCaptured(err, vm, info) {
-    console.warn(err, vm, info);
-    return false;
   }
 };
 </script>

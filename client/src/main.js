@@ -19,6 +19,11 @@ Vue.use(VueOffline, {
   storage: false
 })
 
+// TODO:refactor after error handeling lection
+Vue.mixin({
+
+})
+
 new Vue({
   vuetify,
   router,

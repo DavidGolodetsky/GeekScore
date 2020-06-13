@@ -54,17 +54,17 @@ export default {
     }
   },
   created() {
-    this.backTitle(this.game.name);
+    this.setBackTitle(this.game.name);
   },
   methods: {
-    ...mapActions(["backTitle"]),
+    ...mapActions(["setBackTitle"]),
     ...mapActions("teams", ["updateTeam", "loadGameTeams"]),
-    toggleFavorite(data) {
-      const payload = {
-        ...data,
+    toggleFavorite(teamInfo) {
+      const team = {
+        ...teamInfo,
         gameId: this.gameId
       };
-      this.updateTeam(payload);
+      this.updateTeam(team);
     }
   }
 };

@@ -35,7 +35,7 @@ export default {
     },
     actions: {
         createTeam({ commit, rootState }, payload) {
-            commit('SET_LOADING', true, { root: true })
+            commit('LOADING', true, { root: true })
             const user = rootState.user.user.id
             const team = {
                 ...payload,
@@ -48,31 +48,31 @@ export default {
                     commit("CREATE_TEAM", { ...team, _id })
                 })
                 .catch(e => console.log(e))
-                .finally(() => commit('SET_LOADING', false, { root: true }))
+                .finally(() => commit('LOADING', false, { root: true }))
         },
         loadTeams({ commit, rootState }) {
-            commit('SET_LOADING', true, { root: true })
+            commit('LOADING', true, { root: true })
             const user = rootState.user.user.id
             axios.get('/api/teams', { params: { user } })
                 .then((res) => {
                     if (res.data.length) commit('LOAD_TEAMS', res.data)
                 })
                 .catch(e => console.log(e))
-                .finally(() => commit('SET_LOADING', false, { root: true }))
+                .finally(() => commit('LOADING', false, { root: true }))
         },
         updateTeam({ commit }, payload) {
-            commit('SET_LOADING', true, { root: true })
+            commit('LOADING', true, { root: true })
             axios.patch(`/api/teams/${payload._id}`, payload)
                 .then(() => commit("UPDATE_TEAM", payload))
                 .catch(e => console.log(e))
-                .finally(() => commit('SET_LOADING', false, { root: true }))
+                .finally(() => commit('LOADING', false, { root: true }))
         },
         deleteTeam({ commit }, payload) {
-            commit('SET_LOADING', true, { root: true })
+            commit('LOADING', true, { root: true })
             axios.delete(`/api/teams/${payload}`)
                 .then(() => commit("DELETE_TEAM", payload))
                 .catch(e => console.log(e))
-                .finally(() => commit('SET_LOADING', false, { root: true }))
+                .finally(() => commit('LOADING', false, { root: true }))
 
         },
     },

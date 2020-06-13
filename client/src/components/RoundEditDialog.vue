@@ -31,10 +31,6 @@ export default {
         this.deleteRound(this.round._id);
       }
     }
-  },
-  errorCaptured(err, vm, info) {
-    console.warn(err, vm, info);
-    return false;
   }
 };
 </script>

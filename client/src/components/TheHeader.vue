@@ -76,20 +76,16 @@ export default {
     }
   },
   methods: {
-    ...mapActions({ setBackTitle: "backTitle" }),
+    ...mapActions(["setBackTitle"]),
     ...mapActions("user", ["logout"]),
     onLogout() {
       if (this.$route.fullPath === "/") {
         this.sideNav = false;
       } else {
-        this.setBackTitle(null);
+        this.setBackTitle();
       }
       this.logout();
     }
-  },
-  errorCaptured(err, vm, info) {
-    console.warn(err, vm, info);
-    return false;
   }
 };
 </script>

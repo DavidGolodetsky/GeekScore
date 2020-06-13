@@ -27,7 +27,7 @@ export default {
     },
     actions: {
         createRound({ commit, rootState }, payload) {
-            commit('SET_LOADING', true, { root: true })
+            commit('LOADING', true, { root: true })
             const user = rootState.user.user.id
             const round = {
                 ...payload,
@@ -39,24 +39,24 @@ export default {
                     commit("CREATE_ROUND", { ...round, _id })
                 })
                 .catch(e => console.log(e))
-                .finally(() => commit('SET_LOADING', false, { root: true }))
+                .finally(() => commit('LOADING', false, { root: true }))
         },
         loadRounds({ commit, rootState }) {
-            commit('SET_LOADING', true, { root: true })
+            commit('LOADING', true, { root: true })
             const user = rootState.user.user.id;
             axios.get('/api/rounds', { params: { user } })
                 .then((res) => {
                     if (res.data.length) commit('LOAD_ROUNDS', res.data)
                 })
                 .catch(e => console.log(e))
-                .finally(() => commit('SET_LOADING', false, { root: true }))
+                .finally(() => commit('LOADING', false, { root: true }))
         },
         deleteRound({ commit }, payload) {
-            commit('SET_LOADING', true, { root: true })
+            commit('LOADING', true, { root: true })
             axios.delete(`/api/rounds/${payload}`)
                 .then(() => commit("DELETE_ROUND", payload))
                 .catch(e => console.log(e))
-                .finally(() => commit('SET_LOADING', false, { root: true }))
+                .finally(() => commit('LOADING', false, { root: true }))
         },
     },
     getters: {

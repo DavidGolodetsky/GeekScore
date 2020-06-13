@@ -48,10 +48,6 @@ export default {
       }
       this.updateTeam(team);
     }
-  },
-  errorCaptured(err, vm, info) {
-    console.warn(err, vm, info);
-    return false;
   }
 };
 </script>

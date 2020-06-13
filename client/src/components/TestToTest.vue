@@ -51,7 +51,6 @@ export default {
     this.$el.remove();
   },
   methods: {
-    ...mapActions({ setBackTitle: "backTitle" }),
     removeList() {
       this.items = [];
     },
@@ -61,10 +60,6 @@ export default {
     onSubmit() {
       this.$emit("submitted", { name: this.name });
     }
-  },
-  errorCaptured(err, vm, info) {
-    console.warn(err, vm, info);
-    return false;
   }
 };
 </script>

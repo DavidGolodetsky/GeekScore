@@ -24,35 +24,9 @@
 </template>
 
 <script>
-import LoginForm from "@/components/LoginForm";
-import { mapActions, mapGetters } from "vuex";
+import auth from "@/mixins/auth";
 
 export default {
-  components: {
-    LoginForm
-  },
-  methods: {
-    ...mapActions(["clearError", "clearBackTitle"]),
-    onDismiss() {
-      this.clearError();
-    }
-  },
-  watch: {
-    user(value) {
-      if (value) {
-        this.$router.push("/games");
-      }
-    }
-  },
-  computed: {
-    ...mapGetters("user", ["user"]),
-    ...mapGetters(["error"])
-  },
-  created() {
-    this.clearBackTitle();
-  },
-  beforeDestroy() {
-    this.onDismiss();
-  }
+  mixins: [auth]
 };
 </script>

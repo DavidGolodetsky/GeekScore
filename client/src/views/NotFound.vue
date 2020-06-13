@@ -13,10 +13,10 @@ import { mapActions } from "vuex";
 
 export default {
   created() {
-    this.clearBackTitle();
+    this.setBackTitle();
   },
   methods: {
-    ...mapActions(["clearBackTitle"])
+    ...mapActions(["setBackTitle"])
   }
 };
 </script>

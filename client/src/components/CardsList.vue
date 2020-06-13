@@ -187,10 +187,7 @@ export default {
       this.$emit("favorite", data);
     }
   },
-  errorCaptured(err, vm, info) {
-    console.warn(err, vm, info);
-    return false;
-  }
+ 
 };
 </script>
 

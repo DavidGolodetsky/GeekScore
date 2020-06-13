@@ -1,4 +1,5 @@
 import firebase from 'firebase/app';
+import router from '@/router/index'
 import axios from 'axios'
 
 
@@ -6,20 +7,20 @@ export default {
     namespaced: true,
     state: {
         user: null,
-        resettedPassword: false
+        resetPassword: false
     },
     mutations: {
         SET_USER(state, payload) {
             state.user = payload
         },
         RESET_PASSWORD(state) {
-            state.resettedPassword = true
+            state.resetPassword = true
         }
     },
     actions: {
         signUpUser({ commit }, payload) {
-            commit('SET_LOADING', true, { root: true })
-            commit('CLEAR_ERROR', null, { root: true })
+            commit('LOADING', true, { root: true })
+            commit('ERROR', null, { root: true })
             firebase.auth().createUserWithEmailAndPassword(payload.email, payload.password)
                 .then(user => {
                     if (user.user) {
@@ -28,17 +29,18 @@ export default {
                         }
                         axios.post('/api/users', newUser)
                             .then(() => commit('SET_USER', newUser))
+                            .then(() => router.push("/games"))
                             .catch(e => console.log(e))
-                            .finally(() => commit('SET_LOADING', false, { root: true }))
+                            .finally(() => commit('LOADING', false, { root: true }))
                     }
                 }
                 )
-                .catch(e => commit('SET_ERROR', e, { root: true }))
-                .finally(() => commit('SET_LOADING', false, { root: true }))
+                .catch(e => commit('ERROR', e, { root: true }))
+                .finally(() => commit('LOADING', false, { root: true }))
         },
         signInUser({ commit }, payload) {
-            commit('SET_LOADING', true, { root: true })
-            commit('CLEAR_ERROR', null, { root: true })
+            commit('LOADING', true, { root: true })
+            commit('ERROR', null, { root: true })
             firebase.auth().signInWithEmailAndPassword(payload.email, payload.password)
                 .then(user => {
                     if (user.user) {
@@ -47,22 +49,22 @@ export default {
                         }
                         commit('SET_USER', loggedUser)
                     }
-                }
-                )
-                .catch(e => commit('SET_ERROR', e, { root: true }))
-                .finally(() => commit('SET_LOADING', false, { root: true }))
+                })
+                .then(() => router.push("/games"))
+                .catch(e => commit('ERROR', e, { root: true }))
+                .finally(() => commit('LOADING', false, { root: true }))
         },
         autoSignIn({ commit }, payload) {
-            commit('SET_LOADING', true, { root: true })
+            commit('LOADING', true, { root: true })
             commit('SET_USER', { id: payload.uid })
-            commit('SET_LOADING', false, { root: true })
+            commit('LOADING', false, { root: true })
         },
         resetPassword({ commit }, payload) {
-            commit('SET_LOADING', true, { root: true })
+            commit('LOADING', true, { root: true })
             firebase.auth().sendPasswordResetEmail(payload)
                 .then(() => commit('RESET_PASSWORD'))
-                .catch(e => commit('SET_ERROR', e, { root: true }))
-                .finally(() => commit('SET_LOADING', false, { root: true }))
+                .catch(e => commit('ERROR', e, { root: true }))
+                .finally(() => commit('LOADING', false, { root: true }))
         },
         logout({ commit, rootState }) {
             rootState.games.games = rootState.teams.teams = []
@@ -74,8 +76,8 @@ export default {
         user(state) {
             return state.user
         },
-        resettedPassword(state) {
-            return state.resettedPassword
+        resetPassword(state) {
+            return state.resetPassword
         },
     }
 }
