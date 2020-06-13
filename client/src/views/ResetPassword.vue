@@ -1,7 +1,7 @@
 <template>
   <section>
     <the-alert v-if="error" type="error" @dismissed="onDismiss" key="singin" :text="error.message" />
-    <div v-if=" resetPassword">
+    <div v-if="isResetPasswordDone">
       <h3 class="mb-5">Check your email for a new password</h3>
       <the-go-back title="Back to Sign in" />
     </div>
@@ -62,10 +62,7 @@ export default {
   },
   computed: {
     ...mapGetters(["error"]),
-    ...mapGetters("user", [" resetPassword"])
-  },
-  beforeDestroy() {
-    this.onDismiss();
+    ...mapGetters("user", ["isResetPasswordDone"])
   },
   methods: {
     ...mapActions(["setError"]),
@@ -77,6 +74,9 @@ export default {
       const valid = this.$refs.form.validate();
       if (valid) this.resetPassword(this.email);
     }
+  },
+  beforeDestroy() {
+    this.onDismiss();
   }
 };
 </script>

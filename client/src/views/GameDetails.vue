@@ -1,7 +1,7 @@
 <template>
   <section class="game-details">
     <the-title title="Teams" icon="account-group" :props="{ gameId }" component="team-add-dialog" />
-    <cards-list v-if="teams" :items="teams" @favorite="toggleFavorite" :route="gameRoute">
+    <cards-list v-if="teams" :items="teams" @favorite="toggleFavorite" :route="teamRoute">
       <template #action="{ item }">
         <team-edit-dialog :team="item" />
       </template>
@@ -41,7 +41,7 @@ export default {
     game() {
       return this.getGame(this.gameId);
     },
-    gameRoute() {
+    teamRoute() {
       return {
         name: "team",
         params: { teamId: "" },

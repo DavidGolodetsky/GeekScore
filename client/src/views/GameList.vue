@@ -1,12 +1,7 @@
 <template>
   <section>
     <the-title title="Games" icon="dice-multiple" component="game-add-dialog" />
-    <cards-list
-      v-if="getGames"
-      :items="getGames"
-      @favorite="toggleFavorite"
-      :route="{name: 'game', params: {gameId: ''}}"
-    >
+    <cards-list v-if="getGames" :items="getGames" @favorite="toggleFavorite" :route="gameRoute">
       <template #action="{ item }">
         <game-edit-dialog :game="item" />
       </template>
@@ -28,10 +23,13 @@ export default {
   },
   computed: {
     ...mapGetters("games", ["getGames"]),
-    ...mapGetters("teams", ["getTeams"])
+    ...mapGetters("teams", ["getTeams"]),
+    gameRoute() {
+      return { name: "game", params: { gameId: "" } };
+    }
   },
   created() {
-    this.shouldLoadData();
+    this.loadData();
     this.setBackTitle();
   },
   methods: {
@@ -41,7 +39,7 @@ export default {
     toggleFavorite(game) {
       this.updateGame(game);
     },
-    shouldLoadData() {
+    loadData() {
       this.getGames ? "" : this.loadGames();
       this.getTeams ? "" : this.loadTeams();
     }

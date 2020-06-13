@@ -1,5 +1,6 @@
 <template>
   <section>
+    <!-- TODO:move to shared component with SignUp -->
     <the-alert v-if="error" type="error" @dismissed="onDismiss" key="singin" :text="error.message" />
     <login-form class="mt-12">
       <template #title>

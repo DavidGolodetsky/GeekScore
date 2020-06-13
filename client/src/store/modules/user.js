@@ -73,7 +73,7 @@ export default {
         getUser(state) {
             return state.user
         },
-        resetPassword(state) {
+        isResetPasswordDone(state) {
             return state.resetPassword
         },
     }
