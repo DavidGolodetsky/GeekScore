@@ -7,16 +7,13 @@ export default {
     },
     mutations: {
         CREATE_TEAM(state, payload) {
-            if (state.gameTeams) {
-                state.gameTeams.push(payload)
-            }
             if (state.teams) {
                 state.teams = [...state.teams, payload]
             } else {
                 state.teams = [payload]
             }
         },
-        LOAD_TEAMS(state, payload) {
+        SET_TEAMS(state, payload) {
             state.teams = payload
         },
         UPDATE_TEAM(state, payload) {
@@ -55,7 +52,7 @@ export default {
             const user = rootState.user.user.id
             axios.get('/api/teams', { params: { user } })
                 .then((res) => {
-                    if (res.data.length) commit('LOAD_TEAMS', res.data)
+                    if (res.data.length) commit('SET_TEAMS', res.data)
                 })
                 .catch(e => console.log(e))
                 .finally(() => commit('LOADING', false, { root: true }))
@@ -77,17 +74,17 @@ export default {
         },
     },
     getters: {
-        teams(state) {
+        getTeams(state) {
             return state.teams
         },
-        team(state) {
+        getTeam(state) {
             return (teamId) => {
                 if (state.teams) {
                     return state.teams.find(team => team._id === teamId)
                 }
             }
         },
-        gameTeams(state) {
+        getGameTeams(state) {
             return (gameId) => {
                 if (state.teams) {
                     return state.teams.filter(team => team.games.includes(gameId))

@@ -14,7 +14,7 @@ export default {
                 state.games = [payload]
             }
         },
-        SET_LOADED_GAMES(state, payload) {
+        SET_GAMES(state, payload) {
             state.games = payload
         },
         UPDATE_GAME(state, payload) {
@@ -55,7 +55,7 @@ export default {
             const user = rootState.user.user.id
             axios.get('/api/games', { params: { user } })
                 .then((res) => {
-                    if (res.data.length) commit('SET_LOADED_GAMES', res.data)
+                    if (res.data.length) commit('SET_GAMES', res.data)
                 })
                 .catch(e => console.log(e))
                 .finally(() => commit('LOADING', false, { root: true }))
@@ -76,10 +76,10 @@ export default {
         }
     },
     getters: {
-        games(state) {
+        getGames(state) {
             return state.games
         },
-        game(state) {
+        getGame(state) {
             return (gameId) => {
                 return state.games.find((game) => {
                     return game._id === gameId

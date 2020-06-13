@@ -2,8 +2,8 @@
   <section>
     <the-title title="Games" icon="dice-multiple" component="game-add-dialog" />
     <cards-list
-      v-if="games"
-      :items="games"
+      v-if="getGames"
+      :items="getGames"
       @favorite="toggleFavorite"
       :route="{name: 'game', params: {gameId: ''}}"
     >
@@ -27,9 +27,8 @@ export default {
     CardsList
   },
   computed: {
-    ...mapGetters("games", ["games"]),
-    ...mapGetters("teams", ["teams"]),
-    ...mapGetters("user", ["user"])
+    ...mapGetters("games", ["getGames"]),
+    ...mapGetters("teams", ["getTeams"])
   },
   created() {
     this.shouldLoadData();
@@ -43,8 +42,8 @@ export default {
       this.updateGame(game);
     },
     shouldLoadData() {
-      this.games ? "" : this.loadGames();
-      this.teams ? "" : this.loadTeams();
+      this.getGames ? "" : this.loadGames();
+      this.getTeams ? "" : this.loadTeams();
     }
   }
 };

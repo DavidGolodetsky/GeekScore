@@ -33,14 +33,13 @@ export default {
     };
   },
   computed: {
-    ...mapGetters("teams", ["gameTeams"]),
-    ...mapGetters("games", ["game"]),
-    ...mapGetters("user", ["user"]),
+    ...mapGetters("teams", ["getGameTeams"]),
+    ...mapGetters("games", ["getGame"]),
     teams() {
-      return this.gameTeams(this.gameId);
+      return this.getGameTeams(this.gameId);
     },
-    getGame() {
-      return this.game(this.gameId);
+    game() {
+      return this.getGame(this.gameId);
     },
     gameRoute() {
       return {
@@ -51,7 +50,7 @@ export default {
     }
   },
   created() {
-    this.setBackTitle(this.getGame.name);
+    this.setBackTitle(this.game.name);
   },
   methods: {
     ...mapActions(["setBackTitle"]),

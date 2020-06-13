@@ -12,7 +12,6 @@ export const auth = {
         }
     },
     computed: {
-        ...mapGetters("user", ["user"]),
         ...mapGetters(["error"])
     },
     created() {

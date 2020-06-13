@@ -70,7 +70,7 @@ export default {
         }
     },
     getters: {
-        user(state) {
+        getUser(state) {
             return state.user
         },
         resetPassword(state) {

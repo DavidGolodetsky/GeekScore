@@ -13,7 +13,7 @@ export default {
                 state.rounds = [payload]
             }
         },
-        LOAD_ROUNDS(state, payload) {
+        SET_ROUNDS(state, payload) {
             state.rounds = payload
         },
         DELETE_ROUND(state, payload) {
@@ -46,7 +46,7 @@ export default {
             const user = rootState.user.user.id;
             axios.get('/api/rounds', { params: { user } })
                 .then((res) => {
-                    if (res.data.length) commit('LOAD_ROUNDS', res.data)
+                    if (res.data.length) commit('SET_ROUNDS', res.data)
                 })
                 .catch(e => console.log(e))
                 .finally(() => commit('LOADING', false, { root: true }))
@@ -60,7 +60,7 @@ export default {
         },
     },
     getters: {
-        rounds(state) {
+        getRounds(state) {
             return (query) => {
                 if (state.rounds) {
                     const teamRounds = state.rounds.filter(round => round.teamId === query.teamId)

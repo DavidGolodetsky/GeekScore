@@ -132,7 +132,7 @@ const router = new Router({
 
 router.beforeEach((to, from, next) => {
   if (to.matched.some(record => record.meta.requiresAuth)) {
-    if (store.getters['user/user']) {
+    if (store.getters['user/getUser']) {
       next()
     } else {
       next({ name: "signIn" })

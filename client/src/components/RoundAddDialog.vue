@@ -90,7 +90,7 @@ export default {
     };
   },
   computed: {
-    ...mapGetters("teams", { getTeam: "team" }),
+    ...mapGetters("teams", ["getTeam"]),
     team() {
       return this.getTeam(this.teamId);
     }

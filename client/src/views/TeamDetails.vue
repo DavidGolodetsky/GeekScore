@@ -4,7 +4,7 @@
       title="Rounds"
       icon="sword-cross"
       class="mb-4"
-      :props="{ teamId: this.team._id, gameId: this.gameId }"
+      :props="{ teamId, gameId }"
       component="round-add-dialog"
     />
     <div v-if="showTable">
@@ -59,9 +59,12 @@ export default {
     };
   },
   computed: {
-    ...mapGetters("teams", { getTeam: "team" }),
-    ...mapGetters("games", { getGame: "game" }),
-    ...mapGetters("rounds", { getRounds: "rounds" }),
+    ...mapGetters("teams", ["getTeam"]),
+    ...mapGetters("games", ["getGame"]),
+    ...mapGetters("rounds", ["getRounds"]),
+    game() {
+      return this.getGame(this.gameId);
+    },
     team() {
       return this.getTeam(this.teamId);
     },
@@ -73,9 +76,6 @@ export default {
         return rounds;
       }
       return [];
-    },
-    game() {
-      return this.getGame(this.gameId);
     },
     showTable() {
       if (this.rounds?.length) {

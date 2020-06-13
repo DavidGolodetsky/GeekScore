@@ -51,7 +51,7 @@ export default {
   }),
   computed: {
     ...mapGetters(["loading"]),
-    ...mapGetters("user", ["user"])
+    ...mapGetters("user", ["getUser"])
   },
   watch: {
     user(value) {

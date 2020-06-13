@@ -14,7 +14,7 @@
           <span class="header-title">Geek Score</span>
         </router-link>
         <v-spacer />
-        <template v-if="user">
+        <template v-if="getUser">
           <nav>
             <ul class="d-none d-sm-flex">
               <li v-for="{icon, text, link} in navItems" :key="text">
@@ -63,7 +63,7 @@ export default {
     };
   },
   computed: {
-    ...mapGetters("user", ["user"]),
+    ...mapGetters("user", ["getUser"]),
     ...mapGetters(["backTitle"]),
     navItems() {
       return [

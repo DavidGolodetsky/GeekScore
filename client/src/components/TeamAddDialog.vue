@@ -61,7 +61,7 @@ export default {
     };
   },
   computed: {
-    ...mapGetters("games", { getGame: "game" }),
+    ...mapGetters("games", ["getGame"]),
     game() {
       return this.getGame(this.gameId);
     }

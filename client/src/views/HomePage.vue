@@ -24,7 +24,7 @@
         ripple
         width="100%"
         type="submit"
-        :to="{name: user ? 'games' : 'signIn'}"
+        :to="{name: getUser ? 'games' : 'signIn'}"
       >{{ user ? 'Games' : 'Sign In' }}</v-btn>
     </div>
   </section>
@@ -66,7 +66,7 @@ export default {
     ]
   }),
   computed: {
-    ...mapGetters("user", ["user"])
+    ...mapGetters("user", ["getUser"])
   }
 };
 </script>
