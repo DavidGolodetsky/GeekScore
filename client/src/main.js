@@ -12,16 +12,18 @@ const isDev = process.env.NODE_ENV !== "production";
 
 Vue.config.productionTip = isDev
 Vue.config.performance = isDev;
+Vue.config.errorHandler = function (err, vm, info) {
+  console.error(`Error: ${err.toString()}; Spot: ${vm}; Additinal info: ${info} }`);
+}
+Vue.config.warnHandler = function (err, vm, info) {
+  console.warn(`Warning: ${err.toString()}; Spot: ${vm}; Additinal info: ${info} }`);
+}
+
 Vue.prototype.$log = console.log
 
 Vue.use(VueOffline, {
   mixin: false,
   storage: false
-})
-
-// TODO:refactor after error handeling lection
-Vue.mixin({
-
 })
 
 new Vue({
