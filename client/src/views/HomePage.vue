@@ -25,7 +25,7 @@
         width="100%"
         type="submit"
         :to="{name: getUser ? 'games' : 'signIn'}"
-      >{{ user ? 'Games' : 'Sign In' }}</v-btn>
+      >{{ getUser ? 'Games' : 'Sign In' }}</v-btn>
     </div>
   </section>
 </template>

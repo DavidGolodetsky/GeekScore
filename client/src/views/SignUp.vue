@@ -1,32 +1,25 @@
 <template>
-  <section>
-    <the-alert v-if="error" type="error" @dismissed="onDismiss" key="singup" :text="error.message" />
-    <login-form class="mt-12" signup-mode>
-      <template #title>
-        <div class="d-flex align-items-center">
-          <v-icon class="mr-3">mdi-account-circle</v-icon>
-          <h3 class="app-headline">Sign Up</h3>
-        </div>
-      </template>
-      <template #forgot>
-        <div class="text-center mb-3">
-          <router-link :to="{ name: 'resetPass' }" class="link">Forgot password?</router-link>
-        </div>
-      </template>
-      <template #redirect>
-        <div class="text-center mb-3">
-          <span class="mr-3">Already have account?</span>
-          <router-link :to="{ name: 'signIn' }" class="link">Sign In</router-link>
-        </div>
-      </template>
-    </login-form>
-  </section>
+  <login-form :form-props="formProps" />
 </template>
 
 <script>
-import auth from "@/mixins/auth";
+import LoginForm from "@/components/LoginForm";
 
 export default {
-  mixins: [auth]
+  components: {
+    LoginForm
+  },
+  data() {
+    return {
+      formProps: {
+        title: "Sign Up",
+        icon: "account-circle",
+        redirectText: "Already have account?",
+        redirectLink: { name: "signIn" },
+        redirectLinkText: "Sign In",
+        signUp: true
+      }
+    };
+  }
 };
 </script>
