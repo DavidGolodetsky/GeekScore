@@ -34,7 +34,7 @@ export default {
                 user
             }
             axios.post('/api/rounds', round)
-                .then((res) => {
+                .then(res => {
                     const _id = res.data._id
                     commit("CREATE_ROUND", { ...round, _id })
                 })
@@ -45,7 +45,7 @@ export default {
             commit('LOADING', true, { root: true })
             const user = rootState.user.user.id;
             axios.get('/api/rounds', { params: { user } })
-                .then((res) => {
+                .then(res => {
                     if (res.data.length) commit('SET_ROUNDS', res.data)
                 })
                 .catch(e => console.log(e))

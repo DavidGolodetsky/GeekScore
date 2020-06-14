@@ -43,7 +43,7 @@ export default {
                 favorite: false
             }
             axios.post('/api/games', game)
-                .then((res) => {
+                .then(res => {
                     const _id = res.data._id
                     commit("CREATE_GAME", { ...game, _id })
                 })
@@ -54,7 +54,7 @@ export default {
             commit('LOADING', true, { root: true })
             const user = rootState.user.user.id
             axios.get('/api/games', { params: { user } })
-                .then((res) => {
+                .then(res => {
                     if (res.data.length) commit('SET_GAMES', res.data)
                 })
                 .catch(e => console.log(e))
