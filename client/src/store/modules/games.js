@@ -32,47 +32,59 @@ export default {
         }
     },
     actions: {
-        createGame({ commit, rootState }, payload) {
+        async createGame({ commit, rootState }, payload) {
             commit('LOADING', true, { root: true })
             const user = rootState.user.user.id
-            const game = {
+            const gamePayload = {
                 ...payload,
                 user,
                 imageUrl: "",
                 teams: [],
                 favorite: false
             }
-            axios.post('/api/games', game)
-                .then(res => {
-                    const _id = res.data._id
-                    commit("CREATE_GAME", { ...game, _id })
-                })
-                .catch(e => console.log(e))
-                .finally(() => commit('LOADING', false, { root: true }))
+            try {
+                const createdGame = await axios.post('/api/games', gamePayload)
+                // TODO:rename _id to id
+                commit("CREATE_GAME", { ...gamePayload, _id: createdGame.data._id })
+            } catch (e) {
+                throw new Error(e)
+            } finally {
+                commit('LOADING', false, { root: true })
+            }
         },
-        loadGames({ commit, rootState }) {
+        async loadGames({ commit, rootState }) {
             commit('LOADING', true, { root: true })
             const user = rootState.user.user.id
-            axios.get('/api/games', { params: { user } })
-                .then(res => {
-                    if (res.data.length) commit('SET_GAMES', res.data)
-                })
-                .catch(e => console.log(e))
-                .finally(() => commit('LOADING', false, { root: true }))
+            try {
+                const games = await axios.get('/api/games', { params: { user } })
+                if (games) commit('SET_GAMES', games.data)
+            } catch (e) {
+                throw new Error(e)
+            } finally {
+                commit('LOADING', false, { root: true })
+            }
         },
-        updateGame({ commit }, payload) {
+        async updateGame({ commit }, payload) {
             commit('LOADING', true, { root: true })
-            axios.patch(`/api/games/${payload._id}`, payload)
-                .then(() => commit("UPDATE_GAME", payload))
-                .catch(e => console.log(e))
-                .finally(() => commit('LOADING', false, { root: true }))
+            try {
+                await axios.patch(`/api/games/${payload._id}`, payload)
+                commit("UPDATE_GAME", payload)
+            } catch (e) {
+                throw new Error(e)
+            } finally {
+                commit('LOADING', false, { root: true })
+            }
         },
-        deleteGame({ commit }, payload) {
+        async deleteGame({ commit }, payload) {
             commit('LOADING', true, { root: true })
-            axios.delete(`/api/games/${payload}`)
-                .then(() => commit("DELETE_GAME", payload))
-                .catch(e => console.log(e))
-                .finally(() => commit('LOADING', false, { root: true }))
+            try {
+                await axios.delete(`/api/games/${payload}`)
+                commit("DELETE_GAME", payload)
+            } catch (e) {
+                throw new Error(e)
+            } finally {
+                commit('LOADING', false, { root: true })
+            }
         }
     },
     getters: {
