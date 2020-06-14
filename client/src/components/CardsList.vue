@@ -3,7 +3,7 @@
     <v-row>
       <v-col sm="6" md="4" cols="12">
         <v-text-field
-          v-if="shouldSearch"
+          v-if="items.length > 3"
           clearable
           prepend-icon="mdi-magnify"
           dark
@@ -72,7 +72,7 @@
                       text
                       aria-label="Favorite"
                       fab
-                      v-if="showFavorite"
+                      v-if="items.length > 1"
                       @click.stop.prevent="favorite(item)"
                       :color="item.favorite ? 'error' : '#fff'"
                     >
@@ -113,22 +113,14 @@ export default {
   },
   computed: {
     filteredItems() {
-      if (this.search) {
-        const filtered = this.items.filter(item => {
-          return this.search
-            .toLowerCase()
-            .split(" ")
-            .every(v => item.name.toLowerCase().includes(v));
-        });
-        return this.getItemsOrder(filtered);
-      }
-      return this.getItemsOrder(this.items);
-    },
-    shouldSearch() {
-      return this.items.length > 3 ? true : false;
-    },
-    showFavorite() {
-      return this.items.length > 1 ? true : false;
+      if (!this.search) return this.getItemsOrder(this.items);
+      const filtered = this.items.filter(item =>
+        this.search
+          .toLowerCase()
+          .split(" ")
+          .every(value => item.name.toLowerCase().includes(value))
+      );
+      return this.getItemsOrder(filtered);
     }
   },
   methods: {
@@ -186,8 +178,7 @@ export default {
       };
       this.$emit("favorite", data);
     }
-  },
- 
+  }
 };
 </script>
 
