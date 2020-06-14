@@ -1,4 +1,5 @@
 import firebase from 'firebase/app';
+import router from '@/router'
 import axios from 'axios'
 
 
@@ -17,56 +18,63 @@ export default {
         }
     },
     actions: {
-        signUpUser({ commit }, payload) {
-            commit('LOADING', true, { root: true })
-            commit('ERROR', null, { root: true })
-            firebase.auth().createUserWithEmailAndPassword(payload.email, payload.password)
-                .then(user => {
-                    if (user.user) {
-                        const newUser = {
-                            id: user.user.uid,
-                        }
-                        axios.post('/api/users', newUser)
-                            .then(() => commit('SET_USER', newUser))
-                            .catch(e => console.log(e))
-                            .finally(() => commit('LOADING', false, { root: true }))
-                    }
+        async signUpUser({ commit }, payload) {
+            try {
+                commit('LOADING', true, { root: true })
+                const user = await firebase.auth().createUserWithEmailAndPassword(payload.email, payload.password)
+                const userPayload = {
+                    id: user.user.uid,
                 }
-                )
-                .catch(e => commit('ERROR', e, { root: true }))
-                .finally(() => commit('LOADING', false, { root: true }))
+                await axios.post('/api/users', userPayload)
+                commit('SET_USER', userPayload)
+            } catch (e) {
+                commit('ERROR', e, { root: true })
+            } finally {
+                commit('LOADING', false, { root: true })
+            }
         },
-        signInUser({ commit }, payload) {
-            commit('LOADING', true, { root: true })
-            commit('ERROR', null, { root: true })
-            firebase.auth().signInWithEmailAndPassword(payload.email, payload.password)
-                .then(user => {
-                    if (user.user) {
-                        const loggedUser = {
-                            id: user.user.uid,
-                        }
-                        commit('SET_USER', loggedUser)
-                    }
-                })
-                .catch(e => commit('ERROR', e, { root: true }))
-                .finally(() => commit('LOADING', false, { root: true }))
+        async signInUser({ commit }, payload) {
+            try {
+                commit('LOADING', true, { root: true })
+                const user = await firebase.auth().signInWithEmailAndPassword(payload.email, payload.password)
+                const userPayload = {
+                    id: user.user.uid,
+                }
+                await axios.post('/api/users', userPayload)
+                commit('SET_USER', userPayload)
+            } catch (e) {
+                commit('ERROR', e, { root: true })
+            } finally {
+                commit('LOADING', false, { root: true })
+            }
         },
         autoSignIn({ commit }, payload) {
             commit('LOADING', true, { root: true })
             commit('SET_USER', { id: payload.uid })
             commit('LOADING', false, { root: true })
         },
-        resetPassword({ commit }, payload) {
-            commit('LOADING', true, { root: true })
-            firebase.auth().sendPasswordResetEmail(payload)
-                .then(() => commit('RESET_PASSWORD'))
-                .catch(e => commit('ERROR', e, { root: true }))
-                .finally(() => commit('LOADING', false, { root: true }))
+        async resetPassword({ commit }, payload) {
+            try {
+                commit('LOADING', true, { root: true })
+                await firebase.auth().sendPasswordResetEmail(payload)
+                commit('RESET_PASSWORD')
+            } catch (e) {
+                commit('ERROR', e, { root: true })
+            } finally {
+                commit('LOADING', false, { root: true })
+            }
         },
-        logout({ commit, rootState }) {
-            rootState.games.games = rootState.teams.teams = []
-            firebase.auth().signOut()
-            commit('SET_USER', null)
+        async logout({ commit, rootState }) {
+            try {
+                rootState.games.games = rootState.teams.teams = []
+                await firebase.auth().signOut()
+                commit('SET_USER', null)
+                router.push("/")
+            } catch (e) {
+                commit('ERROR', e, { root: true })
+            } finally {
+                commit('LOADING', false, { root: true })
+            }
         }
     },
     getters: {

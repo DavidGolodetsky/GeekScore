@@ -26,37 +26,44 @@ export default {
         },
     },
     actions: {
-        createRound({ commit, rootState }, payload) {
-            commit('LOADING', true, { root: true })
-            const user = rootState.user.user.id
-            const round = {
-                ...payload,
-                user
+        async createRound({ commit, rootState }, payload) {
+            try {
+                const user = rootState.user.user.id
+                const roundPayload = {
+                    ...payload,
+                    user
+                }
+                commit('LOADING', true, { root: true })
+                const createdRound = await axios.post('/api/rounds', roundPayload)
+                commit("CREATE_ROUND", { ...createdRound.data })
+            } catch (e) {
+                commit('ERROR', e, { root: true })
+            } finally {
+                commit('LOADING', false, { root: true })
             }
-            axios.post('/api/rounds', round)
-                .then(res => {
-                    const _id = res.data._id
-                    commit("CREATE_ROUND", { ...round, _id })
-                })
-                .catch(e => console.log(e))
-                .finally(() => commit('LOADING', false, { root: true }))
         },
-        loadRounds({ commit, rootState }) {
-            commit('LOADING', true, { root: true })
-            const user = rootState.user.user.id;
-            axios.get('/api/rounds', { params: { user } })
-                .then(res => {
-                    if (res.data.length) commit('SET_ROUNDS', res.data)
-                })
-                .catch(e => console.log(e))
-                .finally(() => commit('LOADING', false, { root: true }))
+        async loadRounds({ commit, rootState }) {
+            try {
+                const user = rootState.user.user.id;
+                commit('LOADING', true, { root: true })
+                const rounds = await axios.get('/api/rounds', { params: { user } })
+                commit('SET_ROUNDS', rounds.data)
+            } catch (e) {
+                commit('ERROR', e, { root: true })
+            } finally {
+                commit('LOADING', false, { root: true })
+            }
         },
-        deleteRound({ commit }, payload) {
-            commit('LOADING', true, { root: true })
-            axios.delete(`/api/rounds/${payload}`)
-                .then(() => commit("DELETE_ROUND", payload))
-                .catch(e => console.log(e))
-                .finally(() => commit('LOADING', false, { root: true }))
+        async deleteRound({ commit }, payload) {
+            try {
+                commit('LOADING', true, { root: true })
+                await axios.delete(`/api/rounds/${payload}`)
+                commit("DELETE_ROUND", payload)
+            } catch (e) {
+                commit('ERROR', e, { root: true })
+            } finally {
+                commit('LOADING', false, { root: true })
+            }
         },
     },
     getters: {

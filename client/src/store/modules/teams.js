@@ -31,46 +31,56 @@ export default {
         },
     },
     actions: {
-        createTeam({ commit, rootState }, payload) {
-            commit('LOADING', true, { root: true })
-            const user = rootState.user.user.id
-            const team = {
-                ...payload,
-                user,
-                favorite: false
+        async createTeam({ commit, rootState }, payload) {
+            try {
+                const user = rootState.user.user.id
+                const teamPayload = {
+                    ...payload,
+                    user,
+                    favorite: false
+                }
+                commit('LOADING', true, { root: true })
+                const createdTeam = await axios.post('/api/teams', teamPayload)
+                commit("CREATE_TEAM", { ...createdTeam.data })
+            } catch (e) {
+                throw new Error(e)
+            } finally {
+                commit('LOADING', false, { root: true })
             }
-            axios.post('/api/teams', team)
-                .then((res) => {
-                    const _id = res.data._id
-                    commit("CREATE_TEAM", { ...team, _id })
-                })
-                .catch(e => console.log(e))
-                .finally(() => commit('LOADING', false, { root: true }))
         },
-        loadTeams({ commit, rootState }) {
-            commit('LOADING', true, { root: true })
-            const user = rootState.user.user.id
-            axios.get('/api/teams', { params: { user } })
-                .then((res) => {
-                    if (res.data.length) commit('SET_TEAMS', res.data)
-                })
-                .catch(e => console.log(e))
-                .finally(() => commit('LOADING', false, { root: true }))
+        async loadTeams({ commit, rootState }) {
+            try {
+                const user = rootState.user.user.id
+                commit('LOADING', true, { root: true })
+                const teams = await axios.get('/api/teams', { params: { user } })
+                commit('SET_TEAMS', teams.data)
+            } catch (e) {
+                throw new Error(e)
+            } finally {
+                commit('LOADING', false, { root: true })
+            }
         },
-        updateTeam({ commit }, payload) {
-            commit('LOADING', true, { root: true })
-            axios.patch(`/api/teams/${payload._id}`, payload)
-                .then(() => commit("UPDATE_TEAM", payload))
-                .catch(e => console.log(e))
-                .finally(() => commit('LOADING', false, { root: true }))
+        async updateTeam({ commit }, payload) {
+            try {
+                commit('LOADING', true, { root: true })
+                await axios.patch(`/api/teams/${payload._id}`, payload)
+                commit("UPDATE_TEAM", payload)
+            } catch (e) {
+                throw new Error(e)
+            } finally {
+                commit('LOADING', false, { root: true })
+            }
         },
-        deleteTeam({ commit }, payload) {
-            commit('LOADING', true, { root: true })
-            axios.delete(`/api/teams/${payload}`)
-                .then(() => commit("DELETE_TEAM", payload))
-                .catch(e => console.log(e))
-                .finally(() => commit('LOADING', false, { root: true }))
-
+        async deleteTeam({ commit }, payload) {
+            try {
+                commit('LOADING', true, { root: true })
+                await axios.delete(`/api/teams/${payload}`)
+                commit("DELETE_TEAM", payload)
+            } catch (e) {
+                throw new Error(e)
+            } finally {
+                commit('LOADING', false, { root: true })
+            }
         },
     },
     getters: {
