@@ -1,6 +1,5 @@
 <template>
   <section class="login-form mt-12">
-    <the-alert v-if="error" type="error" @dismissed="onDismiss" key="singup" :text="error.message" />
     <v-card width="400" raised outlined dark color="primary" class="mx-auto my-4 px-4 pt-4">
       <v-form v-model="valid" lazy-validation ref="form" @submit.prevent="onSubmit">
         <div class="d-flex align-items-center">
@@ -70,7 +69,7 @@
 </template>
 
 <script>
-import { mapActions, mapGetters } from "vuex";
+import { mapActions } from "vuex";
 import { fbStart } from "@/db";
 
 export default {
@@ -101,7 +100,6 @@ export default {
     };
   },
   computed: {
-    ...mapGetters(["error"]),
     comparePasswords() {
       return this.password === this.confirmPassword || "Passwords don't match";
     },
@@ -127,13 +125,7 @@ export default {
         };
         this.loginMethod(userInfo);
       }
-    },
-    onDismiss() {
-      this.setError();
     }
-  },
-  beforeDestroy() {
-    this.onDismiss();
   }
 };
 </script>

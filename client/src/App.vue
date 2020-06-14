@@ -3,7 +3,7 @@
     <the-header />
     <v-content>
       <v-container class="app-container">
-        <the-alert v-if="isOffline" type="warning" :text="offlineText" />
+        <the-alert v-if="showAlert" :type="alertType" :text="alertText" />
         <transition name="slide" mode="out-in">
           <router-view></router-view>
         </transition>
@@ -29,6 +29,7 @@
 <script>
 import TheHeader from "@/components/TheHeader";
 import TheFooter from "@/components/TheFooter";
+import TheAlert from "@/components/TheAlert";
 import { mapGetters } from "vuex";
 import { VueOfflineMixin } from "vue-offline";
 
@@ -37,7 +38,8 @@ export default {
   mixins: [VueOfflineMixin],
   components: {
     TheHeader,
-    TheFooter
+    TheFooter,
+    TheAlert
   },
 
   data: () => ({
@@ -50,8 +52,17 @@ export default {
     }
   }),
   computed: {
-    ...mapGetters(["loading"]),
-    ...mapGetters("user", ["getUser"])
+    ...mapGetters(["loading", "error"]),
+    ...mapGetters("user", ["getUser"]),
+    showAlert() {
+      return this.isOffline || this.error;
+    },
+    alertType() {
+      return this.isOffline ? "warning" : "error";
+    },
+    alertText() {
+      return this.isOffline ? this.offlineText : this.error.message;
+    }
   },
   watch: {
     user(value) {

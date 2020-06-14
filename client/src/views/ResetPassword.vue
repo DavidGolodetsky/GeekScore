@@ -1,6 +1,5 @@
 <template>
   <section>
-    <the-alert v-if="error" type="error" @dismissed="onDismiss" key="singin" :text="error.message" />
     <div v-if="isResetPasswordDone">
       <h3 class="mb-5">Check your email for a new password</h3>
       <the-go-back title="Back to Sign in" />
@@ -61,22 +60,14 @@ export default {
     };
   },
   computed: {
-    ...mapGetters(["error"]),
     ...mapGetters("user", ["isResetPasswordDone"])
   },
   methods: {
-    ...mapActions(["setError"]),
     ...mapActions("user", ["resetPassword"]),
-    onDismiss() {
-      this.setError();
-    },
     onSubmit() {
       const valid = this.$refs.form.validate();
       if (valid) this.resetPassword(this.email);
     }
-  },
-  beforeDestroy() {
-    this.onDismiss();
   }
 };
 </script>

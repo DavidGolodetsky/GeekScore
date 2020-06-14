@@ -22,6 +22,7 @@ Vue.use(VueOffline, {
   storage: false
 })
 
+
 new Vue({
   vuetify,
   router,

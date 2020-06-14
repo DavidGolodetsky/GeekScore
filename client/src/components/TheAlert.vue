@@ -7,6 +7,8 @@
 </template>
 
 <script>
+import { mapActions } from "vuex";
+
 export default {
   props: {
     type: {
@@ -19,7 +21,9 @@ export default {
     }
   },
   methods: {
+    ...mapActions(["setError"]),
     onClose() {
+      this.setError();
       this.$emit("dismissed");
     }
   }

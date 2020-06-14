@@ -75,10 +75,7 @@ export default {
       return rounds;
     },
     showTable() {
-      if (this.rounds?.length) {
-        return true;
-      }
-      return false;
+      return this.rounds?.length;
     }
   },
   created() {
