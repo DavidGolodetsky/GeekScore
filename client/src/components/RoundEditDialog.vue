@@ -1,10 +1,10 @@
 <template>
   <the-dialog
-    activator="pencil"
+    activator-icon="pencil"
     color="#607d8b"
     header="Edit round info"
     simple
-    :submitLogic="onSubmit"
+    :submit-logic="onSubmit"
   >
     <v-switch v-model="isDelete" label="Delete round" color="error" hide-details></v-switch>
   </the-dialog>

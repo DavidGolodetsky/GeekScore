@@ -1,6 +1,6 @@
 <template>
   <section class="round-add">
-    <the-dialog activator="plus" header="Add new round" :submitLogic="onSubmit">
+    <the-dialog activator-icon="plus" header="Add new round" :submit-logic="onSubmit">
       <v-row>
         <v-col cols="6">
           <v-radio-group
@@ -38,7 +38,7 @@
           offset-y
           min-width="290px"
         >
-          <template #activator="{ on }">
+          <template #activator-icon="{ on }">
             <v-text-field
               v-model="date"
               :rules="fieldRules"
@@ -67,6 +67,11 @@
 </template>
 
 <script>
+import {
+  requiredField,
+  tooLongField,
+  onlyWhitespaces
+} from "@/utils/validations";
 import { mapActions, mapGetters } from "vuex";
 export default {
   props: {
@@ -86,7 +91,7 @@ export default {
       turn: "",
       result: null,
       date: new Date().toISOString().substr(0, 10),
-      fieldRules: [v => !!v || "Field is required"]
+      fieldRules: [requiredField, tooLongField, onlyWhitespaces]
     };
   },
   computed: {

@@ -1,10 +1,10 @@
 <template>
   <the-dialog
-    activator="pencil"
+    activator-icon="pencil"
     color="#fff"
     header="Edit game info"
     simple
-    :submitLogic="onSubmit"
+    :submit-logic="onSubmit"
   >
     <v-text-field
       clearable
@@ -47,6 +47,12 @@
 </template>
 
 <script>
+import {
+  requiredField,
+  onlyWhitespaces,
+  tooLongField,
+  linkField
+} from "@/utils/validations";
 import { mapActions } from "vuex";
 
 export default {
@@ -65,21 +71,8 @@ export default {
       isDelete: false,
       imageUrl: this.game.imageUrl,
       imageFile: null,
-      fieldRules: [
-        v => !!v || "Field is required",
-        v => (!!v && v.length <= 60) || "Field is too long",
-        v =>
-          !!(v && v.replace(/\s/g, "").length) ||
-          "Field contains only whitespaces"
-      ],
-      linkRules: [
-        v => {
-          if (v) {
-            const link = v.match(/(https?:\/\/[^\s]+)/g);
-            return !!link || "Please provide a correct link";
-          } else return true;
-        }
-      ]
+      fieldRules: [requiredField, tooLongField, onlyWhitespaces],
+      linkRules: [onlyWhitespaces, tooLongField, linkField]
     };
   },
   methods: {

@@ -1,5 +1,10 @@
 <template>
-  <the-dialog activator="plus" header="Add new team" button-text="New team" :submitLogic="onSubmit">
+  <the-dialog
+    activator-icon="plus"
+    header="Add new team"
+    button-text="New team"
+    :submit-logic="onSubmit"
+  >
     <v-text-field
       clearable
       :rules="fieldRules"
@@ -31,6 +36,12 @@
 </template>
 
 <script>
+import {
+  requiredField,
+  onlyWhitespaces,
+  tooLongField,
+  uniqueField
+} from "@/utils/validations";
 import { mapActions, mapGetters } from "vuex";
 
 export default {
@@ -46,18 +57,8 @@ export default {
       coop: false,
       numberOfPlayers: [1, 2, 3, 4, 5, 6, 7, 8],
       players: [],
-      fieldRules: [
-        v => !!v || "Field is required",
-        v => v.length <= 40 || "Field is too long",
-        v =>
-          !!(v && v.replace(/\s/g, "").length) ||
-          "Field contains only whitespaces",
-        v => {
-          let pl = this.players.filter(player => player.name === v);
-          return (!!v && pl.length < 2) || "Player name should be unique";
-        }
-      ],
-      selectRules: [v => !!v || "Field is required"]
+      fieldRules: [requiredField, tooLongField, onlyWhitespaces, uniqueField],
+      selectRules: [requiredField, tooLongField, onlyWhitespaces]
     };
   },
   computed: {

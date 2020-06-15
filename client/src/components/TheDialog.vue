@@ -9,7 +9,7 @@
       @click.prevent="dialog = true"
       :color="color"
     >
-      <v-icon dark>mdi-{{ activator }}</v-icon>
+      <v-icon dark>mdi-{{ activatorIcon }}</v-icon>
     </v-btn>
     <v-dialog v-model="dialog" v-if="renderDialog" max-width="600">
       <v-card class="the-dialog">
@@ -40,7 +40,7 @@
 <script>
 export default {
   props: {
-    activator: {
+    activatorIcon: {
       type: String,
       required: true
     },

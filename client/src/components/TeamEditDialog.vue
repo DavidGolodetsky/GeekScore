@@ -1,10 +1,10 @@
 <template>
   <the-dialog
-    activator="pencil"
+    activator-icon="pencil"
     color="#fff"
     header="Edit team info"
     simple
-    :submitLogic="onSubmit"
+    :submit-logic="onSubmit"
   >
     <v-text-field clearable :rules="fieldRules" label="Name" v-model="name"></v-text-field>
     <v-switch v-model="isDelete" label="Delete team" color="error" hide-details></v-switch>
@@ -12,6 +12,11 @@
 </template>
 
 <script>
+import {
+  requiredField,
+  onlyWhitespaces,
+  tooLongField
+} from "@/utils/validations";
 import { mapActions } from "vuex";
 
 export default {
@@ -25,13 +30,7 @@ export default {
     return {
       name: this.team.name,
       isDelete: false,
-      fieldRules: [
-        v => !!v || "Field is required",
-        v => (!!v && v.length <= 60) || "Field is too long",
-        v =>
-          !!(v && v.replace(/\s/g, "").length) ||
-          "Field contains only whitespaces"
-      ]
+      fieldRules: [requiredField, tooLongField, onlyWhitespaces]
     };
   },
   methods: {

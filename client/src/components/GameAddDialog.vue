@@ -1,5 +1,5 @@
 <template>
-  <the-dialog activator="plus" header="Add new game" :submitLogic="onSubmit">
+  <the-dialog activator-icon="plus" header="Add new game" :submit-logic="onSubmit">
     <v-text-field
       clearable
       :rules="fieldRules"
@@ -12,20 +12,19 @@
 </template>
 
 <script>
+import {
+  requiredField,
+  onlyWhitespaces,
+  tooLongField
+} from "@/utils/validations";
 import { mapActions } from "vuex";
-
+// TODO:refactored
 export default {
   data() {
     return {
       name: "",
       coop: false,
-      fieldRules: [
-        v => !!v || "Field is required",
-        v => (!!v && v.length <= 40) || "Field is too long",
-        v =>
-          !!(v && v.replace(/\s/g, "").length) ||
-          "Field contains only whitespaces"
-      ]
+      fieldRules: [requiredField, tooLongField, onlyWhitespaces]
     };
   },
   methods: {

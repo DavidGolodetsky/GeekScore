@@ -1,7 +1,7 @@
 <template>
   <v-app class="app" v-scroll="onScroll" v-cloak>
     <the-header />
-    <v-content>
+    <v-main>
       <v-container class="app-container">
         <the-alert v-if="showAlert" :type="alertType" :text="alertText" />
         <transition name="slide" mode="out-in">
@@ -21,7 +21,7 @@
           <v-icon dark>mdi-chevron-up</v-icon>
         </v-btn>
       </v-container>
-    </v-content>
+    </v-main>
     <the-footer />
   </v-app>
 </template>
