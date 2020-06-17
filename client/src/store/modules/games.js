@@ -43,6 +43,7 @@ export default {
             }
             const createdGame = await axios.post('/api/games', gamePayload).catch(e => commit('ERROR', e, { root: true }))
             commit('LOADING', true, { root: true })
+
             commit("CREATE_GAME", { ...createdGame.data })
             commit('LOADING', false, { root: true })
         },
