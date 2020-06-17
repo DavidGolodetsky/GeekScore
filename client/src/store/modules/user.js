@@ -22,9 +22,7 @@ export default {
             commit('LOADING', true, { root: true })
             const user = await firebase.auth().createUserWithEmailAndPassword(payload.email, payload.password)
                 .catch(e => commit('ERROR', e, { root: true }))
-            const userPayload = {
-                id: user.user.uid,
-            }
+            const userPayload = { id: user.user.uid }
             await axios.post('/api/users', userPayload).catch(e => commit('ERROR', e, { root: true }))
             commit('SET_USER', userPayload)
             commit('LOADING', false, { root: true })
@@ -34,9 +32,7 @@ export default {
             commit('LOADING', true, { root: true })
             const user = await firebase.auth().signInWithEmailAndPassword(payload.email, payload.password)
                 .catch(e => commit('ERROR', e, { root: true }))
-            const userPayload = {
-                id: user.user.uid,
-            }
+            const userPayload = { id: user.user.uid }
             await axios.post('/api/users', userPayload).catch(e => commit('ERROR', e, { root: true }))
             commit('SET_USER', userPayload)
             commit('LOADING', false, { root: true })
