@@ -33,57 +33,37 @@ export default {
     },
     actions: {
         async createGame({ commit, rootState }, payload) {
-            try {
-                const user = rootState.user.user.id
-                const gamePayload = {
-                    ...payload,
-                    user,
-                    imageUrl: "",
-                    teams: [],
-                    favorite: false
-                }
-                const createdGame = await axios.post('/api/games', gamePayload)
-                commit('LOADING', true, { root: true })
-                commit("CREATE_GAME", { ...createdGame.data })
-            } catch (e) {
-                commit('ERROR', e, { root: true })
-            } finally {
-                commit('LOADING', false, { root: true })
+            const user = rootState.user.user.id
+            const gamePayload = {
+                ...payload,
+                user,
+                imageUrl: "",
+                teams: [],
+                favorite: false
             }
+            const createdGame = await axios.post('/api/games', gamePayload).catch(e => commit('ERROR', e, { root: true }))
+            commit('LOADING', true, { root: true })
+            commit("CREATE_GAME", { ...createdGame.data })
+            commit('LOADING', false, { root: true })
         },
         async loadGames({ commit, rootState }) {
-            try {
-                const user = rootState.user.user.id
-                commit('LOADING', true, { root: true })
-                const games = await axios.get('/api/games', { params: { user } })
-                commit('SET_GAMES', games.data)
-            } catch (e) {
-                commit('ERROR', e, { root: true })
-            } finally {
-                commit('LOADING', false, { root: true })
-            }
+            const user = rootState.user.user.id
+            commit('LOADING', true, { root: true })
+            const games = await axios.get('/api/games', { params: { user } }).catch(e => commit('ERROR', e, { root: true }))
+            commit('SET_GAMES', games.data)
+            commit('LOADING', false, { root: true })
         },
         async updateGame({ commit }, payload) {
-            try {
-                commit('LOADING', true, { root: true })
-                await axios.patch(`/api/games/${payload._id}`, payload)
-                commit("UPDATE_GAME", payload)
-            } catch (e) {
-                commit('ERROR', e, { root: true })
-            } finally {
-                commit('LOADING', false, { root: true })
-            }
+            commit('LOADING', true, { root: true })
+            await axios.patch(`/api/games/${payload._id}`, payload).catch(e => commit('ERROR', e, { root: true }))
+            commit("UPDATE_GAME", payload)
+            commit('LOADING', false, { root: true })
         },
         async deleteGame({ commit }, payload) {
-            try {
-                commit('LOADING', true, { root: true })
-                await axios.delete(`/api/games/${payload}`)
-                commit("DELETE_GAME", payload)
-            } catch (e) {
-                commit('ERROR', e, { root: true })
-            } finally {
-                commit('LOADING', false, { root: true })
-            }
+            commit('LOADING', true, { root: true })
+            await axios.delete(`/api/games/${payload}`).catch(e => commit('ERROR', e, { root: true }))
+            commit("DELETE_GAME", payload)
+            commit('LOADING', false, { root: true })
         }
     },
     getters: {
