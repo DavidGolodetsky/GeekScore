@@ -4,6 +4,7 @@ const app = express();
 const path = require('path');
 const serveStatic = require("serve-static");
 const cors = require('cors');
+// const morgan = require('morgan');
 const mongoose = require('mongoose');
 const users = require('./routes/api/users');
 const games = require('./routes/api/games');
@@ -19,6 +20,8 @@ db.on('error', (error) => console.error(error));
 db.on('connected', () => console.log('Connected to database!'));
 
 app.use(express.json());
+// TODO:fix for prod
+// app.use(morgan('dev'))
 app.use(cors());
 
 
