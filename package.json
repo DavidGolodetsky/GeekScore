@@ -1,7 +1,7 @@
 {
   "name": "geek-score-server",
   "version": "0.1.0",
-  "author": "david_go__",
+  "author": "",
   "description": "Server for Geek Score on node.js and mongoDB",
   "engines": {
     "node": "12.16.x"
@@ -11,7 +11,6 @@
     "serve": "nodemon server.js",
     "start": "node server.js"
   },
-  "author": "",
   "license": "ISC",
   "dependencies": {
     "cors": "^2.8.5",
