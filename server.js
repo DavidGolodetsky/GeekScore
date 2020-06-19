@@ -2,7 +2,7 @@ require('dotenv').config();
 const express = require('express');
 const app = express();
 const path = require('path');
-const morgan = require('morgan');
+// const morgan = require('morgan');
 const serveStatic = require("serve-static");
 const cors = require('cors');
 const mongoose = require('mongoose');
@@ -20,7 +20,7 @@ db.on('error', (error) => console.error(error));
 db.on('connected', () => console.log('Connected to database!'));
 
 app.use(express.json());
-app.use(morgan('dev'))
+// app.use(morgan('dev'))
 app.use(cors());
 
 
