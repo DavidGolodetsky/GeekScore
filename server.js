@@ -29,21 +29,21 @@ app.use('/api/games', games);
 app.use('/api/teams', teams);
 app.use('/api/rounds', rounds);
 
-app.use((req, res, next) => {
-    const err = new Error('Not found')
-    // err.status(404)
-    next(err)
-})
+// app.use((req, res, next) => {
+//     const err = new Error('Not found')
+//     err.status(404)
+//     next(err)
+// })
 
-app.use((err, req, res, next) => {
-    res.status(err.status || 500)
-    res.json({
-        error: {
-            message: err.message
-        }
-    })
-}
-)
+// app.use((err, req, res, next) => {
+//     res.status(err.status || 500)
+//     res.json({
+//         error: {
+//             message: err.message
+//         }
+//     })
+// })
+
 if (process.env.NODE_ENV === 'production') {
     app.use(serveStatic(path.join(__dirname, 'public')));
     app.get('*', (req, res) => res.sendFile(__dirname + '/public/index.html'))
