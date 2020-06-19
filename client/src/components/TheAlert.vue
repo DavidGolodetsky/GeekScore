@@ -1,7 +1,7 @@
 <template>
   <section class="the-alert">
     <transition appear name="fade-down">
-      <v-alert dismissible :value="true" :type="type" @input="onClose()">{{ text }}</v-alert>
+      <v-alert v-if="showAlert" dismissible value :type="type" @input="onClose()">{{ text }}</v-alert>
     </transition>
   </section>
 </template>
@@ -20,11 +20,23 @@ export default {
       required: true
     }
   },
+  data() {
+    return {
+      showAlert: true
+    };
+  },
+  mounted() {
+    this.autoHide();
+  },
   methods: {
     ...mapActions(["setError"]),
     onClose() {
+      this.showAlert = false;
       this.setError();
       this.$emit("dismissed");
+    },
+    autoHide() {
+      setTimeout(() => (this.showAlert = false), 5000);
     }
   }
 };
