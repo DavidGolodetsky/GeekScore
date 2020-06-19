@@ -13,25 +13,41 @@ router.post('/', async (req, res) => {
         favorite,
         imageUrl
     });
-    const newGame = await game.save();
-    res.status(201).json(newGame);
+    try {
+        const newGame = await game.save();
+        res.status(201).json(newGame);
+    } catch (err) {
+        res.status(400).json({ message: err.message });
+    }
 })
 
 router.get('/', async (req, res) => {
     const user = req.query.user
-    const games = await Game.find({ user });
-    res.status(200).json(games);
+    try {
+        const games = await Game.find({ user });
+        res.status(200).json(games);
+    } catch (err) {
+        res.status(500).json({ message: err.message });
+    }
 });
 
 
 router.patch('/:id', async (req, res) => {
-    await Game.findByIdAndUpdate(req.params.id, req.body);
-    res.status(200).json({ state: 'updated' });
+    try {
+        await Game.findByIdAndUpdate(req.params.id, req.body);
+        res.status(200).json({ state: 'updated' });
+    } catch (err) {
+        res.status(400).json({ message: err.message });
+    }
 });
 
 router.delete('/:id', async (req, res) => {
-    await Game.findByIdAndRemove(req.params.id);
-    res.status(200).json({ state: 'deleted' });
+    try {
+        await Game.findByIdAndRemove(req.params.id);
+        res.status(200).json({ state: 'deleted' });
+    } catch (err) {
+        res.status(400).json({ message: err.message });
+    }
 });
 
 module.exports = router;

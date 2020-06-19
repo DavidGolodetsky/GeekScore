@@ -14,22 +14,34 @@ router.post('/', async (req, res) => {
         winner,
         comment
     });
-    const newRound = await round.save();
-    res.status(201).json(newRound);
-    console.log(newRound)
+    try {
+        const newRound = await round.save();
+        res.status(201).json(newRound);
+        console.log(newRound)
+    } catch (err) {
+        res.status(400).json({ message: err.message });
+    }
 })
 
 
 router.get('/', async (req, res) => {
     const user = req.query.user
-    const rounds = await Round.find({ user });
-    res.status(200).json(rounds);
+    try {
+        const rounds = await Round.find({ user });
+        res.status(200).json(rounds);
+    } catch (err) {
+        res.status(500).json({ message: err.message });
+    }
 });
 
 
 router.delete('/:id', async (req, res) => {
-    await Round.findByIdAndRemove(req.params.id);
-    res.status(200).json({ state: 'deleted' });
+    try {
+        await Round.findByIdAndRemove(req.params.id);
+        res.status(200).json({ state: 'deleted' });
+    } catch (err) {
+        res.status(400).json({ message: err.message });
+    }
 });
 
 
