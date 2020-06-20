@@ -36,6 +36,7 @@ import {
 import { mapActions } from "vuex";
 
 export default {
+  // TODO:refactored
   props: {
     game: {
       type: Object,
@@ -44,6 +45,9 @@ export default {
   },
   data() {
     return {
+      isDelete: false,
+      fieldRules: [requiredField, tooLongField, onlyWhitespaces],
+      linkRules: [onlyWhitespaces, tooLongField, linkField],
       fields: {
         name: {
           label: "Name",
@@ -75,15 +79,16 @@ export default {
           value: this.game.imageUrl,
           rules: this.linkRules
         }
-      },
-      isDelete: false,
-      fieldRules: [requiredField, tooLongField, onlyWhitespaces],
-      linkRules: [onlyWhitespaces, tooLongField, linkField]
+      }
     };
   },
   methods: {
     ...mapActions("games", ["updateGame", "deleteGame"]),
     onSubmit() {
+      if (this.isDelete) return this.deleteGame(this.game._id);
+      this.updateTheGame();
+    },
+    updateTheGame() {
       const game = {
         _id: this.game._id,
         name: this.fields.name.value,
@@ -92,10 +97,6 @@ export default {
         rulesURL: this.fields.rulesURL.value,
         imageUrl: this.fields.imageUrl.value
       };
-      if (this.isDelete) {
-        this.deleteGame(this.game._id);
-        return;
-      }
       this.updateGame(game);
     }
   }
