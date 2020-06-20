@@ -7,41 +7,21 @@
     :submit-logic="onSubmit"
   >
     <v-text-field
+      v-for="field in fields"
+      :key="field.label"
       clearable
-      :rules="fieldRules"
-      prepend-icon="mdi-dice-multiple"
-      label="Name"
-      v-model.trim="name"
+      :rules="field.rules"
+      :prepend-icon="`mdi-${field.icon}`"
+      :label="field.label"
+      v-model.trim="field.value"
     ></v-text-field>
-    <v-text-field
-      clearable
-      :rules="linkRules"
-      label="Board geek game URL"
-      prepend-icon="mdi-cards"
-      v-model.trim="bggURL"
-    ></v-text-field>
-    <v-text-field
-      clearable
-      :rules="linkRules"
-      label="Melodice URL"
-      prepend-icon="mdi-music"
-      v-model.trim="melodiceURL"
-    ></v-text-field>
-    <v-text-field
-      clearable
-      :rules="linkRules"
-      label="Rules URL"
-      prepend-icon="mdi-book-open-variant"
-      v-model.trim="rulesURL"
-    ></v-text-field>
-    <v-text-field
-      clearable
-      :rules="linkRules"
-      prepend-icon="mdi-image"
-      label="Image URL"
-      v-model.trim="imageUrl"
-    ></v-text-field>
-    <v-img v-if="imageUrl" :src="imageUrl" :alt="name" height="200" contain></v-img>
+    <v-img
+      v-if="fields.imageUrl.value"
+      :src="fields.imageUrl.value"
+      :alt="fields.name.value"
+      height="200"
+      contain
+    ></v-img>
     <v-switch v-model="isDelete" label="Delete game" color="error" hide-details></v-switch>
   </the-dialog>
 </template>
@@ -64,13 +44,39 @@ export default {
   },
   data() {
     return {
-      name: this.game.name,
-      bggURL: this.game.bggURL ? this.game.bggURL : "",
-      melodiceURL: this.game.melodiceURL ? this.game.melodiceURL : "",
-      rulesURL: this.game.rulesURL ? this.game.rulesURL : "",
+      fields: {
+        name: {
+          label: "Name",
+          icon: "dice-multiple",
+          value: this.game.name,
+          rules: this.fieldRules
+        },
+        bggURL: {
+          label: "Board geek game URL",
+          icon: "cards",
+          value: this.game.bggURL || "",
+          rules: this.linkRules
+        },
+        melodiceURL: {
+          label: "Melodice URL",
+          icon: "music",
+          value: this.game.melodiceURL || "",
+          rules: this.linkRules
+        },
+        rulesURL: {
+          label: "Rules URL",
+          icon: "book-open-variant",
+          value: this.game.rulesURL || "",
+          rules: this.linkRules
+        },
+        imageUrl: {
+          label: "Image URL",
+          icon: "image",
+          value: this.game.imageUrl,
+          rules: this.linkRules
+        }
+      },
       isDelete: false,
-      imageUrl: this.game.imageUrl,
-      imageFile: null,
       fieldRules: [requiredField, tooLongField, onlyWhitespaces],
       linkRules: [onlyWhitespaces, tooLongField, linkField]
     };
@@ -79,12 +85,12 @@ export default {
     ...mapActions("games", ["updateGame", "deleteGame"]),
     onSubmit() {
       const game = {
-        name: this.name,
-        imageUrl: this.imageUrl,
         _id: this.game._id,
-        bggURL: this.bggURL,
-        melodiceURL: this.melodiceURL,
-        rulesURL: this.rulesURL
+        name: this.fields.name.value,
+        bggURL: this.fields.bggURL.value,
+        melodiceURL: this.fields.melodiceURL.value,
+        rulesURL: this.fields.rulesURL.value,
+        imageUrl: this.fields.imageUrl.value
       };
       if (this.isDelete) {
         this.deleteGame(this.game._id);
