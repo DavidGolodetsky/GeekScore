@@ -57,6 +57,9 @@ export default {
       };
       this.updateTeam(team);
     }
+  },
+  beforeDestroy() {
+    this.setBackTitle();
   }
 };
 </script>

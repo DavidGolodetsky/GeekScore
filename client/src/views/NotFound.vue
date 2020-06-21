@@ -7,16 +7,3 @@
     </p>
   </section>
 </template>
-
-<script>
-import { mapActions } from "vuex";
-
-export default {
-  created() {
-    this.setBackTitle();
-  },
-  methods: {
-    ...mapActions(["setBackTitle"])
-  }
-};
-</script>

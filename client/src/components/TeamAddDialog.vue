@@ -25,7 +25,7 @@
       :readonly="isMe(player)"
       :clearable="!isMe(player)"
       prepend-icon="mdi-account"
-      :rules="fieldRules"
+      :rules="playerRules"
       :key="i"
       :label="`Player #${i + 1}`"
     ></v-text-field>

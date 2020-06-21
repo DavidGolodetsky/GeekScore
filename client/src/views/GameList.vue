@@ -30,18 +30,16 @@ export default {
   },
   created() {
     this.loadData();
-    this.setBackTitle();
   },
   methods: {
     ...mapActions("games", ["loadGames", "updateGame"]),
     ...mapActions("teams", ["loadTeams"]),
-    ...mapActions(["setBackTitle"]),
     toggleFavorite(game) {
       this.updateGame(game);
     },
     loadData() {
-      this.getGames ? "" : this.loadGames();
-      this.getTeams ? "" : this.loadTeams();
+      this.getGames || this.loadGames();
+      this.getTeams || this.loadTeams();
     }
   }
 };

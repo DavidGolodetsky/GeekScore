@@ -1,10 +1,14 @@
 <template>
   <section>
-    <div v-if="isResetPasswordDone">
-      <h3 class="mb-5">Check your email for a new password</h3>
-      <the-go-back title="Back to Sign in" />
-    </div>
-    <v-card v-else width="400" raised outlined dark color="primary" class="mx-auto my-4 px-4 pt-4">
+    <v-card
+      v-if="!isResetPasswordDone"
+      width="400"
+      raised
+      outlined
+      dark
+      color="primary"
+      class="mx-auto my-4 px-4 pt-4"
+    >
       <v-form v-model="valid" lazy-validation ref="form" @submit.prevent="onSubmit">
         <v-card-title class="pb-10">
           <div class="d-flex align-items-center">
@@ -36,6 +40,10 @@
         </v-card-actions>
       </v-form>
     </v-card>
+    <template v-else>
+      <h3 class="mb-5">Check your email for a new password</h3>
+      <the-go-back title="Back to Sign in" />
+    </template>
   </section>
 </template>
 

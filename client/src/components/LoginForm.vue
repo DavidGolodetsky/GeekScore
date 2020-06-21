@@ -107,15 +107,12 @@ export default {
       return this.formProps.signupMode ? this.signUpUser : this.signInUser;
     }
   },
-  created() {
-    this.setBackTitle();
-  },
   mounted() {
     fbStart();
   },
   methods: {
     ...mapActions("user", ["signUpUser", "signInUser"]),
-    ...mapActions(["setError", "setBackTitle"]),
+    ...mapActions(["setError"]),
     onSubmit() {
       const valid = this.$refs.form.validate();
       if (valid) {

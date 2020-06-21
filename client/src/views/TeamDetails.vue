@@ -11,23 +11,14 @@
       <v-tabs v-model="tab" background-color="primary" centered dark icons-and-text>
         <v-tabs-slider color="secondary"></v-tabs-slider>
 
-        <v-tab href="#tab-1">
-          Table
-          <v-icon>mdi-table-large</v-icon>
-        </v-tab>
-
-        <v-tab href="#tab-2">
-          Statistics
-          <v-icon>mdi-chart-bar</v-icon>
+        <v-tab v-for="(tab, i) in tabs" :key="tab.name" :href="`#tab-${i}`">
+          <v-icon>{{ `mdi-${tab.icon}` }}</v-icon>
         </v-tab>
       </v-tabs>
 
       <v-tabs-items v-model="tab">
-        <v-tab-item value="tab-1">
-          <the-table :team="team" :rounds="rounds" />
-        </v-tab-item>
-        <v-tab-item value="tab-2">
-          <chart-bars :team="team" :rounds="rounds" />
+        <v-tab-item v-for="(component, i) in tabComponents" :key="i" :value="`tab-${i}`">
+          <component :is="component" :team="team" :rounds="rounds" />
         </v-tab-item>
       </v-tabs-items>
     </div>
@@ -55,7 +46,20 @@ export default {
   data() {
     return {
       tab: null,
-      gameId: this.$route.query.gameId
+      gameId: this.$route.query.gameId,
+      tabs: [
+        {
+          name: "Table",
+          href: "tab-1",
+          icon: "table-large"
+        },
+        {
+          name: "Statistics",
+          href: "tab-2",
+          icon: "chart-bar"
+        }
+      ],
+      tabComponents: ["the-table", "chart-bars"]
     };
   },
   computed: {
@@ -85,6 +89,9 @@ export default {
   methods: {
     ...mapActions(["setBackTitle"]),
     ...mapActions("rounds", ["loadRounds"])
+  },
+  beforeDestroy() {
+    this.setBackTitle();
   }
 };
 </script>

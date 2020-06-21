@@ -12,8 +12,6 @@ const isDev = process.env.NODE_ENV !== "production";
 
 Vue.config.productionTip = isDev
 Vue.config.performance = isDev;
-Vue.config.errorHandler = (err, vm, info) => console.error(`Error: ${err.toString()}; Additional info: ${info}; Spot: ${vm}`);
-Vue.config.warnHandler = (err, vm, info) => console.warn(`Warning: ${err.toString()}; Additional info: ${info}; Spot: ${vm}`);
 
 Vue.prototype.$log = console.log
 
@@ -22,6 +20,13 @@ Vue.use(VueOffline, {
   storage: false
 })
 
+
+Vue.mixin({
+  errorCaptured(err, vm, info) {
+    console.error(err, vm, info);
+    return false;
+  }
+})
 
 new Vue({
   vuetify,
