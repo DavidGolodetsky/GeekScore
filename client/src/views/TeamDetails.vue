@@ -76,6 +76,7 @@ export default {
       if (rounds) rounds.forEach(round => (round[round.winner] = "VICTORY"));
       return rounds;
     },
+
     showTable() {
       return this.rounds?.length;
     }
