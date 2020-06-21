@@ -19,18 +19,16 @@
       @change="setPlayers"
       label="Number of players"
     ></v-select>
-    <template v-if="players.length">
-      <v-text-field
-        v-for="(player, i) in players"
-        v-model.trim="player.name"
-        :readonly="isMe(player)"
-        :clearable="!isMe(player)"
-        prepend-icon="mdi-account"
-        :rules="fieldRules"
-        :key="i"
-        :label="`Player #${i + 1}`"
-      ></v-text-field>
-    </template>
+    <v-text-field
+      v-for="(player, i) in players"
+      v-model.trim="player.name"
+      :readonly="isMe(player)"
+      :clearable="!isMe(player)"
+      prepend-icon="mdi-account"
+      :rules="fieldRules"
+      :key="i"
+      :label="`Player #${i + 1}`"
+    ></v-text-field>
     <v-switch v-if="!game.coop" v-model="coop" label="Cooperative" color="secondary" hide-details></v-switch>
   </the-dialog>
 </template>
@@ -56,9 +54,10 @@ export default {
       name: "",
       coop: false,
       numberOfPlayers: [1, 2, 3, 4, 5, 6, 7, 8],
-      players: [],
-      fieldRules: [requiredField, tooLongField, onlyWhitespaces, uniqueField],
-      selectRules: [requiredField, tooLongField, onlyWhitespaces]
+      players: null,
+      fieldRules: [requiredField, tooLongField, onlyWhitespaces],
+      playerRules: [requiredField, tooLongField, onlyWhitespaces, uniqueField],
+      selectRules: [requiredField]
     };
   },
   computed: {
@@ -99,6 +98,10 @@ export default {
       };
       this.createTeam(team);
     }
+  },
+  errorCaptured(err, vm, info) {
+    console.warn(err, vm, info);
+    return false;
   }
 };
 </script>

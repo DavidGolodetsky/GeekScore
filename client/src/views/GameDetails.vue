@@ -27,11 +27,6 @@ export default {
       required: true
     }
   },
-  data() {
-    return {
-      teamsFromCache: null
-    };
-  },
   computed: {
     ...mapGetters("teams", ["getGameTeams"]),
     ...mapGetters("games", ["getGame"]),
@@ -66,10 +61,4 @@ export default {
 };
 </script>
 
-<style lang="scss">
-.game-details {
-  .title-wrap {
-    background-color: rgba(0, 0, 0, 0.7);
-  }
-}
-</style>
+

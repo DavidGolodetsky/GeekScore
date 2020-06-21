@@ -1,6 +1,6 @@
 export const requiredField = v => !!v || "Field is required"
 
-export const tooLongField = v => (!!v && v.length <= 60) || "Field is too long"
+export const tooLongField = v => !!(v && v.length <= 60) || "Field is too long"
 
 export const onlyWhitespaces = v => !!(v && v.replace(/\s/g, "").length) || "Field contains only whitespaces"
 
