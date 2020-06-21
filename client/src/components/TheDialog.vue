@@ -70,11 +70,9 @@ export default {
   watch: {
     dialog: {
       handler(value) {
-        if (value) {
-          this.renderDialog = true;
-        } else {
-          setTimeout((this.renderDialog = false), 1000);
-        }
+        value
+          ? (this.renderDialog = true)
+          : setTimeout((this.renderDialog = false), 1000);
       },
       immediate: true
     }

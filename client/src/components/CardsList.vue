@@ -15,6 +15,7 @@
     <v-row>
       <v-col sm="6" md="4" cols="12" v-for="item in filteredItems" :key="item._id" class="mb-6">
         <v-lazy :options="{ threshold: 0.5 }" min-height="200" transition="fade-transition">
+          <!-- TODO:decouple -->
           <v-card
             dark
             :key="item._id"
@@ -113,7 +114,7 @@ export default {
   },
   computed: {
     filteredItems() {
-      if (!this.search) return this.getItemsOrder(this.items);
+      !this.search && this.getItemsOrder(this.items);
       const filtered = this.items.filter(item =>
         this.search
           .toLowerCase()
@@ -126,6 +127,7 @@ export default {
   methods: {
     getActions(item) {
       const actions = [];
+      // TODO:refactor
       if (item.bggURL) {
         actions.push({
           link: item.bggURL,

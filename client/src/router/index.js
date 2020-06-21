@@ -118,9 +118,7 @@ const router = new Router({
   base: process.env.BASE_URL,
   scrollBehavior(to, from, savedPosition) {
     let position = { x: 0, y: 0 }
-    if (savedPosition) {
-      position = savedPosition
-    }
+    if (savedPosition) position = savedPosition
     return new Promise((resolve) => {
       setTimeout(() => {
         resolve(position)
@@ -133,11 +131,7 @@ const router = new Router({
 router.beforeEach((to, from, next) => {
   store.dispatch('setError')
   if (to.matched.some(record => record.meta.requiresAuth)) {
-    if (store.getters['user/getUser']) {
-      next()
-    } else {
-      next({ name: "signIn" })
-    }
+    store.getters['user/getUser'] ? next() : next({ name: "signIn" })
   } else {
     next()
   }

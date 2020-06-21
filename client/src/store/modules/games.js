@@ -8,11 +8,9 @@ export default {
     },
     mutations: {
         CREATE_GAME(state, payload) {
-            if (state.games) {
-                state.games = [...state.games, payload]
-            } else {
-                state.games = [payload]
-            }
+            state.games
+                ? state.games = [...state.games, payload]
+                : state.games = [payload]
         },
         SET_GAMES(state, payload) {
             state.games = payload
@@ -24,11 +22,7 @@ export default {
         },
         DELETE_GAME(state, payload) {
             const games = state.games.filter(game => game._id !== payload)
-            if (games.length) {
-                state.games = games
-            } else {
-                state.games = null
-            }
+            games.length ? state.games = games : state.games = null
         }
     },
     actions: {

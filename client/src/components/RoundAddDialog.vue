@@ -115,11 +115,8 @@ export default {
         comment: this.comment,
         winner: this.result.toLowerCase()
       };
-      if (this.team.coop) {
-        round.result = this.result;
-      } else if (this.result === "tie") {
-        round.tie = "TIE";
-      }
+      if (this.team.coop) round.result = this.result;
+      if (this.result === "tie") round.tie = "TIE";
       return round;
     }
   }

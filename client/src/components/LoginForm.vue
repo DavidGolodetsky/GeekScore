@@ -40,7 +40,7 @@
             prepend-icon="mdi-lock"
             :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
             @click:append="showPassword = !showPassword"
-            :rules="[comparePasswords]"
+            :rules="comparePasswords"
             required
             v-model.trim="confirmPassword"
           />
@@ -72,7 +72,7 @@
 import { mapActions } from "vuex";
 import { fbStart } from "@/db";
 import {
-  EmailField,
+  emailField,
   shortPassword,
   onlyWhitespaces,
   requiredField
@@ -92,13 +92,15 @@ export default {
       password: "",
       confirmPassword: "",
       email: "",
-      EmailRules: [requiredField, EmailField],
-      passwordRules: [requiredField, onlyWhitespaces, shortPassword]
+      EmailRules: [requiredField, emailField],
+      passwordRules: [requiredField, shortPassword, onlyWhitespaces]
     };
   },
   computed: {
     comparePasswords() {
-      return this.password === this.confirmPassword || "Passwords don't match";
+      return [
+        this.password === this.confirmPassword || "Passwords don't match"
+      ];
     },
     loginMethod() {
       return this.formProps.signupMode ? this.signUpUser : this.signInUser;
@@ -111,13 +113,11 @@ export default {
     ...mapActions("user", ["signUpUser", "signInUser"]),
     ...mapActions(["setError"]),
     onSubmit() {
-      if (this.valid) {
-        const userInfo = {
-          email: this.email,
-          password: this.password
-        };
-        this.loginMethod(userInfo);
-      }
+      const userInfo = {
+        email: this.email,
+        password: this.password
+      };
+      this.valid && this.loginMethod(userInfo);
     }
   }
 };

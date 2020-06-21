@@ -7,11 +7,9 @@ export default {
     },
     mutations: {
         CREATE_TEAM(state, payload) {
-            if (state.teams) {
-                state.teams = [...state.teams, payload]
-            } else {
-                state.teams = [payload]
-            }
+            state.teams
+                ? state.teams = [...state.teams, payload]
+                : state.teams = [payload]
         },
         SET_TEAMS(state, payload) {
             state.teams = payload
@@ -23,12 +21,10 @@ export default {
         },
         DELETE_TEAM(state, payload) {
             const teams = state.teams.filter(team => team._id !== payload)
-            if (teams.length) {
-                state.teams = teams
-            } else {
-                state.teams = null
-            }
-        },
+            teams.length
+                ? state.teams = teams
+                : state.teams = null
+        }
     },
     actions: {
         async createTeam({ commit, rootState }, payload) {
@@ -89,17 +85,13 @@ export default {
         },
         getTeam(state) {
             return (teamId) => {
-                if (state.teams) {
-                    return state.teams.find(team => team._id === teamId)
-                }
+                state.teams && state.teams.find(team => team._id === teamId)
             }
-        },
-        getGameTeams(state) {
-            return (gameId) => {
-                if (state.teams) {
-                    return state.teams.filter(team => team.games.includes(gameId))
-                }
-            }
+        }
+    },
+    getGameTeams(state) {
+        return (gameId) => {
+            state.teams && state.teams.filter(team => team.games.includes(gameId))
         }
     },
 }

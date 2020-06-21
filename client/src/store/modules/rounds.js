@@ -7,22 +7,18 @@ export default {
     },
     mutations: {
         CREATE_ROUND(state, payload) {
-            if (state.rounds) {
-                state.rounds = [...state.rounds, payload]
-            } else {
-                state.rounds = [payload]
-            }
+            state.rounds
+                ? state.rounds = [...state.rounds, payload]
+                : state.rounds = [payload]
         },
         SET_ROUNDS(state, payload) {
             state.rounds = payload
         },
         DELETE_ROUND(state, payload) {
             const rounds = state.rounds.filter(round => round._id !== payload)
-            if (rounds.length) {
-                state.rounds = rounds
-            } else {
-                state.rounds = null
-            }
+            rounds.length
+                ? state.rounds = rounds
+                : state.rounds = null
         },
     },
     actions: {

@@ -66,18 +66,13 @@ export default {
   },
   watch: {
     user(value) {
-      if (!value && this.$route.fullPath !== "/") {
-        this.$router.push("/");
-      }
+      if (!value && this.$route.fullPath !== "/") this.$router.push("/");
     }
   },
   methods: {
     onScroll() {
-      if (window.pageYOffset > 500) {
-        this.showTop = true;
-      } else if (this.showTop && window.pageYOffset < 500) {
-        this.showTop = false;
-      }
+      if (window.pageYOffset > 500) this.showTop = true;
+      if (this.showTop && window.pageYOffset < 500) this.showTop = false;
     }
   }
 };

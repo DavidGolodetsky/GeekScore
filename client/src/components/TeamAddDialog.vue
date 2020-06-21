@@ -81,11 +81,9 @@ export default {
     },
     setCoop() {
       let coop;
-      if (this.players.length === 1) {
-        coop = true;
-      } else {
-        coop = this.coop || this.game.coop;
-      }
+      this.players.length === 1
+        ? (coop = true)
+        : (coop = this.coop || this.game.coop);
       return coop;
     },
     onSubmit() {

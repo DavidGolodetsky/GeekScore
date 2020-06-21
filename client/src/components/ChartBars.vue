@@ -15,7 +15,7 @@ export default {
   },
   watch: {
     rounds(value) {
-      if (value) return this.setChart();
+      value && this.setChart();
       this._chart.destroy();
     }
   },
@@ -57,9 +57,7 @@ export default {
         let playerRes = 0;
         let formattedPlayer = player.toLowerCase();
         Object.keys(this.rounds).forEach(round => {
-          if (this.rounds[round][formattedPlayer]) {
-            playerRes++;
-          }
+          if (this.rounds[round][formattedPlayer]) playerRes++;
         });
         return playerRes;
       });

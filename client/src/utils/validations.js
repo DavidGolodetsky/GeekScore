@@ -6,7 +6,7 @@ export const onlyWhitespaces = v => !!(v && v.replace(/\s/g, "").length) || "Fie
 
 export const uniqueField = v => {
     let pl = this.players.filter(player => player.name === v);
-    return (!!v && pl.length < 2) || "This field should be unique";
+    return !!(v && pl.length < 2) || "This field should be unique";
 }
 
 export const linkField = v => {
@@ -16,5 +16,5 @@ export const linkField = v => {
 
 export const emailField = v => /.+@.+\..+/.test(v) || "E-mail must be valid"
 
-export const shortPassword = v => (!!v && v.length >= 6) || "Password is too short"
+export const shortPassword = v => !!(v && v.length >= 6) || "Password is too short"
 

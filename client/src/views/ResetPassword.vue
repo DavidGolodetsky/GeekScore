@@ -73,7 +73,7 @@ export default {
   methods: {
     ...mapActions("user", ["resetPassword"]),
     onSubmit() {
-      if (this.valid) this.resetPassword(this.email);
+      this.valid && this.resetPassword(this.email);
     }
   }
 };

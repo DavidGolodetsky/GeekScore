@@ -62,7 +62,7 @@ export default {
         },
         async logout({ commit, rootState }) {
             try {
-                rootState.games.games = rootState.teams.teams = []
+                rootState.games.games = rootState.teams.teams = null
                 await firebase.auth().signOut()
                 commit('SET_USER', null)
                 router.push("/")
