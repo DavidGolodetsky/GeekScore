@@ -10,12 +10,10 @@
     <div v-if="showTable">
       <v-tabs v-model="tab" background-color="primary" centered dark icons-and-text>
         <v-tabs-slider color="secondary"></v-tabs-slider>
-
         <v-tab v-for="(tab, i) in tabs" :key="tab.name" :href="`#tab-${i}`">
           <v-icon>{{ `mdi-${tab.icon}` }}</v-icon>
         </v-tab>
       </v-tabs>
-
       <v-tabs-items v-model="tab">
         <v-tab-item v-for="(component, i) in tabComponents" :key="i" :value="`tab-${i}`">
           <component :is="component" :team="team" :rounds="rounds" />
