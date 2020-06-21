@@ -4,40 +4,28 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/browserconfig.xml"
   },
   {
-    "revision": "41f1c71c1c261378a85f",
-    "url": "/css/app.8ae75868.css"
+    "revision": "3b4600df17fbee5d6cff",
+    "url": "/css/app.c1ef597d.css"
   },
   {
-    "revision": "d168ac6c940f9208cbe8",
-    "url": "/css/chunk-vendors.7f917b0e.css"
+    "revision": "e9f35c277744a1e8022f",
+    "url": "/css/chunk-vendors.eedd2432.css"
   },
   {
-    "revision": "23b32c975a8b7e36fa16",
-    "url": "/css/game.19fea253.css"
+    "revision": "d475e754bf1116e15628",
+    "url": "/css/signIn~signUp.7b8bd9be.css"
   },
   {
-    "revision": "8962e6586cb97daec1cf",
-    "url": "/css/signIn.47cb3f8f.css"
+    "revision": "c07df6594d5ac33a2d9a",
+    "url": "/css/team.778b623f.css"
   },
   {
-    "revision": "a628c2e94da1ba113695",
-    "url": "/css/signUp.47cb3f8f.css"
+    "revision": "5d8dfbbc3198d9071d1c",
+    "url": "/css/theDialog.1f0001e3.css"
   },
   {
-    "revision": "1be95b75217eb2fd26f1",
-    "url": "/css/team.2f1d9b97.css"
-  },
-  {
-    "revision": "f116388aefe4d435eaa2",
-    "url": "/css/theAlert.d47b30c4.css"
-  },
-  {
-    "revision": "b7c81fee8f1e30f2bd54",
-    "url": "/css/theDialog.5392c0be.css"
-  },
-  {
-    "revision": "494203277662dfc7ef3c",
-    "url": "/css/theGoBack.c8467e0b.css"
+    "revision": "676bc441ef12dc7ee165",
+    "url": "/css/theGoBack.07ed25eb.css"
   },
   {
     "revision": "711fd041e2a8d79484ff971cfb00fb82",
@@ -100,55 +88,55 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/img/team.76152c6e.jpg"
   },
   {
-    "revision": "575eeb0fa042acf05b0bb9a98dc9ed55",
+    "revision": "4bbb12b121907d16bf2593c7a1b16baa",
     "url": "/index.html"
   },
   {
-    "revision": "41f1c71c1c261378a85f",
-    "url": "/js/app.65161262.js"
+    "revision": "3b4600df17fbee5d6cff",
+    "url": "/js/app.7605a015.js"
   },
   {
-    "revision": "d168ac6c940f9208cbe8",
-    "url": "/js/chunk-vendors.53e76f04.js"
+    "revision": "e9f35c277744a1e8022f",
+    "url": "/js/chunk-vendors.ca47269f.js"
   },
   {
-    "revision": "23b32c975a8b7e36fa16",
-    "url": "/js/game.0942fd74.js"
+    "revision": "773d957b1fa78aac6e88",
+    "url": "/js/game.906e19ad.js"
   },
   {
-    "revision": "73e27ca777b222933043",
-    "url": "/js/notFound.23f60ef0.js"
+    "revision": "40385aba5525ab3f9ad6",
+    "url": "/js/notFound.8e060ab4.js"
   },
   {
-    "revision": "9e8a8e421d2f51acacd6",
-    "url": "/js/resetPass.4bf6c063.js"
+    "revision": "250b7ec137ccacbb935d",
+    "url": "/js/resetPass.5beb9ec7.js"
   },
   {
-    "revision": "8962e6586cb97daec1cf",
-    "url": "/js/signIn.7181a578.js"
+    "revision": "fc280524639afc64a78d",
+    "url": "/js/signIn.5d618911.js"
   },
   {
-    "revision": "a628c2e94da1ba113695",
-    "url": "/js/signUp.25542138.js"
+    "revision": "d475e754bf1116e15628",
+    "url": "/js/signIn~signUp.45b3cb07.js"
   },
   {
-    "revision": "1be95b75217eb2fd26f1",
-    "url": "/js/team.f2bbcd1e.js"
+    "revision": "187d735c75529216587e",
+    "url": "/js/signUp.89bde836.js"
   },
   {
-    "revision": "f116388aefe4d435eaa2",
-    "url": "/js/theAlert.c9d76e34.js"
+    "revision": "c07df6594d5ac33a2d9a",
+    "url": "/js/team.7db3981f.js"
   },
   {
-    "revision": "b7c81fee8f1e30f2bd54",
-    "url": "/js/theDialog.3f0d6446.js"
+    "revision": "5d8dfbbc3198d9071d1c",
+    "url": "/js/theDialog.531fcd12.js"
   },
   {
-    "revision": "494203277662dfc7ef3c",
-    "url": "/js/theGoBack.8dc41db3.js"
+    "revision": "676bc441ef12dc7ee165",
+    "url": "/js/theGoBack.3dcadd93.js"
   },
   {
-    "revision": "9d40ba1bc3ac8fed7abe7eb3143dfc80",
+    "revision": "daaca8f45b4a0e7573d233c0ccded67a",
     "url": "/manifest.json"
   },
   {
