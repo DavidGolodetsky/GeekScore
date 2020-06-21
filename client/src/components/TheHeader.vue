@@ -18,13 +18,13 @@
           <nav>
             <ul class="d-none d-sm-flex">
               <li v-for="{icon, text, link} in navItems" :key="text">
-                <v-btn :small="$vuetify.breakpoint.smOnly" :to="link" text rounded>
+                <v-btn :small="$vuetify.breakpoint.smOnly" :to="link" text>
                   <v-icon left>mdi-{{ icon }}</v-icon>
                   {{ text }}
                 </v-btn>
               </li>
               <li>
-                <v-btn :small="$vuetify.breakpoint.smOnly" text rounded @click="onLogout">
+                <v-btn :small="$vuetify.breakpoint.smOnly" text @click="onLogout">
                   <v-icon>mdi-logout</v-icon>Log out
                 </v-btn>
               </li>
