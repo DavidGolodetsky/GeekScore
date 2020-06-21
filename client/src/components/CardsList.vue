@@ -151,13 +151,9 @@ export default {
       return actions;
     },
     imagePath(item) {
-      if (item.imageUrl) {
-        return item.imageUrl;
-      } else if (item.teams) {
-        return require(`@/assets/img/game.jpg`);
-      } else {
-        return require(`@/assets/img/team.jpg`);
-      }
+      if (item.imageUrl) return item.imageUrl;
+      if (item.teams) return require(`@/assets/img/game.jpg`);
+      return require(`@/assets/img/team.jpg`);
     },
     getItemsOrder(items) {
       const reversed = items.slice().reverse();

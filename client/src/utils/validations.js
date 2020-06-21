@@ -13,3 +13,8 @@ export const linkField = v => {
     const link = v.match(/(https?:\/\/[^\s]+)/g);
     return !!link || "Please provide a correct link";
 }
+
+export const emailField = v => /.+@.+\..+/.test(v) || "E-mail must be valid"
+
+export const shortPassword = v => (!!v && v.length >= 6) || "Password is too short"
+

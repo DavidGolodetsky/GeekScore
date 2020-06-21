@@ -1,7 +1,7 @@
 <template>
   <section>
     <the-title title="Games" icon="dice-multiple" component="game-add-dialog" />
-    <cards-list v-if="getGames" :items="getGames" @favorite="toggleFavorite" :route="gameRoute">
+    <cards-list :items="getGames" @favorite="toggleFavorite" :route="gameRoute">
       <template #action="{ item }">
         <game-edit-dialog :game="item" />
       </template>

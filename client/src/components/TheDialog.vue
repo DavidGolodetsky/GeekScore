@@ -80,14 +80,8 @@ export default {
     }
   },
   methods: {
-    validateForm() {
-      let form = this.$refs.form;
-      if (form.validate()) {
-        return true;
-      }
-    },
     onSubmit() {
-      if (this.validateForm()) {
+      if (this.valid) {
         this.submitLogic();
         this.close();
       }

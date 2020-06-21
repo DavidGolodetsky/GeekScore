@@ -71,6 +71,12 @@
 <script>
 import { mapActions } from "vuex";
 import { fbStart } from "@/db";
+import {
+  EmailField,
+  shortPassword,
+  onlyWhitespaces,
+  requiredField
+} from "@/utils/validations";
 
 export default {
   props: {
@@ -86,17 +92,8 @@ export default {
       password: "",
       confirmPassword: "",
       email: "",
-      EmailRules: [
-        v => !!v || "Field is required",
-        v => /.+@.+\..+/.test(v) || "E-mail must be valid"
-      ],
-      passwordRules: [
-        v => !!v || "Field is required",
-        v => (!!v && v.length >= 6) || "Password is too short",
-        v =>
-          !!(v && v.replace(/\s/g, "").length) ||
-          "Field contains only whitespaces"
-      ]
+      EmailRules: [requiredField, EmailField],
+      passwordRules: [requiredField, onlyWhitespaces, shortPassword]
     };
   },
   computed: {
@@ -114,8 +111,7 @@ export default {
     ...mapActions("user", ["signUpUser", "signInUser"]),
     ...mapActions(["setError"]),
     onSubmit() {
-      const valid = this.$refs.form.validate();
-      if (valid) {
+      if (this.valid) {
         const userInfo = {
           email: this.email,
           password: this.password

@@ -73,8 +73,7 @@ export default {
   methods: {
     ...mapActions("user", ["resetPassword"]),
     onSubmit() {
-      const valid = this.$refs.form.validate();
-      if (valid) this.resetPassword(this.email);
+      if (this.valid) this.resetPassword(this.email);
     }
   }
 };
