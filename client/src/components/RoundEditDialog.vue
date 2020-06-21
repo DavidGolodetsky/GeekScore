@@ -6,7 +6,12 @@
     simple
     :submit-logic="onSubmit"
   >
-    <v-switch v-model="isDelete" label="Delete round" color="error" hide-details></v-switch>
+    <v-switch
+      v-model="isDelete"
+      label="Delete round"
+      color="error"
+      hide-details
+    ></v-switch>
   </the-dialog>
 </template>
 
