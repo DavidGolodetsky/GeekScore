@@ -14,14 +14,9 @@ export default {
     }
   },
   watch: {
-    rounds: {
-      handler: function(value) {
-        if (value) {
-          this.setChart();
-        } else {
-          this._chart.destroy();
-        }
-      }
+    rounds(value) {
+      if (value) return this.setChart();
+      this._chart.destroy();
     }
   },
   mounted() {

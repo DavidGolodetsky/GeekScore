@@ -36,15 +36,15 @@ export default {
   methods: {
     ...mapActions("teams", ["updateTeam", "deleteTeam"]),
     onSubmit() {
+      if (this.isDelete) return this.deleteTeam(this.team._id);
+      this.updateTheTeam();
+    },
+    updateTheTeam() {
       const team = {
         _id: this.team._id,
         gameId: this.team.gameId,
         name: this.name
       };
-      if (this.isDelete) {
-        this.deleteTeam(this.team._id);
-        return;
-      }
       this.updateTeam(team);
     }
   }
