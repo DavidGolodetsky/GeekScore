@@ -186,10 +186,10 @@ export default {
     background-color: rgba(0, 0, 0, 0.9);
   }
   .app-card {
-    transition: 0.3s;
+    transition: box-shadow 0.3s ease-in;
     &:hover {
       will-change: box-shadow;
-      transition: 0.3s;
+      transition: box-shadow 0.3s ease-in;
       box-shadow: 7px 9px 20px -6px rgba(0, 0, 0, 0.75);
     }
   }

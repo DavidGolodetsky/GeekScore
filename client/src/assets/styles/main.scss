@@ -83,7 +83,7 @@ a {
 
 .slide-enter-active,
 .slide-leave-active {
-  transition: 0.3s;
+  transition: opacity 0.3s;
 }
 .slide-enter,
 .slide-leave-to {
@@ -93,8 +93,9 @@ a {
 
 .fade-down-enter-active,
 .fade-down-leave-active {
-  transition: 1s ease;
-  will-change: transition;
+  transition-property: transform, opacity;
+  transition-duration: 1s;
+  transition-timing-function: ease;
 }
 .fade-down-enter,
 .fade-down-leave-to {
