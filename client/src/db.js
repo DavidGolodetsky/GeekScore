@@ -1,7 +1,5 @@
 import firebase from 'firebase/app';
 import 'firebase/auth';
-import 'firebase/database';
-import 'firebase/storage';
 import * as firebaseui from 'firebaseui'
 import store from '@/store';
 import router from '@/router';
