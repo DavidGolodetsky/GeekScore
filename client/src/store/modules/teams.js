@@ -80,9 +80,6 @@ export default {
         },
     },
     getters: {
-        getTeams(state) {
-            return state.teams
-        },
         getTeam(state) {
             return (teamId) => {
                 state.teams && state.teams.find(team => team._id === teamId)

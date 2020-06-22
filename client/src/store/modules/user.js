@@ -72,13 +72,5 @@ export default {
                 commit('LOADING', false, { root: true })
             }
         }
-    },
-    getters: {
-        getUser(state) {
-            return state.user
-        },
-        isResetPasswordDone(state) {
-            return state.resetPassword
-        },
     }
 }

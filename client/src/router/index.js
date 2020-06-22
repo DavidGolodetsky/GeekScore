@@ -129,9 +129,8 @@ const router = new Router({
 
 
 router.beforeEach((to, from, next) => {
-  store.dispatch('setError')
   if (to.matched.some(record => record.meta.requiresAuth)) {
-    store.getters['user/getUser'] ? next() : next({ name: "signIn" })
+    store.state['user'] ? next() : next({ name: "signIn" })
   } else {
     next()
   }

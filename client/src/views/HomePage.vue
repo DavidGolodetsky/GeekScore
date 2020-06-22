@@ -22,14 +22,14 @@
         class="submit-btn"
         ripple
         type="submit"
-        :to="{name: getUser ? 'games' : 'signIn'}"
-      >{{ getUser ? 'Games' : 'Sign In' }}</v-btn>
+        :to="{name: user ? 'games' : 'signIn'}"
+      >{{ user ? 'Games' : 'Sign In' }}</v-btn>
     </div>
   </section>
 </template>
 
 <script>
-import { mapGetters } from "vuex";
+import { mapState } from "vuex";
 
 export default {
   data: () => ({
@@ -64,7 +64,7 @@ export default {
     ]
   }),
   computed: {
-    ...mapGetters("user", ["getUser"])
+    ...mapState("user", ["user"])
   }
 };
 </script>

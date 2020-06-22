@@ -33,7 +33,7 @@
 </template>
 
 <script>
-import { mapActions, mapGetters } from "vuex";
+import { mapActions, mapState } from "vuex";
 
 export default {
   props: {
@@ -53,7 +53,7 @@ export default {
     };
   },
   computed: {
-    ...mapGetters("user", ["isResetPasswordDone"])
+    ...mapState("user", ["resetPassword"])
   },
   methods: {
     ...mapActions("user", ["resetPassword"]),

@@ -1,7 +1,7 @@
 <template>
   <section>
     <the-title title="Games" icon="dice-multiple" component="game-add-dialog" />
-    <cards-list v-if="getGames" :items="getGames" @favorite="toggleFavorite" :route="gameRoute">
+    <cards-list v-if="games" :items="games" @favorite="toggleFavorite" :route="gameRoute">
       <template #action="{ item }">
         <game-edit-dialog :game="item" />
       </template>
@@ -13,7 +13,7 @@
 import TheTitle from "@/components/TheTitle";
 import GameEditDialog from "@/components/GameEditDialog";
 import CardsList from "@/components/CardsList";
-import { mapGetters, mapActions } from "vuex";
+import { mapState, mapActions } from "vuex";
 
 export default {
   components: {
@@ -27,8 +27,8 @@ export default {
     };
   },
   computed: {
-    ...mapGetters("games", ["getGames"]),
-    ...mapGetters("teams", ["getTeams"])
+    ...mapState("games", ["games"]),
+    ...mapState("teams", ["teams"])
   },
   created() {
     this.loadData();
@@ -40,8 +40,8 @@ export default {
       this.updateGame(game);
     },
     loadData() {
-      this.getGames || this.loadGames();
-      this.getTeams || this.loadTeams();
+      this.games || this.loadGames();
+      this.teams || this.loadTeams();
     }
   }
 };

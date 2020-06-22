@@ -30,7 +30,7 @@
 import TheHeader from "@/components/TheHeader";
 import TheFooter from "@/components/TheFooter";
 import TheAlert from "@/components/TheAlert";
-import { mapGetters } from "vuex";
+import { mapState, mapGetters } from "vuex";
 import { VueOfflineMixin } from "vue-offline";
 
 export default {
@@ -53,7 +53,8 @@ export default {
   }),
   computed: {
     ...mapGetters(["loading", "error"]),
-    ...mapGetters("user", ["getUser"]),
+    // TODO: do we need this?
+    ...mapState("user", ["user"]),
     showAlert() {
       return this.isOffline || this.error;
     },
@@ -64,11 +65,12 @@ export default {
       return this.isOffline ? this.offlineText : this.error.message;
     }
   },
-  watch: {
-    user(value) {
-      if (!value && this.$route.fullPath !== "/") this.$router.push("/");
-    }
-  },
+  // TODO: do we need this?
+  // watch: {
+  //   user(value) {
+  //     if (!value && this.$route.fullPath !== "/") this.$router.push("/");
+  //   }
+  // },
   methods: {
     onScroll() {
       if (window.pageYOffset > 500) this.showTop = true;

@@ -81,9 +81,6 @@ export default {
         }
     },
     getters: {
-        getGames(state) {
-            return state.games
-        },
         getGame(state) {
             return (gameId) => {
                 return state.games.find((game) => {

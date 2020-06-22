@@ -8,7 +8,7 @@
           <span class="header-title">Geek Score</span>
         </router-link>
         <v-spacer />
-        <template v-if="getUser">
+        <template v-if="user">
           <nav>
             <ul class="d-none d-sm-flex">
               <li v-for="{icon, text, link} in navItems" :key="text">
@@ -48,7 +48,7 @@
 </template>
 
 <script>
-import { mapActions, mapGetters } from "vuex";
+import { mapState, mapActions, mapGetters } from "vuex";
 
 export default {
   data() {
@@ -57,7 +57,7 @@ export default {
     };
   },
   computed: {
-    ...mapGetters("user", ["getUser"]),
+    ...mapState("user", ["user"]),
     ...mapGetters(["backTitle"]),
     navItems() {
       return [
