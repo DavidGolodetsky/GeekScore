@@ -1,6 +1,6 @@
 <template>
   <section class="login-form mt-12">
-    <v-card width="400" raised outlined dark color="primary" class="mx-auto my-4 px-4 pt-4">
+    <v-card raised outlined dark class="auth-card">
       <v-form v-model="valid" lazy-validation ref="form" @submit.prevent="onSubmit">
         <div class="d-flex align-items-center">
           <v-icon class="mr-3">{{`mdi-${formProps.icon}`}}</v-icon>
@@ -47,14 +47,7 @@
         </v-card-text>
         <v-divider></v-divider>
         <v-card-actions>
-          <v-btn
-            class="my-2 py-2 submit-btn"
-            color="secondary"
-            width="100%"
-            ripple
-            type="submit"
-            :disabled="!valid"
-          >Submit</v-btn>
+          <v-btn class="submit-btn" ripple type="submit" :disabled="!valid">Submit</v-btn>
         </v-card-actions>
       </v-form>
       <div class="text-center mb-3">

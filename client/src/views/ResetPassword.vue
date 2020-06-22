@@ -1,14 +1,6 @@
 <template>
   <section>
-    <v-card
-      v-if="!isResetPasswordDone"
-      width="400"
-      raised
-      outlined
-      dark
-      color="primary"
-      class="mx-auto my-4 px-4 pt-4"
-    >
+    <v-card v-if="!isResetPasswordDone" raised outlined dark class="auth-card">
       <v-form v-model="valid" lazy-validation ref="form" @submit.prevent="onSubmit">
         <v-card-title class="pb-10">
           <div class="d-flex align-items-center">
@@ -29,14 +21,7 @@
         </v-card-text>
         <v-divider></v-divider>
         <v-card-actions>
-          <v-btn
-            ripple
-            class="my-2 py-2 submit-btn"
-            color="secondary"
-            width="100%"
-            type="submit"
-            :disabled="!valid"
-          >Submit</v-btn>
+          <v-btn ripple class="submit-btn" type="submit" :disabled="!valid">Submit</v-btn>
         </v-card-actions>
       </v-form>
     </v-card>

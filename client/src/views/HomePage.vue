@@ -19,10 +19,8 @@
     </v-timeline>
     <div class="d-flex justify-center">
       <v-btn
-        class="my-2 py-2 submit-btn"
-        color="secondary"
+        class="submit-btn"
         ripple
-        width="100%"
         type="submit"
         :to="{name: getUser ? 'games' : 'signIn'}"
       >{{ getUser ? 'Games' : 'Sign In' }}</v-btn>
@@ -70,4 +68,5 @@ export default {
   }
 };
 </script>
+
 

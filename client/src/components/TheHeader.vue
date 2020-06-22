@@ -1,16 +1,10 @@
 <template>
-  <div>
+  <div class="the-header">
     <v-app-bar app color="primary" dense dark>
       <v-container class="d-flex align-center app-container space-between">
         <the-go-back v-if="backTitle" :title="backTitle" />
         <router-link v-else class="d-flex align-center" :to="{ name: 'home' }">
-          <v-img
-            class="mr-1"
-            :src="require(`@/assets/img/logo.svg`)"
-            height="35"
-            alt="Geek Score"
-            width="35"
-          ></v-img>
+          <v-img class="logo" :src="require(`@/assets/img/logo.svg`)" alt="Geek Score"></v-img>
           <span class="header-title">Geek Score</span>
         </router-link>
         <v-spacer />
@@ -84,3 +78,13 @@ export default {
   }
 };
 </script>
+
+<style scoped lang="scss">
+.the-header {
+  .logo {
+    width: 35px;
+    height: 35px;
+    margin-right: 5px;
+  }
+}
+</style>
