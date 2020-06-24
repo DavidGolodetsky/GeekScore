@@ -8,14 +8,28 @@
       component="round-add-dialog"
     />
     <div v-if="showTable">
-      <v-tabs v-model="tab" background-color="primary" centered dark icons-and-text>
-        <v-tabs-slider color="secondary"></v-tabs-slider>
-        <v-tab v-for="(tab, i) in tabs" :key="tab.name" :href="`#tab-${i}`">
+      <v-tabs
+        v-model="tab"
+        background-color="primary"
+        centered
+        dark
+        icons-and-text
+      >
+        <v-tabs-slider color="secondary" />
+        <v-tab
+          v-for="(tabItem, i) in tabs"
+          :key="tabItem.name"
+          :href="`#tab-${i}`"
+        >
           <v-icon>{{ `mdi-${tab.icon}` }}</v-icon>
         </v-tab>
       </v-tabs>
-      <v-tabs-items v-model="tab">
-        <v-tab-item v-for="(component, i) in tabComponents" :key="i" :value="`tab-${i}`">
+      <v-tabs-items v-model="tabItem">
+        <v-tab-item
+          v-for="(component, i) in tabComponents"
+          :key="i"
+          :value="`tab-${i}`"
+        >
           <component :is="component" :team="team" :rounds="rounds" />
         </v-tab-item>
       </v-tabs-items>
@@ -34,13 +48,13 @@ export default {
   components: {
     ChartBars,
     TheTable,
-    TheTitle
+    TheTitle,
   },
   props: {
     teamId: {
       type: String,
-      required: true
-    }
+      required: true,
+    },
   },
   data() {
     return {
@@ -50,15 +64,15 @@ export default {
         {
           name: "Table",
           href: "tab-1",
-          icon: "table-large"
+          icon: "table-large",
         },
         {
           name: "Statistics",
           href: "tab-2",
-          icon: "chart-bar"
-        }
+          icon: "chart-bar",
+        },
       ],
-      tabComponents: ["the-table", "chart-bars"]
+      tabComponents: ["the-table", "chart-bars"],
     };
   },
   computed: {
@@ -74,17 +88,20 @@ export default {
     rounds() {
       const query = { teamId: this.teamId, gameId: this.gameId };
       const rounds = this.getRounds(query);
-      if (rounds) rounds.forEach(round => (round[round.winner] = "VICTORY"));
+      if (rounds) rounds.forEach((round) => (round[round.winner] = "VICTORY"));
       return rounds;
     },
 
     showTable() {
       return this.rounds?.length;
-    }
+    },
   },
   created() {
     this.loadData();
     this.setBackTitle(`${this.team.name}: ${this.game.name}`);
+  },
+  beforeDestroy() {
+    this.setBackTitle();
   },
   methods: {
     ...mapActions(["setBackTitle"]),
@@ -93,10 +110,7 @@ export default {
       const isRounds = this.$store.hasModule("rounds");
       isRounds || this.$store.registerModule("rounds", rounds);
       this.loadRounds();
-    }
+    },
   },
-  beforeDestroy() {
-    this.setBackTitle();
-  }
 };
 </script>
