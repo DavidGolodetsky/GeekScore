@@ -1,6 +1,5 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import rounds from "./modules/rounds"
 import games from "./modules/games"
 import teams from "./modules/teams"
 // TODO:rename to users?
@@ -16,8 +15,7 @@ const store = new Vuex.Store({
   modules: {
     user,
     games,
-    teams,
-    rounds
+    teams
   },
   state: {
     error: null,
@@ -59,9 +57,5 @@ const store = new Vuex.Store({
   }
 })
 
-
-// store.registerModule('rounds', {
-//   rounds
-// });
 
 export default store

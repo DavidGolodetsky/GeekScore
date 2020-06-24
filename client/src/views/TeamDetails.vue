@@ -27,6 +27,7 @@
 import TheTitle from "@/components/TheTitle";
 import TheTable from "@/components/TheTable";
 import ChartBars from "@/components/ChartBars";
+import rounds from "@/store/modules/rounds";
 import { mapActions, mapGetters } from "vuex";
 
 export default {
@@ -82,12 +83,17 @@ export default {
     }
   },
   created() {
-    this.loadRounds();
+    this.loadData();
     this.setBackTitle(`${this.team.name}: ${this.game.name}`);
   },
   methods: {
     ...mapActions(["setBackTitle"]),
-    ...mapActions("rounds", ["loadRounds"])
+    ...mapActions("rounds", ["loadRounds"]),
+    loadData() {
+      const isRounds = this.$store.hasModule("rounds");
+      isRounds || this.$store.registerModule("rounds", rounds);
+      this.loadRounds();
+    }
   },
   beforeDestroy() {
     this.setBackTitle();
