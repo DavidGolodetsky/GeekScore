@@ -9,7 +9,7 @@ import user from "./modules/user"
 
 Vue.use(Vuex)
 
-export default new Vuex.Store({
+const store = new Vuex.Store({
   // TODO:  uncomment and fix issues
   // strict: process.env.NODE_ENV !== 'production',
 
@@ -58,3 +58,10 @@ export default new Vuex.Store({
     }
   }
 })
+
+
+// store.registerModule('rounds', {
+//   rounds
+// });
+
+export default store

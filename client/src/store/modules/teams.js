@@ -81,14 +81,10 @@ export default {
     },
     getters: {
         getTeam(state) {
-            return (teamId) => {
-                state.teams && state.teams.find(team => team._id === teamId)
-            }
-        }
-    },
-    getGameTeams(state) {
-        return (gameId) => {
-            state.teams && state.teams.filter(team => team.games.includes(gameId))
-        }
+            return (teamId) => state.teams && state.teams.find(team => team._id === teamId)
+        },
+        getGameTeams(state) {
+            return (gameId) => state.teams && state.teams.filter(team => team.games.includes(gameId))
+        },
     },
 }
