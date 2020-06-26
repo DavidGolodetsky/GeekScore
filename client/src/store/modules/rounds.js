@@ -64,7 +64,7 @@ export default {
     },
     getters: {
         getRounds(state) {
-            return (query) => {
+            return query => {
                 if (state.rounds) {
                     const teamRounds = state.rounds.filter(round => round.teamId === query.teamId)
                     return teamRounds.filter(round => round.gameId === query.gameId)
