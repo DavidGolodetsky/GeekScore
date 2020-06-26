@@ -65,7 +65,8 @@
             "allowFirstLine": false
           }
         }
-      ]
+      ],
+      "vue/singleline-html-element-content-newline": "off"
     },
     "parserOptions": {
       "parser": "babel-eslint"

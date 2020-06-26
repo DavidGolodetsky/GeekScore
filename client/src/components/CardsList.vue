@@ -4,21 +4,21 @@
       <v-col sm="6" md="4" cols="12">
         <v-text-field
           v-if="items.length > 3"
+          v-model="search"
           clearable
           prepend-icon="mdi-magnify"
           dark
           label="Search"
-          v-model="search"
-        ></v-text-field>
+        />
       </v-col>
     </v-row>
     <v-row>
-      <v-col sm="6" md="4" cols="12" v-for="item in filteredItems" :key="item._id" class="mb-6">
+      <v-col v-for="item in filteredItems" :key="item._id" sm="6" md="4" cols="12" class="mb-6">
         <v-lazy :options="{ threshold: 0.5 }" min-height="200" transition="fade-transition">
           <!-- TODO:decouple -->
           <v-card
-            dark
             :key="item._id"
+            dark
             raised
             class="mx-auto app-card"
             :aria-describedby="item.name"
@@ -30,13 +30,13 @@
                   <slot name="action" :item="item" />
                 </v-card-title>
               </div>
-              <v-list dense disabled v-if="item.players" class="players">
+              <v-list v-if="item.players" dense disabled class="players">
                 <v-list-item-group>
                   <v-list-item v-for="{name} in item.players" :key="name">
                     <v-list-item-icon>
-                      <v-icon v-text="'mdi-account'"></v-icon>
+                      <v-icon v-text="'mdi-account'" />
                     </v-list-item-icon>
-                    <v-list-item-content v-text="name"></v-list-item-content>
+                    <v-list-item-content v-text="name" />
                   </v-list-item>
                 </v-list-item-group>
               </v-list>
@@ -61,21 +61,21 @@
                         :aria-label="item.name"
                         text
                         fab
-                        @click.stop
                         color="#fff"
+                        @click.stop
                       >
                         <v-icon dark>mdi-{{ action.icon }}</v-icon>
                       </v-btn>
                     </template>
                     <v-btn
+                      v-if="items.length > 1"
                       class="px-0 mx-1"
                       small
                       text
                       aria-label="Favorite"
                       fab
-                      v-if="items.length > 1"
-                      @click.stop.prevent="favorite(item)"
                       :color="item.favorite ? 'error' : '#fff'"
+                      @click.stop.prevent="favorite(item)"
                     >
                       <v-icon dark>mdi-heart</v-icon>
                     </v-btn>
@@ -83,7 +83,7 @@
                 </div>
                 <template #placeholder>
                   <v-row class="fill-height ma-0" align="center" justify="center">
-                    <v-progress-circular indeterminate color="secondary"></v-progress-circular>
+                    <v-progress-circular indeterminate color="secondary" />
                   </v-row>
                 </template>
               </v-img>
