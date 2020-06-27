@@ -1,22 +1,18 @@
 <template>
   <the-dialog activator-icon="plus" header="Add new game" :submit-logic="onSubmit">
     <v-text-field
+      v-model.trim="name"
       clearable
-      :rules="fieldRules"
+      :rules="standardField"
       prepend-icon="mdi-dice-multiple"
       label="Name"
-      v-model.trim="name"
-    ></v-text-field>
-    <v-switch v-model="coop" label="Cooperative" color="secondary" hide-details></v-switch>
+    />
+    <v-switch v-model="coop" label="Cooperative" color="secondary" hide-details />
   </the-dialog>
 </template>
 
 <script>
-import {
-  requiredField,
-  onlyWhitespaces,
-  tooLongField
-} from "@/utils/validations";
+import { standardField } from "@/utils/validations";
 import { mapActions } from "vuex";
 // TODO:refactored
 export default {
@@ -24,7 +20,7 @@ export default {
     return {
       name: "",
       coop: false,
-      fieldRules: [requiredField, tooLongField, onlyWhitespaces]
+      fieldRules: standardField
     };
   },
   methods: {

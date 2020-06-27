@@ -6,40 +6,35 @@
     :submit-logic="onSubmit"
   >
     <v-text-field
+      v-model.trim="name"
       clearable
       :rules="fieldRules"
       prepend-icon="mdi-account-group"
       label="Name"
-      v-model.trim="name"
-    ></v-text-field>
+    />
     <v-select
       prepend-icon="mdi-account-multiple-plus"
       :rules="selectRules"
       :items="numberOfPlayers"
-      @change="setPlayers"
       label="Number of players"
-    ></v-select>
+      @change="setPlayers"
+    />
     <v-text-field
       v-for="(player, i) in players"
+      :key="i"
       v-model.trim="player.name"
       :readonly="isMe(player)"
       :clearable="!isMe(player)"
       prepend-icon="mdi-account"
       :rules="playerRules"
-      :key="i"
       :label="`Player #${i + 1}`"
-    ></v-text-field>
-    <v-switch v-if="!game.coop" v-model="coop" label="Cooperative" color="secondary" hide-details></v-switch>
+    />
+    <v-switch v-if="!game.coop" v-model="coop" label="Cooperative" color="secondary" hide-details />
   </the-dialog>
 </template>
 
 <script>
-import {
-  requiredField,
-  onlyWhitespaces,
-  tooLongField,
-  uniqueField
-} from "@/utils/validations";
+import { requiredField, standardField } from "@/utils/validations";
 import { mapActions, mapGetters } from "vuex";
 
 export default {
@@ -55,8 +50,8 @@ export default {
       coop: false,
       numberOfPlayers: [1, 2, 3, 4, 5, 6, 7, 8],
       players: null,
-      fieldRules: [requiredField, tooLongField, onlyWhitespaces],
-      playerRules: [requiredField, tooLongField, onlyWhitespaces, uniqueField],
+      fieldRules: standardField,
+      playerRules: standardField,
       selectRules: [requiredField]
     };
   },

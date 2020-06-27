@@ -9,26 +9,26 @@
     <v-text-field
       v-for="field in fields"
       :key="field.label"
+      v-model.trim="field.value"
       clearable
       :rules="field.rules"
       :prepend-icon="`mdi-${field.icon}`"
       :label="field.label"
-      v-model.trim="field.value"
-    ></v-text-field>
+    />
     <v-img
       v-if="fields.imageUrl.value"
       :src="fields.imageUrl.value"
       :alt="fields.name.value"
       height="200"
       contain
-    ></v-img>
-    <v-switch v-model="isDelete" label="Delete game" color="error" hide-details></v-switch>
+    />
+    <v-switch v-model="isDelete" label="Delete game" color="error" hide-details />
   </the-dialog>
 </template>
 
 <script>
 import {
-  requiredField,
+  standardField,
   onlyWhitespaces,
   tooLongField,
   linkField
@@ -46,14 +46,13 @@ export default {
   data() {
     return {
       isDelete: false,
-      fieldRules: [requiredField, tooLongField, onlyWhitespaces],
       linkRules: [onlyWhitespaces, tooLongField, linkField],
       fields: {
         name: {
           label: "Name",
           icon: "dice-multiple",
           value: this.game.name,
-          rules: this.fieldRules
+          rules: standardField
         },
         bggURL: {
           label: "Board geek game URL",

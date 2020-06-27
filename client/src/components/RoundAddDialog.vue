@@ -5,27 +5,27 @@
         <v-col cols="6">
           <v-radio-group
             v-if="team.coop"
+            v-model="result"
             label="Result:"
             class="mb-4"
             :rules="fieldRules"
-            v-model="result"
           >
-            <v-radio label="Defeat" value="DEFEAT"></v-radio>
-            <v-radio label="Victory" value="VICTORY"></v-radio>
+            <v-radio label="Defeat" value="DEFEAT" />
+            <v-radio label="Victory" value="VICTORY" />
           </v-radio-group>
-          <v-radio-group label="Result:" v-else class="mb-4" :rules="fieldRules" v-model="result">
-            <v-radio v-for="{name} in team.players" :key="name" :label="name" :value="name"></v-radio>
-            <v-radio label="Tie" value="tie"></v-radio>
+          <v-radio-group v-else v-model="result" label="Result:" class="mb-4" :rules="fieldRules">
+            <v-radio v-for="{name} in team.players" :key="name" :label="name" :value="name" />
+            <v-radio label="Tie" value="tie" />
           </v-radio-group>
         </v-col>
         <v-col cols="6">
           <v-radio-group
             v-if="team.players.length > 1"
+            v-model="turn"
             label="First turn:"
             class="mb-4"
-            v-model="turn"
           >
-            <v-radio v-for="{name} in team.players" :key="name" :label="name" :value="name"></v-radio>
+            <v-radio v-for="{name} in team.players" :key="name" :label="name" :value="name" />
           </v-radio-group>
         </v-col>
       </v-row>
@@ -46,32 +46,28 @@
               prepend-icon="mdi-calendar"
               readonly
               v-on="on"
-            ></v-text-field>
+            />
           </template>
-          <v-date-picker v-model="date" @input="datepicker = false"></v-date-picker>
+          <v-date-picker v-model="date" @input="datepicker = false" />
         </v-menu>
       </v-row>
       <v-row>
         <v-textarea
+          v-model.trim="comment"
           class="comment"
           label="Comment"
-          v-model.trim="comment"
           auto-grow
           filled
           clearable
           prepend-icon="mdi-comment"
-        ></v-textarea>
+        />
       </v-row>
     </the-dialog>
   </section>
 </template>
 
 <script>
-import {
-  requiredField,
-  tooLongField,
-  onlyWhitespaces
-} from "@/utils/validations";
+import { standardField } from "@/utils/validations";
 import { mapActions, mapGetters } from "vuex";
 export default {
   props: {
@@ -91,7 +87,7 @@ export default {
       turn: "",
       result: null,
       date: new Date().toISOString().substr(0, 10),
-      fieldRules: [requiredField, tooLongField, onlyWhitespaces]
+      fieldRules: standardField
     };
   },
   computed: {

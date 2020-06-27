@@ -6,17 +6,13 @@
     simple
     :submit-logic="onSubmit"
   >
-    <v-text-field clearable :rules="fieldRules" label="Name" v-model="name"></v-text-field>
-    <v-switch v-model="isDelete" label="Delete team" color="error" hide-details></v-switch>
+    <v-text-field v-model="name" clearable :rules="fieldRules" label="Name" />
+    <v-switch v-model="isDelete" label="Delete team" color="error" hide-details />
   </the-dialog>
 </template>
 
 <script>
-import {
-  requiredField,
-  onlyWhitespaces,
-  tooLongField
-} from "@/utils/validations";
+import { standardField } from "@/utils/validations";
 import { mapActions } from "vuex";
 
 export default {
@@ -30,7 +26,7 @@ export default {
     return {
       name: this.team.name,
       isDelete: false,
-      fieldRules: [requiredField, tooLongField, onlyWhitespaces]
+      fieldRules: standardField
     };
   },
   methods: {
