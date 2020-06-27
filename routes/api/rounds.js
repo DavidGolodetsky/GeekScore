@@ -17,7 +17,6 @@ router.post('/', async (req, res) => {
     try {
         const newRound = await round.save();
         res.status(201).json(newRound);
-        console.log(newRound)
     } catch (err) {
         res.status(400).json({ message: err.message });
     }

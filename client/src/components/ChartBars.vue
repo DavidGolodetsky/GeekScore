@@ -15,8 +15,7 @@ export default {
   },
   watch: {
     rounds(value) {
-      value && this.setChart();
-      this._chart.destroy();
+      value ? this.setChart() : this._chart.destroy();
     }
   },
   mounted() {
