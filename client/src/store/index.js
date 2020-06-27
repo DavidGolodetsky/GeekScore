@@ -2,15 +2,13 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import games from "./modules/games"
 import teams from "./modules/teams"
-// TODO:rename to users?
 import user from "./modules/user"
 
 
 Vue.use(Vuex)
 
 const store = new Vuex.Store({
-  // TODO:  uncomment and fix issues
-  // strict: process.env.NODE_ENV !== 'production',
+  strict: process.env.NODE_ENV !== 'production',
 
   modules: {
     user,

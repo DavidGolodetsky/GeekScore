@@ -1,6 +1,5 @@
 @import "./_variables";
 
-
 [v-cloak] {
   display: none;
 }
@@ -15,14 +14,16 @@ a {
   list-style: none;
 }
 
-
 .app-headline {
   color: $secondary;
   font-size: 25px;
   user-select: none;
 }
 
-
+.error-message {
+  color: $error;
+  font-size: 12px;
+}
 
 .app {
   .v-main__wrap {
@@ -80,7 +81,7 @@ a {
   .theme--dark.v-btn:not(.v-btn--flat):not(.v-btn--text):not(.v-btn--outlined).submit-btn {
     background-color: $secondary;
   }
-  
+
   .button-text {
     text-transform: uppercase;
     font-size: 12px;

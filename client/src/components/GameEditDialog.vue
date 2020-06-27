@@ -27,12 +27,7 @@
 </template>
 
 <script>
-import {
-  standardField,
-  onlyWhitespaces,
-  tooLongField,
-  linkField
-} from "@/utils/validations";
+import { standardField, tooLongField, linkField } from "@/utils/validations";
 import { mapActions } from "vuex";
 
 export default {
@@ -46,7 +41,6 @@ export default {
   data() {
     return {
       isDelete: false,
-      linkRules: [onlyWhitespaces, tooLongField, linkField],
       fields: {
         name: {
           label: "Name",
@@ -57,26 +51,26 @@ export default {
         bggURL: {
           label: "Board geek game URL",
           icon: "cards",
-          value: this.game.bggURL || "",
-          rules: this.linkRules
+          value: this.game.bggURL,
+          rules: [tooLongField, linkField]
         },
         melodiceURL: {
           label: "Melodice URL",
           icon: "music",
-          value: this.game.melodiceURL || "",
-          rules: this.linkRules
+          value: this.game.melodiceURL,
+          rules: [tooLongField, linkField]
         },
         rulesURL: {
           label: "Rules URL",
           icon: "book-open-variant",
-          value: this.game.rulesURL || "",
-          rules: this.linkRules
+          value: this.game.rulesURL,
+          rules: [tooLongField, linkField]
         },
         imageUrl: {
           label: "Image URL",
           icon: "image",
           value: this.game.imageUrl,
-          rules: this.linkRules
+          rules: [tooLongField, linkField]
         }
       }
     };

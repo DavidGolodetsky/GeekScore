@@ -3,7 +3,7 @@
     <v-text-field
       v-model.trim="name"
       clearable
-      :rules="standardField"
+      :rules="fieldRules"
       prepend-icon="mdi-dice-multiple"
       label="Name"
     />

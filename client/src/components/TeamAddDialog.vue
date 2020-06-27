@@ -23,8 +23,8 @@
       v-for="(player, i) in players"
       :key="i"
       v-model.trim="player.name"
-      :readonly="isMe(player)"
-      :clearable="!isMe(player)"
+      :readonly="isMe"
+      :clearable="!isMe"
       prepend-icon="mdi-account"
       :rules="playerRules"
       :label="`Player #${i + 1}`"
@@ -59,7 +59,19 @@ export default {
     ...mapGetters("games", ["getGame"]),
     game() {
       return this.getGame(this.gameId);
+    },
+    isMe() {
+      return this.players.length === 1 && this.players[0].name === "Me";
     }
+    // TODO:finalize
+    // isUniqueName() {
+    //   if (this.players) {
+    //     const lastName = this.players[this.players.length - 1];
+    //     let pl = this.players.filter(player => player.name === lastName);
+    //     return pl.length >= 2 && "This field should be unique";
+    //   }
+    //   return "";
+    // }
   },
   methods: {
     ...mapActions("teams", ["createTeam"]),
@@ -70,9 +82,6 @@ export default {
         this.players.push(player);
       }
       event === 1 ? (this.coop = true) : "";
-    },
-    isMe(player) {
-      return player.name === "Me" ? true : false;
     },
     setCoop() {
       let coop;
