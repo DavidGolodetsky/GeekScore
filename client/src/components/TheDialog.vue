@@ -20,7 +20,7 @@
             <v-icon dark>mdi-close</v-icon>
           </v-btn>
         </v-card-title>
-        <v-form v-model="valid" lazy-validation ref="form" @submit.prevent="onSubmit">
+        <v-form v-model="valid" ref="form" @submit.prevent="onSubmit">
           <v-card-text>
             <v-container>
               <slot />
@@ -28,8 +28,20 @@
           </v-card-text>
           <v-card-actions class="footer">
             <v-spacer />
-            <v-btn color="secondary darken-1" class="mr-2" outlined @click="close">Cancel</v-btn>
-            <v-btn color="secondary darken-1" outlined type="submit" :disabled="!valid">Submit</v-btn>
+            <v-btn
+              color="secondary darken-1"
+              class="mr-2"
+              outlined
+              @click="close"
+              >Cancel</v-btn
+            >
+            <v-btn
+              color="secondary darken-1"
+              outlined
+              type="submit"
+              :disabled="!valid"
+              >Submit</v-btn
+            >
           </v-card-actions>
         </v-form>
       </v-card>
@@ -42,29 +54,29 @@ export default {
   props: {
     activatorIcon: {
       type: String,
-      required: true
+      required: true,
     },
     header: {
       type: String,
-      required: true
+      required: true,
     },
     color: {
       type: String,
-      default: "secondary"
+      default: "secondary",
     },
     submitLogic: {
       type: Function,
-      required: true
+      required: true,
     },
     simple: {
-      type: Boolean
-    }
+      type: Boolean,
+    },
   },
   data() {
     return {
       dialog: false,
-      valid: true,
-      renderDialog: false
+      valid: false,
+      renderDialog: false,
     };
   },
   watch: {
@@ -74,20 +86,18 @@ export default {
           ? (this.renderDialog = true)
           : setTimeout((this.renderDialog = false), 1000);
       },
-      immediate: true
-    }
+      immediate: true,
+    },
   },
   methods: {
     onSubmit() {
-      if (this.valid) {
-        this.submitLogic();
-        this.close();
-      }
+      this.submitLogic();
+      this.close();
     },
     close() {
       this.dialog = false;
-    }
-  }
+    },
+  },
 };
 </script>
 

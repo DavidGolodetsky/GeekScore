@@ -1,13 +1,13 @@
 <template>
   <section class="login-form mt-12">
     <v-card raised outlined dark class="auth-card">
-      <v-form v-model="valid" lazy-validation ref="form" @submit.prevent="onSubmit">
+      <v-form ref="form" v-model="valid" @submit.prevent="onSubmit">
         <div class="d-flex align-items-center">
-          <v-icon class="mr-3">{{`mdi-${formProps.icon}`}}</v-icon>
+          <v-icon class="mr-3">{{ `mdi-${formProps.icon}` }}</v-icon>
           <h3 class="app-headline">{{ formProps.title }}</h3>
         </div>
         <v-card-text>
-          <div id="firebaseui-auth-container"></div>
+          <div id="firebaseui-auth-container" />
           <div id="loader" class="text-center">
             <v-progress-circular size="30" indeterminate color="secondary" />
           </div>
@@ -15,47 +15,50 @@
             <span class="or">OR</span>
           </div>
           <v-text-field
+            v-model.trim="email"
             clearable
             label="Email"
             type="email"
             prepend-icon="mdi-email"
-            v-model.trim="email"
             :rules="EmailRules"
-            required
           />
           <v-text-field
+            v-model.trim="password"
             :type="showPassword ? 'text' : 'password'"
             label="Password"
             prepend-icon="mdi-lock"
             :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
-            @click:append="showPassword = !showPassword"
             :rules="passwordRules"
-            required
-            v-model.trim="password"
+            @click:append="showPassword = !showPassword"
           />
           <v-text-field
-            v-if="formProps.signupMode"
+            v-if="formProps.signUp"
+            v-model.trim="confirmPassword"
             :type="showPassword ? 'text' : 'password'"
             label="Confirm password"
             prepend-icon="mdi-lock"
             :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
-            @click:append="showPassword = !showPassword"
             :rules="comparePasswords"
-            required
-            v-model.trim="confirmPassword"
+            @click:append="showPassword = !showPassword"
           />
         </v-card-text>
-        <v-divider></v-divider>
+        <v-divider />
         <v-card-actions>
-          <v-btn class="submit-btn" ripple type="submit" :disabled="!valid">Submit</v-btn>
+          <v-btn class="submit-btn" ripple type="submit" :disabled="!valid">
+            Submit
+          </v-btn>
         </v-card-actions>
       </v-form>
       <div class="text-center mb-3">
-        <router-link :to="{ name: 'resetPass' }" class="link">Forgot password?</router-link>
+        <router-link :to="{ name: 'resetPass' }" class="link">
+          Forgot password?
+        </router-link>
       </div>
       <div class="text-center mb-3">
         <span class="mr-3">{{ formProps.redirectText }}</span>
-        <router-link :to="formProps.redirectLink" class="link">{{ formProps.redirectLinkText }}</router-link>
+        <router-link :to="formProps.redirectLink" class="link">
+          {{ formProps.redirectLinkText }}
+        </router-link>
       </div>
     </v-card>
   </section>
@@ -68,36 +71,36 @@ import {
   emailField,
   shortPassword,
   onlyWhitespaces,
-  requiredField
+  requiredField,
 } from "@/utils/validations";
 
 export default {
   props: {
     formProps: {
       type: Object,
-      required: true
-    }
+      required: true,
+    },
   },
   data() {
     return {
-      valid: true,
+      valid: false,
       showPassword: false,
       password: "",
       confirmPassword: "",
       email: "",
       EmailRules: [requiredField, emailField],
-      passwordRules: [requiredField, shortPassword, onlyWhitespaces]
+      passwordRules: [requiredField, shortPassword, onlyWhitespaces],
     };
   },
   computed: {
     comparePasswords() {
       return [
-        this.password === this.confirmPassword || "Passwords don't match"
+        this.password === this.confirmPassword || "Passwords don't match",
       ];
     },
     loginMethod() {
       return this.formProps.signupMode ? this.signUpUser : this.signInUser;
-    }
+    },
   },
   mounted() {
     fbStart();
@@ -108,11 +111,11 @@ export default {
     onSubmit() {
       const userInfo = {
         email: this.email,
-        password: this.password
+        password: this.password,
       };
-      this.valid && this.loginMethod(userInfo);
-    }
-  }
+      this.loginMethod(userInfo);
+    },
+  },
 };
 </script>
 

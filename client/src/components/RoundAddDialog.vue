@@ -1,6 +1,10 @@
 <template>
   <section class="round-add">
-    <the-dialog activator-icon="plus" header="Add new round" :submit-logic="onSubmit">
+    <the-dialog
+      activator-icon="plus"
+      header="Add new round"
+      :submit-logic="onSubmit"
+    >
       <v-row>
         <v-col cols="6">
           <v-radio-group
@@ -8,13 +12,24 @@
             v-model="result"
             label="Result:"
             class="mb-4"
-            :rules="fieldRules"
+            :rules="resultRules"
           >
             <v-radio label="Defeat" value="DEFEAT" />
             <v-radio label="Victory" value="VICTORY" />
           </v-radio-group>
-          <v-radio-group v-else v-model="result" label="Result:" class="mb-4" :rules="fieldRules">
-            <v-radio v-for="{name} in team.players" :key="name" :label="name" :value="name" />
+          <v-radio-group
+            v-else
+            v-model="result"
+            :rules="resultRules"
+            label="Result:"
+            class="mb-4"
+          >
+            <v-radio
+              v-for="{ name } in team.players"
+              :key="name"
+              :label="name"
+              :value="name"
+            />
             <v-radio label="Tie" value="tie" />
           </v-radio-group>
         </v-col>
@@ -25,7 +40,12 @@
             label="First turn:"
             class="mb-4"
           >
-            <v-radio v-for="{name} in team.players" :key="name" :label="name" :value="name" />
+            <v-radio
+              v-for="{ name } in team.players"
+              :key="name"
+              :label="name"
+              :value="name"
+            />
           </v-radio-group>
         </v-col>
       </v-row>
@@ -38,10 +58,9 @@
           offset-y
           min-width="290px"
         >
-          <template #activator-icon="{ on }">
+          <template #activator="{ on }">
             <v-text-field
               v-model="date"
-              :rules="fieldRules"
               label="Date"
               prepend-icon="mdi-calendar"
               readonly
@@ -67,18 +86,18 @@
 </template>
 
 <script>
-import { standardField } from "@/utils/validations";
+import { requiredField } from "@/utils/validations";
 import { mapActions, mapGetters } from "vuex";
 export default {
   props: {
     teamId: {
       type: String,
-      required: true
+      required: true,
     },
     gameId: {
       type: String,
-      required: true
-    }
+      required: true,
+    },
   },
   data() {
     return {
@@ -87,14 +106,14 @@ export default {
       turn: "",
       result: null,
       date: new Date().toISOString().substr(0, 10),
-      fieldRules: standardField
+      resultRules: [requiredField],
     };
   },
   computed: {
     ...mapGetters("teams", ["getTeam"]),
     team() {
       return this.getTeam(this.teamId);
-    }
+    },
   },
   methods: {
     ...mapActions("rounds", ["createRound"]),
@@ -109,12 +128,12 @@ export default {
         gameId: this.gameId,
         teamId: this.teamId,
         comment: this.comment,
-        winner: this.result.toLowerCase()
+        winner: this.result.toLowerCase(),
       };
       if (this.team.coop) round.result = this.result;
       if (this.result === "tie") round.tie = "TIE";
       return round;
-    }
-  }
+    },
+  },
 };
 </script>

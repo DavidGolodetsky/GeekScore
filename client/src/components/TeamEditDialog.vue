@@ -6,8 +6,13 @@
     simple
     :submit-logic="onSubmit"
   >
-    <v-text-field v-model="name" clearable :rules="fieldRules" label="Name" />
-    <v-switch v-model="isDelete" label="Delete team" color="error" hide-details />
+    <v-text-field v-model="name" clearable :rules="nameRules" label="Name" />
+    <v-switch
+      v-model="isDelete"
+      label="Delete team"
+      color="error"
+      hide-details
+    />
   </the-dialog>
 </template>
 
@@ -19,14 +24,14 @@ export default {
   props: {
     team: {
       type: Object,
-      required: true
-    }
+      required: true,
+    },
   },
   data() {
     return {
       name: this.team.name,
       isDelete: false,
-      fieldRules: standardField
+      nameRules: standardField,
     };
   },
   methods: {
@@ -39,10 +44,10 @@ export default {
       const team = {
         _id: this.team._id,
         gameId: this.team.gameId,
-        name: this.name
+        name: this.name,
       };
       this.updateTeam(team);
-    }
-  }
+    },
+  },
 };
 </script>

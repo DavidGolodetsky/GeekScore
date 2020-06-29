@@ -1,13 +1,22 @@
 <template>
-  <the-dialog activator-icon="plus" header="Add new game" :submit-logic="onSubmit">
+  <the-dialog
+    activator-icon="plus"
+    header="Add new game"
+    :submit-logic="onSubmit"
+  >
     <v-text-field
       v-model.trim="name"
       clearable
-      :rules="fieldRules"
+      :rules="nameRules"
       prepend-icon="mdi-dice-multiple"
       label="Name"
     />
-    <v-switch v-model="coop" label="Cooperative" color="secondary" hide-details />
+    <v-switch
+      v-model="coop"
+      label="Cooperative"
+      color="secondary"
+      hide-details
+    />
   </the-dialog>
 </template>
 
@@ -20,7 +29,7 @@ export default {
     return {
       name: "",
       coop: false,
-      fieldRules: standardField
+      nameRules: standardField,
     };
   },
   methods: {
@@ -28,10 +37,10 @@ export default {
     onSubmit() {
       const game = {
         coop: this.coop,
-        name: this.name
+        name: this.name,
       };
       this.createGame(game);
-    }
-  }
+    },
+  },
 };
 </script>

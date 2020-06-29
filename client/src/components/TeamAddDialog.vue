@@ -8,7 +8,7 @@
     <v-text-field
       v-model.trim="name"
       clearable
-      :rules="fieldRules"
+      :rules="nameRules"
       prepend-icon="mdi-account-group"
       label="Name"
     />
@@ -29,7 +29,13 @@
       :rules="playerRules"
       :label="`Player #${i + 1}`"
     />
-    <v-switch v-if="!game.coop" v-model="coop" label="Cooperative" color="secondary" hide-details />
+    <v-switch
+      v-if="!game.coop"
+      v-model="coop"
+      label="Cooperative"
+      color="secondary"
+      hide-details
+    />
   </the-dialog>
 </template>
 
@@ -41,8 +47,8 @@ export default {
   props: {
     gameId: {
       type: String,
-      required: true
-    }
+      required: true,
+    },
   },
   data() {
     return {
@@ -50,9 +56,9 @@ export default {
       coop: false,
       numberOfPlayers: [1, 2, 3, 4, 5, 6, 7, 8],
       players: null,
-      fieldRules: standardField,
+      nameRules: standardField,
       playerRules: standardField,
-      selectRules: [requiredField]
+      selectRules: [requiredField],
     };
   },
   computed: {
@@ -62,7 +68,7 @@ export default {
     },
     isMe() {
       return this.players.length === 1 && this.players[0].name === "Me";
-    }
+    },
     // TODO:finalize
     // isUniqueName() {
     //   if (this.players) {
@@ -96,10 +102,10 @@ export default {
         gameName: this.game.name,
         name: this.name,
         coop: this.setCoop(),
-        players: this.players
+        players: this.players,
       };
       this.createTeam(team);
-    }
-  }
+    },
+  },
 };
 </script>

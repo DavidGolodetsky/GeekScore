@@ -61,7 +61,7 @@
         {
           "singleline": 10,
           "multiline": {
-            "max": 1,
+            "max": 10,
             "allowFirstLine": false
           }
         }
