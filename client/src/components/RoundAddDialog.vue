@@ -14,8 +14,8 @@
             class="mb-4"
             :rules="resultRules"
           >
-            <v-radio label="Defeat" value="DEFEAT" />
             <v-radio label="Victory" value="VICTORY" />
+            <v-radio label="Defeat" value="DEFEAT" />
           </v-radio-group>
           <v-radio-group
             v-else
