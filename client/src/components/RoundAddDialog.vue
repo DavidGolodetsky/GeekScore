@@ -1,35 +1,10 @@
 <template>
   <section class="round-add">
-    <the-dialog
-      activator-icon="plus"
-      header="Add new round"
-      :submit-logic="onSubmit"
-    >
+    <the-dialog activator-icon="plus" header="Add new round" :submit-logic="onSubmit">
       <v-row>
         <v-col cols="6">
-          <v-radio-group
-            v-if="team.coop"
-            v-model="result"
-            label="Result:"
-            class="mb-4"
-            :rules="resultRules"
-          >
-            <v-radio label="Victory" value="VICTORY" />
-            <v-radio label="Defeat" value="DEFEAT" />
-          </v-radio-group>
-          <v-radio-group
-            v-else
-            v-model="result"
-            :rules="resultRules"
-            label="Result:"
-            class="mb-4"
-          >
-            <v-radio
-              v-for="{ name } in team.players"
-              :key="name"
-              :label="name"
-              :value="name"
-            />
+          <v-radio-group v-model="result" :rules="resultRules" label="Result:" class="mb-4">
+            <v-radio v-for="option in resultOptions" :key="option" :label="option" :value="option" />
             <v-radio label="Tie" value="tie" />
           </v-radio-group>
         </v-col>
@@ -40,12 +15,7 @@
             label="First turn:"
             class="mb-4"
           >
-            <v-radio
-              v-for="{ name } in team.players"
-              :key="name"
-              :label="name"
-              :value="name"
-            />
+            <v-radio v-for="{ name } in team.players" :key="name" :label="name" :value="name" />
           </v-radio-group>
         </v-col>
       </v-row>
@@ -92,12 +62,12 @@ export default {
   props: {
     teamId: {
       type: String,
-      required: true,
+      required: true
     },
     gameId: {
       type: String,
-      required: true,
-    },
+      required: true
+    }
   },
   data() {
     return {
@@ -106,7 +76,7 @@ export default {
       turn: "",
       result: null,
       date: new Date().toISOString().substr(0, 10),
-      resultRules: [requiredField],
+      resultRules: [requiredField]
     };
   },
   computed: {
@@ -114,6 +84,10 @@ export default {
     team() {
       return this.getTeam(this.teamId);
     },
+    resultOptions() {
+      this.team.coop && ["Victory", "Defeat"];
+      return this.team.players.map(player => player.name);
+    }
   },
   methods: {
     ...mapActions("rounds", ["createRound"]),
@@ -128,12 +102,12 @@ export default {
         gameId: this.gameId,
         teamId: this.teamId,
         comment: this.comment,
-        winner: this.result.toLowerCase(),
+        winner: this.result.toLowerCase()
       };
       if (this.team.coop) round.result = this.result;
       if (this.result === "tie") round.tie = "TIE";
       return round;
-    },
-  },
+    }
+  }
 };
 </script>

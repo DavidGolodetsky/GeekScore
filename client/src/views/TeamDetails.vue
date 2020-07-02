@@ -11,6 +11,7 @@
       <v-tabs v-model="tab" background-color="primary" centered dark icons-and-text>
         <v-tabs-slider color="secondary" />
         <v-tab v-for="(tabItem, i) in tabs" :key="tabItem.name" :href="`#tab-${i}`">
+          <span class="mt-2">{{ tabItem.name }}</span>
           <v-icon>{{ `mdi-${tabItem.icon}` }}</v-icon>
         </v-tab>
       </v-tabs>
