@@ -85,7 +85,7 @@ export default {
       return this.getTeam(this.teamId);
     },
     resultOptions() {
-      this.team.coop && ["Victory", "Defeat"];
+      if (this.team.coop) return ["Victory", "Defeat"];
       return this.team.players.map(player => player.name);
     }
   },
@@ -104,7 +104,7 @@ export default {
         comment: this.comment,
         winner: this.result.toLowerCase()
       };
-      if (this.team.coop) round.result = this.result;
+      if (this.team.coop) round.result = this.result.toUpperCase();
       if (this.result === "tie") round.tie = "TIE";
       return round;
     }
