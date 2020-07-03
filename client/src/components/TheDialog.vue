@@ -79,7 +79,6 @@ export default {
   },
   methods: {
     onSubmit() {
-      window.navigator.vibrate(200);
       this.submitLogic();
       this.close();
     },

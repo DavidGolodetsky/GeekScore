@@ -26,6 +26,7 @@ export default {
     };
   },
   mounted() {
+    window.navigator.vibrate(300);
     this.autoHide();
   },
   methods: {
