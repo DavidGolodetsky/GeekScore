@@ -2,15 +2,15 @@
   <section class="the-table">
     <v-card class="mb-4">
       <v-card-title class="table-title">
-        <v-spacer class="d-none d-sm-flex"></v-spacer>
+        <v-spacer class="d-none d-sm-flex" />
         <v-text-field
-          class="search pt-0"
           v-model="search"
+          class="search pt-0"
           append-icon="mdi-magnify"
           label="Search"
           single-line
           hide-details
-        ></v-text-field>
+        />
       </v-card-title>
       <v-data-table
         :headers="headers"
@@ -24,7 +24,7 @@
       >
         <template #expanded-item="{ item, headers }">
           <td :colspan="headers.length">
-            <div class="turn" v-if="item.turn">First turn: {{ item.turn }}</div>
+            <div v-if="item.turn" class="turn">First turn: {{ item.turn }}</div>
             <div v-if="item.comment">Comment: {{ item.comment }}</div>
           </td>
         </template>
