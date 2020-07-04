@@ -6,13 +6,14 @@
     simple
     :submit-logic="onSubmit"
   >
-    <v-switch v-model="isDelete" label="Delete round" color="error" hide-details></v-switch>
+    <v-switch v-model="toDelete" label="Delete round" color="error" hide-details />
   </the-dialog>
 </template>
 
 <script>
 import { mapActions } from "vuex";
 export default {
+  // TODO:refactored
   props: {
     round: {
       type: Object,
@@ -21,13 +22,13 @@ export default {
   },
   data() {
     return {
-      isDelete: false
+      toDelete: false
     };
   },
   methods: {
     ...mapActions("rounds", ["deleteRound"]),
     onSubmit() {
-      this.isDelete && this.deleteRound(this.round._id);
+      this.toDelete && this.deleteRound(this.round._id);
     }
   }
 };

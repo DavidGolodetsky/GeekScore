@@ -22,7 +22,7 @@
       height="200"
       contain
     />
-    <v-switch v-model="isDelete" label="Delete game" color="error" hide-details />
+    <v-switch v-model="toDelete" label="Delete game" color="error" hide-details />
   </the-dialog>
 </template>
 
@@ -40,7 +40,7 @@ export default {
   },
   data() {
     return {
-      isDelete: false,
+      toDelete: false,
       fields: {
         name: {
           label: "Name",
@@ -78,7 +78,7 @@ export default {
   methods: {
     ...mapActions("games", ["updateGame", "deleteGame"]),
     onSubmit() {
-      this.isDelete && this.deleteGame(this.game._id);
+      this.toDelete && this.deleteGame(this.game._id);
       this.updateTheGame();
     },
     updateTheGame() {

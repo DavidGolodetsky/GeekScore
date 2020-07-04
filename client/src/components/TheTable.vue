@@ -56,15 +56,15 @@ export default {
   data() {
     return {
       search: "",
-      expanded: []
+      expanded: [],
+      headers: []
     };
   },
-  computed: {
-    headers() {
-      const headers = this.team.players.map(player => ({
-        text: player.name,
-        value: player.name.toLowerCase()
-      }));
+  created() {
+    this.cookHeaders();
+  },
+  methods: {
+    cookHeaders() {
       const fields = [
         this.team.coop
           ? { text: "Result", value: "result" }
@@ -72,8 +72,15 @@ export default {
         { text: "Date", value: "date" },
         { text: "Actions", value: "action", sortable: false }
       ];
-      headers.push(...fields);
-      return headers;
+      if (!this.team.coop) this.countPlayers();
+      this.headers.push(...fields);
+    },
+    countPlayers() {
+      const players = this.team.players.map(player => ({
+        text: player.name,
+        value: player.name.toLowerCase()
+      }));
+      this.headers.push(...players);
     }
   }
 };

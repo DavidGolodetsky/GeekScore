@@ -5,6 +5,12 @@ import RoundAddDialog from "@/components/RoundAddDialog";
 import { VIcon } from "vuetify/lib";
 
 export default {
+  // TODO:refactored
+  components: {
+    GameAddDialog,
+    TeamAddDialog,
+    RoundAddDialog
+  },
   props: {
     title: {
       type: String,
@@ -15,16 +21,15 @@ export default {
       required: true
     },
     icon: {
-      type: String
+      type: String,
+      default: ""
     },
     props: {
-      type: Object
+      type: Object,
+      default() {
+        return {};
+      }
     }
-  },
-  components: {
-    GameAddDialog,
-    TeamAddDialog,
-    RoundAddDialog
   },
   render(h) {
     return h(
