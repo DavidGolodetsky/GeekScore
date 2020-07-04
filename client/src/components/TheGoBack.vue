@@ -4,7 +4,10 @@ import { VIcon } from "vuetify/lib";
 export default {
   functional: true,
   props: {
-    title: String
+    title: {
+      type: String,
+      default: "Back"
+    }
   },
   render(h, ctx) {
     const title = ctx.props.title;

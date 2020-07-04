@@ -28,10 +28,7 @@ const schema = new mongoose.Schema({
     },
     turn: {
         type: String
-    },
-    tie: {
-        type: String
-    },
+    }
 });
 
 module.exports = mongoose.model('Round', schema);

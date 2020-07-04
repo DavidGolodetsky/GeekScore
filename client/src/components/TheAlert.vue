@@ -10,6 +10,7 @@
 import { mapActions } from "vuex";
 
 export default {
+  // TODO:refactored
   props: {
     type: {
       type: String,
@@ -45,10 +46,12 @@ export default {
 
 <style lang="scss">
 .the-alert {
-  .v-alert.warning .v-alert__wrapper,
-  .v-alert.warning .v-icon,
-  .v-alert.warning .v-btn--icon {
-    color: $primary;
+  .v-alert.warning {
+    .v-alert__wrapper,
+    .v-icon,
+    .v-btn--icon {
+      color: $primary;
+    }
   }
 }
 </style>

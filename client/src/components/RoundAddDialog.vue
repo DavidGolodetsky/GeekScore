@@ -5,7 +5,6 @@
         <v-col cols="6">
           <v-radio-group v-model="result" :rules="resultRules" label="Result:" class="mb-4">
             <v-radio v-for="option in resultOptions" :key="option" :label="option" :value="option" />
-            <v-radio label="Tie" value="tie" />
           </v-radio-group>
         </v-col>
         <v-col cols="6">
@@ -86,7 +85,8 @@ export default {
     },
     resultOptions() {
       if (this.team.coop) return ["Victory", "Defeat"];
-      return this.team.players.map(player => player.name);
+      const options = this.team.players.map(player => player.name);
+      return [...options, "Tie"];
     }
   },
   methods: {
@@ -105,7 +105,7 @@ export default {
         winner: this.result.toLowerCase()
       };
       if (this.team.coop) round.result = this.result.toUpperCase();
-      if (this.result === "tie") round.tie = "TIE";
+      // TODO: highlight result, maybe with icon, not VICTORY
       return round;
     }
   }

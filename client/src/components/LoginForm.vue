@@ -44,21 +44,15 @@
         </v-card-text>
         <v-divider />
         <v-card-actions>
-          <v-btn class="submit-btn" ripple type="submit" :disabled="!valid">
-            Submit
-          </v-btn>
+          <v-btn class="submit-btn" ripple type="submit" :disabled="!valid">Submit</v-btn>
         </v-card-actions>
       </v-form>
       <div class="text-center mb-3">
-        <router-link :to="{ name: 'resetPass' }" class="link">
-          Forgot password?
-        </router-link>
+        <router-link :to="{ name: 'resetPass' }" class="link">Forgot password?</router-link>
       </div>
       <div class="text-center mb-3">
         <span class="mr-3">{{ formProps.redirectText }}</span>
-        <router-link :to="formProps.redirectLink" class="link">
-          {{ formProps.redirectLinkText }}
-        </router-link>
+        <router-link :to="formProps.redirectLink" class="link">{{ formProps.redirectLinkText }}</router-link>
       </div>
     </v-card>
   </section>
@@ -67,19 +61,15 @@
 <script>
 import { mapActions } from "vuex";
 import { fbStart } from "@/db";
-import {
-  emailField,
-  shortPassword,
-  onlyWhitespaces,
-  requiredField,
-} from "@/utils/validations";
+import { emailField, standardField, requiredField } from "@/utils/validations";
 
 export default {
+  // TODO:refactored
   props: {
     formProps: {
       type: Object,
-      required: true,
-    },
+      required: true
+    }
   },
   data() {
     return {
@@ -89,18 +79,18 @@ export default {
       confirmPassword: "",
       email: "",
       EmailRules: [requiredField, emailField],
-      passwordRules: [requiredField, shortPassword, onlyWhitespaces],
+      passwordRules: standardField
     };
   },
   computed: {
     comparePasswords() {
       return [
-        this.password === this.confirmPassword || "Passwords don't match",
+        this.password === this.confirmPassword || "Passwords don't match"
       ];
     },
     loginMethod() {
       return this.formProps.signupMode ? this.signUpUser : this.signInUser;
-    },
+    }
   },
   mounted() {
     fbStart();
@@ -111,11 +101,11 @@ export default {
     onSubmit() {
       const userInfo = {
         email: this.email,
-        password: this.password,
+        password: this.password
       };
       this.loginMethod(userInfo);
-    },
-  },
+    }
+  }
 };
 </script>
 

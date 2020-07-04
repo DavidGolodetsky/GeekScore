@@ -7,12 +7,7 @@
     :submit-logic="onSubmit"
   >
     <v-text-field v-model="name" clearable :rules="nameRules" label="Name" />
-    <v-switch
-      v-model="isDelete"
-      label="Delete team"
-      color="error"
-      hide-details
-    />
+    <v-switch v-model="toDelete" label="Delete team" color="error" hide-details />
   </the-dialog>
 </template>
 
@@ -21,33 +16,34 @@ import { standardField } from "@/utils/validations";
 import { mapActions } from "vuex";
 
 export default {
+  // TODO:refactored
   props: {
     team: {
       type: Object,
-      required: true,
-    },
+      required: true
+    }
   },
   data() {
     return {
       name: this.team.name,
-      isDelete: false,
-      nameRules: standardField,
+      toDelete: false,
+      nameRules: standardField
     };
   },
   methods: {
     ...mapActions("teams", ["updateTeam", "deleteTeam"]),
     onSubmit() {
-      this.isDelete && this.deleteTeam(this.team._id);
+      if (this.toDelete) this.deleteTeam(this.team._id);
       this.updateTheTeam();
     },
     updateTheTeam() {
       const team = {
         _id: this.team._id,
         gameId: this.team.gameId,
-        name: this.name,
+        name: this.name
       };
       this.updateTeam(team);
-    },
-  },
+    }
+  }
 };
 </script>
