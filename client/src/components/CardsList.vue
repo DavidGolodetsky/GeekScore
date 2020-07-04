@@ -193,6 +193,7 @@ export default {
       box-shadow: 7px 9px 20px -6px rgba(0, 0, 0, 0.75);
     }
   }
+
   .card-list-name {
     color: $secondary;
   }

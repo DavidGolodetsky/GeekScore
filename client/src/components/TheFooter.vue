@@ -14,7 +14,11 @@
 
 <style scoped lang="scss">
 .the-footer {
-  .footer-text {
+  .container {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    max-width: $app-max-width;
     font-size: 12px;
     @media #{$tablet} {
       font-size: 14px;
