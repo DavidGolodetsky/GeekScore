@@ -37,6 +37,13 @@ a {
     padding-left: 0;
     padding-right: 0;
   }
+
+  .label_text {
+    font-size: 16px;
+    color: rgba(0, 0, 0, 0.6);
+    cursor: pointer;
+  }
+
   .app-container {
     color: #fff;
     max-width: $app-max-width;
@@ -76,6 +83,13 @@ a {
     padding: 16px;
     margin: 40px auto;
     border: none;
+  }
+
+  .row_between {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    align-items: center;
   }
 
   .theme--light.v-btn:not(.v-btn--flat):not(.v-btn--text):not(.v-btn--outlined).submit-btn,

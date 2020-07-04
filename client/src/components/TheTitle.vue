@@ -35,7 +35,7 @@ export default {
     return h(
       "div",
       {
-        class: "d-flex justify-space-between align-center mb-6"
+        class: "row_between mb-6"
       },
       [
         h(

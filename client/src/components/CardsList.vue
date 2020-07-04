@@ -25,7 +25,7 @@
           >
             <router-link :to="setRoute(item._id)">
               <div class="title-wrap">
-                <v-card-title class="d-flex justify-space-between">
+                <v-card-title class="row_between">
                   <span class="card-list-name">{{ item.name }}</span>
                   <slot name="action" :item="item" />
                 </v-card-title>

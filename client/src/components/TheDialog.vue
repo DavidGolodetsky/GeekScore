@@ -4,6 +4,7 @@
       class="px-0"
       :small="simple"
       fab
+      :id="`activator_${activatorText}`"
       aria-label="Open modal"
       :text="simple"
       :color="color"
@@ -11,6 +12,7 @@
     >
       <v-icon dark>mdi-{{ activatorIcon }}</v-icon>
     </v-btn>
+    <label :for="`activator_${activatorText}`" class="label_text">{{ activatorText }}</label>
     <v-dialog v-if="renderDialog" v-model="dialog" max-width="600">
       <v-card class="the-dialog">
         <v-card-title>
@@ -55,6 +57,9 @@ export default {
     submitLogic: {
       type: Function,
       required: true
+    },
+    activatorText: {
+      type: String
     },
     simple: {
       type: Boolean
