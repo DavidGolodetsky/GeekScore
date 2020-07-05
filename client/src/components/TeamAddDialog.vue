@@ -12,7 +12,7 @@
       prepend-icon="mdi-account-group"
       label="Name"
     />
-    <template v-if="!game.coop">
+    <template v-if="!isCoop">
       <v-select
         prepend-icon="mdi-account-multiple-plus"
         :rules="selectRules"
@@ -66,6 +66,9 @@ export default {
     ...mapGetters("games", ["getGame"]),
     game() {
       return this.getGame(this.gameId);
+    },
+    isCoop() {
+      return this.game.coop || this.coop;
     }
   },
   methods: {
@@ -76,7 +79,7 @@ export default {
         let player = { name: "" };
         this.players.push(player);
       }
-      $ev === 1 ? (this.coop = true) : "";
+      if ($ev === 1) this.coop = true;
     },
     isMe(player) {
       return player.name === "Me";
@@ -94,7 +97,7 @@ export default {
         games: [this.gameId],
         gameName: this.game.name,
         name: this.name,
-        coop: this.coop || this.game.coop,
+        coop: this.isCoop,
         players: this.players
       };
       this.createTeam(team);
