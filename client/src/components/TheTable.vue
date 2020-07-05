@@ -40,6 +40,7 @@
 import RoundEditDialog from "@/components/RoundEditDialog";
 
 export default {
+  // TODO:refactor
   components: {
     RoundEditDialog
   },

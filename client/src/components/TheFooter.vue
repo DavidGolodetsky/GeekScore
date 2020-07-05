@@ -14,7 +14,6 @@
 
 <script>
 export default {
-  // TODO:refactored
   data() {
     return {
       copy: ` ${new Date().getFullYear()} — Geek Score`

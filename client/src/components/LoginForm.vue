@@ -64,7 +64,6 @@ import { fbStart } from "@/db";
 import { emailField, standardField, requiredField } from "@/utils/validations";
 
 export default {
-  // TODO:refactored
   props: {
     formProps: {
       type: Object,

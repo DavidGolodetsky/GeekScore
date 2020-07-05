@@ -31,7 +31,6 @@ import { standardField, tooLongField, linkField } from "@/utils/validations";
 import { mapActions } from "vuex";
 
 export default {
-  // TODO:refactored
   props: {
     game: {
       type: Object,

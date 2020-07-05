@@ -13,7 +13,6 @@
 <script>
 import { mapActions } from "vuex";
 export default {
-  // TODO:refactored
   props: {
     round: {
       type: Object,

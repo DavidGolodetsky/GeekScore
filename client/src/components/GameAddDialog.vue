@@ -1,9 +1,5 @@
 <template>
-  <the-dialog
-    activator-icon="plus"
-    header="Add new game"
-    :submit-logic="onSubmit"
-  >
+  <the-dialog activator-icon="plus" header="Add new game" :submit-logic="onSubmit">
     <v-text-field
       v-model.trim="name"
       clearable
@@ -11,25 +7,19 @@
       prepend-icon="mdi-dice-multiple"
       label="Name"
     />
-    <v-switch
-      v-model="coop"
-      label="Cooperative"
-      color="secondary"
-      hide-details
-    />
+    <v-switch v-model="coop" label="Cooperative" color="secondary" hide-details />
   </the-dialog>
 </template>
 
 <script>
 import { standardField } from "@/utils/validations";
 import { mapActions } from "vuex";
-// TODO:refactored
 export default {
   data() {
     return {
       name: "",
       coop: false,
-      nameRules: standardField,
+      nameRules: standardField
     };
   },
   methods: {
@@ -37,10 +27,10 @@ export default {
     onSubmit() {
       const game = {
         coop: this.coop,
-        name: this.name,
+        name: this.name
       };
       this.createGame(game);
-    },
-  },
+    }
+  }
 };
 </script>

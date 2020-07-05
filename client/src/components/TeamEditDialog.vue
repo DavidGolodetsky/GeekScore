@@ -16,7 +16,6 @@ import { standardField } from "@/utils/validations";
 import { mapActions } from "vuex";
 
 export default {
-  // TODO:refactored
   props: {
     team: {
       type: Object,

@@ -5,7 +5,6 @@ import RoundAddDialog from "@/components/RoundAddDialog";
 import { VIcon } from "vuetify/lib";
 
 export default {
-  // TODO:refactored
   components: {
     GameAddDialog,
     TeamAddDialog,

@@ -39,6 +39,7 @@
 
 <script>
 export default {
+  // TODO:refactor
   props: {
     activatorIcon: {
       type: String,

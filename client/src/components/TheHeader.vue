@@ -51,7 +51,6 @@
 import { mapState, mapActions, mapGetters } from "vuex";
 
 export default {
-  // TODO:refactored
   data() {
     return {
       sideNav: false

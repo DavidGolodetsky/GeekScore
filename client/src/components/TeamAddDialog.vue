@@ -12,30 +12,27 @@
       prepend-icon="mdi-account-group"
       label="Name"
     />
-    <v-select
-      prepend-icon="mdi-account-multiple-plus"
-      :rules="selectRules"
-      :items="numberOfPlayers"
-      label="Number of players"
-      @change="setPlayers"
-    />
-    <v-text-field
-      v-for="(player, i) in players"
-      :key="i"
-      v-model.trim="player.name"
-      :readonly="isMe"
-      :clearable="!isMe"
-      prepend-icon="mdi-account"
-      :rules="playerRules"
-      :label="`Player #${i + 1}`"
-    />
-    <v-switch
-      v-if="!game.coop"
-      v-model="coop"
-      label="Cooperative"
-      color="secondary"
-      hide-details
-    />
+    <template v-if="!game.coop">
+      <v-select
+        prepend-icon="mdi-account-multiple-plus"
+        :rules="selectRules"
+        :items="numberOfPlayers"
+        label="Number of players"
+        @change="setPlayers"
+      />
+      <v-text-field
+        v-for="(player, i) in players"
+        :key="i"
+        v-model.trim="player.name"
+        :readonly="isMe(player)"
+        :clearable="!isMe(player)"
+        prepend-icon="mdi-account"
+        :rules="playerRules"
+        :label="`Player #${i + 1}`"
+        @input="isUniqueName"
+      />
+      <v-switch v-model="coop" label="Cooperative" color="secondary" hide-details />
+    </template>
   </the-dialog>
 </template>
 
@@ -47,65 +44,61 @@ export default {
   props: {
     gameId: {
       type: String,
-      required: true,
-    },
+      required: true
+    }
   },
   data() {
     return {
       name: "",
       coop: false,
-      numberOfPlayers: [1, 2, 3, 4, 5, 6, 7, 8],
-      players: null,
+      players: [{ name: "Me" }],
       nameRules: standardField,
       playerRules: standardField,
       selectRules: [requiredField],
+      // Generates number of players from 1 to N
+      numberOfPlayers: Array(8)
+        .join(0)
+        .split(0)
+        .map((v, i) => i + 1)
     };
   },
   computed: {
     ...mapGetters("games", ["getGame"]),
     game() {
       return this.getGame(this.gameId);
-    },
-    isMe() {
-      return this.players.length === 1 && this.players[0].name === "Me";
-    },
-    // TODO:finalize
-    // isUniqueName() {
-    //   if (this.players) {
-    //     const lastName = this.players[this.players.length - 1];
-    //     let pl = this.players.filter(player => player.name === lastName);
-    //     return pl.length >= 2 && "This field should be unique";
-    //   }
-    //   return "";
-    // }
+    }
   },
   methods: {
     ...mapActions("teams", ["createTeam"]),
-    setPlayers(event) {
+    setPlayers($ev) {
       this.players = [{ name: "Me" }];
-      for (let i = 1; i < event; i++) {
+      for (let i = 1; i < $ev; i++) {
         let player = { name: "" };
         this.players.push(player);
       }
-      event === 1 ? (this.coop = true) : "";
+      $ev === 1 ? (this.coop = true) : "";
     },
-    setCoop() {
-      let coop;
-      this.players.length === 1
-        ? (coop = true)
-        : (coop = this.coop || this.game.coop);
-      return coop;
+    isMe(player) {
+      return player.name === "Me";
+    },
+    isUniqueName($ev) {
+      let duplicatedPlayerName = this.players.filter(
+        player => player.name === $ev
+      );
+      const isDuplicated =
+        duplicatedPlayerName.length < 2 || "This field should be unique";
+      this.playerRules = [...this.playerRules, isDuplicated];
     },
     onSubmit() {
       const team = {
         games: [this.gameId],
         gameName: this.game.name,
         name: this.name,
-        coop: this.setCoop(),
-        players: this.players,
+        coop: this.coop || this.game.coop,
+        players: this.players
       };
       this.createTeam(team);
-    },
-  },
+    }
+  }
 };
 </script>

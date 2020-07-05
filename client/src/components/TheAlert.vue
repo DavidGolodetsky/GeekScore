@@ -10,7 +10,6 @@
 import { mapActions } from "vuex";
 
 export default {
-  // TODO:refactored
   props: {
     type: {
       type: String,

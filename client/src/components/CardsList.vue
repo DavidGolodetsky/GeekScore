@@ -97,6 +97,7 @@
 
 <script>
 export default {
+  // TODO:refactor
   props: {
     items: {
       type: Array,
