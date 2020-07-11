@@ -1,6 +1,6 @@
 <template>
   <section class="home-page" aria-labelledby="greeting">
-    <h1 class="app-headline text-center mb-6" id="greeting">Welcome to Geek Score!</h1>
+    <h1 id="greeting" class="app-headline text-center mb-6">Welcome to Geek Score!</h1>
     <v-timeline class="mb-10" dark align-top :dense="$vuetify.breakpoint.smAndDown">
       <v-timeline-item
         v-for="{title, icon, text} in items"
