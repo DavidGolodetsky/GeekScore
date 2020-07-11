@@ -12,8 +12,17 @@ localVue.component(
     'TheDialog', TheDialog
 )
 
+    // TODO:finalize test
+// it('Game Add', async () => {
+//     const wrapper = shallowMount(GameAddDialog, { localVue })
 
-it('Game Add', async () => {
-    const wrapper = shallowMount(GameAddDialog, { localVue })
-    expect(wrapper.exists()).toBe(true)
-})
+//     const commit = jest.fn()
+
+//     const name = "Azul"
+//     const coop = true
+
+//     await actions.createGame({ commit }, { name, coop })
+
+//     expect(commit).toHaveBeenCalledWith(
+//         "CREATE_GAME", { name: "Azul", coop: true })
+// })
