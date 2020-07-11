@@ -23,7 +23,7 @@
       contain
     />
     <scores-table />
-    <v-switch v-model="toDelete" class="mb-4" label="Delete game" color="error" hide-details />
+    <v-switch v-model="toDelete" label="Delete game" color="error" hide-details />
   </the-dialog>
 </template>
 

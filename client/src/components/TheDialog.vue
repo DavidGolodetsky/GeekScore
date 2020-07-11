@@ -1,10 +1,10 @@
 <template>
   <section>
     <v-btn
+      :id="`activator_${activatorText}`"
       class="px-0"
       :small="simple"
       fab
-      :id="`activator_${activatorText}`"
       aria-label="Open modal"
       :text="simple"
       :color="color"
@@ -59,7 +59,8 @@ export default {
       required: true
     },
     activatorText: {
-      type: String
+      type: String,
+      default: ""
     },
     simple: {
       type: Boolean

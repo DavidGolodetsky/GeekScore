@@ -3,7 +3,7 @@
     <v-card v-if="!isResetPasswordDone" raised outlined dark class="auth-card">
       <v-form ref="form" v-model="valid" @submit.prevent="onSubmit">
         <v-card-title class="pb-10">
-          <div class="d-flex align-items-center">
+          <div class="d-flex align-center">
             <v-icon class="mr-3">mdi-lock-reset</v-icon>
             <h3 class="app-headline">Reset Password</h3>
           </div>
@@ -20,9 +20,7 @@
         </v-card-text>
         <v-divider />
         <v-card-actions>
-          <v-btn ripple class="submit-btn" type="submit" :disabled="!valid">
-            Submit
-          </v-btn>
+          <v-btn ripple class="submit-btn" type="submit" :disabled="!valid">Submit</v-btn>
         </v-card-actions>
       </v-form>
     </v-card>
@@ -40,25 +38,25 @@ import { emailField, requiredField } from "@/utils/validations";
 export default {
   props: {
     signupMode: {
-      type: Boolean,
-    },
+      type: Boolean
+    }
   },
   data() {
     return {
       valid: false,
       email: "",
       resetted: false,
-      EmailRules: [requiredField, emailField],
+      EmailRules: [requiredField, emailField]
     };
   },
   computed: {
-    ...mapState("user", ["resetPassword"]),
+    ...mapState("user", ["resetPassword"])
   },
   methods: {
     ...mapActions("user", ["resetPassword"]),
     onSubmit() {
       this.resetPassword(this.email);
-    },
-  },
+    }
+  }
 };
 </script>
