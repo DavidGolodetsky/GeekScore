@@ -1,11 +1,11 @@
 <template>
-  <v-app class="app" v-scroll="onScroll" v-cloak>
+  <v-app v-cloak v-scroll="onScroll" class="app">
     <the-header />
     <v-main>
       <v-container class="app-container">
         <the-alert v-if="showAlert" :type="alertType" :text="alertText" />
         <transition name="slide" mode="out-in">
-          <router-view></router-view>
+          <router-view />
         </transition>
         <div v-if="loading" class="loader-wrap">
           <v-progress-circular :size="50" indeterminate color="secondary" />
@@ -35,13 +35,12 @@ import { VueOfflineMixin } from "vue-offline";
 
 export default {
   name: "App",
-  mixins: [VueOfflineMixin],
   components: {
     TheHeader,
     TheFooter,
     TheAlert
   },
-
+  mixins: [VueOfflineMixin],
   data: () => ({
     showTop: false,
     offlineText: "Geek Score is offline. Some features might be disabled",
@@ -65,12 +64,6 @@ export default {
       return this.isOffline ? this.offlineText : this.error.message;
     }
   },
-  // TODO: do we need this?
-  // watch: {
-  //   user(value) {
-  //     if (!value && this.$route.fullPath !== "/") this.$router.push("/");
-  //   }
-  // },
   methods: {
     onScroll() {
       if (window.pageYOffset > 500) this.showTop = true;

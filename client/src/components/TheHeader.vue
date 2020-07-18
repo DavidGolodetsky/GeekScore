@@ -4,11 +4,7 @@
       <v-container class="d-flex align-center app-container space-between">
         <the-go-back v-if="backTitle" :title="backTitle" />
         <router-link v-else class="d-flex align-center" :to="{ name: 'home' }">
-          <v-img
-            class="logo"
-            :src="require(`@/assets/img/logo.svg`)"
-            alt="Geek Score"
-          />
+          <v-img class="logo" :src="require(`@/assets/img/logo.svg`)" alt="Geek Score" />
           <span class="header-title">Geek Score</span>
         </router-link>
         <v-spacer />
@@ -22,30 +18,19 @@
                 </v-btn>
               </li>
               <li>
-                <v-btn
-                  :small="$vuetify.breakpoint.smOnly"
-                  text
-                  @click="onLogout"
-                >
+                <v-btn :small="$vuetify.breakpoint.smOnly" text @click="onLogout">
                   <v-icon>mdi-logout</v-icon>Log out
                 </v-btn>
               </li>
             </ul>
           </nav>
-          <v-app-bar-nav-icon
-            class="d-sm-none"
-            @click.stop="sideNav = !sideNav"
-          />
+          <v-app-bar-nav-icon class="d-sm-none" @click.stop="sideNav = !sideNav" />
         </template>
       </v-container>
     </v-app-bar>
     <v-navigation-drawer v-model="sideNav" app right dark fixed temporary>
       <v-list>
-        <v-list-item
-          v-for="{ text, icon, link } in navItems"
-          :key="text"
-          :to="link"
-        >
+        <v-list-item v-for="{ text, icon, link } in navItems" :key="text" :to="link">
           <v-list-item-icon>
             <v-icon>mdi-{{ icon }}</v-icon>
           </v-list-item-icon>
@@ -68,7 +53,7 @@ import { mapState, mapActions, mapGetters } from "vuex";
 export default {
   data() {
     return {
-      sideNav: false,
+      sideNav: false
     };
   },
   computed: {
@@ -79,18 +64,18 @@ export default {
         {
           text: "Games",
           icon: "dice-multiple",
-          link: "/games",
-        },
+          link: "/games"
+        }
       ];
-    },
+    }
   },
   methods: {
     ...mapActions("user", ["logout"]),
     onLogout() {
       if (this.$route.fullPath === "/") this.sideNav = false;
       this.logout();
-    },
-  },
+    }
+  }
 };
 </script>
 

@@ -39,6 +39,7 @@ a {
   }
   .app-container {
     color: #fff;
+    max-width: $app-max-width;
     padding: 10px;
     @media #{$tablet} {
       padding: 40px 10px;

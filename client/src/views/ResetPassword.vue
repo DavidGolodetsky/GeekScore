@@ -1,7 +1,7 @@
 <template>
   <section>
     <v-card v-if="!isResetPasswordDone" raised outlined dark class="auth-card">
-      <v-form v-model="valid" lazy-validation ref="form" @submit.prevent="onSubmit">
+      <v-form ref="form" v-model="valid" @submit.prevent="onSubmit">
         <v-card-title class="pb-10">
           <div class="d-flex align-items-center">
             <v-icon class="mr-3">mdi-lock-reset</v-icon>
@@ -10,18 +10,19 @@
         </v-card-title>
         <v-card-text>
           <v-text-field
+            v-model="email"
             clearable
             label="Email"
             type="email"
             prepend-icon="mdi-email"
-            v-model="email"
             :rules="EmailRules"
-            required
           />
         </v-card-text>
-        <v-divider></v-divider>
+        <v-divider />
         <v-card-actions>
-          <v-btn ripple class="submit-btn" type="submit" :disabled="!valid">Submit</v-btn>
+          <v-btn ripple class="submit-btn" type="submit" :disabled="!valid">
+            Submit
+          </v-btn>
         </v-card-actions>
       </v-form>
     </v-card>
@@ -34,32 +35,30 @@
 
 <script>
 import { mapActions, mapState } from "vuex";
+import { emailField, requiredField } from "@/utils/validations";
 
 export default {
   props: {
     signupMode: {
-      type: Boolean
-    }
+      type: Boolean,
+    },
   },
   data() {
     return {
-      valid: true,
+      valid: false,
       email: "",
       resetted: false,
-      EmailRules: [
-        v => !!v || "Field is required",
-        v => /.+@.+\..+/.test(v) || "E-mail must be valid"
-      ]
+      EmailRules: [requiredField, emailField],
     };
   },
   computed: {
-    ...mapState("user", ["resetPassword"])
+    ...mapState("user", ["resetPassword"]),
   },
   methods: {
     ...mapActions("user", ["resetPassword"]),
     onSubmit() {
-      this.valid && this.resetPassword(this.email);
-    }
-  }
+      this.resetPassword(this.email);
+    },
+  },
 };
 </script>

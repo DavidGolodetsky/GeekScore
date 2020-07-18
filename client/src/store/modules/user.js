@@ -60,12 +60,13 @@ export default {
                 commit('LOADING', false, { root: true })
             }
         },
-        async logout({ commit, rootState }) {
+        async logout({ commit }) {
             try {
-                rootState.games.games = rootState.teams.teams = null
                 await firebase.auth().signOut()
-                commit('SET_USER', null)
                 router.push("/")
+                commit('games/SET_GAMES', null, { root: true })
+                commit('teams/SET_TEAMS', null, { root: true })
+                commit('SET_USER', null)
             } catch (e) {
                 commit('ERROR', e, { root: true })
             } finally {

@@ -3,7 +3,7 @@
     <v-text-field
       v-model.trim="name"
       clearable
-      :rules="fieldRules"
+      :rules="nameRules"
       prepend-icon="mdi-dice-multiple"
       label="Name"
     />
@@ -14,13 +14,12 @@
 <script>
 import { standardField } from "@/utils/validations";
 import { mapActions } from "vuex";
-// TODO:refactored
 export default {
   data() {
     return {
       name: "",
       coop: false,
-      fieldRules: standardField
+      nameRules: standardField
     };
   },
   methods: {

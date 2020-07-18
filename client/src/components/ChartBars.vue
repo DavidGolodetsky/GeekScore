@@ -2,6 +2,7 @@
 import { Bar } from "vue-chartjs";
 
 export default {
+  // TODO:refactor
   extends: Bar,
   props: {
     team: {

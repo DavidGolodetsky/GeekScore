@@ -6,21 +6,21 @@
       fab
       aria-label="Open modal"
       :text="simple"
-      @click.prevent="dialog = true"
       :color="color"
+      @click.prevent="dialog = true"
     >
       <v-icon dark>mdi-{{ activatorIcon }}</v-icon>
     </v-btn>
-    <v-dialog v-model="dialog" v-if="renderDialog" max-width="600">
+    <v-dialog v-if="renderDialog" v-model="dialog" max-width="600">
       <v-card class="the-dialog">
         <v-card-title>
           <h3 class="app-headline">{{ header }}</h3>
-          <v-spacer></v-spacer>
+          <v-spacer />
           <v-btn small aria-label="Close modal" fab text @click="close">
             <v-icon dark>mdi-close</v-icon>
           </v-btn>
         </v-card-title>
-        <v-form v-model="valid" lazy-validation ref="form" @submit.prevent="onSubmit">
+        <v-form ref="form" v-model="valid" @submit.prevent="onSubmit">
           <v-card-text>
             <v-container>
               <slot />
@@ -39,6 +39,7 @@
 
 <script>
 export default {
+  // TODO:refactor
   props: {
     activatorIcon: {
       type: String,
@@ -63,7 +64,7 @@ export default {
   data() {
     return {
       dialog: false,
-      valid: true,
+      valid: false,
       renderDialog: false
     };
   },
@@ -79,10 +80,8 @@ export default {
   },
   methods: {
     onSubmit() {
-      if (this.valid) {
-        this.submitLogic();
-        this.close();
-      }
+      this.submitLogic();
+      this.close();
     },
     close() {
       this.dialog = false;
