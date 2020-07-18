@@ -30,6 +30,7 @@
                   <slot name="action" :item="item" />
                 </v-card-title>
               </div>
+              
               <v-list v-if="item.players" dense disabled class="players">
                 <v-list-item-group>
                   <v-list-item v-for="{name} in item.players" :key="name">
@@ -40,6 +41,7 @@
                   </v-list-item>
                 </v-list-item-group>
               </v-list>
+
               <v-img
                 class="white--text align-end"
                 height="350"
