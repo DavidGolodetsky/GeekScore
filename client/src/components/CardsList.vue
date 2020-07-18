@@ -43,7 +43,8 @@
               <v-img
                 class="white--text align-end"
                 height="350"
-                :src="imagePath(item)"
+                :src="imagePath(item, 'jpg')"
+                :srcset="imagePath(item, 'webp')"
                 :alt="item.name"
               >
                 <div class="title-wrap">
@@ -152,10 +153,10 @@ export default {
       }
       return actions;
     },
-    imagePath(item) {
+    imagePath(item, extension) {
       if (item.imageUrl) return item.imageUrl;
-      if (item.teams) return require(`@/assets/img/game.jpg`);
-      return require(`@/assets/img/team.jpg`);
+      if (item.teams) return require(`@/assets/img/game.${extension}`);
+      return require(`@/assets/img/team.${extension}`);
     },
     getItemsOrder(items) {
       const reversed = items.slice().reverse();
