@@ -1,7 +1,7 @@
 <template>
   <div class="the-header">
     <v-app-bar app color="primary" dense dark>
-      <v-container class="d-flex align-center app-container space-between">
+      <v-container class="row_between app-container">
         <the-go-back v-if="backTitle" :title="backTitle" />
         <router-link v-else class="d-flex align-center" :to="{ name: 'home' }">
           <v-img class="logo" :src="require(`@/assets/img/logo.svg`)" alt="Geek Score" />

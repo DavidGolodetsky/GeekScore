@@ -26,7 +26,7 @@
 
 <script>
 import TheTitle from "@/components/TheTitle";
-import TheTable from "@/components/TheTable";
+import MainTable from "@/components/MainTable";
 import ChartBars from "@/components/ChartBars";
 import rounds from "@/store/modules/rounds";
 import { mapActions, mapGetters } from "vuex";
@@ -34,7 +34,7 @@ import { mapActions, mapGetters } from "vuex";
 export default {
   components: {
     ChartBars,
-    TheTable,
+    MainTable,
     TheTitle
   },
   props: {

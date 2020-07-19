@@ -17,7 +17,7 @@
         </v-card>
       </v-timeline-item>
     </v-timeline>
-    <div class="d-flex justify-center">
+    <div class="row_center">
       <v-btn
         class="submit-btn"
         ripple

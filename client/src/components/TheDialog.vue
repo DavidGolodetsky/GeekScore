@@ -1,6 +1,7 @@
 <template>
   <section>
     <v-btn
+      :id="`activator_${activatorText}`"
       class="px-0"
       :small="simple"
       fab
@@ -11,6 +12,7 @@
     >
       <v-icon dark>mdi-{{ activatorIcon }}</v-icon>
     </v-btn>
+    <label :for="`activator_${activatorText}`" class="label_text">{{ activatorText }}</label>
     <v-dialog v-if="renderDialog" v-model="dialog" max-width="600">
       <v-card class="the-dialog">
         <v-card-title>
@@ -56,6 +58,10 @@ export default {
     submitLogic: {
       type: Function,
       required: true
+    },
+    activatorText: {
+      type: String,
+      default: ""
     },
     simple: {
       type: Boolean
