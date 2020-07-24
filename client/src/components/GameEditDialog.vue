@@ -33,7 +33,6 @@ import ScoresTable from "@/components/ScoresTable";
 import { mapActions } from "vuex";
 
 export default {
-  // TODO:refactored
   components: {
     ScoresTable
   },
