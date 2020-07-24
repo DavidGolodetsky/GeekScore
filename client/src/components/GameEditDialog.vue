@@ -15,6 +15,7 @@
       :prepend-icon="`mdi-${field.icon}`"
       :label="field.label"
     />
+    
     <v-img
       v-if="fields.imageUrl.value"
       :src="fields.imageUrl.value"
