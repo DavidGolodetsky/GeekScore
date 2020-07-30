@@ -22,20 +22,21 @@
       height="200"
       contain
     />
-    <scores-table />
+    <!-- TODO: for later -->
+    <!-- <scores-table /> -->
     <v-switch v-model="toDelete" label="Delete game" color="error" hide-details />
   </the-dialog>
 </template>
 
 <script>
 import { standardField, tooLongField, linkField } from "@/utils/validations";
-import ScoresTable from "@/components/ScoresTable";
+// import ScoresTable from "@/components/ScoresTable";
 import { mapActions } from "vuex";
 
 export default {
-  components: {
-    ScoresTable
-  },
+  // components: {
+  //   ScoresTable
+  // },
   props: {
     game: {
       type: Object,
