@@ -5,6 +5,7 @@ A PWA for board games fans. It allows you to store your games, create teams and 
 https://geekscore.herokuapp.com/
 
 <img src="https://i.ibb.co/GFyt0c3/Screenshot-at-Sep-19-11-21-40.png" width=280> <img src="https://i.ibb.co/c38dqdM/Phone-Screenshot-2.png" width=280>
+
 <img src="https://i.ibb.co/9rqvSrP/Phone-Screenshot-3.png" width=280> <img src="https://i.ibb.co/CWrw6vc/Phone-Screenshot-4.png" width=280> <img src="https://i.ibb.co/LxyqVmm/Phone-Screenshot-5.png" width=280> 
 
 This is a second version of the app. The first one is up and running http://geekscore.netlify.com/.
