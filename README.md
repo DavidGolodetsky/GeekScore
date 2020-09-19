@@ -1,14 +1,8 @@
 
-#  ![Geek Score ](https://i.ibb.co/gWTjWGK/mstile-144x144.png =60x)<span style="color:orange">Geek Score </span>
+#  ![Geek Score ](https://i.ibb.co/gWTjWGK/mstile-144x144.png)Geek Score
 
 A PWA for board games fans. It allows you to store your games, create teams and collect statistics. Build with MEVN stack.
 https://geekscore.herokuapp.com/
-
-| ![Geek Score ](https://i.ibb.co/GFyt0c3/Screenshot-at-Sep-19-11-21-40.png =250x) | ![Geek Score ](https://i.ibb.co/c38dqdM/Phone-Screenshot-2.png =250x) |
-|--|--|
-|![Geek Score ](https://i.ibb.co/9rqvSrP/Phone-Screenshot-3.png =250x)  | ![Geek Score ](https://i.ibb.co/CWrw6vc/Phone-Screenshot-4.png =250x) | 
-| ![Geek Score ](https://i.ibb.co/LxyqVmm/Phone-Screenshot-5.png =250x) 
-
 
 
 This is a second version of the app. The first one is up and running http://geekscore.netlify.com/.
