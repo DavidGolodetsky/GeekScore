@@ -1,10 +1,15 @@
-# GeekScore
+# Geek Score 
+![Geek Score ](https://i.ibb.co/gWTjWGK/mstile-144x144.png)
 A PWA for board games fans. It allows you to store your games, create teams and collect statistics. Build with MEVN stack.
 https://geekscore.herokuapp.com/
-Previuos version on Firebase: http://geekscore.netlify.com/
+This is a second version of the app. The first one is up and running http://geekscore.netlify.com/.
+Source code of the first version could be found here: https://github.com/DavidGolodetsky/GeekScore-1
+The main difference for now is that the first version is using Firebase as a backend, while the second version is written with Node.js and Mongo DB. The idea is that both version would exist in the future, but the second one would be continuously  improved, while the first one would be sealed.
 
-## To start Backend
+## For contributors:
+
+### To start Backend
 run `npm run serve` in the **root**  folder
 
-## To start Frontend
+### To start Frontend
 run `npm run serve` in the **client** folder
