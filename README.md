@@ -1,5 +1,5 @@
 
-#  ![Geek Score ](https://i.ibb.co/gWTjWGK/mstile-144x144.png)Geek Score
+#  <img src="https://i.ibb.co/gWTjWGK/mstile-144x144.png" width=40> Geek Score
 
 A PWA for board games fans. It allows you to store your games, create teams and collect statistics. Build with MEVN stack.
 https://geekscore.herokuapp.com/
