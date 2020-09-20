@@ -1,10 +1,25 @@
 <template>
   <section class="round-add">
-    <the-dialog activator-icon="plus" header="Add new round" :submit-logic="onSubmit">
+    <the-dialog
+      v-if="team"
+      activator-icon="plus"
+      header="Add new round"
+      :submit-logic="onSubmit"
+    >
       <v-row>
         <v-col cols="6">
-          <v-radio-group v-model="result" :rules="resultRules" label="Result:" class="mb-4">
-            <v-radio v-for="option in resultOptions" :key="option" :label="option" :value="option" />
+          <v-radio-group
+            v-model="result"
+            :rules="resultRules"
+            label="Result:"
+            class="mb-4"
+          >
+            <v-radio
+              v-for="option in resultOptions"
+              :key="option"
+              :label="option"
+              :value="option"
+            />
           </v-radio-group>
         </v-col>
         <v-col cols="6">
@@ -14,7 +29,12 @@
             label="First turn:"
             class="mb-4"
           >
-            <v-radio v-for="{ name } in team.players" :key="name" :label="name" :value="name" />
+            <v-radio
+              v-for="{ name } in team.players"
+              :key="name"
+              :label="name"
+              :value="name"
+            />
           </v-radio-group>
         </v-col>
       </v-row>
@@ -55,43 +75,47 @@
 </template>
 
 <script>
-import { requiredField } from "@/utils/validations";
-import { mapActions, mapGetters } from "vuex";
+import { requiredField } from '@/utils/validations';
+import { mapActions, mapGetters, mapState } from 'vuex';
 export default {
   // TODO:refactor
   props: {
     teamId: {
       type: String,
-      required: true
+      required: true,
     },
     gameId: {
       type: String,
-      required: true
-    }
+      required: true,
+    },
   },
   data() {
     return {
       datepicker: false,
-      comment: "",
-      turn: "",
+      comment: '',
+      turn: '',
       result: null,
       date: new Date().toISOString().substr(0, 10),
-      resultRules: [requiredField]
+      resultRules: [requiredField],
     };
   },
   computed: {
-    ...mapGetters("teams", ["getTeam"]),
+    ...mapState('teams', ['teams']),
+    ...mapGetters('teams', ['getTeam']),
     team() {
-      return this.getTeam(this.teamId);
+      return this.teams ? this.getTeam(this.teamId) : null;
     },
     resultOptions() {
-      if (this.team.coop) return ["Victory", "Defeat"];
-      const options = this.team.players.map(player => player.name);
-      return [...options, "Tie"];
-    }
+      if (this.team) {
+        if (this.team.coop) return ['Victory', 'Defeat'];
+        const options = this.team.players.map((player) => player.name);
+        return [...options, 'Tie'];
+      }
+      return null;
+    },
   },
   methods: {
-    ...mapActions("rounds", ["createRound"]),
+    ...mapActions('rounds', ['createRound']),
     onSubmit() {
       const round = this.cookRound();
       this.createRound(round);
@@ -103,12 +127,12 @@ export default {
         gameId: this.gameId,
         teamId: this.teamId,
         comment: this.comment,
-        winner: this.result.toLowerCase()
+        winner: this.result.toLowerCase(),
       };
       if (this.team.coop) round.result = this.result.toUpperCase();
       // TODO: highlight result, maybe with icon, not VICTORY
       return round;
-    }
-  }
+    },
+  },
 };
 </script>

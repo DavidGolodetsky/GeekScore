@@ -7,30 +7,28 @@ import VueOffline from 'vue-offline';
 import '@/globalComponents';
 import './registerServiceWorker';
 
+const isDev = process.env.NODE_ENV !== 'production';
 
-const isDev = process.env.NODE_ENV !== "production";
-
-Vue.config.productionTip = isDev
+Vue.config.productionTip = isDev;
 Vue.config.performance = isDev;
 
-Vue.prototype.$log = console.log
+Vue.prototype.$log = console.log;
 
 Vue.use(VueOffline, {
   mixin: false,
-  storage: false
-})
-
+  storage: false,
+});
 
 Vue.mixin({
   errorCaptured(err, vm, info) {
     console.error(err, vm, info);
     return false;
-  }
-})
+  },
+});
 
 new Vue({
   vuetify,
   router,
   store,
-  render: h => h(App),
-}).$mount('#app')
+  render: (h) => h(App),
+}).$mount('#app');

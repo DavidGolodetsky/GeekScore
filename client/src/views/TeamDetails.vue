@@ -8,15 +8,29 @@
       component="round-add-dialog"
     />
     <div v-if="showTable">
-      <v-tabs v-model="tab" background-color="primary" centered dark icons-and-text>
+      <v-tabs
+        v-model="tab"
+        background-color="primary"
+        centered
+        dark
+        icons-and-text
+      >
         <v-tabs-slider color="secondary" />
-        <v-tab v-for="(tabItem, i) in tabs" :key="tabItem.name" :href="`#tab-${i}`">
+        <v-tab
+          v-for="(tabItem, i) in tabs"
+          :key="tabItem.name"
+          :href="`#tab-${i}`"
+        >
           <span class="mt-2">{{ tabItem.name }}</span>
           <v-icon>{{ `mdi-${tabItem.icon}` }}</v-icon>
         </v-tab>
       </v-tabs>
       <v-tabs-items v-model="tab">
-        <v-tab-item v-for="(component, i) in tabComponents" :key="i" :value="`tab-${i}`">
+        <v-tab-item
+          v-for="(component, i) in tabComponents"
+          :key="i"
+          :value="`tab-${i}`"
+        >
           <component :is="component" :team="team" :rounds="rounds" />
         </v-tab-item>
       </v-tabs-items>
@@ -25,23 +39,23 @@
 </template>
 
 <script>
-import TheTitle from "@/components/TheTitle";
-import MainTable from "@/components/MainTable";
-import ChartBars from "@/components/ChartBars";
-import rounds from "@/store/modules/rounds";
-import { mapActions, mapGetters } from "vuex";
+import TheTitle from '@/components/TheTitle';
+import MainTable from '@/components/MainTable';
+import ChartBars from '@/components/ChartBars';
+import rounds from '@/store/modules/rounds';
+import { mapActions, mapGetters, mapState } from 'vuex';
 
 export default {
   components: {
     ChartBars,
     MainTable,
-    TheTitle
+    TheTitle,
   },
   props: {
     teamId: {
       type: String,
-      required: true
-    }
+      required: true,
+    },
   },
   data() {
     return {
@@ -49,55 +63,68 @@ export default {
       gameId: this.$route.query.gameId,
       tabs: [
         {
-          name: "Table",
-          href: "tab-1",
-          icon: "table-large"
+          name: 'Table',
+          href: 'tab-1',
+          icon: 'table-large',
         },
         {
-          name: "Statistics",
-          href: "tab-2",
-          icon: "chart-bar"
-        }
+          name: 'Statistics',
+          href: 'tab-2',
+          icon: 'chart-bar',
+        },
       ],
-      tabComponents: ["the-table", "chart-bars"]
+      tabComponents: ['main-table', 'chart-bars'],
     };
   },
   computed: {
-    ...mapGetters("teams", ["getTeam"]),
-    ...mapGetters("games", ["getGame"]),
-    ...mapGetters("rounds", ["getRounds"]),
+    ...mapState('teams', ['teams']),
+    ...mapState('games', ['games']),
+    ...mapGetters('teams', ['getTeam']),
+    ...mapGetters('games', ['getGame']),
+    ...mapGetters('rounds', ['getRounds']),
     game() {
-      return this.getGame(this.gameId);
+      return this.games ? this.getGame(this.gameId) : null;
     },
     team() {
-      return this.getTeam(this.teamId);
+      return this.teams ? this.getTeam(this.teamId) : null;
+    },
+    gameTeam() {
+      return this.game && this.team;
     },
     rounds() {
       const query = { teamId: this.teamId, gameId: this.gameId };
       const rounds = this.getRounds(query);
-      if (rounds) rounds.forEach(round => (round[round.winner] = "VICTORY"));
+      if (rounds) rounds.forEach((round) => (round[round.winner] = 'VICTORY'));
       return rounds;
     },
 
     showTable() {
-      return this.rounds?.length;
-    }
+      return this.gameTeam && this.rounds?.length;
+    },
+  },
+  watch: {
+    gameTeam(value) {
+      if (value) this.setBackTitle(`${this.team.name}: ${this.game.name}`);
+    },
   },
   created() {
     this.loadData();
-    this.setBackTitle(`${this.team.name}: ${this.game.name}`);
   },
   beforeDestroy() {
     this.setBackTitle();
   },
   methods: {
-    ...mapActions(["setBackTitle"]),
-    ...mapActions("rounds", ["loadRounds"]),
+    ...mapActions(['setBackTitle']),
+    ...mapActions('games', ['loadGames']),
+    ...mapActions('teams', ['loadTeams']),
+    ...mapActions('rounds', ['loadRounds']),
     loadData() {
-      const isRounds = this.$store.hasModule("rounds");
-      isRounds || this.$store.registerModule("rounds", rounds);
+      this.games || this.loadGames();
+      this.teams || this.loadTeams();
+      const isRounds = this.$store.hasModule('rounds');
+      isRounds || this.$store.registerModule('rounds', rounds);
       this.loadRounds();
-    }
-  }
+    },
+  },
 };
 </script>

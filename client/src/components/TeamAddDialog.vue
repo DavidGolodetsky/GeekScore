@@ -31,27 +31,32 @@
         :label="`Player #${i + 1}`"
         @input="isUniqueName"
       />
-      <v-switch v-model="coop" label="Cooperative" color="secondary" hide-details />
+      <v-switch
+        v-model="coop"
+        label="Cooperative"
+        color="secondary"
+        hide-details
+      />
     </template>
   </the-dialog>
 </template>
 
 <script>
-import { requiredField, standardField } from "@/utils/validations";
-import { mapActions, mapGetters } from "vuex";
+import { requiredField, standardField } from '@/utils/validations';
+import { mapActions, mapGetters, mapState } from 'vuex';
 
 export default {
   props: {
     gameId: {
       type: String,
-      required: true
-    }
+      required: true,
+    },
   },
   data() {
     return {
-      name: "",
+      name: '',
       coop: false,
-      players: [{ name: "Me" }],
+      players: [{ name: 'Me' }],
       nameRules: standardField,
       playerRules: standardField,
       selectRules: [requiredField],
@@ -59,37 +64,38 @@ export default {
       numberOfPlayers: Array(8)
         .join(0)
         .split(0)
-        .map((v, i) => i + 1)
+        .map((v, i) => i + 1),
     };
   },
   computed: {
-    ...mapGetters("games", ["getGame"]),
+    ...mapState('games', ['games']),
+    ...mapGetters('games', ['getGame']),
     game() {
-      return this.getGame(this.gameId);
+      return this.games ? this.getGame(this.gameId) : null;
     },
     isCoop() {
-      return this.game.coop || this.coop;
-    }
+      return this.game ? this.game.coop || this.coop : null;
+    },
   },
   methods: {
-    ...mapActions("teams", ["createTeam"]),
+    ...mapActions('teams', ['createTeam']),
     setPlayers($ev) {
-      this.players = [{ name: "Me" }];
+      this.players = [{ name: 'Me' }];
       for (let i = 1; i < $ev; i++) {
-        let player = { name: "" };
+        let player = { name: '' };
         this.players.push(player);
       }
       if ($ev === 1) this.coop = true;
     },
     isMe(player) {
-      return player.name === "Me";
+      return player.name === 'Me';
     },
     isUniqueName($ev) {
       let duplicatedPlayerName = this.players.filter(
-        player => player.name === $ev
+        (player) => player.name === $ev
       );
       const isDuplicated =
-        duplicatedPlayerName.length < 2 || "This field should be unique";
+        duplicatedPlayerName.length < 2 || 'This field should be unique';
       this.playerRules = [...this.playerRules, isDuplicated];
     },
     onSubmit() {
@@ -98,10 +104,10 @@ export default {
         gameName: this.game.name,
         name: this.name,
         coop: this.isCoop,
-        players: this.players
+        players: this.players,
       };
       this.createTeam(team);
-    }
-  }
+    },
+  },
 };
 </script>
