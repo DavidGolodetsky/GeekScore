@@ -4,28 +4,28 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/browserconfig.xml"
   },
   {
-    "revision": "472aad1296bffdc24985",
-    "url": "/css/app.8ab69943.css"
+    "revision": "d9411a65b77304aea94d",
+    "url": "/css/app.0e638125.css"
   },
   {
-    "revision": "a32b43a76a964bd06fd0",
+    "revision": "ee00bfb80761f0e82693",
     "url": "/css/chunk-vendors.eedd2432.css"
   },
   {
-    "revision": "5d616f7fb90e153ee2da",
-    "url": "/css/signIn~signUp.5c124256.css"
+    "revision": "a66018210498eb99ce91",
+    "url": "/css/signIn~signUp.344551b9.css"
   },
   {
-    "revision": "02ec90cd409f2dd6f03e",
-    "url": "/css/team.329dad55.css"
+    "revision": "4aa487c0325e93b24af1",
+    "url": "/css/team.96cf7150.css"
   },
   {
-    "revision": "fbf10669f4b5705aeb28",
-    "url": "/css/theDialog.45c59532.css"
+    "revision": "c7814005c4eff9bb4d56",
+    "url": "/css/theDialog.4ebf92e3.css"
   },
   {
-    "revision": "a86066e9b2f84dab5e6f",
-    "url": "/css/theGoBack.24169b05.css"
+    "revision": "2e7b895c046971f17cae",
+    "url": "/css/theGoBack.dcb5e899.css"
   },
   {
     "revision": "10a04d7dcada291ddf78d9a235b6846e",
@@ -96,51 +96,51 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/img/team.bf4c6f13.webp"
   },
   {
-    "revision": "83021c86516c5074fd259008adf290e6",
+    "revision": "ff5246ee4f4604a5085ef699ff0d19d7",
     "url": "/index.html"
   },
   {
-    "revision": "472aad1296bffdc24985",
-    "url": "/js/app.985da15c.js"
+    "revision": "d9411a65b77304aea94d",
+    "url": "/js/app.e90d3d39.js"
   },
   {
-    "revision": "a32b43a76a964bd06fd0",
-    "url": "/js/chunk-vendors.74c16019.js"
+    "revision": "ee00bfb80761f0e82693",
+    "url": "/js/chunk-vendors.d5ba140e.js"
   },
   {
-    "revision": "836b9dba5ad8e6cb7cd8",
-    "url": "/js/game.e44b680f.js"
+    "revision": "14a78f6678386191dd9a",
+    "url": "/js/game.b76eabc3.js"
   },
   {
     "revision": "404ebbbbcd7bf6ed708b",
     "url": "/js/notFound.69e88ad0.js"
   },
   {
-    "revision": "a8ed81193b61bfaee4e3",
-    "url": "/js/resetPass.8f94be0f.js"
+    "revision": "d222301c915b7b733c0d",
+    "url": "/js/resetPass.b4b755db.js"
   },
   {
     "revision": "17ae9bf42a621262bc1e",
     "url": "/js/signIn.95f4b5bd.js"
   },
   {
-    "revision": "5d616f7fb90e153ee2da",
-    "url": "/js/signIn~signUp.df1e807d.js"
+    "revision": "a66018210498eb99ce91",
+    "url": "/js/signIn~signUp.75353de5.js"
   },
   {
     "revision": "6836f4263beb91740d5b",
     "url": "/js/signUp.5f69f2fc.js"
   },
   {
-    "revision": "02ec90cd409f2dd6f03e",
-    "url": "/js/team.dd0bd268.js"
+    "revision": "4aa487c0325e93b24af1",
+    "url": "/js/team.320d98a6.js"
   },
   {
-    "revision": "fbf10669f4b5705aeb28",
-    "url": "/js/theDialog.ebbd81f3.js"
+    "revision": "c7814005c4eff9bb4d56",
+    "url": "/js/theDialog.ad190c2a.js"
   },
   {
-    "revision": "a86066e9b2f84dab5e6f",
+    "revision": "2e7b895c046971f17cae",
     "url": "/js/theGoBack.48fe5705.js"
   },
   {
