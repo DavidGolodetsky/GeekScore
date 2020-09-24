@@ -1,15 +1,31 @@
 <template>
   <section class="login-form mt-12">
-    <v-card raised outlined dark class="auth-card">
-      <v-form ref="form" v-model="valid" @submit.prevent="onSubmit">
+    <v-card
+      raised
+      outlined
+      dark
+      class="auth-card"
+    >
+      <v-form
+        ref="form"
+        v-model="valid"
+        @submit.prevent="onSubmit"
+      >
         <div class="d-flex align-items-center">
           <v-icon class="mr-3">{{ `mdi-${formProps.icon}` }}</v-icon>
           <h3 class="app-headline">{{ formProps.title }}</h3>
         </div>
         <v-card-text>
           <div id="firebaseui-auth-container" />
-          <div id="loader" class="text-center">
-            <v-progress-circular size="30" indeterminate color="secondary" />
+          <div
+            id="loader"
+            class="text-center"
+          >
+            <v-progress-circular
+              size="30"
+              indeterminate
+              color="secondary"
+            />
           </div>
           <div class="d-md-flex d-none or-wrapper">
             <span class="or">OR</span>
@@ -44,15 +60,26 @@
         </v-card-text>
         <v-divider />
         <v-card-actions>
-          <v-btn class="submit-btn" ripple type="submit" :disabled="!valid">Submit</v-btn>
+          <v-btn
+            class="submit-btn"
+            ripple
+            type="submit"
+            :disabled="!valid"
+          >Submit</v-btn>
         </v-card-actions>
       </v-form>
       <div class="text-center mb-3">
-        <router-link :to="{ name: 'resetPass' }" class="link">Forgot password?</router-link>
+        <router-link
+          :to="{ name: 'resetPass' }"
+          class="link"
+        >Forgot password?</router-link>
       </div>
       <div class="text-center mb-3">
         <span class="mr-3">{{ formProps.redirectText }}</span>
-        <router-link :to="formProps.redirectLink" class="link">{{ formProps.redirectLinkText }}</router-link>
+        <router-link
+          :to="formProps.redirectLink"
+          class="link"
+        >{{ formProps.redirectLinkText }}</router-link>
       </div>
     </v-card>
   </section>
@@ -70,7 +97,7 @@ export default {
       required: true
     }
   },
-  data() {
+  data () {
     return {
       valid: false,
       showPassword: false,
@@ -82,22 +109,21 @@ export default {
     };
   },
   computed: {
-    comparePasswords() {
+    comparePasswords () {
       return [
         this.password === this.confirmPassword || "Passwords don't match"
       ];
     },
-    loginMethod() {
+    loginMethod () {
       return this.formProps.signupMode ? this.signUpUser : this.signInUser;
     }
   },
-  mounted() {
+  mounted () {
     fbStart();
   },
   methods: {
     ...mapActions("user", ["signUpUser", "signInUser"]),
-    ...mapActions(["setError"]),
-    onSubmit() {
+    onSubmit () {
       const userInfo = {
         email: this.email,
         password: this.password
