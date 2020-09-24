@@ -1,7 +1,20 @@
 <template>
-  <section class="home-page" aria-labelledby="greeting">
-    <h1 id="greeting" class="app-headline text-center mb-6">Welcome to Geek Score!</h1>
-    <v-timeline class="mb-10" dark align-top :dense="$vuetify.breakpoint.smAndDown">
+  <section
+    class="home-page"
+    aria-labelledby="greeting"
+  >
+    <h1
+      id="greeting"
+      class="app-headline text-center mb-6"
+    >
+      Welcome to Geek Score!
+    </h1>
+    <v-timeline
+      class="mb-10"
+      dark
+      align-top
+      :dense="$vuetify.breakpoint.smAndDown"
+    >
       <v-timeline-item
         v-for="{title, icon, text} in items"
         :key="title"
@@ -9,7 +22,10 @@
         :icon="`mdi-${icon}`"
         fill-dot
       >
-        <v-card color="silver" light>
+        <v-card
+          color="silver"
+          light
+        >
           <v-card-title class="title">{{ title }}</v-card-title>
           <v-card-text class="white text--primary">
             <p>{{ text }}</p>
@@ -23,7 +39,9 @@
         ripple
         type="submit"
         :to="{name: user ? 'games' : 'signIn'}"
-      >{{ user ? 'Games' : 'Sign In' }}</v-btn>
+      >
+        {{ user ? 'Games' : 'Sign In' }}
+      </v-btn>
     </div>
   </section>
 </template>
