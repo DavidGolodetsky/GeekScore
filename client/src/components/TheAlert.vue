@@ -17,29 +17,30 @@
 </template>
 
 <script>
-import { mapActions } from "vuex";
+import { mapActions } from 'vuex';
 
 export default {
   props: {
     type: {
       type: String,
-      required: true
+      required: true,
     },
     text: {
       type: String,
-      required: true
-    }
+      required: true,
+    },
   },
   mounted () {
     window.navigator.vibrate(300);
   },
   methods: {
-    ...mapActions(["setError"]),
+    ...mapActions(['setError']),
+
     onClose () {
       this.setError();
-      this.$emit("dismissed");
-    }
-  }
+      this.$emit('dismissed');
+    },
+  },
 };
 </script>
 
