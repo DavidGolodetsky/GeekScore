@@ -31,7 +31,7 @@
           :key="i"
           :value="`tab-${i}`"
         >
-          <component :is="component" :team="team" :rounds="rounds" :tab="tab" />
+          <component :is="component" :team="team" :rounds="rounds" />
         </v-tab-item>
       </v-tabs-items>
     </div>
