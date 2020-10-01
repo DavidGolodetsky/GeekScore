@@ -35,9 +35,6 @@ export default {
   watch: {
     rounds() {
       this.updateChart()
-    },
-    tab(val) {
-      if (val === 'tab-1') this.updateChart()
     }
   },
   mounted() {
