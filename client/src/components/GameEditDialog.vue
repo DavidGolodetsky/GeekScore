@@ -56,25 +56,25 @@ export default {
         bggURL: {
           label: "Board geek game URL",
           icon: "cards",
-          value: this.game.bggURL,
+          value: this.game.bggURL === undefined ? "" : this.game.bggURL,
           rules: [tooLongField, linkField]
         },
         melodiceURL: {
           label: "Melodice URL",
           icon: "music",
-          value: this.game.melodiceURL,
+          value: this.game.melodiceURL === undefined ? "" : this.game.melodiceURL,
           rules: [tooLongField, linkField]
         },
         rulesURL: {
           label: "Rules URL",
           icon: "book-open-variant",
-          value: this.game.rulesURL,
+          value: this.game.rulesURL === undefined ? "" : this.game.rulesURL,
           rules: [tooLongField, linkField]
         },
         imageUrl: {
           label: "Image URL",
           icon: "image",
-          value: this.game.imageUrl,
+          value: this.game.imageUrl === undefined ? "" : this.game.imageUrl,
           rules: [tooLongField, linkField]
         }
       }
