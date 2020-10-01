@@ -40,6 +40,7 @@
 import RoundEditDialog from "@/components/RoundEditDialog";
 
 export default {
+  name: "MainTable",
   // TODO:refactor
   components: {
     RoundEditDialog

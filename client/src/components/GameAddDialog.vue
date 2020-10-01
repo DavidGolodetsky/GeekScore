@@ -14,7 +14,9 @@
 <script>
 import { standardField } from "@/utils/validations";
 import { mapActions } from "vuex";
+
 export default {
+  name: "GameAddDialog",
   data() {
     return {
       name: "",

@@ -6,6 +6,7 @@
 import LoginForm from "@/components/LoginForm";
 
 export default {
+  name: "SignIn",
   components: {
     LoginForm
   },

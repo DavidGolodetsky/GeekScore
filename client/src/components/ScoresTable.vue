@@ -33,6 +33,7 @@
 
 <script>
 export default {
+  name: "ScoresTable",
   data() {
     return {
       isActive: false,

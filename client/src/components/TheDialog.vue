@@ -41,6 +41,7 @@
 
 <script>
 export default {
+  name: "TheDialog",
   // TODO:refactor
   props: {
     activatorIcon: {
