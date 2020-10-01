@@ -4,7 +4,7 @@
       title="Rounds"
       icon="sword-cross"
       class="mb-4"
-      :props="{ teamId, gameId }"
+      :props="{ teamId, gameId, gameTeam }"
       component="round-add-dialog"
     />
     <div v-if="showTable">
@@ -46,6 +46,7 @@ import rounds from '@/store/modules/rounds';
 import { mapActions, mapGetters, mapState } from 'vuex';
 
 export default {
+  name: "TeamDetails",
   components: {
     ChartBars,
     MainTable,

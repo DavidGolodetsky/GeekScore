@@ -22,7 +22,7 @@
             />
           </v-radio-group>
         </v-col>
-        <v-col cols="6">
+        <v-col cols="6" v-if="!gameTeam.coop">
           <v-radio-group
             v-if="team.players.length > 1"
             v-model="turn"
@@ -78,6 +78,7 @@
 import { requiredField } from '@/utils/validations';
 import { mapActions, mapGetters, mapState } from 'vuex';
 export default {
+  name: "RoundAddDialog",
   // TODO:refactor
   props: {
     teamId: {
@@ -88,6 +89,10 @@ export default {
       type: String,
       required: true,
     },
+    gameTeam: {
+      type: Object,
+      required: true
+    }
   },
   data() {
     return {
