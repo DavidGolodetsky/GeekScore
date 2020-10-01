@@ -30,6 +30,7 @@ export default {
         name: this.name
       };
       this.createGame(game);
+      this.name = "";
     }
   }
 };
