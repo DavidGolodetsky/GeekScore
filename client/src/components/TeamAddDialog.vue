@@ -13,14 +13,13 @@
       label="Name"
     />
     <v-select
-      v-if="coop"
       prepend-icon="mdi-account-multiple-plus"
       :rules="selectRules"
       :items="numberOfPlayers"
       label="Number of players"
       @change="setPlayers"
     />
-    <span v-if="coop">
+    <span>
       <v-text-field
         v-for="(player, i) in players"
         :key="i"
@@ -53,7 +52,7 @@ export default {
       required: true,
     },
   },
-  data() {
+  data () {
     return {
       name: '',
       coop: false,
@@ -71,16 +70,16 @@ export default {
   computed: {
     ...mapState('games', ['games']),
     ...mapGetters('games', ['getGame']),
-    game() {
+    game () {
       return this.games ? this.getGame(this.gameId) : null
     },
-    isCoop() {
+    isCoop () {
       return this.game ? this.game.coop || this.coop : null
     },
   },
   methods: {
     ...mapActions('teams', ['createTeam']),
-    setPlayers($ev) {
+    setPlayers ($ev) {
       this.players = [{ name: 'Me' }]
       for (let i = 1; i < $ev; i++) {
         let player = { name: '' }
@@ -88,10 +87,10 @@ export default {
       }
       if ($ev === 1) this.coop = true
     },
-    isMe(player) {
+    isMe (player) {
       return player.name === 'Me'
     },
-    isUniqueName($ev) {
+    isUniqueName ($ev) {
       let duplicatedPlayerName = this.players.filter(
         (player) => player.name === $ev
       )
@@ -99,7 +98,7 @@ export default {
         duplicatedPlayerName.length < 2 || 'This field should be unique'
       this.playerRules = [...this.playerRules, isDuplicated]
     },
-    onSubmit() {
+    onSubmit () {
       const team = {
         games: [this.gameId],
         gameName: this.game.name,
