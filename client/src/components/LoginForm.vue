@@ -70,6 +70,7 @@
       </v-form>
       <div class="text-center mb-3">
         <router-link
+          v-if="!formProps.signUp"
           :to="{ name: 'resetPass' }"
           class="link"
         >Forgot password?</router-link>
