@@ -12,10 +12,6 @@ export default {
     rounds: {
       type: Array,
       required: true
-    },
-    tab: {
-      type: String,
-      required: true
     }
   },
   computed: {
