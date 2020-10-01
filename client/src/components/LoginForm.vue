@@ -115,7 +115,7 @@ export default {
       ];
     },
     loginMethod () {
-      return this.formProps.signupMode ? this.signUpUser : this.signInUser;
+      return this.formProps.signUp ? this.signUpUser : this.signInUser;
     }
   },
   mounted () {
