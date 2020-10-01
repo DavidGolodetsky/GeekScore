@@ -12,20 +12,15 @@ export default {
     rounds: {
       type: Array,
       required: true
+    },
+    tab: {
+      type: String,
+      required: true
     }
   },
-  watch: {
-    rounds(value) {
-      value ? this.setChart() : this._chart.destroy();
-    }
-  },
-  mounted() {
-    this.setChart();
-  },
-  methods: {
-    setChart() {
-      this.renderChart(
-        {
+  computed: {
+    chartdata () {
+      return {
           labels: this.team.coop ? ["Victories", "Defeats"] : this.getPlayers(),
           datasets: [
             {
@@ -34,7 +29,30 @@ export default {
               data: this.team.coop ? this.getCoopStat() : this.getPlayersStat()
             }
           ]
-        },
+        }
+    },
+  },
+  watch: {
+    rounds() {
+      this.updateChart()
+    },
+    tab(val) {
+      if (val === 'tab-1') this.updateChart()
+    }
+  },
+  mounted() {
+    this.setChart();
+  },
+  methods: {
+    updateChart () {
+      if (this.$data._chart) {
+        this.$data._chart.data = this.chartdata;
+        this.$data._chart.update();
+      }
+    },
+    setChart() {
+      this.renderChart(
+        this.chartdata,
         {
           responsive: true,
           maintainAspectRatio: false
