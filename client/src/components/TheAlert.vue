@@ -53,5 +53,9 @@ export default {
       color: $primary;
     }
   }
+  position: -webkit-sticky;
+  position: sticky;
+  top: 77px;
+  z-index: 2;
 }
 </style>
