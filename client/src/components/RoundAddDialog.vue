@@ -22,7 +22,7 @@
             />
           </v-radio-group>
         </v-col>
-        <v-col cols="6" v-if="!gameTeam.coop">
+        <v-col cols="6" v-if="!game.coop">
           <v-radio-group
             v-if="team.players.length > 1"
             v-model="turn"
@@ -75,10 +75,10 @@
 </template>
 
 <script>
-import { requiredField } from '@/utils/validations';
-import { mapActions, mapGetters, mapState } from 'vuex';
+import { requiredField } from '@/utils/validations'
+import { mapActions, mapGetters, mapState } from 'vuex'
 export default {
-  name: "RoundAddDialog",
+  name: 'RoundAddDialog',
   // TODO:refactor
   props: {
     teamId: {
@@ -89,10 +89,6 @@ export default {
       type: String,
       required: true,
     },
-    gameTeam: {
-      type: Object,
-      required: true
-    }
   },
   data() {
     return {
@@ -102,28 +98,33 @@ export default {
       result: null,
       date: new Date().toISOString().substr(0, 10),
       resultRules: [requiredField],
-    };
+    }
   },
   computed: {
     ...mapState('teams', ['teams']),
+    ...mapState('games', ['games']),
     ...mapGetters('teams', ['getTeam']),
+    ...mapGetters('games', ['getGame']),
+    game() {
+      return this.games ? this.getGame(this.gameId) : null
+    },
     team() {
-      return this.teams ? this.getTeam(this.teamId) : null;
+      return this.teams ? this.getTeam(this.teamId) : null
     },
     resultOptions() {
       if (this.team) {
-        if (this.team.coop) return ['Victory', 'Defeat'];
-        const options = this.team.players.map((player) => player.name);
-        return [...options, 'Tie'];
+        if (this.team.coop) return ['Victory', 'Defeat']
+        const options = this.team.players.map((player) => player.name)
+        return [...options, 'Tie']
       }
-      return null;
+      return null
     },
   },
   methods: {
     ...mapActions('rounds', ['createRound']),
     onSubmit() {
-      const round = this.cookRound();
-      this.createRound(round);
+      const round = this.cookRound()
+      this.createRound(round)
     },
     cookRound() {
       const round = {
@@ -133,11 +134,11 @@ export default {
         teamId: this.teamId,
         comment: this.comment,
         winner: this.result.toLowerCase(),
-      };
-      if (this.team.coop) round.result = this.result.toUpperCase();
+      }
+      if (this.team.coop) round.result = this.result.toUpperCase()
       // TODO: highlight result, maybe with icon, not VICTORY
-      return round;
+      return round
     },
   },
-};
+}
 </script>
