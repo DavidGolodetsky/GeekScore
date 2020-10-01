@@ -13,23 +13,26 @@
       label="Name"
     />
     <v-select
+      v-if="coop"
       prepend-icon="mdi-account-multiple-plus"
       :rules="selectRules"
       :items="numberOfPlayers"
       label="Number of players"
       @change="setPlayers"
     />
-    <v-text-field
-      v-for="(player, i) in players"
-      :key="i"
-      v-model.trim="player.name"
-      :readonly="isMe(player)"
-      :clearable="!isMe(player)"
-      prepend-icon="mdi-account"
-      :rules="playerRules"
-      :label="`Player #${i + 1}`"
-      @input="isUniqueName"
-    />
+    <span v-if="coop">
+      <v-text-field
+        v-for="(player, i) in players"
+        :key="i"
+        v-model.trim="player.name"
+        :readonly="isMe(player)"
+        :clearable="!isMe(player)"
+        prepend-icon="mdi-account"
+        :rules="playerRules"
+        :label="`Player #${i + 1}`"
+        @input="isUniqueName"
+      />
+    </span>
     <v-switch
       v-model="coop"
       label="Cooperative"
