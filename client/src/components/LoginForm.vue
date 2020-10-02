@@ -39,6 +39,14 @@
             :rules="EmailRules"
           />
           <v-text-field
+            v-if="formProps.signUp"
+            v-model.trim="username"
+            clearable
+            label="Username"
+            type="text"
+            prepend-icon="mdi-account"
+          />
+          <v-text-field
             v-model.trim="password"
             :type="showPassword ? 'text' : 'password'"
             label="Password"
@@ -107,7 +115,8 @@ export default {
       confirmPassword: "",
       email: "",
       EmailRules: [requiredField, emailField],
-      passwordRules: standardField
+      username: "",
+      passwordRules: standardField,
     };
   },
   computed: {
@@ -128,6 +137,7 @@ export default {
     onSubmit () {
       const userInfo = {
         email: this.email,
+        username: this.username,
         password: this.password
       };
       this.loginMethod(userInfo);
