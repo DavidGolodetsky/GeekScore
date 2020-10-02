@@ -46,6 +46,7 @@ import rounds from '@/store/modules/rounds';
 import { mapActions, mapGetters, mapState } from 'vuex';
 
 export default {
+  name: "TeamDetails",
   components: {
     ChartBars,
     MainTable,

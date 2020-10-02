@@ -2,6 +2,7 @@
 import { VIcon } from "vuetify/lib";
 
 export default {
+  name: "TheGoBack",
   functional: true,
   props: {
     title: {

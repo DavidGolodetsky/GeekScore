@@ -34,6 +34,7 @@ import { standardField, tooLongField, linkField } from "@/utils/validations";
 import { mapActions } from "vuex";
 
 export default {
+  name: "GameEditDialog",
   // components: {
   //   ScoresTable
   // },

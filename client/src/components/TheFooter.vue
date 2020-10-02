@@ -14,14 +14,11 @@
 
 <script>
 export default {
-  computed: {
-    year() {
-      const date = new Date();
-      return date.getFullYear();
-    },
-    copy() {
-      return ` ${this.year} — Geek Score`
-    }
+  name: "TheFooter",
+  data() {
+    return {
+      copy: ` ${new Date().getFullYear()} — Geek Score`
+    };
   }
 };
 </script>

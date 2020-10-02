@@ -92,6 +92,7 @@ import { fbStart } from "@/db";
 import { emailField, standardField, requiredField } from "@/utils/validations";
 
 export default {
+  name: "LoginForm",
   props: {
     formProps: {
       type: Object,
