@@ -6,9 +6,10 @@ const router = express.Router();
 // TODO:do you use it currently? 
 
 router.post('/', async (req, res) => {
-    const { id } = req.body
+    const { id, username } = req.body
     const user = new User({
-        id
+        id,
+        username
     });
     try {
         const newUser = await user.save();

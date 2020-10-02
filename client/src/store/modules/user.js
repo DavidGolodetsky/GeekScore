@@ -48,8 +48,7 @@ export default {
         const user = await firebase
           .auth()
           .signInWithEmailAndPassword(payload.email, payload.password);
-        const username = user.user.displayName;
-        const userPayload = { id: user.user.uid, username: username };
+        const userPayload = { id: user.user.uid, username: user.user.displayName };
         await axios.post('/api/users', userPayload);
         commit('SET_USER', userPayload);
       } catch (e) {
