@@ -20,6 +20,7 @@
 import { mapActions } from 'vuex';
 
 export default {
+  name: "TheAlert",
   props: {
     type: {
       type: String,

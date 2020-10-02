@@ -51,6 +51,7 @@
 import { mapState, mapActions, mapGetters } from "vuex";
 
 export default {
+  name: "TheHeader",
   data() {
     return {
       sideNav: false

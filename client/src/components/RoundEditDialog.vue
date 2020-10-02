@@ -12,7 +12,9 @@
 
 <script>
 import { mapActions } from "vuex";
+
 export default {
+  name: "RoundEditDialog",
   props: {
     round: {
       type: Object,

@@ -26,6 +26,7 @@ import CardsList from '@/components/CardsList';
 import { mapActions, mapGetters, mapState } from 'vuex';
 
 export default {
+  name: "GameDetails",
   components: {
     TheTitle,
     TeamEditDialog,

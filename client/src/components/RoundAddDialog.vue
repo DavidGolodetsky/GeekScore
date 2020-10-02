@@ -88,7 +88,7 @@ export default {
     gameId: {
       type: String,
       required: true,
-    },
+    }
   },
   data() {
     return {
