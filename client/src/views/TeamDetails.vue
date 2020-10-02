@@ -103,11 +103,6 @@ export default {
       return this.gameTeam && this.rounds?.length;
     },
   },
-  watch: {
-    gameTeam(value) {
-      if (value) this.setBackTitle(`${this.team.name}: ${this.game.name}`);
-    },
-  },
   created() {
     this.loadData();
   },
@@ -121,10 +116,14 @@ export default {
     ...mapActions('rounds', ['loadRounds']),
     loadData() {
       this.games || this.loadGames();
-      this.teams || this.loadTeams();
+      this.teams || this.loadTeams().then(() => {
+        this.setBackTitle(`${this.team.name}: ${this.game.name}`);
+      });
       const isRounds = this.$store.hasModule('rounds');
       isRounds || this.$store.registerModule('rounds', rounds);
       this.loadRounds();
+
+      if (this.teams != null) this.setBackTitle(`${this.team.name}: ${this.game.name}`);
     },
   },
 };

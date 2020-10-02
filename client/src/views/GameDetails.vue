@@ -57,11 +57,6 @@ export default {
       };
     },
   },
-  watch: {
-    game(value) {
-      if (value) this.setBackTitle(this.game.name);
-    },
-  },
   created() {
     this.loadData();
   },
@@ -80,8 +75,11 @@ export default {
       this.updateTeam(team);
     },
     loadData() {
-      this.games || this.loadGames();
+      this.games || this.loadGames().then(() => {
+        this.setBackTitle(this.getGame(this.gameId).name);
+      });
       this.teams || this.loadTeams();
+      if (this.games != null) this.setBackTitle(this.getGame(this.gameId).name);
     },
   },
 };
