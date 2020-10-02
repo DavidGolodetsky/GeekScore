@@ -4,7 +4,7 @@
       title="Rounds"
       icon="sword-cross"
       class="mb-4"
-      :props="{ teamId, gameId, gameTeam }"
+      :props="{ teamId, gameId }"
       component="round-add-dialog"
     />
     <div v-if="showTable">
