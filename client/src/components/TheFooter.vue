@@ -2,7 +2,7 @@
   <v-footer class="the-footer" padless>
     <v-layout primary white--text>
       <v-container>
-        <span class="mr-6">&copy; {{ copy }}</span>
+        <span class="mr-6" data-test-copy>&copy; {{ copy }}</span>
         <span>
           Build by
           <a class="link" href="https://twitter.com/david_go__" target="_blank">@David_Go__</a>
