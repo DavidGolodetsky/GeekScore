@@ -48,7 +48,6 @@ export default {
           userInfo = response.data.filter(x => x.id === user.user.uid)
         })
         const userPayload = { id: userInfo[0].id, username: userInfo[0].username };
-        await axios.post('/api/users', userPayload);
         commit('SET_USER', userPayload);
       } catch (e) {
         commit('ERROR', e, { root: true });
