@@ -22,7 +22,7 @@
             />
           </v-radio-group>
         </v-col>
-        <v-col cols="6" v-if="!gameTeam.coop">
+        <v-col cols="6">
           <v-radio-group
             v-if="team.players.length > 1"
             v-model="turn"
@@ -88,10 +88,6 @@ export default {
     gameId: {
       type: String,
       required: true,
-    },
-    gameTeam: {
-      type: Object,
-      required: true
     }
   },
   data() {
