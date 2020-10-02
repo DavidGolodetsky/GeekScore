@@ -28,11 +28,6 @@ export default {
         const user = await firebase
           .auth()
           .createUserWithEmailAndPassword(payload.email, payload.password);
-        if(payload.username != ""){
-          await user.user.updateProfile({
-            displayName: payload.username
-          })
-        }
         const userPayload = { id: user.user.uid, username: payload.username};
         await axios.post('/api/users', userPayload);
         commit('SET_USER', userPayload);
@@ -48,7 +43,11 @@ export default {
         const user = await firebase
           .auth()
           .signInWithEmailAndPassword(payload.email, payload.password);
-        const userPayload = { id: user.user.uid, username: user.user.displayName };
+        var userInfo;
+        await axios.get('/api/users').then(function(response){
+          userInfo = response.data.filter(x => x.id === user.user.uid)
+        })
+        const userPayload = { id: userInfo[0].id, username: userInfo[0].username };
         await axios.post('/api/users', userPayload);
         commit('SET_USER', userPayload);
       } catch (e) {
