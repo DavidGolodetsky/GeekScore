@@ -22,7 +22,7 @@
             />
           </v-radio-group>
         </v-col>
-        <v-col cols="6" v-if="!game.coop">
+        <v-col cols="6" v-if="!team.coop">
           <v-radio-group
             v-if="team.players.length > 1"
             v-model="turn"
@@ -102,12 +102,7 @@ export default {
   },
   computed: {
     ...mapState('teams', ['teams']),
-    ...mapState('games', ['games']),
     ...mapGetters('teams', ['getTeam']),
-    ...mapGetters('games', ['getGame']),
-    game() {
-      return this.games ? this.getGame(this.gameId) : null
-    },
     team() {
       return this.teams ? this.getTeam(this.teamId) : null
     },
