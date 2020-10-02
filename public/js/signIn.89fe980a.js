@@ -1,2 +1,0 @@
-(window["webpackJsonp"]=window["webpackJsonp"]||[]).push([["signIn"],{"54e2":function(n,e,t){"use strict";t.r(e);var r=function(){var n=this,e=n.$createElement,t=n._self._c||e;return t("login-form",{attrs:{"form-props":n.formProps}})},o=[],i=t("61b1"),c={components:{LoginForm:i["a"]},data:function(){return{formProps:{title:"Sign In",icon:"login",redirectText:"Don't have account yet?",redirectLink:{name:"signUp"},redirectLinkText:"Sign Up"}}}},s=c,a=t("2877"),p=Object(a["a"])(s,r,o,!1,null,null,null);e["default"]=p.exports}}]);
-//# sourceMappingURL=signIn.89fe980a.js.map
