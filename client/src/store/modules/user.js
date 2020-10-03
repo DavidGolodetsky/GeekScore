@@ -74,7 +74,7 @@ export default {
     async logout({ commit }) {
       try {
         await firebase.auth().signOut();
-        router.push('/');
+        if (router.currentRoute.path !== '/') router.push('/');
         commit('games/SET_GAMES', null, { root: true });
         commit('teams/SET_TEAMS', null, { root: true });
         commit('SET_USER', null);
