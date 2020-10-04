@@ -59,7 +59,9 @@ export default {
     autoSignIn({ commit }, payload) {
       commit('LOADING', true, { root: true });
       commit('SET_USER', { id: payload.uid });
-      router.push('/games');
+      if (router.currentRoute.path !== '/games') {
+        router.push('/games');
+      }
       commit('LOADING', false, { root: true });
     },
     async resetPassword({ commit }, payload) {

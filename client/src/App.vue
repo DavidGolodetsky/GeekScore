@@ -50,6 +50,7 @@ import TheFooter from "@/components/TheFooter";
 import TheAlert from "@/components/TheAlert";
 import { mapState, mapActions, mapGetters } from "vuex";
 import { VueOfflineMixin } from "vue-offline";
+import { setupFb } from '@/db';
 
 export default {
   name: "App",
@@ -93,6 +94,9 @@ export default {
       if (window.pageYOffset > 500) this.showTop = true;
       if (this.showTop && window.pageYOffset < 500) this.showTop = false;
     }
+  },
+  mounted() {
+    setupFb()
   }
 };
 </script>
