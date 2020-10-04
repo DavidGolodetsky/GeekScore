@@ -20,6 +20,7 @@ The main difference for now is that the first version is using Firebase as a bac
 
 ### How to contribute?
 
+0. If you're about to work on particular issue, ask for assignment in order to notify other developers that you're working on that.
 1. Fork repo
 2. Clone your fork
 3. Go to **root**  folder
