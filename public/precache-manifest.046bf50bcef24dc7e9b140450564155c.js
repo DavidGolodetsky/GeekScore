@@ -4,7 +4,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/browserconfig.xml"
   },
   {
-    "revision": "17e08ac112caa8f73e45",
+    "revision": "f51ff0d0b0f36fa02291",
     "url": "/css/app.db104173.css"
   },
   {
@@ -12,15 +12,15 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/css/chunk-vendors.d6e42cfc.css"
   },
   {
-    "revision": "e20ee0740b3b10830cf7",
-    "url": "/css/signIn~signUp.ba0d2394.css"
+    "revision": "aeeb9f3fa4647c17a063",
+    "url": "/css/signIn~signUp.4596e569.css"
   },
   {
-    "revision": "09f9f1ef5b9f1402ad25",
+    "revision": "24a1ad7e81cada792f97",
     "url": "/css/team.4eed53de.css"
   },
   {
-    "revision": "f71bac8f0b1571971435",
+    "revision": "923942d97b67929dcdf8",
     "url": "/css/theDialog.0fa9b1f6.css"
   },
   {
@@ -96,48 +96,48 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/img/team.bf4c6f13.webp"
   },
   {
-    "revision": "b6f7e3d06440ac4ba66546653752ccf4",
+    "revision": "9b0fd20ff9518f7b785dab4f62072ac5",
     "url": "/index.html"
   },
   {
-    "revision": "17e08ac112caa8f73e45",
-    "url": "/js/app.7f31e25a.js"
+    "revision": "f51ff0d0b0f36fa02291",
+    "url": "/js/app.dcf34ff1.js"
   },
   {
     "revision": "618d9ce605687188f758",
     "url": "/js/chunk-vendors.fa2dbc67.js"
   },
   {
-    "revision": "5982bd249d709fc27821",
-    "url": "/js/game.68a3eeb5.js"
+    "revision": "67d8bebbc4bb0b76ec4a",
+    "url": "/js/game.53570e8e.js"
   },
   {
-    "revision": "23a4f40766c7b98fbde1",
-    "url": "/js/notFound.4f522696.js"
+    "revision": "ac51d7763601aad1d749",
+    "url": "/js/notFound.49bbfd36.js"
   },
   {
-    "revision": "295592eca3ac0f0dd351",
-    "url": "/js/resetPass.9cffdc3e.js"
+    "revision": "d94e41ae65d1e04a4b1e",
+    "url": "/js/resetPass.effd1668.js"
   },
   {
-    "revision": "6d21f957a53e8f572ef2",
-    "url": "/js/signIn.ef6763bc.js"
+    "revision": "0899655ff2f98d31d15e",
+    "url": "/js/signIn.a8e1f7ee.js"
   },
   {
-    "revision": "e20ee0740b3b10830cf7",
-    "url": "/js/signIn~signUp.ab0cdfc2.js"
+    "revision": "aeeb9f3fa4647c17a063",
+    "url": "/js/signIn~signUp.2ea77551.js"
   },
   {
-    "revision": "b6be5ea96d0f92d0ab8a",
-    "url": "/js/signUp.145f0d2c.js"
+    "revision": "79d484cb73bacd9680a3",
+    "url": "/js/signUp.51e55fac.js"
   },
   {
-    "revision": "09f9f1ef5b9f1402ad25",
-    "url": "/js/team.6980a5a3.js"
+    "revision": "24a1ad7e81cada792f97",
+    "url": "/js/team.afe84c65.js"
   },
   {
-    "revision": "f71bac8f0b1571971435",
-    "url": "/js/theDialog.e55a58cf.js"
+    "revision": "923942d97b67929dcdf8",
+    "url": "/js/theDialog.956a0b0e.js"
   },
   {
     "revision": "31849e45106ef7247613",
