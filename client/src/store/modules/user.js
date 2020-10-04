@@ -33,6 +33,7 @@ export default {
         commit('SET_USER', userPayload);
       } catch (e) {
         commit('ERROR', e, { root: true });
+        throw e;
       } finally {
         commit('LOADING', false, { root: true });
       }

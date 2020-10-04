@@ -6,6 +6,9 @@ export const tooLongField = (v) =>
 export const tooShortField = (v) =>
   v === '' || !!(v && v.length >= 2) || 'Field is too short';
 
+export const passwordField = (v) =>
+  v === '' || !!(v && v.length >= 6) || 'Field is too short';
+
 export const onlyWhitespaces = (v) =>
   v === '' ||
   !!(v && v.replace(/\s/g, '').length) || 'Field contains only whitespaces';
