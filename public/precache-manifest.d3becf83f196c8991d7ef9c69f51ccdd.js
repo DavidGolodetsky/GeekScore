@@ -4,16 +4,20 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/browserconfig.xml"
   },
   {
-    "revision": "f51ff0d0b0f36fa02291",
-    "url": "/css/app.db104173.css"
+    "revision": "e90ed7ee4315b0ccd98e",
+    "url": "/css/app.a45aba91.css"
   },
   {
-    "revision": "618d9ce605687188f758",
-    "url": "/css/chunk-vendors.d6e42cfc.css"
+    "revision": "0194f3703fbcd093183b",
+    "url": "/css/chunk-vendors.e34db925.css"
   },
   {
-    "revision": "aeeb9f3fa4647c17a063",
-    "url": "/css/signIn~signUp.4596e569.css"
+    "revision": "8a284900e102360531bb",
+    "url": "/css/signIn.4596e569.css"
+  },
+  {
+    "revision": "8f91492cab68d2cad6ad",
+    "url": "/css/signUp.4596e569.css"
   },
   {
     "revision": "24a1ad7e81cada792f97",
@@ -96,16 +100,16 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/img/team.bf4c6f13.webp"
   },
   {
-    "revision": "9b0fd20ff9518f7b785dab4f62072ac5",
+    "revision": "0988a8d451e33346e8fff732f17d1b78",
     "url": "/index.html"
   },
   {
-    "revision": "f51ff0d0b0f36fa02291",
-    "url": "/js/app.dcf34ff1.js"
+    "revision": "e90ed7ee4315b0ccd98e",
+    "url": "/js/app.679186c3.js"
   },
   {
-    "revision": "618d9ce605687188f758",
-    "url": "/js/chunk-vendors.fa2dbc67.js"
+    "revision": "0194f3703fbcd093183b",
+    "url": "/js/chunk-vendors.900ce4a4.js"
   },
   {
     "revision": "67d8bebbc4bb0b76ec4a",
@@ -120,16 +124,12 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/js/resetPass.effd1668.js"
   },
   {
-    "revision": "0899655ff2f98d31d15e",
-    "url": "/js/signIn.a8e1f7ee.js"
+    "revision": "8a284900e102360531bb",
+    "url": "/js/signIn.decad9f4.js"
   },
   {
-    "revision": "aeeb9f3fa4647c17a063",
-    "url": "/js/signIn~signUp.2ea77551.js"
-  },
-  {
-    "revision": "79d484cb73bacd9680a3",
-    "url": "/js/signUp.51e55fac.js"
+    "revision": "8f91492cab68d2cad6ad",
+    "url": "/js/signUp.e6581800.js"
   },
   {
     "revision": "24a1ad7e81cada792f97",

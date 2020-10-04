@@ -1,32 +1,14 @@
 <template>
-  <v-app
-    v-cloak
-    v-scroll="onScroll"
-    class="app"
-  >
+  <v-app v-cloak v-scroll="onScroll" class="app">
     <the-header />
     <v-main>
       <v-container class="app-container">
-        <the-alert
-          v-if="showAlert"
-          :type="alertType"
-          :text="alertText"
-        />
-        <transition
-          name="slide"
-          mode="out-in"
-        >
+        <the-alert v-if="showAlert" :type="alertType" :text="alertText" />
+        <transition name="slide" mode="out-in">
           <router-view />
         </transition>
-        <div
-          v-if="loading"
-          class="loader-wrap"
-        >
-          <v-progress-circular
-            :size="50"
-            indeterminate
-            color="secondary"
-          />
+        <div v-if="loading" class="loader-wrap">
+          <v-progress-circular :size="50" indeterminate color="secondary" />
         </div>
         <v-btn
           v-if="showTop"
@@ -45,59 +27,59 @@
 </template>
 
 <script>
-import TheHeader from "@/components/TheHeader";
-import TheFooter from "@/components/TheFooter";
-import TheAlert from "@/components/TheAlert";
-import { mapState, mapActions, mapGetters } from "vuex";
-import { VueOfflineMixin } from "vue-offline";
+import TheHeader from '@/components/TheHeader';
+import TheFooter from '@/components/TheFooter';
+import TheAlert from '@/components/TheAlert';
+import { mapState, mapActions, mapGetters } from 'vuex';
+import { VueOfflineMixin } from 'vue-offline';
 import { setupFb } from '@/db';
 
 export default {
-  name: "App",
+  name: 'App',
   components: {
     TheHeader,
     TheFooter,
-    TheAlert
+    TheAlert,
   },
   mixins: [VueOfflineMixin],
   data: () => ({
     showTop: false,
-    offlineText: "Geek Score is offline. Some features might be disabled",
+    offlineText: 'Geek Score is offline. Some features might be disabled',
     options: {
       duration: 300,
       offset: 0,
-      easing: "easeInOutCubic"
-    }
+      easing: 'easeInOutCubic',
+    },
   }),
   computed: {
-    ...mapGetters(["loading", "error"]),
+    ...mapGetters(['loading', 'error']),
     // TODO: do we need this?
-    ...mapState("user", ["user"]),
-    showAlert () {
+    ...mapState('user', ['user']),
+    showAlert() {
       return this.isOffline || this.error;
     },
-    alertType () {
-      return this.isOffline ? "warning" : "error";
+    alertType() {
+      return this.isOffline ? 'warning' : 'error';
     },
-    alertText () {
+    alertText() {
       return this.isOffline ? this.offlineText : this.error.message;
-    }
+    },
   },
   watch: {
-    showAlert (val) {
-      if (val) setTimeout(() => (this.setError()), 10000);
-    }
-  },
-  methods: {
-    ...mapActions(["setError"]),
-    onScroll () {
-      if (window.pageYOffset > 500) this.showTop = true;
-      if (this.showTop && window.pageYOffset < 500) this.showTop = false;
-    }
+    showAlert(val) {
+      if (val) setTimeout(() => this.setError(), 10000);
+    },
   },
   mounted() {
-    setupFb()
-  }
+    setupFb();
+  },
+  methods: {
+    ...mapActions(['setError']),
+    onScroll() {
+      if (window.pageYOffset > 500) this.showTop = true;
+      if (this.showTop && window.pageYOffset < 500) this.showTop = false;
+    },
+  },
 };
 </script>
 

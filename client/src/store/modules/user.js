@@ -46,8 +46,8 @@ export default {
           .signInWithEmailAndPassword(payload.email, payload.password);
         const userInfo = await axios.get(`/api/users/${user.user.uid}`);
         const userPayload = {
-          id: userInfo.data.id,
-          username: userInfo.data.username,
+          id: userInfo.data[0].id,
+          username: userInfo.data[0].username,
         };
         await commit('SET_USER', userPayload);
       } catch (e) {
