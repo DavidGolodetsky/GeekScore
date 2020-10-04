@@ -44,10 +44,10 @@ export default {
           .auth()
           .signInWithEmailAndPassword(payload.email, payload.password);
         var userInfo;
-        await axios.get('/api/users').then(function(response){
-          userInfo = response.data.filter(x => x.id === user.user.uid)
-        })
-        const userPayload = { id: userInfo[0].id, username: userInfo[0].username };
+        await axios.get(`/api/users/${user.user.uid}`).then(function(response){
+          userInfo = response;
+        });
+        const userPayload = { id: userInfo.id, username: userInfo.username };
         commit('SET_USER', userPayload);
       } catch (e) {
         commit('ERROR', e, { root: true });
