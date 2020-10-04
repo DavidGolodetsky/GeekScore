@@ -78,7 +78,7 @@
 <script>
 import { mapActions } from 'vuex';
 import { fbStart } from '@/db';
-import { emailField, standardField, requiredField, passwordField } from '@/utils/validations';
+import { emailField, standardField, requiredField, shortPassword } from '@/utils/validations';
 
 export default {
   name: 'LoginForm',
@@ -97,7 +97,7 @@ export default {
       email: '',
       EmailRules: [requiredField, emailField],
       username: '',
-      passwordRules: [...standardField, passwordField],
+      passwordRules: [...standardField, shortPassword],
     };
   },
   computed: {
