@@ -59,18 +59,11 @@
       "eslint:recommended"
     ],
     "rules": {
-      "vue/max-attributes-per-line": [
-        "error",
-        {
-          "singleline": 10,
-          "multiline": {
-            "max": 10,
-            "allowFirstLine": false
-          }
-        }
-      ],
+      "vue/max-attributes-per-line": "off",
       "vue/singleline-html-element-content-newline": "off",
-      "vue/multiline-html-element-content-newline": "off"
+      "vue/multiline-html-element-content-newline": "off",
+      "vue/html-closing-bracket-new": "off",
+      "vue/html-indent": "off"
     },
     "parserOptions": {
       "parser": "babel-eslint"

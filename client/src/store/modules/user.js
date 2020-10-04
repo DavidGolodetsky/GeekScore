@@ -28,7 +28,7 @@ export default {
         const user = await firebase
           .auth()
           .createUserWithEmailAndPassword(payload.email, payload.password);
-        const userPayload = { id: user.user.uid, username: payload.username};
+        const userPayload = { id: user.user.uid, username: payload.username };
         await axios.post('/api/users', userPayload);
         commit('SET_USER', userPayload);
       } catch (e) {
@@ -43,12 +43,12 @@ export default {
         const user = await firebase
           .auth()
           .signInWithEmailAndPassword(payload.email, payload.password);
-        var userInfo;
-        await axios.get(`/api/users/${user.user.uid}`).then(function(response){
-          userInfo = response;
-        });
-        const userPayload = { id: userInfo.id, username: userInfo.username };
-        commit('SET_USER', userPayload);
+        const userInfo = await axios.get(`/api/users/${user.user.uid}`);
+        const userPayload = {
+          id: userInfo.data[0].id,
+          username: userInfo.data[0].username,
+        };
+        await commit('SET_USER', userPayload);
       } catch (e) {
         commit('ERROR', e, { root: true });
       } finally {
