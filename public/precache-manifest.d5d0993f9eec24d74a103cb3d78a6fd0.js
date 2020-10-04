@@ -4,16 +4,16 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/browserconfig.xml"
   },
   {
-    "revision": "0b7f888b903a12f89eab",
-    "url": "/css/app.af185d71.css"
+    "revision": "17e08ac112caa8f73e45",
+    "url": "/css/app.db104173.css"
   },
   {
     "revision": "618d9ce605687188f758",
     "url": "/css/chunk-vendors.d6e42cfc.css"
   },
   {
-    "revision": "a5e37a9ef38ba2e3aa19",
-    "url": "/css/signIn~signUp.f613c19c.css"
+    "revision": "e20ee0740b3b10830cf7",
+    "url": "/css/signIn~signUp.ba0d2394.css"
   },
   {
     "revision": "09f9f1ef5b9f1402ad25",
@@ -96,12 +96,12 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/img/team.bf4c6f13.webp"
   },
   {
-    "revision": "8552e2bd27c62c3a0508bdcc3225085c",
+    "revision": "b6f7e3d06440ac4ba66546653752ccf4",
     "url": "/index.html"
   },
   {
-    "revision": "0b7f888b903a12f89eab",
-    "url": "/js/app.d6356c00.js"
+    "revision": "17e08ac112caa8f73e45",
+    "url": "/js/app.7f31e25a.js"
   },
   {
     "revision": "618d9ce605687188f758",
@@ -124,8 +124,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/js/signIn.ef6763bc.js"
   },
   {
-    "revision": "a5e37a9ef38ba2e3aa19",
-    "url": "/js/signIn~signUp.50d57491.js"
+    "revision": "e20ee0740b3b10830cf7",
+    "url": "/js/signIn~signUp.ab0cdfc2.js"
   },
   {
     "revision": "b6be5ea96d0f92d0ab8a",
