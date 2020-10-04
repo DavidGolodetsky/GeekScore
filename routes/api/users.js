@@ -3,7 +3,7 @@ const express = require('express')
 const User = require('../../models/user');
 const router = express.Router();
 
-// TODO:do you use it currently? 
+// TODO:do you use it currently?
 
 router.post('/', async (req, res) => {
     const { id, username } = req.body
@@ -28,6 +28,14 @@ router.get('/', async (req, res) => {
     }
 });
 
-
+router.get('/:id', async (req, res) => {
+    try {
+        const id = req.params.id;
+        const user = await User.find({id: id});
+        res.status(200).json(user);
+    } catch (err) {
+        res.status(500).json({ message: err.message });
+    }
+});
 
 module.exports = router;
