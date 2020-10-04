@@ -45,8 +45,8 @@ export default {
           .signInWithEmailAndPassword(payload.email, payload.password);
         const userInfo = await axios.get(`/api/users/${user.user.uid}`);
         const userPayload = {
-          id: userInfo.data[0].id,
-          username: userInfo.data[0].username,
+          id: userInfo.data.id,
+          username: userInfo.data.username,
         };
         await commit('SET_USER', userPayload);
       } catch (e) {
@@ -58,6 +58,7 @@ export default {
     autoSignIn({ commit }, payload) {
       commit('LOADING', true, { root: true });
       commit('SET_USER', { id: payload.uid });
+      router.push('/games');
       commit('LOADING', false, { root: true });
     },
     async resetPassword({ commit }, payload) {

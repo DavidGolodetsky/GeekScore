@@ -2,7 +2,6 @@ import firebase from 'firebase/app';
 import 'firebase/auth';
 import * as firebaseui from 'firebaseui';
 import store from '@/store';
-import router from '@/router';
 
 const firebaseConfig = {
   apiKey: 'AIzaSyAscgoXoqL2LOk84LfNxq1BCu-JnFwyNug',
@@ -16,10 +15,8 @@ const firebaseConfig = {
 
 firebase.initializeApp(firebaseConfig);
 firebase.auth().onAuthStateChanged((user) => {
-  console.log(user);
   if (user) {
     store.dispatch('user/autoSignIn', user);
-    router.push('/games');
   }
 });
 
