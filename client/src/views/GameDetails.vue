@@ -1,12 +1,21 @@
 <template>
   <section class="game-details">
-    <div v-if="winRate">{{ winRate }}</div>
     <the-title
       title="Teams"
       icon="account-group"
       :props="{ gameId }"
       component="team-add-dialog"
     />
+    <div
+      v-if="winRate"
+      class="win-rate"
+    >
+      <v-icon
+        dark
+        class="mr-3"
+      >mdi-brightness-percent</v-icon>
+      <span>Your win rate is: {{ winRate }}</span>
+    </div>
     <cards-list
       v-if="gameTeams"
       :items="gameTeams"
@@ -41,8 +50,7 @@ export default {
   },
   computed: {
     ...mapState('teams', ['teams']),
-    ...mapState('games', ['games']),
-    ...mapState('user', ['winRate']),
+    ...mapState('games', ['games', 'winRate']),
     ...mapGetters('teams', ['getGameTeams']),
     ...mapGetters('games', ['getGame']),
     gameTeams () {
@@ -67,8 +75,7 @@ export default {
   },
   methods: {
     ...mapActions(['setBackTitle']),
-    ...mapActions('games', ['loadGames']),
-    ...mapActions('user', ['loadWinRate']),
+    ...mapActions('games', ['loadGames', 'loadWinRate']),
     ...mapActions('teams', ['updateTeam', 'loadTeams', 'loadGameTeams']),
     toggleFavorite (teamInfo) {
       const team = {
@@ -82,9 +89,21 @@ export default {
         this.setBackTitle(this.getGame(this.gameId).name);
       });
       this.teams || this.loadTeams();
-      this.winRate || this.loadWinRate()
+      this.loadWinRate(this.gameId)
       if (this.games != null) this.setBackTitle(this.getGame(this.gameId).name);
     },
   },
 };
 </script>
+
+<style lang="scss">
+.game-details {
+  .win-rate {
+    background-color: $secondary;
+    padding: 15px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+  }
+}
+</style>

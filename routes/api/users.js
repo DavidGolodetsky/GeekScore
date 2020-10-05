@@ -64,9 +64,9 @@ router.get('/win-rate/:id', async (req, res) => {
     }
     const response = {};
     for (game in winRates) {
-      response[game] = (
-        winRates[game].wins / winRates[game].totalGames
-      ).toFixed(4);
+      response[game] = `${Math.floor(
+        (winRates[game].wins / winRates[game].totalGames) * 100
+      )}%`;
     }
     res.status(200).json(response);
   } catch (err) {

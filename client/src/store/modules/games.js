@@ -4,6 +4,7 @@ export default {
   namespaced: true,
   state: {
     games: null,
+    winRate: null,
   },
   mutations: {
     CREATE_GAME(state, payload) {
@@ -22,6 +23,9 @@ export default {
     DELETE_GAME(state, payload) {
       const games = state.games.filter((game) => game._id !== payload);
       games.length ? (state.games = games) : (state.games = null);
+    },
+    SET_WIN_RATE(state, payload) {
+      state.winRate = payload;
     },
   },
   actions: {
@@ -72,6 +76,22 @@ export default {
         commit('LOADING', true, { root: true });
         await axios.delete(`/api/games/${payload}`);
         commit('DELETE_GAME', payload);
+      } catch (e) {
+        commit('ERROR', e, { root: true });
+      } finally {
+        commit('LOADING', false, { root: true });
+      }
+    },
+    async loadWinRate({ commit }, payload) {
+      try {
+        commit('LOADING', true, { root: true });
+        let winRate = await axios.get(`/api/games/win-rate/${payload}`);
+        if (winRate.data) {
+          winRate = `${winRate.data}%`;
+          commit('SET_WIN_RATE', winRate);
+        } else {
+          commit('SET_WIN_RATE', null);
+        }
       } catch (e) {
         commit('ERROR', e, { root: true });
       } finally {
