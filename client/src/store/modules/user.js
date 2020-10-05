@@ -6,6 +6,7 @@ export default {
   namespaced: true,
   state: {
     user: null,
+    winRate: null,
     resetPassword: false,
   },
   mutations: {
@@ -19,6 +20,9 @@ export default {
     },
     RESET_PASSWORD(state) {
       state.resetPassword = true;
+    },
+    SET_WIN_RATE(state, payload) {
+      state.winRate = payload;
     },
   },
   actions: {
@@ -77,11 +81,24 @@ export default {
     },
     async logout({ commit }) {
       try {
+        commit('LOADING', true, { root: true });
         await firebase.auth().signOut();
         if (router.currentRoute.path !== '/') router.push('/');
         commit('games/SET_GAMES', null, { root: true });
         commit('teams/SET_TEAMS', null, { root: true });
         commit('SET_USER', null);
+      } catch (e) {
+        commit('ERROR', e, { root: true });
+      } finally {
+        commit('LOADING', false, { root: true });
+      }
+    },
+    async loadWinRate({ commit }) {
+      try {
+        commit('LOADING', true, { root: true });
+        const user = window.localStorage.getItem('userId');
+        const winRate = await axios.get(`/api/users/win-rate/${user}`);
+        commit('SET_WIN_RATE', winRate.data);
       } catch (e) {
         commit('ERROR', e, { root: true });
       } finally {

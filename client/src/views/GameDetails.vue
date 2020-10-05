@@ -1,5 +1,6 @@
 <template>
   <section class="game-details">
+    <div v-if="winRate">{{ winRate }}</div>
     <the-title
       title="Teams"
       icon="account-group"
@@ -41,15 +42,16 @@ export default {
   computed: {
     ...mapState('teams', ['teams']),
     ...mapState('games', ['games']),
+    ...mapState('user', ['winRate']),
     ...mapGetters('teams', ['getGameTeams']),
     ...mapGetters('games', ['getGame']),
-    gameTeams() {
+    gameTeams () {
       return this.teams ? this.getGameTeams(this.gameId) : null;
     },
-    game() {
+    game () {
       return this.games ? this.getGame(this.gameId) : null;
     },
-    teamRoute() {
+    teamRoute () {
       return {
         name: 'team',
         params: { teamId: '' },
@@ -57,28 +59,30 @@ export default {
       };
     },
   },
-  created() {
+  created () {
     this.loadData();
   },
-  beforeDestroy() {
+  beforeDestroy () {
     this.setBackTitle();
   },
   methods: {
     ...mapActions(['setBackTitle']),
     ...mapActions('games', ['loadGames']),
+    ...mapActions('user', ['loadWinRate']),
     ...mapActions('teams', ['updateTeam', 'loadTeams', 'loadGameTeams']),
-    toggleFavorite(teamInfo) {
+    toggleFavorite (teamInfo) {
       const team = {
         ...teamInfo,
         gameId: this.gameId,
       };
       this.updateTeam(team);
     },
-    loadData() {
+    loadData () {
       this.games || this.loadGames().then(() => {
         this.setBackTitle(this.getGame(this.gameId).name);
       });
       this.teams || this.loadTeams();
+      this.winRate || this.loadWinRate()
       if (this.games != null) this.setBackTitle(this.getGame(this.gameId).name);
     },
   },
