@@ -25,6 +25,7 @@ The main difference for now is that the first version is using Firebase as a bac
 2. Clone your fork
 3. Go to **root**  folder
 4. Run `npm i`
+6. Run `npm i -g @vue/cli`
 5. Start Backend: run `npm run serve`
 6. Go to **client** folder and run `npm i`
 6. Start Frontend: run `npm run serve` in the **client** folder
