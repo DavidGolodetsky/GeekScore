@@ -27,13 +27,15 @@ The main difference for now is that the first version is using Firebase as a bac
 4. Run `docker-compose up --build`
 6. Create your branch, commit, push, create pull request
 
-### Project structure
+## Project structure
 
 **Main logical parts** are Games, Teams, Rounds and Users. Those 4 entities could be find all over the project structure. 
 
-**Backend** is written in Node.js (Express) and it's using MongoDB as a database (hence MEVN stack). Index file is `server.js` in the **root** folder. Here all routes are applied. Routes could be found in the **routes/api** folder. They are divided by 4 logical entities. Every route has it's Mongoose schema. All Mongoose models could be found in the **models** folder (again they are divided on those 4 entities). Firebase is using only for authentication and it's temprary solution before migrating authentication to node.js.
+#### Backend
+Backend is written in Node.js (Express) and it's using MongoDB as a database (hence MEVN stack). Index file is `server.js` in the **root** folder. Here all routes are applied. Routes could be found in the **routes/api** folder. They are divided by 4 logical entities. Every route has it's Mongoose schema. All Mongoose models could be found in the **models** folder (again they are divided on those 4 entities). Firebase is using only for authentication and it's temprary solution before migrating authentication to node.js.
 
-**Frontend** is written on Vue.js (^2.6). We're also using Vuetify as a UI library, and Vuex as state management library. For routing we're using Vue Router and Vue Test Utils (based on Jest) for unit tests. Frontend index point is `main.js`. Pages could be found in **views** folder, components are in **components** folder. For structuring components we're stick to official Vue styleguide (https://vuejs.org/v2/style-guide/#Tightly-coupled-component-names-strongly-recommended).
+#### Frontend
+Frontend is written on Vue.js (^2.6). We're also using Vuetify as a UI library, and Vuex as state management library. For routing we're using Vue Router and Vue Test Utils (based on Jest) for unit tests. Frontend index point is `main.js`. Pages could be found in **views** folder, components are in **components** folder. For structuring components we're stick to official Vue styleguide (https://vuejs.org/v2/style-guide/#Tightly-coupled-component-names-strongly-recommended).
 Vuex store is the heart of the app. All api calls are going through vuex. It's also divided by main 4 entities. All manipulations with the store must go through `actions`, which will call respective `mutations` (More info: https://vuex.vuejs.org/guide/actions.html).
  
 #### Docker
