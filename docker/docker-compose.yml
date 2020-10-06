@@ -31,7 +31,7 @@ services:
       - geek-database
     restart: always
     ports:
-    - ${HOST_BACKEND_PORT}:3000
+      - ${HOST_BACKEND_PORT}:3000
     networks:
       - geek-network
 
