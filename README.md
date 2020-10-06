@@ -45,9 +45,9 @@ This must be done before building the Image. After that it can be changed backwa
 
 ##### Running the App with docker-compose 
 In order to run the app with docker-compose the working dir of the cmd must be `/docker` (where the docker-compose file is located)
-###### Start and rebuild Images
+##### Start and rebuild Images
 In order to rebuild the Images before starting the app following command must be typed `docker-compose up --build`
-###### Start without rebuild Images
+##### Start without rebuild Images
 In order to start the docker-compose file just type in following command `docker-compose up`
 ##### Basic commands for docker-compose 
 - `docker-compose stop` -> Stops the whole app containers
