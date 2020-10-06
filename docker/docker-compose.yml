@@ -1,0 +1,52 @@
+# Docker compose File for the the MEVN stack applicaton
+version: "3.8"
+
+# Network
+networks:
+  geek-network:
+    driver: bridge
+
+services:
+  # Database
+  geek-database:
+    container_name: geek-database
+    image: mongo
+    restart: always
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: ${PSQL_USER}
+      MONGO_INITDB_ROOT_PASSWORD: ${PSQL_PASSWORD}
+      MONGO_INITDB_DATABASE: ${PSQL_DATABASE}
+    ports:
+      - ${HOST_DATABASE_PORT}:5432
+    networks:
+      - geek-network
+
+  # Backend
+  geek-backend:
+    container_name: geek-backend
+    build:
+      context: ./..
+      dockerfile: Dockerfile
+    depends_on:
+      - geek-database
+    restart: always
+    ports:
+      - ${HOST_BACKEND_PORT}:3000
+    networks:
+      - geek-network
+
+  # Frontend
+  geek-frontend:
+    container_name: geek-frontend
+    build:
+      context: ./../client
+      dockerfile: Dockerfile
+    depends_on:
+      - geek-backend
+    restart: always
+    ports:
+      - ${HOST_FRONTEND_PORT}:8080
+    networks:
+      - geek-network
+
+
