@@ -1,5 +1,5 @@
 # Docker compose File for the the MEVN stack applicaton
-version: "3.8"
+version: '3.8'
 
 # Network
 networks:
@@ -48,5 +48,3 @@ services:
       - ${HOST_FRONTEND_PORT}:8080
     networks:
       - geek-network
-
-
