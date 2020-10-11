@@ -76,7 +76,6 @@ export default {
           username: payload.username
         });
         commit('SET_USER', { id: payload.id, username: payload.username });
-        commit('LOADING', false, { root: true });
       } catch (e) {
         commit('ERROR', e, { root: true });
       } finally {
