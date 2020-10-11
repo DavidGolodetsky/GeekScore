@@ -2,6 +2,7 @@ import Vue from 'vue';
 import Router from 'vue-router';
 import HomePage from '@/views/HomePage';
 import GameList from '@/views/GameList';
+import Profile from '@/views/Profile';
 import store from '@/store';
 
 Vue.use(Router)
@@ -44,6 +45,19 @@ const routes = [
       metaTags: {
         name: "description",
         content: "Game details page"
+      }
+    }
+  },
+  {
+    path: '/profile',
+    name: 'profile',
+    component: Profile,
+    meta: {
+      requiresAuth: true,
+      title: "Geek Score - Profile page",
+      metaTags: {
+        name: "User Profile",
+        content: "User Profile page"
       }
     }
   },
