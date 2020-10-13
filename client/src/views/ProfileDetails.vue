@@ -1,14 +1,18 @@
 <template>
   <section>
-    <the-title title="Profile" icon="account-details" />
+    <the-title
+      title="Profile"
+      icon="account-details"
+    />
     <the-alert
       v-if="alertData.showAlert"
       :type="alertData.type"
       :text="alertData.text"
     />
     <v-container>
+      <!-- TODO:refactor -->
       <v-row>
-        <v-col cols="12" sm="12">
+        <v-col cols="12">
           <v-text-field
             v-model="formData.username"
             class="my-2"
@@ -20,7 +24,10 @@
             required
           />
           <v-card-actions>
-            <v-btn v-if="!isReadOnly" @click="resetForm"> Cancel </v-btn>
+            <v-btn
+              v-if="!isReadOnly"
+              @click="resetForm"
+            > Cancel </v-btn>
             <v-btn
               color="secondary"
               :disabled="!formIsValid"
@@ -29,6 +36,17 @@
               {{ isReadOnly ? "Edit" : "Save" }}
             </v-btn>
           </v-card-actions>
+        </v-col>
+      </v-row>
+      <v-row>
+        <v-col>
+          <v-btn
+            @click="onLogout"
+            color="secondary"
+          >
+            <v-icon left>mdi-logout</v-icon>
+            Logout
+          </v-btn>
         </v-col>
       </v-row>
     </v-container>
@@ -70,11 +88,11 @@ export default {
     ...mapState("user", {
       userData: state => state.user
     }),
-    formIsValid() {
+    formIsValid () {
       return this.formData.username;
     }
   },
-  created: function() {
+  created: function () {
     if (this.userData) {
       axios.get(`/api/users/${this.userData.id}`).then(user => {
         this.defaultFormData.username = user.data[0].username;
@@ -83,12 +101,15 @@ export default {
     }
   },
   methods: {
-    ...mapActions("user", ["updateUsername"]),
-    resetForm() {
+    ...mapActions("user", ["updateUsername", "logout"]),
+    onLogout () {
+      this.logout();
+    },
+    resetForm () {
       this.formData = Object.assign({}, this.formData, this.defaultFormData);
       this.isReadOnly = !this.isReadOnly;
     },
-    updateUserData() {
+    updateUserData () {
       if (this.isReadOnly) {
         this.isReadOnly = !this.isReadOnly;
         return;
@@ -109,7 +130,7 @@ export default {
           console.log(`An error has occurred: ${error}`);
         });
     },
-    toggleAlert(isShown, type, text) {
+    toggleAlert (isShown, type, text) {
       this.alertData = Object.assign({}, this.alertData, {
         showAlert: isShown,
         type: type,

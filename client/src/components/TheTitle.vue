@@ -18,7 +18,6 @@ export default {
     },
     component: {
       type: String,
-      required: false,
       default: ""
     },
     icon: {
@@ -27,12 +26,12 @@ export default {
     },
     props: {
       type: Object,
-      default() {
+      default () {
         return {};
       }
     }
   },
-  render(h) {
+  render (h) {
     return h(
       "div",
       {
