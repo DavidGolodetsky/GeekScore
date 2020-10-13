@@ -20,6 +20,30 @@ router.post('/', async (req, res) => {
   }
 });
 
+router.put('/:id', async (req, res) => {
+  const { id, username } = req.body;
+  const user = new User({
+    id,
+    username
+  });
+  try {
+    const updatedUser = await User.update(
+      { id: id },
+      { username: username },
+      { upsert: false },
+      function (error, result) {
+        if (error) {
+          res.status(400).json(error);
+        } else {
+          res.status(200).json(result);
+        }
+      }
+    );
+  } catch (err) {
+    res.status(400).json({ message: err.message });
+  }
+});
+
 router.get('/', async (req, res) => {
   try {
     const users = await User.find();

@@ -68,6 +68,20 @@ export default {
       }
       commit('LOADING', false, { root: true });
     },
+    async updateUsername({ commit }, payload) {
+      try {
+        commit('LOADING', true, { root: true });
+        await axios.put(`/api/users/${payload.id}`, {
+          id: payload.id,
+          username: payload.username
+        });
+        commit('SET_USER', { id: payload.id, username: payload.username });
+      } catch (e) {
+        commit('ERROR', e, { root: true });
+      } finally {
+        commit('LOADING', false, { root: true });
+      }
+    },
     async resetPassword({ commit }, payload) {
       try {
         commit('LOADING', true, { root: true });
