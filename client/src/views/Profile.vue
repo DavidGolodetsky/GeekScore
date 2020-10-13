@@ -1,10 +1,6 @@
 <template>
   <section>
     <the-title title="Profile" icon="account-details" />
-    <!-- <div class="d-flex my-3">
-      <v-icon class="mx-2" color="secondary"> mdi-account-details </v-icon>
-      <h1 class="app-headline">Profile</h1>
-    </div> -->
     <the-alert
       v-if="alertData.showAlert"
       :type="alertData.type"
