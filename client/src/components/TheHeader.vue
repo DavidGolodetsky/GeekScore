@@ -66,6 +66,11 @@ export default {
           text: "Games",
           icon: "dice-multiple",
           link: "/games"
+        },
+        {
+          text: "Profile",
+          icon: "account-details",
+          link: "/profile"
         }
       ];
     }
