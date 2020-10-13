@@ -51,37 +51,39 @@ import { mapState } from "vuex";
 
 export default {
   name: "HomePage",
-  data: () => ({
-    items: [
-      {
-        title: "Games",
-        text:
-          "Add your favorite board games. Add more info about this awesome game!",
-        color: "warning",
-        icon: "dice-multiple"
-      },
-      {
-        title: "Teams",
-        text:
-          "Create team of buddies to dive in the world of board games! You can add as many teams per game as you want.",
-        color: "accent",
-        icon: "account-group"
-      },
-      {
-        title: "Rounds",
-        text:
-          "When team is ready to play - roll the dice! Add result of your game to rounds table which is there per team in this game.",
-        color: "info",
-        icon: "sword-cross"
-      },
-      {
-        title: "Statistics",
-        text: "Check out statistics - see who is the best!",
-        color: "success",
-        icon: "chart-bar"
-      }
-    ]
-  }),
+  data () {
+    return {
+      items: [
+        {
+          title: "Games",
+          text:
+            "Add your favorite board games. Add more info about this awesome game!",
+          color: "warning",
+          icon: "dice-multiple"
+        },
+        {
+          title: "Teams",
+          text:
+            "Create team of buddies to dive in the world of board games! You can add as many teams per game as you want.",
+          color: "accent",
+          icon: "account-group"
+        },
+        {
+          title: "Rounds",
+          text:
+            "When team is ready to play - roll the dice! Add result of your game to rounds table which is there per team in this game.",
+          color: "info",
+          icon: "sword-cross"
+        },
+        {
+          title: "Statistics",
+          text: "Check out statistics - see who is the best!",
+          color: "success",
+          icon: "chart-bar"
+        }
+      ]
+    }
+  },
   computed: {
     ...mapState("user", ["user"])
   }
