@@ -18,7 +18,8 @@ export default {
     },
     component: {
       type: String,
-      required: true
+      required: false,
+      default: ""
     },
     icon: {
       type: String,
