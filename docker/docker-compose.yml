@@ -30,6 +30,8 @@ services:
     depends_on:
       - geek-database
     restart: always
+    volumes:
+      - ../:/app/src:ro
     ports:
       - ${HOST_BACKEND_PORT}:3000
     networks:
