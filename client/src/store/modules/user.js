@@ -32,6 +32,8 @@ export default {
         const user = await firebase
           .auth()
           .createUserWithEmailAndPassword(payload.email, payload.password);
+        console.log(user);
+        await user.user.updateProfile({ displayName: payload.username });
         const userPayload = { id: user.user.uid, username: payload.username };
         await axios.post('/api/users', userPayload);
         commit('SET_USER', userPayload);
@@ -62,20 +64,20 @@ export default {
     },
     autoSignIn({ commit }, payload) {
       commit('LOADING', true, { root: true });
-      commit('SET_USER', { id: payload.uid });
+      commit('SET_USER', { id: payload.uid, username: payload.displayName });
       if (router.currentRoute.path !== '/games') {
         router.push('/games');
       }
       commit('LOADING', false, { root: true });
     },
-    async updateUsername({ commit }, payload) {
+    async updateUser({ commit }, { id, username }) {
       try {
         commit('LOADING', true, { root: true });
-        await axios.put(`/api/users/${payload.id}`, {
-          id: payload.id,
-          username: payload.username
+        await axios.put(`/api/users/${id}`, {
+          id,
+          username,
         });
-        commit('SET_USER', { id: payload.id, username: payload.username });
+        commit('SET_USER', { id, username });
       } catch (e) {
         commit('ERROR', e, { root: true });
       } finally {

@@ -1,23 +1,17 @@
 <template>
   <section>
-    <the-title
-      title="Profile"
-      icon="account-details"
-    />
-    <v-row>
+    <the-title title="Profile" icon="account-details" />
+    <v-row v-if="user">
       <v-col>
         <div class="d-flex">
           <span class="mr-3">Username:</span>
-          <span>{{ formData.username }}</span>
+          <span>{{ user.username }}</span>
         </div>
       </v-col>
     </v-row>
     <v-row>
       <v-col>
-        <v-btn
-          color="secondary"
-          @click="onLogout"
-        >
+        <v-btn color="secondary" @click="onLogout">
           <v-icon left>mdi-logout</v-icon>
           Logout
         </v-btn>
@@ -27,41 +21,22 @@
 </template>
 
 <script>
-import TheTitle from "@/components/TheTitle";
-import { mapActions, mapState } from "vuex";
-import axios from "axios";
+import TheTitle from '@/components/TheTitle';
+import { mapActions, mapState } from 'vuex';
 
 export default {
-  name: "ProfileDetails",
+  name: 'ProfileDetails',
   components: {
-    TheTitle
-  },
-  data () {
-    return {
-      formData: {
-        username: ""
-      }
-    }
+    TheTitle,
   },
   computed: {
-    ...mapState("user", {
-      userData: state => state.user
-    }),
-  },
-  created: function () {
-    // TODO:create action instead
-    if (this.userData) {
-      axios.get(`/api/users/${this.userData.id}`).then(user => {
-        this.defaultFormData.username = user.data[0].username;
-        this.formData.username = user.data[0].username;
-      });
-    }
+    ...mapState('user', ['user']),
   },
   methods: {
-    ...mapActions("user", ["updateUsername", "logout"]),
-    onLogout () {
+    ...mapActions('user', ['updateUser', 'logout']),
+    onLogout() {
       this.logout();
     },
-  }
+  },
 };
 </script>
