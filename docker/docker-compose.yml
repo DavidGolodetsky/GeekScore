@@ -48,3 +48,7 @@ services:
       - ${HOST_FRONTEND_PORT}:8080
     networks:
       - geek-network
+    volumes:
+      - ../client:/app/src:ro
+    environment:
+      CHOKIDAR_USEPOLLING: 1
