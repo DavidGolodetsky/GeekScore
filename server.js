@@ -25,7 +25,7 @@ db.on('error', (error) => console.error(error));
 db.on('connected', () => console.log('Connected to database!'));
 
 app.use(express.json());
-app.use(morgan('dev'));
+if (isDev) app.use(morgan('dev'));
 app.use(cors());
 
 app.use('/api/users', users);
