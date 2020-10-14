@@ -10,7 +10,7 @@ https://geekscore.herokuapp.com
 
 This is a second version of the app. The first one is up and running [here](http://geekscore.netlify.com/).
 Source code of the first version could be found [here](https://github.com/DavidGolodetsky/GeekScore-1).
-The main difference for now is that the first version is using Firebase as a backend, while the second version is written with Node.js and Mongo DB. The idea is that both version would exist in the future, but the second one would be continuously  improved, while the first one would be sealed. Here is an [article](https://davidgo.netlify.app/blog/geek-score.html) on my blog if you learn more about project path:)
+The main difference for now is that the first version is using Firebase as a backend, while the second version is written with Node.js and Mongo DB. The idea is that both version would exist in the future, but the second one would be continuously  improved, while the first one would be sealed. Here is an [article](https://davidgo.netlify.app/blog/geek-score.html) on my blog if you want to learn more about project's path:)
 
 ## For contributors:
 
