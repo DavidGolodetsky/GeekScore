@@ -14,7 +14,7 @@
     </div>
     <div class="mb-7">
       <h3 class="mb-3">Win rates</h3>
-      <ol class="columns-2">
+      <ol class="columns">
         <li
           v-for="(rate, game) in winRates"
           :key="game"

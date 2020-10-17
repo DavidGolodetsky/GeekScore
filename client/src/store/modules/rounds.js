@@ -6,23 +6,23 @@ export default {
     rounds: null,
   },
   mutations: {
-    CREATE_ROUND(state, payload) {
+    CREATE_ROUND (state, payload) {
       state.rounds
         ? (state.rounds = [...state.rounds, payload])
         : (state.rounds = [payload]);
     },
-    SET_ROUNDS(state, payload) {
+    SET_ROUNDS (state, payload) {
       state.rounds = payload;
     },
-    DELETE_ROUND(state, payload) {
+    DELETE_ROUND (state, payload) {
       const rounds = state.rounds.filter((round) => round._id !== payload);
       rounds.length ? (state.rounds = rounds) : (state.rounds = null);
     },
   },
   actions: {
-    async createRound({ commit }, payload) {
+    async createRound ({ commit }, payload) {
       try {
-        const user = window.localStorage.getItem('userId');
+        const user = localStorage.getItem('userId');
         const roundPayload = {
           ...payload,
           user,
@@ -36,9 +36,9 @@ export default {
         commit('LOADING', false, { root: true });
       }
     },
-    async loadRounds({ commit }) {
+    async loadRounds ({ commit }) {
       try {
-        const user = window.localStorage.getItem('userId');
+        const user = localStorage.getItem('userId');
         commit('LOADING', true, { root: true });
         const rounds = await axios.get('/api/rounds', { params: { user } });
         commit('SET_ROUNDS', rounds.data);
@@ -48,7 +48,7 @@ export default {
         commit('LOADING', false, { root: true });
       }
     },
-    async deleteRound({ commit }, payload) {
+    async deleteRound ({ commit }, payload) {
       try {
         commit('LOADING', true, { root: true });
         await axios.delete(`/api/rounds/${payload}`);
@@ -61,7 +61,7 @@ export default {
     },
   },
   getters: {
-    getRounds(state) {
+    getRounds (state) {
       return (query) => {
         if (state.rounds) {
           const teamRounds = state.rounds.filter(

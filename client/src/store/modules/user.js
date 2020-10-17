@@ -12,7 +12,7 @@ export default {
   mutations: {
     SET_USER (state, payload) {
       if (payload?.id) {
-        window.localStorage.setItem('userId', payload?.id);
+        localStorage.setItem('userId', payload?.id);
       } else {
         localStorage.clear();
       }
@@ -112,7 +112,7 @@ export default {
     async loadWinRates ({ commit }) {
       try {
         commit('LOADING', true, { root: true });
-        const user = window.localStorage.getItem('userId');
+        const user = localStorage.getItem('userId');
         const winRate = await axios.get(`/api/users/win-rate/${user}`);
         commit('SET_WIN_RATES', winRate.data);
       } catch (e) {
