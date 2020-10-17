@@ -4,20 +4,20 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/browserconfig.xml"
   },
   {
-    "revision": "e1eb6c61128cd3ef563e",
-    "url": "/css/app.d7b2f856.css"
+    "revision": "2d95a21048f17ad8b8af",
+    "url": "/css/app.a7885251.css"
   },
   {
     "revision": "884d5433a44b225c8cdd",
     "url": "/css/chunk-vendors.a0b752f4.css"
   },
   {
-    "revision": "a0bccc98ecd77a3b03c5",
-    "url": "/css/game.71a37a2e.css"
+    "revision": "da9de421f51ee3c83c75",
+    "url": "/css/game.e3d1a049.css"
   },
   {
-    "revision": "d377196a0d89e8c4fbed",
-    "url": "/css/games.8d965f33.css"
+    "revision": "709744f00b368fae51ca",
+    "url": "/css/games.bef47e1e.css"
   },
   {
     "revision": "78bfca7ef0d4b3d2c32d",
@@ -32,24 +32,24 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/css/home.c951d6af.css"
   },
   {
-    "revision": "844316e0af22c4f41cc9",
-    "url": "/css/signIn.4596e569.css"
+    "revision": "18bfee8807bc9eb41f1e",
+    "url": "/css/signIn.b9af9a6d.css"
   },
   {
-    "revision": "ad76cf01016e869da620",
-    "url": "/css/signUp.4596e569.css"
+    "revision": "634eec412603765c19b7",
+    "url": "/css/signUp.b9af9a6d.css"
   },
   {
-    "revision": "e0a9f9d6bfef317d13c1",
-    "url": "/css/team.4eed53de.css"
+    "revision": "d72d228774ebf2b77fc9",
+    "url": "/css/team.148463ff.css"
   },
   {
-    "revision": "57f5e383754cb589beea",
-    "url": "/css/theDialog.ce0248eb.css"
+    "revision": "239ca430ca1cc155e8f6",
+    "url": "/css/theDialog.6af0c2d0.css"
   },
   {
-    "revision": "31849e45106ef7247613",
-    "url": "/css/theGoBack.0ba95f65.css"
+    "revision": "74c89872ed916516f572",
+    "url": "/css/theGoBack.3040d8e7.css"
   },
   {
     "revision": "10a04d7dcada291ddf78d9a235b6846e",
@@ -120,23 +120,23 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/img/team.bf4c6f13.webp"
   },
   {
-    "revision": "6d7fc37357306b369f0cc5ba4763d41f",
+    "revision": "2ef295d52709e45924fdd0951d4b6aec",
     "url": "/index.html"
   },
   {
-    "revision": "e1eb6c61128cd3ef563e",
-    "url": "/js/app.80669761.js"
+    "revision": "2d95a21048f17ad8b8af",
+    "url": "/js/app.a9448ead.js"
   },
   {
     "revision": "884d5433a44b225c8cdd",
     "url": "/js/chunk-vendors.2caf14ee.js"
   },
   {
-    "revision": "a0bccc98ecd77a3b03c5",
+    "revision": "da9de421f51ee3c83c75",
     "url": "/js/game.41271bb7.js"
   },
   {
-    "revision": "d377196a0d89e8c4fbed",
+    "revision": "709744f00b368fae51ca",
     "url": "/js/games.752e6371.js"
   },
   {
@@ -156,31 +156,31 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/js/notFound.e1c62db2.js"
   },
   {
-    "revision": "21697b73f2c7eb6498c9",
-    "url": "/js/profile.14b7937c.js"
+    "revision": "84850ecbe9875cdb2d3a",
+    "url": "/js/profile.b12b1e72.js"
   },
   {
     "revision": "21fbac85bdcab05cb079",
     "url": "/js/resetPass.e105e706.js"
   },
   {
-    "revision": "844316e0af22c4f41cc9",
+    "revision": "18bfee8807bc9eb41f1e",
     "url": "/js/signIn.23c1eca1.js"
   },
   {
-    "revision": "ad76cf01016e869da620",
+    "revision": "634eec412603765c19b7",
     "url": "/js/signUp.04e94912.js"
   },
   {
-    "revision": "e0a9f9d6bfef317d13c1",
-    "url": "/js/team.b3e4464b.js"
+    "revision": "d72d228774ebf2b77fc9",
+    "url": "/js/team.a173bfaa.js"
   },
   {
-    "revision": "57f5e383754cb589beea",
+    "revision": "239ca430ca1cc155e8f6",
     "url": "/js/theDialog.e9ee4f2a.js"
   },
   {
-    "revision": "31849e45106ef7247613",
+    "revision": "74c89872ed916516f572",
     "url": "/js/theGoBack.2bc7ac74.js"
   },
   {
