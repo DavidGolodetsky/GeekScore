@@ -6,11 +6,11 @@ export default {
   namespaced: true,
   state: {
     user: null,
-    winRate: null,
+    winRates: null,
     resetPassword: false,
   },
   mutations: {
-    SET_USER(state, payload) {
+    SET_USER (state, payload) {
       if (payload?.id) {
         window.localStorage.setItem('userId', payload?.id);
       } else {
@@ -18,15 +18,15 @@ export default {
       }
       state.user = payload;
     },
-    RESET_PASSWORD(state) {
+    RESET_PASSWORD (state) {
       state.resetPassword = true;
     },
-    SET_WIN_RATE(state, payload) {
-      state.winRate = payload;
+    SET_WIN_RATES (state, payload) {
+      state.winRates = payload;
     },
   },
   actions: {
-    async signUpUser({ commit }, payload) {
+    async signUpUser ({ commit }, payload) {
       try {
         commit('LOADING', true, { root: true });
         const user = await firebase
@@ -44,7 +44,7 @@ export default {
         commit('LOADING', false, { root: true });
       }
     },
-    async signInUser({ commit }, payload) {
+    async signInUser ({ commit }, payload) {
       try {
         commit('LOADING', true, { root: true });
         const user = await firebase
@@ -62,7 +62,7 @@ export default {
         commit('LOADING', false, { root: true });
       }
     },
-    autoSignIn({ commit }, payload) {
+    autoSignIn ({ commit }, payload) {
       commit('LOADING', true, { root: true });
       commit('SET_USER', { id: payload.uid, username: payload.displayName });
       if (router.currentRoute.path !== '/games') {
@@ -70,7 +70,7 @@ export default {
       }
       commit('LOADING', false, { root: true });
     },
-    async updateUser({ commit }, { id, username }) {
+    async updateUser ({ commit }, { id, username }) {
       try {
         commit('LOADING', true, { root: true });
         await axios.put(`/api/users/${id}`, {
@@ -84,7 +84,7 @@ export default {
         commit('LOADING', false, { root: true });
       }
     },
-    async resetPassword({ commit }, payload) {
+    async resetPassword ({ commit }, payload) {
       try {
         commit('LOADING', true, { root: true });
         await firebase.auth().sendPasswordResetEmail(payload);
@@ -95,7 +95,7 @@ export default {
         commit('LOADING', false, { root: true });
       }
     },
-    async logout({ commit }) {
+    async logout ({ commit }) {
       try {
         commit('LOADING', true, { root: true });
         await firebase.auth().signOut();
@@ -109,12 +109,12 @@ export default {
         commit('LOADING', false, { root: true });
       }
     },
-    async loadWinRate({ commit }) {
+    async loadWinRates ({ commit }) {
       try {
         commit('LOADING', true, { root: true });
         const user = window.localStorage.getItem('userId');
         const winRate = await axios.get(`/api/users/win-rate/${user}`);
-        commit('SET_WIN_RATE', winRate.data);
+        commit('SET_WIN_RATES', winRate.data);
       } catch (e) {
         commit('ERROR', e, { root: true });
       } finally {

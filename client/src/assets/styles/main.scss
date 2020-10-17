@@ -8,7 +8,6 @@ a {
   text-decoration: none;
 }
 
-.v-application ol,
 .v-application ul {
   padding-left: 0;
   list-style: none;
@@ -23,6 +22,10 @@ a {
 .error-message {
   color: $error;
   font-size: 12px;
+}
+
+.columns-2 {
+      column-count: 2;
 }
 
 .app {
