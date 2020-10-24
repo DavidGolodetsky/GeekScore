@@ -1,14 +1,32 @@
 <template>
-  <v-app v-cloak v-scroll="onScroll" class="app">
+  <v-app
+    v-cloak
+    v-scroll="onScroll"
+    class="app"
+  >
     <the-header />
     <v-main>
       <v-container class="app-container">
-        <the-alert v-if="showAlert" :type="alertType" :text="alertText" />
-        <transition name="slide" mode="out-in">
+        <the-alert
+          v-if="showAlert"
+          :type="alertType"
+          :text="alertText"
+        />
+        <transition
+          name="slide"
+          mode="out-in"
+        >
           <router-view />
         </transition>
-        <div v-if="loading" class="loader-wrap">
-          <v-progress-circular :size="50" indeterminate color="secondary" />
+        <div
+          v-if="loading"
+          class="loader-wrap"
+        >
+          <v-progress-circular
+            :size="50"
+            indeterminate
+            color="secondary"
+          />
         </div>
         <v-btn
           v-if="showTop"
@@ -30,7 +48,7 @@
 import TheHeader from '@/components/TheHeader';
 import TheFooter from '@/components/TheFooter';
 import TheAlert from '@/components/TheAlert';
-import { mapState, mapActions, mapGetters } from 'vuex';
+import { mapActions, mapGetters } from 'vuex';
 import { VueOfflineMixin } from 'vue-offline';
 import { setupFb } from '@/db';
 
@@ -53,29 +71,27 @@ export default {
   }),
   computed: {
     ...mapGetters(['loading', 'error']),
-    // TODO: do we need this?
-    ...mapState('user', ['user']),
-    showAlert() {
+    showAlert () {
       return this.isOffline || this.error;
     },
-    alertType() {
+    alertType () {
       return this.isOffline ? 'warning' : 'error';
     },
-    alertText() {
+    alertText () {
       return this.isOffline ? this.offlineText : this.error.message;
     },
   },
   watch: {
-    showAlert(val) {
+    showAlert (val) {
       if (val) setTimeout(() => this.setError(), 10000);
     },
   },
-  mounted() {
+  mounted () {
     setupFb();
   },
   methods: {
     ...mapActions(['setError']),
-    onScroll() {
+    onScroll () {
       if (window.pageYOffset > 500) this.showTop = true;
       if (this.showTop && window.pageYOffset < 500) this.showTop = false;
     },
