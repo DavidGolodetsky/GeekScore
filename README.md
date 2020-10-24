@@ -14,6 +14,8 @@ The main difference for now is that the first version is using Firebase as a bac
 
 ## For contributors:
 
+See the [Planning board](https://github.com/DavidGolodetsky/GeekScore-2/projects/1)
+
 ### Requirements
 * node (preferably >=14)
 * npm
