@@ -24,13 +24,6 @@
         </li>
       </ol>
     </div>
-    <v-btn
-      color="secondary"
-      @click="onLogout"
-    >
-      <v-icon left>mdi-logout</v-icon>
-      Logout
-    </v-btn>
   </section>
 </template>
 
@@ -53,10 +46,7 @@ export default {
     this.loadWinRates()
   },
   methods: {
-    ...mapActions('user', ['logout', 'loadWinRates']),
-    onLogout () {
-      this.logout();
-    },
+    ...mapActions('user', ['loadWinRates']),
   },
 };
 </script>
