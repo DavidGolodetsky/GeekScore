@@ -24,7 +24,10 @@
       >
         <template #expanded-item="{ item, headers }">
           <td :colspan="headers.length">
-            <div v-if="item.turn" class="turn">First turn: {{ item.turn }}</div>
+            <div
+              v-if="item.turn"
+              class="turn"
+            >First turn: {{ item.turn }}</div>
             <div v-if="item.comment">Comment: {{ item.comment }}</div>
           </td>
         </template>
@@ -38,6 +41,7 @@
 
 <script>
 import RoundEditDialog from "@/components/RoundEditDialog";
+import { mapState } from 'vuex';
 
 export default {
   name: "MainTable",
@@ -55,18 +59,21 @@ export default {
       required: true
     }
   },
-  data() {
+  data () {
     return {
       search: "",
       expanded: [],
       headers: []
     };
   },
-  created() {
+  computed: {
+    ...mapState('user', ['user']),
+  },
+  created () {
     this.cookHeaders();
   },
   methods: {
-    cookHeaders() {
+    cookHeaders () {
       const fields = [
         this.team.coop
           ? { text: "Result", value: "result" }
@@ -77,11 +84,19 @@ export default {
       if (!this.team.coop) this.countPlayers();
       this.headers.push(...fields);
     },
-    countPlayers() {
-      const players = this.team.players.map(player => ({
-        text: player.name,
-        value: player.name.toLowerCase()
-      }));
+    countPlayers () {
+      const players = this.team.players.map(player => {
+        let playerName = ''
+        if (player.name === 'Me' && this.user.username) {
+          playerName = this.user.username
+        } else {
+          playerName = player.name
+        }
+        return {
+          text: playerName,
+          value: player.name.toLowerCase()
+        };
+      })
       this.headers.push(...players);
     }
   }

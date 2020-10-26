@@ -7,12 +7,16 @@
     />
     <div
       v-if="isUsername"
-      class="d-flex"
+      class="d-flex mb-4"
     >
       <span class="mr-3">Username:</span>
       <span>{{ user.username }}</span>
     </div>
-    <div class="mb-7">
+    <!-- TODO:remove winRates if none -->
+    <div
+      v-if="winRates"
+      class="mb-7"
+    >
       <h3 class="mb-3">Win rates</h3>
       <ol class="columns">
         <li

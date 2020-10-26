@@ -1,7 +1,11 @@
 <template>
   <section class="cards-list">
     <v-row>
-      <v-col sm="6" md="4" cols="12">
+      <v-col
+        sm="6"
+        md="4"
+        cols="12"
+      >
         <v-text-field
           v-if="items.length > 3"
           v-model="search"
@@ -13,8 +17,19 @@
       </v-col>
     </v-row>
     <v-row>
-      <v-col v-for="item in filteredItems" :key="item._id" sm="6" md="4" cols="12" class="mb-6">
-        <v-lazy :options="{ threshold: 0.5 }" min-height="200" transition="fade-transition">
+      <v-col
+        v-for="item in filteredItems"
+        :key="item._id"
+        sm="6"
+        md="4"
+        cols="12"
+        class="mb-6"
+      >
+        <v-lazy
+          :options="{ threshold: 0.5 }"
+          min-height="200"
+          transition="fade-transition"
+        >
           <!-- TODO:decouple -->
           <v-card
             :key="item._id"
@@ -27,13 +42,24 @@
               <div class="title-wrap">
                 <v-card-title class="row_between">
                   <span class="card-list-name">{{ item.name }}</span>
-                  <slot name="action" :item="item" />
+                  <slot
+                    name="action"
+                    :item="item"
+                  />
                 </v-card-title>
               </div>
 
-              <v-list v-if="item.players" dense disabled class="players">
+              <v-list
+                v-if="item.players"
+                dense
+                disabled
+                class="players"
+              >
                 <v-list-item-group>
-                  <v-list-item v-for="{name} in item.players" :key="name">
+                  <v-list-item
+                    v-for="{name} in formatPlayers(item.players)"
+                    :key="name"
+                  >
                     <v-list-item-icon>
                       <v-icon v-text="'mdi-account'" />
                     </v-list-item-icon>
@@ -85,8 +111,15 @@
                   </v-card-title>
                 </div>
                 <template #placeholder>
-                  <v-row class="fill-height ma-0" align="center" justify="center">
-                    <v-progress-circular indeterminate color="secondary" />
+                  <v-row
+                    class="fill-height ma-0"
+                    align="center"
+                    justify="center"
+                  >
+                    <v-progress-circular
+                      indeterminate
+                      color="secondary"
+                    />
                   </v-row>
                 </template>
               </v-img>
@@ -99,6 +132,8 @@
 </template>
 
 <script>
+import { mapState } from 'vuex';
+
 export default {
   name: "CardsList",
   // TODO:refactor
@@ -112,13 +147,14 @@ export default {
       required: true
     }
   },
-  data() {
+  data () {
     return {
       search: ""
     };
   },
   computed: {
-    filteredItems() {
+    ...mapState('user', ['user']),
+    filteredItems () {
       !this.search && this.getItemsOrder(this.items);
       const filtered = this.items.filter(item =>
         this.search
@@ -130,7 +166,21 @@ export default {
     }
   },
   methods: {
-    getActions(item) {
+    formatPlayers (players) {
+      const formattedPlayers = players.map(player => {
+        let playerName = ''
+        if (player.name === 'Me' && this.user.username) {
+          playerName = this.user.username
+        } else {
+          playerName = player.name
+        }
+        return {
+          name: playerName,
+        };
+      })
+      return formattedPlayers
+    },
+    getActions (item) {
       const actions = [];
       // TODO:refactor
       if (item.bggURL) {
@@ -157,23 +207,23 @@ export default {
       }
       return actions;
     },
-    imagePath(item, extension) {
+    imagePath (item, extension) {
       if (item.imageUrl) return item.imageUrl;
       if (item.teams) return require(`@/assets/img/game.${extension}`);
       return require(`@/assets/img/team.${extension}`);
     },
-    getItemsOrder(items) {
+    getItemsOrder (items) {
       const reversed = items.slice().reverse();
       return reversed.sort((x, y) => y.favorite - x.favorite);
     },
-    setRoute(id) {
+    setRoute (id) {
       let route = { ...this.route };
       route.params = {
         [Object.keys(this.route.params)[0]]: id
       };
       return route;
     },
-    favorite(item) {
+    favorite (item) {
       const favorite = !item.favorite;
       const data = {
         favorite,
