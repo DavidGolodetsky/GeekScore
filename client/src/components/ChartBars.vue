@@ -1,5 +1,6 @@
 <script>
 import { Bar } from "vue-chartjs";
+import { mapState } from 'vuex';
 
 export default {
   name: "ChartBars",
@@ -16,25 +17,26 @@ export default {
     }
   },
   computed: {
+    ...mapState('user', ['user']),
     chartdata () {
       return {
-          labels: this.team.coop ? ["Victories", "Defeats"] : this.getPlayers(),
-          datasets: [
-            {
-              label: "Victories",
-              backgroundColor: "#ec8506",
-              data: this.team.coop ? this.getCoopStat() : this.getPlayersStat()
-            }
-          ]
-        }
+        labels: this.team.coop ? ["Victories", "Defeats"] : this.getPlayers(),
+        datasets: [
+          {
+            label: "Victories",
+            backgroundColor: "#ec8506",
+            data: this.team.coop ? this.getCoopStat() : this.getPlayersStat()
+          }
+        ]
+      }
     },
   },
   watch: {
-    rounds() {
+    rounds () {
       this.updateChart()
     }
   },
-  mounted() {
+  mounted () {
     this.setChart();
   },
   methods: {
@@ -44,7 +46,7 @@ export default {
         this.$data._chart.update();
       }
     },
-    setChart() {
+    setChart () {
       this.renderChart(
         this.chartdata,
         {
@@ -53,7 +55,7 @@ export default {
         }
       );
     },
-    getCoopStat() {
+    getCoopStat () {
       let victories = null;
       let defeats = null;
       Object.values(this.rounds).forEach(round => {
@@ -63,7 +65,7 @@ export default {
       let top = Math.round(Math.max.apply(null, data) + 10 / 10) + 5;
       return [victories, defeats, 0, top];
     },
-    getPlayersStat() {
+    getPlayersStat () {
       const players = this.getPlayers();
       const data = players.map(player => {
         let playerRes = 0;
@@ -78,8 +80,17 @@ export default {
 
       return [...data, 0, top];
     },
-    getPlayers() {
-      return this.team.players.map(player => player.name);
+    getPlayers () {
+      // TODO: map Me to username in one place
+      return this.team.players.map(player => {
+        let playerName = ""
+        if (player.name === 'Me' && this.user.username) {
+          playerName = this.user.username
+        } else {
+          playerName = player.name
+        }
+        return playerName
+      });
     }
   }
 };
