@@ -4,7 +4,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/browserconfig.xml"
   },
   {
-    "revision": "6c7dff50d8197a4ce576",
+    "revision": "32ee57427ac84f63a408",
     "url": "/css/app.e9759685.css"
   },
   {
@@ -12,12 +12,12 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/css/chunk-vendors.a0b752f4.css"
   },
   {
-    "revision": "4a507f29e50b1b13f4f5",
-    "url": "/css/game.473e5ae9.css"
+    "revision": "db6b1dee6dd178172751",
+    "url": "/css/game.e58d5625.css"
   },
   {
-    "revision": "ad3a8d4af9939b084681",
-    "url": "/css/games.448c5d3d.css"
+    "revision": "4ab65cd9c5fd4815e5f0",
+    "url": "/css/games.2ba3d76f.css"
   },
   {
     "revision": "78bfca7ef0d4b3d2c32d",
@@ -40,8 +40,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/css/signUp.3784cc1c.css"
   },
   {
-    "revision": "ff9100d7e605d8c71588",
-    "url": "/css/team.99341970.css"
+    "revision": "27677a3c8d03d398d428",
+    "url": "/css/team.c186d2bb.css"
   },
   {
     "revision": "2f407494e167f31308e5",
@@ -120,24 +120,24 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/img/team.bf4c6f13.webp"
   },
   {
-    "revision": "b139cc1aa0b56250f84377368808b98d",
+    "revision": "826f3a1e10196a0363c5b71c76c6048e",
     "url": "/index.html"
   },
   {
-    "revision": "6c7dff50d8197a4ce576",
-    "url": "/js/app.f1ef3c5f.js"
+    "revision": "32ee57427ac84f63a408",
+    "url": "/js/app.6471279b.js"
   },
   {
     "revision": "884d5433a44b225c8cdd",
     "url": "/js/chunk-vendors.2caf14ee.js"
   },
   {
-    "revision": "4a507f29e50b1b13f4f5",
-    "url": "/js/game.41271bb7.js"
+    "revision": "db6b1dee6dd178172751",
+    "url": "/js/game.86a930b7.js"
   },
   {
-    "revision": "ad3a8d4af9939b084681",
-    "url": "/js/games.752e6371.js"
+    "revision": "4ab65cd9c5fd4815e5f0",
+    "url": "/js/games.3262e2eb.js"
   },
   {
     "revision": "78bfca7ef0d4b3d2c32d",
@@ -156,8 +156,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/js/notFound.e1c62db2.js"
   },
   {
-    "revision": "f4d2cd2ee814e500c4c7",
-    "url": "/js/profile.54123a9f.js"
+    "revision": "070c825b6034efafd49b",
+    "url": "/js/profile.30950d71.js"
   },
   {
     "revision": "21fbac85bdcab05cb079",
@@ -172,8 +172,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/js/signUp.04e94912.js"
   },
   {
-    "revision": "ff9100d7e605d8c71588",
-    "url": "/js/team.a173bfaa.js"
+    "revision": "27677a3c8d03d398d428",
+    "url": "/js/team.274ab83f.js"
   },
   {
     "revision": "2f407494e167f31308e5",
