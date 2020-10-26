@@ -57,7 +57,7 @@
               >
                 <v-list-item-group>
                   <v-list-item
-                    v-for="{name} in formatPlayers(item.players)"
+                    v-for="{name} in item.players"
                     :key="name"
                   >
                     <v-list-item-icon>
@@ -132,8 +132,6 @@
 </template>
 
 <script>
-import { mapState } from 'vuex';
-
 export default {
   name: "CardsList",
   // TODO:refactor
@@ -153,7 +151,6 @@ export default {
     };
   },
   computed: {
-    ...mapState('user', ['user']),
     filteredItems () {
       !this.search && this.getItemsOrder(this.items);
       const filtered = this.items.filter(item =>
@@ -166,20 +163,6 @@ export default {
     }
   },
   methods: {
-    formatPlayers (players) {
-      const formattedPlayers = players.map(player => {
-        let playerName = ''
-        if (player.name === 'Me' && this.user.username) {
-          playerName = this.user.username
-        } else {
-          playerName = player.name
-        }
-        return {
-          name: playerName,
-        };
-      })
-      return formattedPlayers
-    },
     getActions (item) {
       const actions = [];
       // TODO:refactor

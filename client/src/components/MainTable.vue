@@ -41,7 +41,6 @@
 
 <script>
 import RoundEditDialog from "@/components/RoundEditDialog";
-import { mapState } from 'vuex';
 
 export default {
   name: "MainTable",
@@ -66,9 +65,6 @@ export default {
       headers: []
     };
   },
-  computed: {
-    ...mapState('user', ['user']),
-  },
   created () {
     this.cookHeaders();
   },
@@ -85,18 +81,10 @@ export default {
       this.headers.push(...fields);
     },
     countPlayers () {
-      const players = this.team.players.map(player => {
-        let playerName = ''
-        if (player.name === 'Me' && this.user.username) {
-          playerName = this.user.username
-        } else {
-          playerName = player.name
-        }
-        return {
-          text: playerName,
-          value: player.name.toLowerCase()
-        };
-      })
+      const players = this.team.players.map(player => ({
+        text: player.name,
+        value: player.name.toLowerCase()
+      }));
       this.headers.push(...players);
     }
   }

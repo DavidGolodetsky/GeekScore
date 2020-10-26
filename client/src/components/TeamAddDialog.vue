@@ -24,8 +24,8 @@
         v-for="(player, i) in players"
         :key="i"
         v-model.trim="player.name"
-        :readonly="isMe(player)"
-        :clearable="!isMe(player)"
+        :readonly="player.isMe"
+        :clearable="!player.isMe"
         prepend-icon="mdi-account"
         :rules="playerRules"
         :label="`Player #${i + 1}`"
@@ -69,6 +69,7 @@ export default {
     }
   },
   computed: {
+    ...mapState('user', ['user']),
     ...mapState('games', ['games']),
     ...mapGetters('games', ['getGame']),
     game () {
@@ -81,15 +82,13 @@ export default {
   methods: {
     ...mapActions('teams', ['createTeam']),
     setPlayers ($ev) {
-      this.players = [{ name: 'Me' }]
+      let myName = this.user.username ? this.user.username : "Me"
+      this.players = [{ name: myName, isMe: true }]
       for (let i = 1; i < $ev; i++) {
         let player = { name: '' }
         this.players.push(player)
       }
       if ($ev === 1) this.coop = true
-    },
-    isMe (player) {
-      return player.name === 'Me'
     },
     isUniqueName ($ev) {
       let duplicatedPlayerName = this.players.filter(

@@ -1,6 +1,5 @@
 <script>
 import { Bar } from "vue-chartjs";
-import { mapState } from 'vuex';
 
 export default {
   name: "ChartBars",
@@ -17,7 +16,6 @@ export default {
     }
   },
   computed: {
-    ...mapState('user', ['user']),
     chartdata () {
       return {
         labels: this.team.coop ? ["Victories", "Defeats"] : this.getPlayers(),
@@ -81,16 +79,7 @@ export default {
       return [...data, 0, top];
     },
     getPlayers () {
-      // TODO: map Me to username in one place
-      return this.team.players.map(player => {
-        let playerName = ""
-        if (player.name === 'Me' && this.user.username) {
-          playerName = this.user.username
-        } else {
-          playerName = player.name
-        }
-        return playerName
-      });
+      return this.team.players.map(player => player.name);
     }
   }
 };
