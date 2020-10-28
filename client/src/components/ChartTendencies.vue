@@ -27,6 +27,7 @@ export default {
   methods: {
     setChart () {
       this.renderChart({
+        // TODO:refactor that horror
         labels: this.stat.map(data => data.date),
         datasets: this.team.players.map(player => {
           const victories = this.stat.map(data => data[player.name.toLowerCase()])
