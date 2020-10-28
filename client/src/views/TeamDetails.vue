@@ -31,7 +31,11 @@
           :key="i"
           :value="`tab-${i}`"
         >
-          <component :is="component" :team="team" :rounds="rounds" />
+          <component
+            :is="component"
+            :team="team"
+            :rounds="rounds"
+          />
         </v-tab-item>
       </v-tabs-items>
     </div>
@@ -42,6 +46,7 @@
 import TheTitle from '@/components/TheTitle';
 import MainTable from '@/components/MainTable';
 import ChartBars from '@/components/ChartBars';
+import ChartTendencies from '@/components/ChartTendencies';
 import rounds from '@/store/modules/rounds';
 import { mapActions, mapGetters, mapState } from 'vuex';
 
@@ -51,6 +56,7 @@ export default {
     ChartBars,
     MainTable,
     TheTitle,
+    ChartTendencies
   },
   props: {
     teamId: {
@@ -58,7 +64,7 @@ export default {
       required: true,
     },
   },
-  data() {
+  data () {
     return {
       tab: null,
       gameId: this.$route.query.gameId,
@@ -73,8 +79,13 @@ export default {
           href: 'tab-2',
           icon: 'chart-bar',
         },
+        {
+          name: 'Tendencies',
+          href: 'tab-3',
+          icon: 'chart-line',
+        },
       ],
-      tabComponents: ['main-table', 'chart-bars'],
+      tabComponents: ['main-table', 'chart-bars', 'chart-tendencies'],
     };
   },
   computed: {
@@ -83,30 +94,30 @@ export default {
     ...mapGetters('teams', ['getTeam']),
     ...mapGetters('games', ['getGame']),
     ...mapGetters('rounds', ['getRounds']),
-    game() {
+    game () {
       return this.games ? this.getGame(this.gameId) : null;
     },
-    team() {
+    team () {
       return this.teams ? this.getTeam(this.teamId) : null;
     },
-    gameTeam() {
+    gameTeam () {
       return this.game && this.team;
     },
-    rounds() {
+    rounds () {
       const query = { teamId: this.teamId, gameId: this.gameId };
       const rounds = this.getRounds(query);
       if (rounds) rounds.forEach((round) => (round[round.winner] = 'VICTORY'));
       return rounds;
     },
 
-    showTable() {
+    showTable () {
       return this.gameTeam && this.rounds?.length;
     },
   },
-  created() {
+  created () {
     this.loadData();
   },
-  beforeDestroy() {
+  beforeDestroy () {
     this.setBackTitle();
   },
   methods: {
@@ -114,7 +125,7 @@ export default {
     ...mapActions('games', ['loadGames']),
     ...mapActions('teams', ['loadTeams']),
     ...mapActions('rounds', ['loadRounds']),
-    loadData() {
+    loadData () {
       this.games || this.loadGames();
       this.teams || this.loadTeams().then(() => {
         this.setBackTitle(`${this.team.name}: ${this.game.name}`);
