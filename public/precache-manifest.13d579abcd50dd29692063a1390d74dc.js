@@ -4,7 +4,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/browserconfig.xml"
   },
   {
-    "revision": "bb7d3de00fe62af95d6b",
+    "revision": "c7c9b9ebe1d34dd2a9fe",
     "url": "/css/app.e9759685.css"
   },
   {
@@ -20,7 +20,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/css/games.cca8381f.css"
   },
   {
-    "revision": "78bfca7ef0d4b3d2c32d",
+    "revision": "4c4bb0df30e4780c1799",
     "url": "/css/game~games~profile~resetPass~signIn~signUp~team.a41e1dae.css"
   },
   {
@@ -40,7 +40,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/css/signUp.3784cc1c.css"
   },
   {
-    "revision": "57c8ddc1e67e57b825c8",
+    "revision": "f7e0811ad5e7f72e6cac",
     "url": "/css/team.bb8e78e7.css"
   },
   {
@@ -120,12 +120,12 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/img/team.bf4c6f13.webp"
   },
   {
-    "revision": "7630864af9cb2e87301db7e2ab78d93f",
+    "revision": "769f4f034eb80108dddcfeb323da967f",
     "url": "/index.html"
   },
   {
-    "revision": "bb7d3de00fe62af95d6b",
-    "url": "/js/app.e10b1104.js"
+    "revision": "c7c9b9ebe1d34dd2a9fe",
+    "url": "/js/app.3a4ff40a.js"
   },
   {
     "revision": "884d5433a44b225c8cdd",
@@ -140,8 +140,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/js/games.12285b70.js"
   },
   {
-    "revision": "78bfca7ef0d4b3d2c32d",
-    "url": "/js/game~games~profile~resetPass~signIn~signUp~team.01085896.js"
+    "revision": "4c4bb0df30e4780c1799",
+    "url": "/js/game~games~profile~resetPass~signIn~signUp~team.811e39bd.js"
   },
   {
     "revision": "cde37a8062db5da44ec0",
@@ -172,8 +172,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/js/signUp.04e94912.js"
   },
   {
-    "revision": "57c8ddc1e67e57b825c8",
-    "url": "/js/team.c973dd05.js"
+    "revision": "f7e0811ad5e7f72e6cac",
+    "url": "/js/team.211e8e69.js"
   },
   {
     "revision": "2f407494e167f31308e5",
