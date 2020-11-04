@@ -4,7 +4,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/browserconfig.xml"
   },
   {
-    "revision": "c7c9b9ebe1d34dd2a9fe",
+    "revision": "70b415163209dd0a42b4",
     "url": "/css/app.e9759685.css"
   },
   {
@@ -24,7 +24,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/css/game~games~profile~resetPass~signIn~signUp~team.a41e1dae.css"
   },
   {
-    "revision": "cde37a8062db5da44ec0",
+    "revision": "7948c1cbfa12bbbe7ecc",
     "url": "/css/game~games~profile~team.987fe12d.css"
   },
   {
@@ -120,12 +120,12 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/img/team.bf4c6f13.webp"
   },
   {
-    "revision": "769f4f034eb80108dddcfeb323da967f",
+    "revision": "222b1cb3da609912d9114b03f680a111",
     "url": "/index.html"
   },
   {
-    "revision": "c7c9b9ebe1d34dd2a9fe",
-    "url": "/js/app.3a4ff40a.js"
+    "revision": "70b415163209dd0a42b4",
+    "url": "/js/app.88874e8b.js"
   },
   {
     "revision": "884d5433a44b225c8cdd",
@@ -144,8 +144,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/js/game~games~profile~resetPass~signIn~signUp~team.811e39bd.js"
   },
   {
-    "revision": "cde37a8062db5da44ec0",
-    "url": "/js/game~games~profile~team.7b4534da.js"
+    "revision": "7948c1cbfa12bbbe7ecc",
+    "url": "/js/game~games~profile~team.a7d7a5ed.js"
   },
   {
     "revision": "53ab261e5c2e6a9bcec5",
