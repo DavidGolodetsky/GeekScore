@@ -43,11 +43,8 @@ export default {
   methods: {
     ...mapActions("teams", ["updateTeam", "deleteTeam"]),
     onSubmit () {
-      if (this.toDelete) {
-        this.deleteTeam(this.team._id);
-      } else {
-        this.updateTheTeam();
-      }
+      if (this.toDelete) return this.deleteTeam(this.team._id);
+      this.updateTheTeam();
 
     },
     updateTheTeam () {

@@ -89,11 +89,8 @@ export default {
   methods: {
     ...mapActions("games", ["updateGame", "deleteGame"]),
     onSubmit () {
-      if (this.toDelete) {
-        this.deleteGame(this.game._id)
-      } else {
-        this.updateTheGame();
-      }
+      if (this.toDelete) return this.deleteGame(this.game._id)
+      this.updateTheGame();
     },
     updateTheGame () {
       const game = {
