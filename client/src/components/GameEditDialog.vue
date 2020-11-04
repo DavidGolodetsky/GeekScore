@@ -24,7 +24,12 @@
     />
     <!-- TODO: for later -->
     <!-- <scores-table /> -->
-    <v-switch v-model="toDelete" label="Delete game" color="error" hide-details />
+    <v-switch
+      v-model="toDelete"
+      label="Delete game"
+      color="error"
+      hide-details
+    />
   </the-dialog>
 </template>
 
@@ -44,7 +49,7 @@ export default {
       required: true
     }
   },
-  data() {
+  data () {
     return {
       toDelete: false,
       fields: {
@@ -83,11 +88,14 @@ export default {
   },
   methods: {
     ...mapActions("games", ["updateGame", "deleteGame"]),
-    onSubmit() {
-      this.toDelete && this.deleteGame(this.game._id);
-      this.updateTheGame();
+    onSubmit () {
+      if (this.toDelete) {
+        this.deleteGame(this.game._id)
+      } else {
+        this.updateTheGame();
+      }
     },
-    updateTheGame() {
+    updateTheGame () {
       const game = {
         _id: this.game._id,
         name: this.fields.name.value,

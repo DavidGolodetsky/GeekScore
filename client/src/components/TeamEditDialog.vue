@@ -6,8 +6,18 @@
     simple
     :submit-logic="onSubmit"
   >
-    <v-text-field v-model="name" clearable :rules="nameRules" label="Name" />
-    <v-switch v-model="toDelete" label="Delete team" color="error" hide-details />
+    <v-text-field
+      v-model="name"
+      clearable
+      :rules="nameRules"
+      label="Name"
+    />
+    <v-switch
+      v-model="toDelete"
+      label="Delete team"
+      color="error"
+      hide-details
+    />
   </the-dialog>
 </template>
 
@@ -23,7 +33,7 @@ export default {
       required: true
     }
   },
-  data() {
+  data () {
     return {
       name: this.team.name,
       toDelete: false,
@@ -32,11 +42,15 @@ export default {
   },
   methods: {
     ...mapActions("teams", ["updateTeam", "deleteTeam"]),
-    onSubmit() {
-      if (this.toDelete) this.deleteTeam(this.team._id);
-      this.updateTheTeam();
+    onSubmit () {
+      if (this.toDelete) {
+        this.deleteTeam(this.team._id);
+      } else {
+        this.updateTheTeam();
+      }
+
     },
-    updateTheTeam() {
+    updateTheTeam () {
       const team = {
         _id: this.team._id,
         gameId: this.team.gameId,
