@@ -57,7 +57,7 @@ export default {
     return {
       name: '',
       coop: false,
-      players: [{ name: 'Me' }],
+      players: [],
       nameRules: standardField,
       playerRules: standardField,
       selectRules: [requiredField],
@@ -67,6 +67,9 @@ export default {
         .split(0)
         .map((v, i) => i + 1),
     }
+  },
+  created () {
+    this.setInitialPlayer()
   },
   computed: {
     ...mapState('user', ['user']),
@@ -81,6 +84,12 @@ export default {
   },
   methods: {
     ...mapActions('teams', ['createTeam']),
+    setInitialPlayer () {
+      if (this.user.username) {
+        const name = this.user.username ? this.user.username : 'Me'
+        this.players.push({ name })
+      }
+    },
     setPlayers ($ev) {
       let myName = this.user.username ? this.user.username : "Me"
       this.players = [{ name: myName, isMe: true }]
