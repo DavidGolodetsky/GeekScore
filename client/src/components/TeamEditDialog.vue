@@ -6,7 +6,12 @@
     simple
     :submit-logic="onSubmit"
   >
-    <v-text-field v-model="name" clearable :rules="nameRules" label="Name" />
+    <v-text-field
+      v-model="name"
+      clearable
+      :rules="nameRules"
+      label="Name"
+    />
     <v-switch
       v-model="toDelete"
       label="Delete team"
@@ -25,25 +30,31 @@ export default {
   props: {
     team: {
       type: Object,
-      required: true,
-    },
+      required: true
+    }
   },
   data () {
     return {
       name: this.team.name,
       toDelete: false,
-      nameRules: standardField,
+      nameRules: standardField
     };
   },
   methods: {
     ...mapActions("teams", ["updateTeam", "deleteTeam"]),
-    onSubmit() {
-      if (this.toDelete) {
-        this.deleteTeam(this.team._id);
-      } else {
-        //TODO edit team
-      }
+    onSubmit () {
+      if (this.toDelete) return this.deleteTeam(this.team._id);
+      this.updateTheTeam();
+
+    },
+    updateTheTeam () {
+      const team = {
+        _id: this.team._id,
+        gameId: this.team.gameId,
+        name: this.name
+      };
+      this.updateTeam(team);
     }
-  },
+  }
 };
 </script>
