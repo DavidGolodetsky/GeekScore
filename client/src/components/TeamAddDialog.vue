@@ -1,44 +1,73 @@
 <template>
+
   <the-dialog
     activator-icon="plus"
     header="Add new team"
     button-text="New team"
     :submit-logic="onSubmit"
   >
-    <v-text-field
-      v-model.trim="name"
-      clearable
-      :rules="nameRules"
-      prepend-icon="mdi-account-group"
-      label="Name"
-    />
-    <v-select
-      prepend-icon="mdi-account-multiple-plus"
-      :rules="selectRules"
-      :items="numberOfPlayers"
-      label="Number of players"
-      @change="setPlayers"
-    />
-    <span>
-      <v-text-field
-        v-for="(player, i) in players"
-        :key="i"
-        v-model.trim="player.name"
-        :readonly="player.isMe"
-        :clearable="!player.isMe"
-        prepend-icon="mdi-account"
-        :rules="playerRules"
-        :label="`Player #${i + 1}`"
-        @input="isUniqueName"
-      />
-    </span>
-    <v-switch
-      v-model="coop"
-      label="Cooperative"
-      color="secondary"
-      hide-details
-    />
+    <v-tabs
+      v-model="tab"
+      background-color="primary"
+      centered
+      dark
+      icons-and-text
+    >
+      <v-tabs-slider color="secondary" />
+      <v-tab
+        v-for="(tabItem, i) in tabs"
+        :key="tabItem.name"
+        :href="`#tab-${i}`"
+      >
+        <span class="mt-2">{{ tabItem.name }}</span>
+      </v-tab>
+    </v-tabs>
+    <v-tabs-items v-model="tab">
+      <v-tab-item value="tab-0">
+        <v-select
+          prepend-icon="mdi-account-multiple-plus"
+          :items="teams"
+          v-model="selectedTeam"
+          item-text="name"
+          label="Team"
+        />
+      </v-tab-item>
+      <v-tab-item value="tab-1">
+        <v-text-field
+          v-model.trim="name"
+          clearable
+          prepend-icon="mdi-account-group"
+          label="Name"
+        />
+        <v-select
+          prepend-icon="mdi-account-multiple-plus"
+          :items="numberOfPlayers"
+          label="Number of players"
+          @change="setPlayers"
+        />
+        <span>
+          <v-text-field
+            v-for="(player, i) in players"
+            :key="i"
+            v-model.trim="player.name"
+            :readonly="player.isMe"
+            :clearable="!player.isMe"
+            prepend-icon="mdi-account"
+            :rules="playerRules"
+            :label="`Player #${i + 1}`"
+            @input="isUniqueName"
+          />
+        </span>
+        <v-switch
+          v-model="coop"
+          label="Cooperative"
+          color="secondary"
+          hide-details
+        />
+      </v-tab-item>
+    </v-tabs-items>
   </the-dialog>
+
 </template>
 
 <script>
@@ -61,6 +90,18 @@ export default {
       nameRules: standardField,
       playerRules: standardField,
       selectRules: [requiredField],
+      selectedTeam: null,
+      tab: null,
+      tabs: [
+        {
+          name: 'Select existing',
+          href: 'tab-0',
+        },
+        {
+          name: 'Create New',
+          href: 'tab-1',
+        },
+      ],
       // Generates number of players from 1 to N
       numberOfPlayers: Array(8)
         .join(0)
@@ -71,6 +112,7 @@ export default {
   computed: {
     ...mapState('user', ['user']),
     ...mapState('games', ['games']),
+    ...mapState('teams', ['teams']),
     ...mapGetters('games', ['getGame']),
     game () {
       return this.games ? this.getGame(this.gameId) : null
@@ -85,7 +127,7 @@ export default {
   methods: {
     ...mapActions('teams', ['createTeam']),
     setInitialPlayer () {
-      if (this.user.username) {
+      if (this.user?.username) {
         const name = this.user.username ? this.user.username : 'Me'
         this.players.push({ name })
       }
@@ -120,3 +162,10 @@ export default {
   },
 }
 </script>
+
+<style scoped lang="scss">
+.v-tabs-items {
+  padding: 20px;
+}
+</style>
+
