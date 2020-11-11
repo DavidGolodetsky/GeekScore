@@ -68,9 +68,6 @@ export default {
         .map((v, i) => i + 1),
     }
   },
-  created () {
-    this.setInitialPlayer()
-  },
   computed: {
     ...mapState('user', ['user']),
     ...mapState('games', ['games']),
@@ -81,6 +78,9 @@ export default {
     isCoop () {
       return this.game ? this.game.coop || this.coop : null
     },
+  },
+  created () {
+    this.setInitialPlayer()
   },
   methods: {
     ...mapActions('teams', ['createTeam']),

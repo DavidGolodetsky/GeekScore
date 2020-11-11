@@ -49,7 +49,7 @@ export default {
       required: true,
     },
   },
-  data() {
+  data () {
     return {
       toDelete: false,
       fields: {
@@ -87,7 +87,7 @@ export default {
       },
     };
   },
-  methods: {
+ methods: {
     ...mapActions("games", ["updateGame", "deleteGame"]),
     onSubmit() {
       if (this.toDelete) {

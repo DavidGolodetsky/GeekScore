@@ -28,7 +28,7 @@ export default {
       required: true,
     },
   },
-  data() {
+  data () {
     return {
       name: this.team.name,
       toDelete: false,
