@@ -1,5 +1,5 @@
 <template>
-  <section class="team-details">
+  <section>
     <the-title
       title="Rounds"
       icon="sword-cross"
@@ -71,17 +71,17 @@ export default {
       tabs: [
         {
           name: 'Table',
-          href: 'tab-0',
+          href: 'tab-1',
           icon: 'table-large',
         },
         {
           name: 'Statistics',
-          href: 'tab-1',
+          href: 'tab-2',
           icon: 'chart-bar',
         },
         {
           name: 'Tendencies',
-          href: 'tab-2',
+          href: 'tab-3',
           icon: 'chart-line',
         },
       ],
