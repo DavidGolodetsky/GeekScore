@@ -63,6 +63,11 @@ export default {
     navItems() {
       return [
         {
+          text: "Tools",
+          icon: "hammer-screwdriver",
+          link: "/tools"
+        },
+        {
           text: "Games",
           icon: "dice-multiple",
           link: "/games"
