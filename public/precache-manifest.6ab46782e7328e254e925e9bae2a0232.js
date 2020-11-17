@@ -4,52 +4,52 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/browserconfig.xml"
   },
   {
-    "revision": "64a7aa4284df59625e2e",
-    "url": "/css/app.f1cd9082.css"
+    "revision": "6a06a4e0563ede036dd5",
+    "url": "/css/app.4e960c3f.css"
   },
   {
     "revision": "884d5433a44b225c8cdd",
     "url": "/css/chunk-vendors.a0b752f4.css"
   },
   {
-    "revision": "b65a1729db59d99e127a",
-    "url": "/css/game.4fc60443.css"
+    "revision": "f995e00abaa52da5f714",
+    "url": "/css/game.0d37ab19.css"
   },
   {
-    "revision": "2bf51c71bafd42e9d86f",
-    "url": "/css/games.cca8381f.css"
+    "revision": "d479ac5401e639dad1c7",
+    "url": "/css/games.da94af42.css"
   },
   {
     "revision": "4c4bb0df30e4780c1799",
     "url": "/css/game~games~profile~resetPass~signIn~signUp~team.a41e1dae.css"
   },
   {
-    "revision": "7b1453d2b7bbd000e1d0",
-    "url": "/css/game~games~profile~team.987fe12d.css"
+    "revision": "298efa17657f7c06eb98",
+    "url": "/css/game~games~profile~team.ed039d0c.css"
   },
   {
     "revision": "53ab261e5c2e6a9bcec5",
     "url": "/css/home.c951d6af.css"
   },
   {
-    "revision": "1f082e2bda4a4aa986a9",
-    "url": "/css/signIn.3784cc1c.css"
+    "revision": "0626fad02221849fbc5e",
+    "url": "/css/signIn.664ac4f9.css"
   },
   {
-    "revision": "abaeb2c52345f721eb9e",
-    "url": "/css/signUp.3784cc1c.css"
+    "revision": "e2cbf4fa3d55bd12caa0",
+    "url": "/css/signUp.664ac4f9.css"
   },
   {
-    "revision": "f7e0811ad5e7f72e6cac",
-    "url": "/css/team.bb8e78e7.css"
+    "revision": "7c3d1bc93eded26dcb04",
+    "url": "/css/team.54133c61.css"
   },
   {
-    "revision": "2f407494e167f31308e5",
-    "url": "/css/theDialog.bd484caa.css"
+    "revision": "a3e987331d4cf150cc4b",
+    "url": "/css/theDialog.242e9b35.css"
   },
   {
-    "revision": "3f0cbe893c25ee0ef8d8",
-    "url": "/css/theGoBack.59f61d2c.css"
+    "revision": "8840a9b153d23ed332d9",
+    "url": "/css/theGoBack.aefab150.css"
   },
   {
     "revision": "10a04d7dcada291ddf78d9a235b6846e",
@@ -120,23 +120,23 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/img/team.bf4c6f13.webp"
   },
   {
-    "revision": "9dc7508ed3a0c1f62d8e47cb9843bf62",
+    "revision": "648862214127cf1876ba7d12263e0ab9",
     "url": "/index.html"
   },
   {
-    "revision": "64a7aa4284df59625e2e",
-    "url": "/js/app.d7d00611.js"
+    "revision": "6a06a4e0563ede036dd5",
+    "url": "/js/app.8b6fe40d.js"
   },
   {
     "revision": "884d5433a44b225c8cdd",
     "url": "/js/chunk-vendors.2caf14ee.js"
   },
   {
-    "revision": "b65a1729db59d99e127a",
+    "revision": "f995e00abaa52da5f714",
     "url": "/js/game.7f5d5eff.js"
   },
   {
-    "revision": "2bf51c71bafd42e9d86f",
+    "revision": "d479ac5401e639dad1c7",
     "url": "/js/games.a9fa85cd.js"
   },
   {
@@ -144,8 +144,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/js/game~games~profile~resetPass~signIn~signUp~team.811e39bd.js"
   },
   {
-    "revision": "7b1453d2b7bbd000e1d0",
-    "url": "/js/game~games~profile~team.cfdccde0.js"
+    "revision": "298efa17657f7c06eb98",
+    "url": "/js/game~games~profile~team.06549c78.js"
   },
   {
     "revision": "53ab261e5c2e6a9bcec5",
@@ -164,23 +164,23 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/js/resetPass.e105e706.js"
   },
   {
-    "revision": "1f082e2bda4a4aa986a9",
+    "revision": "0626fad02221849fbc5e",
     "url": "/js/signIn.23c1eca1.js"
   },
   {
-    "revision": "abaeb2c52345f721eb9e",
+    "revision": "e2cbf4fa3d55bd12caa0",
     "url": "/js/signUp.04e94912.js"
   },
   {
-    "revision": "f7e0811ad5e7f72e6cac",
-    "url": "/js/team.211e8e69.js"
+    "revision": "7c3d1bc93eded26dcb04",
+    "url": "/js/team.8ae22c1b.js"
   },
   {
-    "revision": "2f407494e167f31308e5",
+    "revision": "a3e987331d4cf150cc4b",
     "url": "/js/theDialog.e9ee4f2a.js"
   },
   {
-    "revision": "3f0cbe893c25ee0ef8d8",
+    "revision": "8840a9b153d23ed332d9",
     "url": "/js/theGoBack.2bc7ac74.js"
   },
   {
