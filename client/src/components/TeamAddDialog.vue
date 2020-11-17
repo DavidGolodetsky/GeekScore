@@ -2,17 +2,11 @@
 
   <the-dialog
     activator-icon="plus"
-    header="Add new team"
-    button-text="New team"
+    header="Add team"
+    button-text="Add team"
     :submit-logic="onSubmit"
   >
-    <v-tabs
-      v-model="tab"
-      background-color="primary"
-      centered
-      dark
-      icons-and-text
-    >
+    <v-tabs v-model="tab">
       <v-tabs-slider color="secondary" />
       <v-tab
         v-for="(tabItem, i) in tabs"
@@ -25,10 +19,11 @@
     <v-tabs-items v-model="tab">
       <v-tab-item value="tab-0">
         <v-select
+          v-model="selectedTeam"
           prepend-icon="mdi-account-multiple-plus"
           :items="teams"
-          v-model="selectedTeam"
           item-text="name"
+          item-value="_id"
           label="Team"
         />
       </v-tab-item>
@@ -94,7 +89,7 @@ export default {
       tab: null,
       tabs: [
         {
-          name: 'Select existing',
+          name: 'Select team',
           href: 'tab-0',
         },
         {
@@ -113,7 +108,8 @@ export default {
     ...mapState('user', ['user']),
     ...mapState('games', ['games']),
     ...mapState('teams', ['teams']),
-    ...mapGetters('games', ['getGame']),
+    ...mapGetters('games', ['getGame',]),
+    ...mapGetters('teams', ['getTeam']),
     game () {
       return this.games ? this.getGame(this.gameId) : null
     },
@@ -125,7 +121,7 @@ export default {
     this.setInitialPlayer()
   },
   methods: {
-    ...mapActions('teams', ['createTeam']),
+    ...mapActions('teams', ['createTeam', 'updateTeam']),
     setInitialPlayer () {
       if (this.user?.username) {
         const name = this.user.username ? this.user.username : 'Me'
@@ -150,6 +146,9 @@ export default {
       this.playerRules = [...this.playerRules, isDuplicated]
     },
     onSubmit () {
+      this.selectedTeam ? this.addExistingTeam() : this.createNewTeam()
+    },
+    createNewTeam () {
       const team = {
         games: [this.gameId],
         gameName: this.game.name,
@@ -159,6 +158,14 @@ export default {
       }
       this.createTeam(team)
     },
+    addExistingTeam () {
+      const team = this.getTeam(this.selectedTeam)
+      const payload = {
+        _id: this.selectedTeam,
+        games: [...team.games, this.gameId]
+      }
+      this.updateTeam(payload)
+    }
   },
 }
 </script>

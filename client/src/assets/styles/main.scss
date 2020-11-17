@@ -26,9 +26,9 @@ a {
 
 .columns {
   column-count: auto;
- column-fill: auto;
- width: 300px;
- height: 300px;
+  column-fill: auto;
+  width: 300px;
+  height: 300px;
 }
 
 .app {
@@ -78,6 +78,10 @@ a {
     background-color: $light-grey;
   }
 
+  .v-tabs > .v-tabs-bar {
+    background-color: $light-grey;
+  }
+
   .submit-btn {
     max-width: 250px;
     width: 100%;
@@ -124,7 +128,6 @@ a {
     color: $secondary;
   }
 }
-
 
 .header-title {
   user-select: none;
