@@ -40,9 +40,6 @@ export default {
     };
   },
   methods: {
-    imagePath(item, extension) {
-      return require(`@/assets/img/${item.img}.${extension}`);
-    },
     openDialog(item) {
       this.$refs.ToolsDialog.show(item);
     },

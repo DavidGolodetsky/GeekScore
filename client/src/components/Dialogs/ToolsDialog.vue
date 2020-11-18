@@ -1,17 +1,12 @@
 <template>
-  <the-dialog
-    activator-icon="pencil"
-    color="#fff"
-    header="Edit game info"
-    simple
-    :submit-logic="onSubmit"
-  >
+  <v-dialog v-model="open" max-width="300">
     <v-card v-if="item">
+      <v-card-title class="justify-center">
+        {{ item.name }}
+      </v-card-title>
       <dice-roller-card v-if="item.name === 'Dice Roller'" />
     </v-card>
-    <!-- TODO: for later -->
-    <!-- <scores-table /> -->
-  </the-dialog>
+  </v-dialog>
 </template>
 
 <script>
