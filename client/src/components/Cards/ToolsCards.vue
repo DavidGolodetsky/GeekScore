@@ -6,42 +6,25 @@
         raised
         class="mx-auto app-card"
         :aria-describedby="item.name"
-        @click="openDialog(item)"
       >
-        <v-card-title class="row_between">
-          <v-icon large color="grey darken-1">
-            {{ item.icon }}
-          </v-icon>
-          <span class="card-list-name">{{ item.name }}</span>
-        </v-card-title>
+        <div class="title-wrap">
+          <v-card-title class="row_between">
+            <slot name="action" :item="item" />
+            <span class="card-list-name">{{ item.name }}</span>
+          </v-card-title>
+        </div>
       </v-card>
     </v-col>
-    <tools-dialog ref="ToolsDialog" />
   </v-row>
 </template>
 
 <script>
-import ToolsDialog from "@/components/Dialogs/ToolsDialog";
-
 export default {
   name: "ToolsCards",
-  components: {
-    ToolsDialog,
-  },
   props: {
     items: {
       type: Array,
       required: true,
-    },
-  },
-  data() {
-    return {
-      dialog: false,
-    };
-  },
-  methods: {
-    openDialog(item) {
-      this.$refs.ToolsDialog.show(item);
     },
   },
 };
