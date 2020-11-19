@@ -2,7 +2,7 @@ import Vue from 'vue'
 
 Vue.component(
     'TheDialog',
-    () => import(/* webpackChunkName: "theDialog" */  '@/components/TheDialog')
+    () => import(/* webpackChunkName: "theDialog" */  '@/components/Dialogs/TheDialog')
 )
 
 Vue.component(

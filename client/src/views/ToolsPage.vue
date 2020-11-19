@@ -1,6 +1,9 @@
 <template>
   <section>
-    <the-title title="Tools" icon="hammer-screwdriver" />
+    <the-title
+      title="Tools"
+      icon="hammer-screwdriver"
+    />
     <tools-card :items="tools">
       <template #action="{ item }">
         <dice-roller-dialog :tool="item" />
@@ -11,7 +14,7 @@
 
 <script>
 import TheTitle from "@/components/TheTitle";
-import ToolsCard from "@/components/Cards/ToolsCards";
+import ToolsCard from "@/components/Cards/ToolsCard";
 import DiceRollerDialog from "@/components/Dialogs/DiceRollerDialog";
 
 export default {
@@ -21,7 +24,7 @@ export default {
     ToolsCard,
     DiceRollerDialog,
   },
-  data() {
+  data () {
     return {
       tools: [
         {

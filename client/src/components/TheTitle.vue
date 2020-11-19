@@ -1,7 +1,7 @@
 <script>
-import GameAddDialog from "@/components/GameAddDialog";
-import TeamAddDialog from "@/components/TeamAddDialog";
-import RoundAddDialog from "@/components/RoundAddDialog";
+import GameAddDialog from "@/components/Dialogs/GameAddDialog";
+import TeamAddDialog from "@/components/Dialogs/TeamAddDialog";
+import RoundAddDialog from "@/components/Dialogs/RoundAddDialog";
 import { VIcon } from "vuetify/lib";
 
 export default {
@@ -26,12 +26,12 @@ export default {
     },
     props: {
       type: Object,
-      default() {
+      default () {
         return {};
       },
     },
   },
-  render(h) {
+  render (h) {
     let template;
     if (this.component !== "") {
       template = h(

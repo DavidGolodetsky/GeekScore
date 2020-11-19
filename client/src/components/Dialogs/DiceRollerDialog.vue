@@ -13,7 +13,11 @@
       :key="index"
       class="row_between"
     >
-      <v-icon large color="grey darken-1" @click="field.function('minus')">
+      <v-icon
+        large
+        color="grey darken-1"
+        @click="field.func('minus')"
+      >
         mdi-minus
       </v-icon>
 
@@ -22,18 +26,29 @@
         :label="field.label"
         :disabled="true"
       />
-      <v-icon large color="grey darken-1" @click="field.function('plus')">
+      <v-icon
+        large
+        color="grey darken-1"
+        @click="field.func('plus')"
+      >
         mdi-plus
       </v-icon>
     </v-card-text>
 
     <v-card-actions>
-      <v-btn class="submit-btn" ripple type="submit" @click="rollDice"
-        >Roll</v-btn
-      >
+      <v-btn
+        class="submit-btn"
+        ripple
+        type="submit"
+        @click="rollDice"
+      >Roll</v-btn>
     </v-card-actions>
     <v-card-text class="pt-5">
-      <v-text-field v-model="totalValue" label="Result" disabled />
+      <v-text-field
+        v-model="totalValue"
+        label="Result"
+        disabled
+      />
     </v-card-text>
   </the-dialog>
 </template>
@@ -47,17 +62,17 @@ export default {
       required: true,
     },
   },
-  data() {
+  data () {
     return {
       totalValue: "",
       fields: {
         diceSide: {
-          function: this.changeSide,
+          func: this.changeSide,
           label: "Dice Sides",
           model: 3,
         },
         rollNumber: {
-          function: this.changeRoll,
+          func: this.changeRoll,
           label: "Roll Numbers",
           model: 1,
         },
@@ -65,36 +80,36 @@ export default {
     };
   },
   methods: {
-    changeSide(operator) {
+    changeSide (operator) {
       if (operator === "plus") {
         if (this.fields.diceSide.model < 20) {
           this.fields.diceSide.model++;
         }
-      } else if (operator === "minus") {
+      } else {
         if (this.fields.diceSide.model > 3) {
           this.fields.diceSide.model--;
         }
       }
     },
-    changeRoll(operator) {
+    changeRoll (operator) {
       if (operator === "plus") {
         if (this.fields.rollNumber.model < 10) {
           this.fields.rollNumber.model++;
         }
-      } else if (operator === "minus") {
+      } else {
         if (this.fields.rollNumber.model > 1) {
           this.fields.rollNumber.model--;
         }
       }
     },
-    rollDice() {
+    rollDice () {
       this.totalValue =
         this.fields.rollNumber.model +
         Math.floor(
           Math.random() *
-            (this.fields.diceSide.model * this.fields.rollNumber.model -
-              this.fields.rollNumber.model +
-              1)
+          (this.fields.diceSide.model * this.fields.rollNumber.model -
+            this.fields.rollNumber.model +
+            1)
         );
     },
   },
