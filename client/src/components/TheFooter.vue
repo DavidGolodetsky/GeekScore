@@ -1,12 +1,29 @@
 <template>
-  <v-footer class="the-footer" padless>
-    <v-layout primary white--text>
+  <v-footer
+    class="the-footer"
+    padless
+  >
+    <v-layout
+      primary
+      white--text
+    >
       <v-container>
-        <span class="mr-6" data-test-copy>&copy; {{ copy }}</span>
-        <span>
-          Build by
-          <a class="link" href="https://twitter.com/david_go__" rel="noopener noreferrer" target="_blank">@David_Go__</a>
-        </span>
+        <span
+          class="mr-6"
+          data-test-copy
+        >&copy; {{ copy }}</span>
+        <a
+          class="link"
+          href="https://github.com/DavidGolodetsky/GeekScore-2"
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          <span class="mr-2">Repo</span>
+          <v-icon
+            size="18"
+            dark
+          >mdi-code-tags</v-icon>
+        </a>
       </v-container>
     </v-layout>
   </v-footer>
@@ -15,7 +32,7 @@
 <script>
 export default {
   name: "TheFooter",
-  data() {
+  data () {
     return {
       copy: ` ${new Date().getFullYear()} — Geek Score`
     };

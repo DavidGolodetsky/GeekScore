@@ -26,9 +26,9 @@ a {
 
 .columns {
   column-count: auto;
- column-fill: auto;
- width: 300px;
- height: 300px;
+  column-fill: auto;
+  width: 300px;
+  height: 300px;
 }
 
 .app {
@@ -72,6 +72,14 @@ a {
   }
   .v-input--radio-group--column .v-input--radio-group__input > .v-label {
     margin-bottom: 8px;
+  }
+
+  .v-tabs-items {
+    background-color: $light-grey;
+  }
+
+  .v-tabs > .v-tabs-bar {
+    background-color: $light-grey;
   }
 
   .submit-btn {

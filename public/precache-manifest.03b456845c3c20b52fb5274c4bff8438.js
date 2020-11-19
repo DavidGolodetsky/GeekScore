@@ -4,19 +4,19 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/browserconfig.xml"
   },
   {
-    "revision": "70b415163209dd0a42b4",
-    "url": "/css/app.e9759685.css"
+    "revision": "64a7aa4284df59625e2e",
+    "url": "/css/app.f1cd9082.css"
   },
   {
     "revision": "884d5433a44b225c8cdd",
     "url": "/css/chunk-vendors.a0b752f4.css"
   },
   {
-    "revision": "d879c923ab07500f33b3",
+    "revision": "b65a1729db59d99e127a",
     "url": "/css/game.4fc60443.css"
   },
   {
-    "revision": "c12b907ddb790b50fbce",
+    "revision": "2bf51c71bafd42e9d86f",
     "url": "/css/games.cca8381f.css"
   },
   {
@@ -24,7 +24,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/css/game~games~profile~resetPass~signIn~signUp~team.a41e1dae.css"
   },
   {
-    "revision": "7948c1cbfa12bbbe7ecc",
+    "revision": "7b1453d2b7bbd000e1d0",
     "url": "/css/game~games~profile~team.987fe12d.css"
   },
   {
@@ -120,32 +120,32 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/img/team.bf4c6f13.webp"
   },
   {
-    "revision": "222b1cb3da609912d9114b03f680a111",
+    "revision": "9dc7508ed3a0c1f62d8e47cb9843bf62",
     "url": "/index.html"
   },
   {
-    "revision": "70b415163209dd0a42b4",
-    "url": "/js/app.88874e8b.js"
+    "revision": "64a7aa4284df59625e2e",
+    "url": "/js/app.d7d00611.js"
   },
   {
     "revision": "884d5433a44b225c8cdd",
     "url": "/js/chunk-vendors.2caf14ee.js"
   },
   {
-    "revision": "d879c923ab07500f33b3",
-    "url": "/js/game.941ff993.js"
+    "revision": "b65a1729db59d99e127a",
+    "url": "/js/game.7f5d5eff.js"
   },
   {
-    "revision": "c12b907ddb790b50fbce",
-    "url": "/js/games.12285b70.js"
+    "revision": "2bf51c71bafd42e9d86f",
+    "url": "/js/games.a9fa85cd.js"
   },
   {
     "revision": "4c4bb0df30e4780c1799",
     "url": "/js/game~games~profile~resetPass~signIn~signUp~team.811e39bd.js"
   },
   {
-    "revision": "7948c1cbfa12bbbe7ecc",
-    "url": "/js/game~games~profile~team.a7d7a5ed.js"
+    "revision": "7b1453d2b7bbd000e1d0",
+    "url": "/js/game~games~profile~team.cfdccde0.js"
   },
   {
     "revision": "53ab261e5c2e6a9bcec5",

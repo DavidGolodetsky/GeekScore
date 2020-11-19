@@ -114,6 +114,20 @@ const routes = [
     },
   },
   {
+    path: '/tools',
+    name: 'tools',
+    component: () =>
+      import(/* webpackChunkName: "tools" */ '../views/ToolsPage'),
+    meta: {
+      requiresAuth: true,
+      title: 'Geek Score - Tools page',
+      metaTags: {
+        name: 'description',
+        content: "A list of tools for games",
+      },
+    },
+  },
+  {
     path: '/404',
     alias: '*',
     name: 'notFound',
