@@ -48,7 +48,7 @@ export default {
       this.updateGame(game);
     },
     loadData () {
-      this.games || this.loadGames();
+      this.games ?? this.loadGames();
     },
   },
 };

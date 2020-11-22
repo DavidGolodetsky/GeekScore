@@ -85,12 +85,12 @@ export default {
       this.updateTeam(team);
     },
     loadData () {
-      this.games || this.loadGames().then(() => {
+      this.games ?? this.loadGames().then(() => {
         this.setBackTitle(this.getGame(this.gameId).name);
       });
-      this.teams || this.loadTeams();
+      this.teams ?? this.loadTeams();
       this.loadWinRate(this.gameId)
-      if (this.games != null) this.setBackTitle(this.getGame(this.gameId).name);
+      this.games && this.setBackTitle(this.getGame(this.gameId).name);
     },
   },
 };
