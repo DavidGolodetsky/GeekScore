@@ -1,5 +1,9 @@
 <template>
-  <the-dialog activator-icon="plus" header="Add new game" :submit-logic="onSubmit">
+  <the-dialog
+    activator-icon="plus"
+    header="Add new game"
+    :submit-logic="onSubmit"
+  >
     <v-text-field
       v-model.trim="name"
       clearable
@@ -7,7 +11,12 @@
       prepend-icon="mdi-dice-multiple"
       label="Name"
     />
-    <v-switch v-model="coop" label="Cooperative" color="secondary" hide-details />
+    <v-switch
+      v-model="coop"
+      label="Cooperative"
+      color="secondary"
+      hide-details
+    />
   </the-dialog>
 </template>
 
@@ -17,7 +26,7 @@ import { mapActions } from "vuex";
 
 export default {
   name: "GameAddDialog",
-  data() {
+  data () {
     return {
       name: "",
       coop: false,
@@ -26,7 +35,7 @@ export default {
   },
   methods: {
     ...mapActions("games", ["createGame"]),
-    onSubmit() {
+    onSubmit () {
       const game = {
         coop: this.coop,
         name: this.name

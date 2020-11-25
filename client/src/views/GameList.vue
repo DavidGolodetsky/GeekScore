@@ -1,6 +1,10 @@
 <template>
   <section>
-    <the-title title="Games" icon="dice-multiple" component="game-add-dialog" />
+    <the-title
+      title="Games"
+      icon="dice-multiple"
+      component="game-add-dialog"
+    />
     <cards-list
       v-if="games"
       :route="gameRoute"
@@ -16,8 +20,8 @@
 
 <script>
 import TheTitle from '@/components/TheTitle';
-import GameEditDialog from '@/components/GameEditDialog';
-import CardsList from '@/components/CardsList';
+import GameEditDialog from '@/components/Dialogs/GameEditDialog';
+import CardsList from '@/components/Cards/CardsList';
 import { mapState, mapActions } from 'vuex';
 
 export default {
@@ -27,7 +31,7 @@ export default {
     GameEditDialog,
     CardsList,
   },
-  data() {
+  data () {
     return {
       gameRoute: { name: 'game', params: { gameId: '' } },
     };
@@ -35,16 +39,16 @@ export default {
   computed: {
     ...mapState('games', ['games']),
   },
-  created() {
+  created () {
     this.loadData();
   },
   methods: {
     ...mapActions('games', ['loadGames', 'updateGame']),
-    toggleFavorite(game) {
+    toggleFavorite (game) {
       this.updateGame(game);
     },
-    loadData() {
-      this.games || this.loadGames();
+    loadData () {
+      this.games ?? this.loadGames();
     },
   },
 };

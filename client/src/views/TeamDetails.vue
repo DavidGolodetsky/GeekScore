@@ -126,15 +126,14 @@ export default {
     ...mapActions('teams', ['loadTeams']),
     ...mapActions('rounds', ['loadRounds']),
     loadData () {
-      this.games || this.loadGames();
-      this.teams || this.loadTeams().then(() => {
+      this.games ?? this.loadGames();
+      this.teams ?? this.loadTeams().then(() => {
         this.setBackTitle(`${this.team.name}: ${this.game.name}`);
       });
       const isRounds = this.$store.hasModule('rounds');
       isRounds || this.$store.registerModule('rounds', rounds);
       this.loadRounds();
-
-      if (this.teams != null) this.setBackTitle(`${this.team.name}: ${this.game.name}`);
+      this.teams && this.setBackTitle(`${this.team.name}: ${this.game.name}`);
     },
   },
 };
