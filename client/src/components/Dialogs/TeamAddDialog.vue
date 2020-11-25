@@ -62,7 +62,6 @@
       </v-tab-item>
     </v-tabs-items>
   </the-dialog>
-
 </template>
 
 <script>
@@ -111,7 +110,7 @@ export default {
     ...mapGetters('games', ['getGame',]),
     ...mapGetters('teams', ['getTeam']),
     game () {
-      return this.games ? this.getGame(this.gameId) : null
+      return this.games ?? this.getGame(this.gameId)
     },
     isCoop () {
       return this.game ? this.game.coop || this.coop : null

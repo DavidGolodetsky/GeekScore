@@ -53,7 +53,6 @@ router.get('/win-rate/:id', async (req, res) => {
   try {
     const gameId = req.params.id;
     const rounds = await Round.find({ gameId });
-    const game = await Game.findById(gameId);
 
     let wins = 0;
     for (let i = 0; i < rounds.length; i++) {

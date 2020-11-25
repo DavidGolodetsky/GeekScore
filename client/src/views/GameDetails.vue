@@ -31,8 +31,8 @@
 
 <script>
 import TheTitle from '@/components/TheTitle';
-import TeamEditDialog from '@/components/TeamEditDialog';
-import CardsList from '@/components/CardsList';
+import TeamEditDialog from '@/components/Dialogs/TeamEditDialog';
+import CardsList from '@/components/Cards/CardsList';
 import { mapActions, mapGetters, mapState } from 'vuex';
 
 export default {
@@ -85,12 +85,12 @@ export default {
       this.updateTeam(team);
     },
     loadData () {
-      this.games || this.loadGames().then(() => {
+      this.games ?? this.loadGames().then(() => {
         this.setBackTitle(this.getGame(this.gameId).name);
       });
-      this.teams || this.loadTeams();
+      this.teams ?? this.loadTeams();
       this.loadWinRate(this.gameId)
-      if (this.games != null) this.setBackTitle(this.getGame(this.gameId).name);
+      this.games && this.setBackTitle(this.getGame(this.gameId).name);
     },
   },
 };

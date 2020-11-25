@@ -1,7 +1,7 @@
 <script>
-import GameAddDialog from "@/components/GameAddDialog";
-import TeamAddDialog from "@/components/TeamAddDialog";
-import RoundAddDialog from "@/components/RoundAddDialog";
+import GameAddDialog from "@/components/Dialogs/GameAddDialog";
+import TeamAddDialog from "@/components/Dialogs/TeamAddDialog";
+import RoundAddDialog from "@/components/Dialogs/RoundAddDialog";
 import { VIcon } from "vuetify/lib";
 
 export default {
@@ -9,68 +9,107 @@ export default {
   components: {
     GameAddDialog,
     TeamAddDialog,
-    RoundAddDialog
+    RoundAddDialog,
   },
   props: {
     title: {
       type: String,
-      required: true
+      required: true,
     },
     component: {
       type: String,
-      default: ""
+      default: "",
     },
     icon: {
       type: String,
-      default: ""
+      default: "",
     },
     props: {
       type: Object,
       default () {
         return {};
-      }
-    }
+      },
+    },
   },
   render (h) {
-    return h(
-      "div",
-      {
-        class: "row_between mb-6"
-      },
-      [
-        h(
-          "div",
-          {
-            class: "d-flex"
-          },
-          [
-            h(
-              VIcon,
-              {
-                class: "mx-2",
-                props: {
-                  color: "secondary"
-                }
-              },
-              `mdi-${this.icon}`
-            ),
-            h(
-              "h1",
-              {
-                class: "app-headline"
-              },
-              this.title
-            )
-          ]
-        ),
-        h(this.component, {
-          class: "d-flex justify-end my-2",
-          props: {
-            ...this.props
-          }
-        })
-      ]
-    );
-  }
+    let template;
+    if (this.component !== "") {
+      template = h(
+        "div",
+        {
+          class: "row_between mb-6",
+        },
+        [
+          h(
+            "div",
+            {
+              class: "d-flex",
+            },
+            [
+              h(
+                VIcon,
+                {
+                  class: "mx-2",
+                  props: {
+                    color: "secondary",
+                  },
+                },
+                `mdi-${this.icon}`
+              ),
+              h(
+                "h1",
+                {
+                  class: "app-headline",
+                },
+                this.title
+              ),
+            ]
+          ),
+          h(this.component, {
+            class: "d-flex justify-end my-2",
+            props: {
+              ...this.props,
+            },
+          }),
+        ]
+      );
+    } else {
+      template = h(
+        "div",
+        {
+          class: "row_between mb-6 pt-5",
+        },
+        [
+          h(
+            "div",
+            {
+              class: "d-flex",
+            },
+            [
+              h(
+                VIcon,
+                {
+                  class: "mx-2",
+                  props: {
+                    color: "secondary",
+                  },
+                },
+                `mdi-${this.icon}`
+              ),
+              h(
+                "h1",
+                {
+                  class: "app-headline",
+                },
+                this.title
+              ),
+            ]
+          ),
+        ]
+      );
+    }
+
+    return template;
+  },
 };
 </script>
