@@ -72,7 +72,7 @@ export default {
     },
     submitLogic: {
       type: Function,
-      required: true,
+      required: false
     },
     activatorText: {
       type: String,
