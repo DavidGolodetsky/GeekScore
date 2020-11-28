@@ -88,6 +88,6 @@ export default {
 
 <style scoped lang="scss">
 canvas#bar-chart {
-  background-color: $light-grey;
+  background-color: $lightgrey;
 }
 </style>
