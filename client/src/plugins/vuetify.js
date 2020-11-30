@@ -14,7 +14,10 @@ export default new Vuetify({
                 warning: '#ffc107',
                 info: '#03a9f4',
                 success: '#8bc34a',
-                silver: '#d9d9d8'
+                silver: '#d9d9d8',
+                bg: '#50514f',
+                lightgrey: '#d9d9d8',
+                label: '#6C6C6B'
             },
         },
     },
