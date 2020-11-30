@@ -3,8 +3,8 @@
     <the-title title="Tools" icon="hammer-screwdriver" />
     <tools-card :items="tools">
       <template #action="{ item }">
-        <dice-roller-dialog v-if="item._id === 0" :tool="item" />
-        <timer-dialog v-if="item._id === 1" :tool="item" />
+        <dice-roller-dialog v-if="item.id === 'dice'" :tool="item" />
+        <timer-dialog v-if="item.id === 'clock'" :tool="item" />
       </template>
     </tools-card>
   </section>
@@ -28,15 +28,15 @@ export default {
     return {
       tools: [
         {
-          _id: 0,
+          id: "dice",
           name: "Dice Roller",
         },
         {
-          _id: 1,
+          id: "clock",
           name: "Clock Tools",
         },
       ],
     };
-  },
+  }
 };
 </script>
