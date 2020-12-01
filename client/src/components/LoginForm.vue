@@ -119,7 +119,7 @@ export default {
       email: '',
       EmailRules: [requiredField, emailField],
       username: '',
-      passwordRules: [...standardField, shortPassword],
+      passwordRules: [...standardField, requiredField, shortPassword],
     };
   },
   computed: {

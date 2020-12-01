@@ -1,20 +1,32 @@
 export const requiredField = v => !!v || "Field is required"
 
-export const tooLongField = v => !!(v && v.length <= 60) || "Field is too long"
-
-export const tooShortField = v => !!(v && v.length >= 2) || "Field is too short"
-
-export const onlyWhitespaces = v => !!(v && v.replace(/\s/g, "").length) || "Field contains only whitespaces"
-
-export const linkField = v => {
-  const link = (v && v.match(/(https?:\/\/[^\s]+)/g))
-  return !!link || "Please provide a correct link";
+export const tooLongField = v => {
+  if (v) return !!(v.length <= 60) || "Field is too long"
 }
 
-export const emailField = v => /.+@.+\..+/.test(v) || "E-mail must be valid"
+export const tooShortField = v => {
+  if (v) return !!(v.length >= 2) || "Field is too short"
+}
 
-export const shortPassword = v => !!(v && v.length >= 6) || "Password is too short"
+export const onlyWhitespaces = v => {
+  if (v) return !!(v.replace(/\s/g, "").length) || "Field contains only whitespaces"
+}
+
+export const linkField = v => {
+  if (v) {
+    const link = (v && v.match(/(https?:\/\/[^\s]+)/g))
+    return !!link || "Please provide a correct link";
+  }
+}
+
+export const emailField = v => {
+  if (v) return /.+@.+\..+/.test(v) || "E-mail must be valid"
+}
+
+export const shortPassword = v => {
+  if (v) return !!(v.length >= 6) || "Password is too short"
+}
 
 
-export const standardField = [requiredField, tooLongField, tooShortField, onlyWhitespaces]
+export const standardField = [tooLongField, tooShortField, onlyWhitespaces]
 

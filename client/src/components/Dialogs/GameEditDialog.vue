@@ -34,7 +34,7 @@
 </template>
 
 <script>
-import { standardField, tooLongField, linkField } from "@/utils/validations";
+import { standardField, requiredField, tooLongField, linkField } from "@/utils/validations";
 // import ScoresTable from "@/components/ScoresTable";
 import { mapActions } from "vuex";
 
@@ -57,7 +57,7 @@ export default {
           label: "Name",
           icon: "dice-multiple",
           value: this.game.name,
-          rules: standardField
+          rules: [...standardField, requiredField]
         },
         bggURL: {
           label: "Board geek game URL",
