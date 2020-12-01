@@ -89,7 +89,7 @@ export default {
     },
     submitLogic: {
       type: Function,
-      required: true,
+      default: () => {},
     },
     activatorText: {
       type: String,
@@ -100,12 +100,10 @@ export default {
     },
     footer: {
       type: Boolean,
-      required: false,
       default: true,
     },
     closeOnSubmit: {
       type: Boolean,
-      required: false,
       default: true,
     },
   },
