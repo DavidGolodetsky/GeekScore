@@ -17,6 +17,7 @@
       </v-tab>
     </v-tabs>
     <v-tabs-items v-model="tab">
+      <!-- TODO: rename tabs with meaningful names -->
       <v-tab-item value="tab-0">
         <v-select
           v-model="selectedTeam"

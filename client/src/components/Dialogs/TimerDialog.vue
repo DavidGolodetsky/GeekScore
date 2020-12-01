@@ -7,7 +7,10 @@
     :footer="false"
     :close-on-submit="false"
   >
-    <v-tabs v-model="tab" background-color="#d9d9d8">
+    <v-tabs
+      v-model="tab"
+      background-color="#d9d9d8"
+    >
       <v-tabs-slider color="secondary" />
       <v-tab
         v-for="tabItem in tabs"
@@ -18,22 +21,53 @@
       </v-tab>
     </v-tabs>
     <v-tabs-items v-model="tab">
-      <v-tab-item value="tab-timer" />
-      <v-tab-item value="tab-countdown" />
-      <span class="d-flex justify-center">
-        <v-text-field
-          v-model="time"
-          label="Time"
-          outlined
-          :disabled="tab === 'tab-timer' ? true : false"
-        />
-      </span>
-      <span class="d-flex row_between">
-        <v-btn class="submit-btn test" ripple @click="playPauseTimer">{{
+      <v-tab-item value="tab-timer">
+        <span class="d-flex row_between">
+          <v-text-field
+            v-model="time"
+            label="Time"
+            outlined
+            :disabled="tab === 'tab-timer' ? true : false"
+          />
+          <v-btn
+            class="submit-btn test"
+            ripple
+            @click="playPauseTimer"
+          >{{
           pause ? "Play" : "Pause"
         }}</v-btn>
-        <v-btn class="submit-btn" ripple @click="stopTimer">Stop</v-btn>
-      </span>
+          <v-btn
+            class="submit-btn"
+            ripple
+            @click="stopTimer"
+          >Stop</v-btn>
+        </span>
+      </v-tab-item>
+      <v-tab-item value="tab-countdown">
+        <span class="d-flex row_between">
+          <v-text-field
+            v-model="time"
+            label="Time"
+            outlined
+            :disabled="tab === 'tab-timer' ? true : false"
+          />
+        </span>
+        <span class="d-flex row_between">
+          <v-btn
+            class="submit-btn test"
+            ripple
+            @click="playPauseTimer"
+          >{{
+          pause ? "Play" : "Pause"
+        }}</v-btn>
+          <v-btn
+            class="submit-btn"
+            ripple
+            @click="stopTimer"
+          >Stop</v-btn>
+        </span>
+      </v-tab-item>
+
     </v-tabs-items>
   </the-dialog>
 </template>
@@ -47,7 +81,7 @@ export default {
       required: true,
     },
   },
-  data() {
+  data () {
     return {
       time: 0,
       tab: null,
@@ -66,15 +100,15 @@ export default {
     };
   },
   watch: {
-    tab() {
+    tab () {
       this.stopTimer();
     },
   },
-  destroyed() {
+  destroyed () {
     this.stopTimer();
   },
   methods: {
-    playPauseTimer() {
+    playPauseTimer () {
       this.pause = !this.pause;
 
       if (this.pause) {
@@ -89,7 +123,7 @@ export default {
         }, 1000);
       }
     },
-    stopTimer() {
+    stopTimer () {
       this.time = 0;
       this.pause = true;
       clearInterval(this.playInterval);
