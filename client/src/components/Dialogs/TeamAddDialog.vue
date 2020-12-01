@@ -22,6 +22,7 @@
           v-model="selectedTeam"
           prepend-icon="mdi-account-multiple-plus"
           :items="teams"
+          :rules="selectRules"
           item-text="name"
           item-value="_id"
           label="Team"
@@ -31,12 +32,14 @@
         <v-text-field
           v-model.trim="name"
           clearable
+          :rules="nameRules"
           prepend-icon="mdi-account-group"
           label="Name"
         />
         <v-select
           prepend-icon="mdi-account-multiple-plus"
           :items="numberOfPlayers"
+          :rules="selectRules"
           label="Number of players"
           @change="setPlayers"
         />
