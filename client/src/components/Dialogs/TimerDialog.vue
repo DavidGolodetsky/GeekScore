@@ -22,13 +22,14 @@
     </v-tabs>
     <v-tabs-items v-model="tab">
       <v-tab-item value="tab-timer">
-        <span class="d-flex row_between">
-          <v-text-field
-            v-model="time"
-            label="Time"
-            outlined
-            :disabled="tab === 'tab-timer' ? true : false"
-          />
+        <!-- TODO:decouple -->
+        <v-text-field
+          v-model="time"
+          label="Time"
+          outlined
+          disabled
+        />
+        <div class="d-flex row_between">
           <v-btn
             class="submit-btn test"
             ripple
@@ -41,18 +42,15 @@
             ripple
             @click="stopTimer"
           >Stop</v-btn>
-        </span>
+        </div>
       </v-tab-item>
       <v-tab-item value="tab-countdown">
-        <span class="d-flex row_between">
-          <v-text-field
-            v-model="time"
-            label="Time"
-            outlined
-            :disabled="tab === 'tab-timer' ? true : false"
-          />
-        </span>
-        <span class="d-flex row_between">
+        <v-text-field
+          v-model="time"
+          label="Time"
+          outlined
+        />
+        <div class="d-flex row_between">
           <v-btn
             class="submit-btn test"
             ripple
@@ -65,7 +63,7 @@
             ripple
             @click="stopTimer"
           >Stop</v-btn>
-        </span>
+        </div>
       </v-tab-item>
 
     </v-tabs-items>
