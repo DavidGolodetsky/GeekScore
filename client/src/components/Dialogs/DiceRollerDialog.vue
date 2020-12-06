@@ -1,11 +1,26 @@
 <template>
   <the-dialog
-    activator-icon="dice-d20"
     color="#fff"
     header="Dice Roller"
     simple
-    :submit-logic="rollDice"
   >
+    <template #activator>
+      <v-card
+        dark
+        raised
+        class="mx-auto card-pointer"
+      >
+        <div class="title-wrap">
+          <v-card-title class="d-flex">
+            <v-icon
+              class="mr-2"
+              dark
+            >mdi-dice-d20</v-icon>
+            <span class="label_text">Dice Roller</span>
+          </v-card-title>
+        </div>
+      </v-card>
+    </template>
     <v-card-text
       v-for="(field, index) in fields"
       :key="index"
@@ -51,12 +66,6 @@
 <script>
 export default {
   name: "DiceRollerDialog",
-  props: {
-    tool: {
-      type: Object,
-      required: true,
-    },
-  },
   data () {
     return {
       totalValue: "",

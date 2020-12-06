@@ -1,23 +1,26 @@
 <template>
   <section>
-    <v-btn
-      :id="`activator_${activatorText}`"
-      class="px-0"
-      :small="simple"
-      fab
-      aria-label="Open modal"
-      :text="simple"
-      :color="color"
-      @click.prevent="dialog = true"
-    >
-      <v-icon dark>mdi-{{ activatorIcon }}</v-icon>
-    </v-btn>
-    <label
-      :for="`activator_${activatorText}`"
-      class="label_text"
-    >{{
+    <div @click.prevent="dialog = true">
+      <slot name="activator">
+        <v-btn
+          :id="`activator_${activatorText}`"
+          class="px-0 mr-2"
+          :small="simple"
+          fab
+          aria-label="Open modal"
+          :text="simple"
+          :color="color"
+        >
+          <v-icon dark>mdi-{{ activatorIcon }}</v-icon>
+        </v-btn>
+        <label
+          :for="`activator_${activatorText}`"
+          class="label_text"
+        >{{
       activatorText
     }}</label>
+      </slot>
+    </div>
     <v-dialog
       v-model="dialog"
       max-width="600"
@@ -76,7 +79,7 @@ export default {
   props: {
     activatorIcon: {
       type: String,
-      required: true,
+      default: "",
     },
     header: {
       type: String,

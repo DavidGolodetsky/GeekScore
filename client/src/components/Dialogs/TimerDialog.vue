@@ -1,10 +1,26 @@
 <template>
   <the-dialog
-    activator-icon="timer"
     color="#fff"
     :header="tab === 'tab-timer' ? 'Timer' : 'Countdown'"
     simple
   >
+    <template #activator>
+      <v-card
+        dark
+        raised
+        class="mx-auto card-pointer"
+      >
+        <div class="title-wrap">
+          <v-card-title class="d-flex">
+            <v-icon
+              class="mr-2"
+              dark
+            >mdi-timer</v-icon>
+            <span class="label_text">Clock Tools</span>
+          </v-card-title>
+        </div>
+      </v-card>
+    </template>
     <v-tabs
       v-model="tab"
       background-color="#d9d9d8"
@@ -59,12 +75,6 @@
 <script>
 export default {
   name: "TimerDialog",
-  props: {
-    tool: {
-      type: Object,
-      required: true,
-    },
-  },
   data () {
     return {
       time: 0,

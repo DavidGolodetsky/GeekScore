@@ -46,7 +46,7 @@ a {
 
   .label_text {
     font-size: 16px;
-    color: rgba(0, 0, 0, 0.6);
+    color: #fff;
     cursor: pointer;
   }
 
@@ -127,6 +127,10 @@ a {
     font-size: 12px;
     color: $secondary;
   }
+}
+
+.card-pointer {
+  cursor: pointer;
 }
 
 .header-title {

@@ -32,7 +32,7 @@
 <script>
 import TheTitle from '@/components/TheTitle';
 import TeamEditDialog from '@/components/Dialogs/TeamEditDialog';
-import CardsList from '@/components/Cards/CardsList';
+import CardsList from '@/components/CardsList';
 import { mapActions, mapGetters, mapState } from 'vuex';
 
 export default {
