@@ -4,8 +4,6 @@
     color="#fff"
     :header="tab === 'tab-timer' ? 'Timer' : 'Countdown'"
     simple
-    :footer="false"
-    :close-on-submit="false"
   >
     <v-tabs
       v-model="tab"
@@ -22,27 +20,12 @@
     </v-tabs>
     <v-tabs-items v-model="tab">
       <v-tab-item value="tab-timer">
-        <!-- TODO:decouple -->
         <v-text-field
           v-model="time"
           label="Time"
           outlined
           disabled
         />
-        <div class="d-flex justify-space-around">
-          <v-btn
-            color="secondary darken-1"
-            outlined
-            @click="playPauseTimer"
-          >{{
-          pause ? "Play" : "Pause"
-        }}</v-btn>
-          <v-btn
-            color="secondary darken-1"
-            outlined
-            @click="stopTimer"
-          >Stop</v-btn>
-        </div>
       </v-tab-item>
       <v-tab-item value="tab-countdown">
         <v-text-field
@@ -50,22 +33,23 @@
           label="Time"
           outlined
         />
-        <div class="d-flex justify-space-around">
-          <v-btn
-            color="secondary darken-1"
-            outlined
-            @click="playPauseTimer"
-          >{{
-          pause ? "Play" : "Pause"
-        }}</v-btn>
-          <v-btn
-            color="secondary darken-1"
-            outlined
-            @click="stopTimer"
-          >Stop</v-btn>
-        </div>
       </v-tab-item>
     </v-tabs-items>
+    <template #footer>
+      <v-btn
+        color="secondary darken-1"
+        outlined
+        class="mr-2"
+        @click="playPauseTimer"
+      >{{
+          pause ? "Play" : "Pause"
+        }}</v-btn>
+      <v-btn
+        color="secondary darken-1"
+        outlined
+        @click="stopTimer"
+      >Stop</v-btn>
+    </template>
   </the-dialog>
 </template>
 

@@ -46,23 +46,22 @@
               <slot />
             </v-container>
           </v-card-text>
-          <v-card-actions
-            v-if="footer"
-            class="footer"
-          >
+          <v-card-actions class="footer">
             <v-spacer />
-            <v-btn
-              color="secondary darken-1"
-              class="mr-2"
-              outlined
-              @click="close"
-            >Cancel</v-btn>
-            <v-btn
-              color="secondary darken-1"
-              outlined
-              type="submit"
-              :disabled="!valid"
-            >Submit</v-btn>
+            <slot name="footer">
+              <v-btn
+                color="secondary darken-1"
+                class="mr-2"
+                outlined
+                @click="close"
+              >Cancel</v-btn>
+              <v-btn
+                color="secondary darken-1"
+                outlined
+                type="submit"
+                :disabled="!valid"
+              >Submit</v-btn>
+            </slot>
           </v-card-actions>
         </v-form>
       </v-card>
@@ -98,14 +97,6 @@ export default {
     simple: {
       type: Boolean,
     },
-    footer: {
-      type: Boolean,
-      default: true,
-    },
-    closeOnSubmit: {
-      type: Boolean,
-      default: true,
-    },
   },
   data () {
     return {
@@ -116,9 +107,7 @@ export default {
   methods: {
     onSubmit () {
       this.submitLogic();
-      if (this.closeOnSubmit) {
-        this.close();
-      }
+      this.close();
     },
     close () {
       this.dialog = false;

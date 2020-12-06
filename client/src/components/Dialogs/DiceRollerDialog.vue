@@ -5,8 +5,6 @@
     header="Dice Roller"
     simple
     :submit-logic="rollDice"
-    :footer="false"
-    :close-on-submit="false"
   >
     <v-card-text
       v-for="(field, index) in fields"
@@ -34,23 +32,17 @@
         mdi-plus
       </v-icon>
     </v-card-text>
-
-    <v-card-actions>
+    <h3 class="pt-5">
+      Result: {{ totalValue }}
+      <v-divider />
+    </h3>
+    <template #footer>
       <v-btn
         color="secondary darken-1"
-        class="submit-btn"
         outlined
-        type="submit"
         @click="rollDice"
       >Roll</v-btn>
-    </v-card-actions>
-    <v-card-text class="pt-5">
-      <v-text-field
-        v-model="totalValue"
-        label="Result"
-        disabled
-      />
-    </v-card-text>
+    </template>
   </the-dialog>
 </template>
 
