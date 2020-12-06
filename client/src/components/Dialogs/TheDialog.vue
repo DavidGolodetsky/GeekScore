@@ -89,7 +89,7 @@ export default {
     },
     submitLogic: {
       type: Function,
-      default: () => {},
+      default: () => { },
     },
     activatorText: {
       type: String,

@@ -29,17 +29,17 @@
           outlined
           disabled
         />
-        <div class="d-flex row_between">
+        <div class="d-flex justify-space-around">
           <v-btn
-            class="submit-btn test"
-            ripple
+            color="secondary darken-1"
+            outlined
             @click="playPauseTimer"
           >{{
           pause ? "Play" : "Pause"
         }}</v-btn>
           <v-btn
-            class="submit-btn"
-            ripple
+            color="secondary darken-1"
+            outlined
             @click="stopTimer"
           >Stop</v-btn>
         </div>
@@ -50,22 +50,21 @@
           label="Time"
           outlined
         />
-        <div class="d-flex row_between">
+        <div class="d-flex justify-space-around">
           <v-btn
-            class="submit-btn test"
-            ripple
+            color="secondary darken-1"
+            outlined
             @click="playPauseTimer"
           >{{
           pause ? "Play" : "Pause"
         }}</v-btn>
           <v-btn
-            class="submit-btn"
-            ripple
+            color="secondary darken-1"
+            outlined
             @click="stopTimer"
           >Stop</v-btn>
         </div>
       </v-tab-item>
-
     </v-tabs-items>
   </the-dialog>
 </template>
@@ -135,12 +134,7 @@ export default {
 .v-tabs-items {
   padding: 20px;
 }
-
 .v-text-field {
   max-width: 150px;
-}
-
-.v-btn {
-  max-width: 150px !important;
 }
 </style>

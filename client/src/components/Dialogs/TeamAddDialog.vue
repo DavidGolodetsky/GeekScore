@@ -18,7 +18,7 @@
     </v-tabs>
     <v-tabs-items v-model="tab">
       <!-- TODO: rename tabs with meaningful names -->
-      <v-tab-item value="tab-select">
+      <v-tab-item value="tab-0">
         <v-select
           v-model="selectedTeam"
           prepend-icon="mdi-account-multiple-plus"
@@ -29,7 +29,7 @@
           label="Team"
         />
       </v-tab-item>
-      <v-tab-item value="tab-create">
+      <v-tab-item value="tab-1">
         <v-text-field
           v-model.trim="name"
           clearable
@@ -93,11 +93,11 @@ export default {
       tabs: [
         {
           name: 'Select team',
-          href: 'tab-select',
+          href: 'tab-0',
         },
         {
           name: 'Create New',
-          href: 'tab-create',
+          href: 'tab-1',
         },
       ],
       // Generates number of players from 1 to N

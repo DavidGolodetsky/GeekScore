@@ -37,8 +37,9 @@
 
     <v-card-actions>
       <v-btn
+        color="secondary darken-1"
         class="submit-btn"
-        ripple
+        outlined
         type="submit"
         @click="rollDice"
       >Roll</v-btn>
