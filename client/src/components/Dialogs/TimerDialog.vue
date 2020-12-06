@@ -18,7 +18,10 @@
         <span class="mt-2">{{ tabItem.name }}</span>
       </v-tab>
     </v-tabs>
-    <v-tabs-items v-model="tab">
+    <v-tabs-items
+      v-model="tab"
+      class="pt-4 px-4"
+    >
       <v-tab-item value="tab-timer">
         <v-text-field
           v-model="time"
@@ -115,9 +118,6 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.v-tabs-items {
-  padding: 20px;
-}
 .v-text-field {
   max-width: 150px;
 }

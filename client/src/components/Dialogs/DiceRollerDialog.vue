@@ -9,7 +9,7 @@
     <v-card-text
       v-for="(field, index) in fields"
       :key="index"
-      class="row_between"
+      class="d-flex justify-center"
     >
       <v-icon
         large
@@ -20,9 +20,10 @@
       </v-icon>
 
       <v-text-field
-        v-model="field.model"
+        :value="field.model"
         :label="field.label"
-        :disabled="true"
+        class="mx-2"
+        readonly
       />
       <v-icon
         large
@@ -32,10 +33,11 @@
         mdi-plus
       </v-icon>
     </v-card-text>
-    <h3 class="pt-5">
-      Result: {{ totalValue }}
+    <div class="pt-5">
+      <h4>Result: {{ totalValue }} </h4>
       <v-divider />
-    </h3>
+    </div>
+
     <template #footer>
       <v-btn
         color="secondary darken-1"
@@ -108,3 +110,9 @@ export default {
   },
 };
 </script>
+
+<style scoped lang="scss">
+.v-text-field {
+  max-width: 100px;
+}
+</style>

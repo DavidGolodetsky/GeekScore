@@ -16,7 +16,10 @@
         <span class="mt-2">{{ tabItem.name }}</span>
       </v-tab>
     </v-tabs>
-    <v-tabs-items v-model="tab">
+    <v-tabs-items
+      v-model="tab"
+      class="pt-4 px-4"
+    >
       <!-- TODO: rename tabs with meaningful names -->
       <v-tab-item value="tab-0">
         <v-select
@@ -173,9 +176,4 @@ export default {
 }
 </script>
 
-<style scoped lang="scss">
-.v-tabs-items {
-  padding: 20px;
-}
-</style>
 
