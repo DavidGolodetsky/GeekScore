@@ -99,7 +99,7 @@
 
 <script>
 import { mapActions } from 'vuex';
-import { fbStart } from '@/db';
+import { fbStart } from '@/auth';
 import { emailField, standardField, requiredField, shortPassword } from '@/utils/validations';
 
 export default {
