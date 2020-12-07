@@ -1,17 +1,30 @@
 <template>
   <the-dialog
-    activator-icon="dice-d20"
     color="#fff"
     header="Dice Roller"
     simple
-    :submit-logic="rollDice"
-    :footer="false"
-    :close-on-submit="false"
   >
+    <template #activator>
+      <v-card
+        dark
+        raised
+        class="mx-auto card-pointer"
+      >
+        <div class="title-wrap">
+          <v-card-title class="d-flex">
+            <v-icon
+              class="mr-2"
+              dark
+            >mdi-dice-d20</v-icon>
+            <span class="label_text">Dice Roller</span>
+          </v-card-title>
+        </div>
+      </v-card>
+    </template>
     <v-card-text
       v-for="(field, index) in fields"
       :key="index"
-      class="row_between"
+      class="d-flex justify-center"
     >
       <v-icon
         large
@@ -22,9 +35,10 @@
       </v-icon>
 
       <v-text-field
-        v-model="field.model"
+        :value="field.model"
         :label="field.label"
-        :disabled="true"
+        class="mx-2"
+        readonly
       />
       <v-icon
         large
@@ -34,34 +48,24 @@
         mdi-plus
       </v-icon>
     </v-card-text>
+    <div class="pt-5">
+      <h4>Result: {{ totalValue }} </h4>
+      <v-divider />
+    </div>
 
-    <v-card-actions>
+    <template #footer>
       <v-btn
-        class="submit-btn"
-        ripple
-        type="submit"
+        color="secondary darken-1"
+        outlined
         @click="rollDice"
       >Roll</v-btn>
-    </v-card-actions>
-    <v-card-text class="pt-5">
-      <v-text-field
-        v-model="totalValue"
-        label="Result"
-        disabled
-      />
-    </v-card-text>
+    </template>
   </the-dialog>
 </template>
 
 <script>
 export default {
   name: "DiceRollerDialog",
-  props: {
-    tool: {
-      type: Object,
-      required: true,
-    },
-  },
   data () {
     return {
       totalValue: "",
@@ -115,3 +119,9 @@ export default {
   },
 };
 </script>
+
+<style scoped lang="scss">
+.v-text-field {
+  max-width: 100px;
+}
+</style>

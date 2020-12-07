@@ -22,7 +22,7 @@
 </template>
 
 <script>
-import { standardField } from "@/utils/validations";
+import { standardField, requiredField } from "@/utils/validations";
 import { mapActions } from "vuex";
 
 export default {
@@ -37,7 +37,7 @@ export default {
     return {
       name: this.team.name,
       toDelete: false,
-      nameRules: standardField
+      nameRules: [...standardField, requiredField]
     };
   },
   methods: {

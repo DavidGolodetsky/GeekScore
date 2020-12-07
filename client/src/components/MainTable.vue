@@ -95,10 +95,10 @@ export default {
 .the-table {
   .app-table,
   .table-title {
-    background-color: $light-grey;
+    background-color: $lightgrey;
   }
   .search {
-    background-color: $light-grey;
+    background-color: $lightgrey;
     @media #{$tablet} {
       max-width: 300px;
     }

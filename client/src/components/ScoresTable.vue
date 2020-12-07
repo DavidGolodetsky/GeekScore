@@ -1,15 +1,36 @@
 <template>
   <div class="scores-table">
-    <div v-if="!isActive" class="activator">
-      <v-btn small id="scores-table" fab text color="#607d8b" @click="isActive = true">
+    <div
+      v-if="!isActive"
+      class="activator"
+    >
+      <v-btn
+        id="scores-table"
+        small
+        fab
+        text
+        color="#607d8b"
+        @click="isActive = true"
+      >
         <v-icon dark>mdi-plus-minus-variant</v-icon>
       </v-btn>
-      <label for="scores-table" class="label_text">Scores Calculator</label>
+      <label
+        for="scores-table"
+        class="label_text"
+      >Scores Calculator</label>
     </div>
-    <div v-else class="calculator">
+    <div
+      v-else
+      class="calculator"
+    >
       <div class="row_between mb-2">
         <h3 class="label_text">Table fields</h3>
-        <v-btn small fab text @click="addField">
+        <v-btn
+          small
+          fab
+          text
+          @click="addField"
+        >
           <v-icon dark>mdi-plus</v-icon>
         </v-btn>
       </div>
@@ -24,7 +45,11 @@
         placeholder="Parameter"
       >
         <template #prepend-inner>
-          <v-select dense v-model="selectedOperator" :items="operators" />
+          <v-select
+            v-model="selectedOperator"
+            dense
+            :items="operators"
+          />
         </template>
       </v-text-field>
     </div>
@@ -34,7 +59,7 @@
 <script>
 export default {
   name: "ScoresTable",
-  data() {
+  data () {
     return {
       isActive: false,
       selectedOperator: "+",
@@ -43,7 +68,7 @@ export default {
     };
   },
   methods: {
-    addField() {
+    addField () {
       this.fields++;
     }
   }

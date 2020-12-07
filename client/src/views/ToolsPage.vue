@@ -4,35 +4,50 @@
       title="Tools"
       icon="hammer-screwdriver"
     />
-    <tools-card :items="tools">
-      <template #action="{ item }">
-        <dice-roller-dialog :tool="item" />
-      </template>
-    </tools-card>
+    <v-row>
+      <v-col
+        sm="6"
+        md="4"
+        cols="12"
+      >
+        <dice-roller-dialog />
+      </v-col>
+      <v-col
+        sm="6"
+        md="4"
+        cols="12"
+      >
+        <timer-dialog />
+      </v-col>
+    </v-row>
   </section>
 </template>
 
 <script>
 import TheTitle from "@/components/TheTitle";
-import ToolsCard from "@/components/Cards/ToolsCard";
 import DiceRollerDialog from "@/components/Dialogs/DiceRollerDialog";
+import TimerDialog from "@/components/Dialogs/TimerDialog";
 
 export default {
   name: "ToolsPage",
   components: {
     TheTitle,
-    ToolsCard,
     DiceRollerDialog,
+    TimerDialog,
   },
   data () {
     return {
       tools: [
         {
-          _id: 0,
-          name: "Dice Roller"
+          id: "dice",
+          name: "Dice Roller",
+        },
+        {
+          id: "clock",
+          name: "Clock Tools",
         },
       ],
     };
-  },
+  }
 };
 </script>

@@ -46,7 +46,7 @@ a {
 
   .label_text {
     font-size: 16px;
-    color: rgba(0, 0, 0, 0.6);
+    color: #fff;
     cursor: pointer;
   }
 
@@ -59,7 +59,7 @@ a {
     }
   }
   .v-dialog .v-sheet {
-    background-color: $light-grey;
+    background-color: $lightgrey;
   }
   .v-btn.secondary .v-btn__content {
     color: $primary;
@@ -75,11 +75,11 @@ a {
   }
 
   .v-tabs-items {
-    background-color: $light-grey;
+    background-color: $lightgrey;
   }
 
   .v-tabs > .v-tabs-bar {
-    background-color: $light-grey;
+    background-color: $lightgrey;
   }
 
   .submit-btn {
@@ -127,6 +127,10 @@ a {
     font-size: 12px;
     color: $secondary;
   }
+}
+
+.card-pointer {
+  cursor: pointer;
 }
 
 .header-title {

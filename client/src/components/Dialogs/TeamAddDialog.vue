@@ -16,12 +16,17 @@
         <span class="mt-2">{{ tabItem.name }}</span>
       </v-tab>
     </v-tabs>
-    <v-tabs-items v-model="tab">
+    <v-tabs-items
+      v-model="tab"
+      class="pt-4 px-4"
+    >
+      <!-- TODO: rename tabs with meaningful names -->
       <v-tab-item value="tab-0">
         <v-select
           v-model="selectedTeam"
           prepend-icon="mdi-account-multiple-plus"
           :items="teams"
+          :rules="selectRules"
           item-text="name"
           item-value="_id"
           label="Team"
@@ -31,12 +36,14 @@
         <v-text-field
           v-model.trim="name"
           clearable
+          :rules="nameRules"
           prepend-icon="mdi-account-group"
           label="Name"
         />
         <v-select
           prepend-icon="mdi-account-multiple-plus"
           :items="numberOfPlayers"
+          :rules="selectRules"
           label="Number of players"
           @change="setPlayers"
         />
@@ -81,8 +88,8 @@ export default {
       name: '',
       coop: false,
       players: [],
-      nameRules: standardField,
-      playerRules: standardField,
+      nameRules: [...standardField, requiredField],
+      playerRules: [...standardField, requiredField],
       selectRules: [requiredField],
       selectedTeam: null,
       tab: null,
@@ -169,9 +176,4 @@ export default {
 }
 </script>
 
-<style scoped lang="scss">
-.v-tabs-items {
-  padding: 20px;
-}
-</style>
 

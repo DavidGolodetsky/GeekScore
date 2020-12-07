@@ -1,51 +1,70 @@
 <template>
   <section>
-    <v-btn
-      :id="`activator_${activatorText}`"
-      class="px-0"
-      :small="simple"
-      fab
-      aria-label="Open modal"
-      :text="simple"
-      :color="color"
-      @click.prevent="dialog = true"
-    >
-      <v-icon dark>mdi-{{ activatorIcon }}</v-icon>
-    </v-btn>
-    <label :for="`activator_${activatorText}`" class="label_text">{{
+    <div @click.prevent="dialog = true">
+      <slot name="activator">
+        <v-btn
+          :id="`activator_${activatorText}`"
+          class="px-0 mr-2"
+          :small="simple"
+          fab
+          aria-label="Open modal"
+          :text="simple"
+          :color="color"
+        >
+          <v-icon dark>mdi-{{ activatorIcon }}</v-icon>
+        </v-btn>
+        <label
+          :for="`activator_${activatorText}`"
+          class="label_text"
+        >{{
       activatorText
     }}</label>
-    <v-dialog v-if="renderDialog" v-model="dialog" max-width="600">
+      </slot>
+    </div>
+    <v-dialog
+      v-model="dialog"
+      max-width="600"
+    >
       <v-card class="the-dialog">
         <v-card-title>
           <h3 class="app-headline">{{ header }}</h3>
           <v-spacer />
-          <v-btn small aria-label="Close modal" fab text @click="close">
+          <v-btn
+            small
+            aria-label="Close modal"
+            fab
+            text
+            @click="close"
+          >
             <v-icon dark>mdi-close</v-icon>
           </v-btn>
         </v-card-title>
-        <v-form ref="form" v-model="valid" @submit.prevent="onSubmit">
+        <v-form
+          ref="form"
+          v-model="valid"
+          @submit.prevent="onSubmit"
+        >
           <v-card-text>
             <v-container>
               <slot />
             </v-container>
           </v-card-text>
-          <v-card-actions v-if="footer" class="footer">
+          <v-card-actions class="footer">
             <v-spacer />
-            <v-btn
-              color="secondary darken-1"
-              class="mr-2"
-              outlined
-              @click="close"
-              >Cancel</v-btn
-            >
-            <v-btn
-              color="secondary darken-1"
-              outlined
-              type="submit"
-              :disabled="!valid"
-              >Submit</v-btn
-            >
+            <slot name="footer">
+              <v-btn
+                color="secondary darken-1"
+                class="mr-2"
+                outlined
+                @click="close"
+              >Cancel</v-btn>
+              <v-btn
+                color="secondary darken-1"
+                outlined
+                type="submit"
+                :disabled="!valid"
+              >Submit</v-btn>
+            </slot>
           </v-card-actions>
         </v-form>
       </v-card>
@@ -60,7 +79,7 @@ export default {
   props: {
     activatorIcon: {
       type: String,
-      required: true,
+      default: "",
     },
     header: {
       type: String,
@@ -72,7 +91,7 @@ export default {
     },
     submitLogic: {
       type: Function,
-      required: true,
+      default: () => { },
     },
     activatorText: {
       type: String,
@@ -81,42 +100,19 @@ export default {
     simple: {
       type: Boolean,
     },
-    footer: {
-      type: Boolean,
-      required: false,
-      default: true,
-    },
-    closeOnSubmit: {
-      type: Boolean,
-      required: false,
-      default: true,
-    },
   },
-  data() {
+  data () {
     return {
       dialog: false,
       valid: false,
-      renderDialog: false,
     };
   },
-  watch: {
-    dialog: {
-      handler(value) {
-        value
-          ? (this.renderDialog = true)
-          : setTimeout((this.renderDialog = false), 1000);
-      },
-      immediate: true,
-    },
-  },
   methods: {
-    onSubmit() {
+    onSubmit () {
       this.submitLogic();
-      if (this.closeOnSubmit) {
-        this.close();
-      }
+      this.close();
     },
-    close() {
+    close () {
       this.dialog = false;
     },
   },
