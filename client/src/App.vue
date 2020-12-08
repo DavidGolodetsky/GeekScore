@@ -50,7 +50,7 @@ import TheFooter from '@/components/TheFooter';
 import TheAlert from '@/components/TheAlert';
 import { mapActions, mapGetters } from 'vuex';
 import { VueOfflineMixin } from 'vue-offline';
-import { setupFb } from '@/db';
+import { setupFb } from '@/auth';
 
 export default {
   name: 'App',
