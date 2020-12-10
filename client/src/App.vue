@@ -9,8 +9,7 @@
       <v-container class="app-container">
         <the-alert
           v-if="showAlert"
-          :type="alertType"
-          :text="alertText"
+          v-bind="{alertType, alertText}"
         />
         <transition
           name="slide"

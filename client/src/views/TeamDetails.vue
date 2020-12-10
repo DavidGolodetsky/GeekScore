@@ -33,8 +33,7 @@
         >
           <component
             :is="component"
-            :team="team"
-            :rounds="rounds"
+            v-bind="{team, rounds}"
           />
         </v-tab-item>
       </v-tabs-items>
