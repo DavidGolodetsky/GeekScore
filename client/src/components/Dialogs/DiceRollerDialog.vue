@@ -1,10 +1,20 @@
 <template>
-  <the-dialog header="Dice Roller" simple>
+  <the-dialog
+    header="Dice Roller"
+    simple
+  >
     <template #activator>
-      <v-card dark raised class="mx-auto card-pointer">
+      <v-card
+        dark
+        raised
+        class="mx-auto card-pointer"
+      >
         <div class="title-wrap">
           <v-card-title class="d-flex">
-            <v-icon class="mr-2" dark>mdi-dice-d20</v-icon>
+            <v-icon
+              class="mr-2"
+              dark
+            >mdi-dice-d20</v-icon>
             <span class="label_text">Dice Roller</span>
           </v-card-title>
         </div>
@@ -15,7 +25,11 @@
       :key="index"
       class="d-flex justify-center"
     >
-      <v-icon large color="grey darken-1" @click="field.func('minus')">
+      <v-icon
+        large
+        color="grey darken-1"
+        @click="field.func('minus')"
+      >
         mdi-minus
       </v-icon>
 
@@ -25,7 +39,11 @@
         class="mx-2"
         readonly
       />
-      <v-icon large color="grey darken-1" @click="field.func('plus')">
+      <v-icon
+        large
+        color="grey darken-1"
+        @click="field.func('plus')"
+      >
         mdi-plus
       </v-icon>
     </v-card-text>
@@ -40,9 +58,16 @@
     </div>
 
     <template #footer>
-      <v-btn color="secondary darken-1" outlined @click="rollDice">
-        <v-icon class="mr-1" dark> mdi-dice-6 </v-icon>Roll</v-btn
+      <v-btn
+        color="secondary darken-1"
+        outlined
+        @click="rollDice"
       >
+        <v-icon
+          class="mr-1"
+          dark
+        > mdi-dice-6 </v-icon>Roll
+      </v-btn>
     </template>
   </the-dialog>
 </template>
@@ -50,7 +75,7 @@
 <script>
 export default {
   name: "DiceRollerDialog",
-  data() {
+  data () {
     return {
       show: true,
       totalValue: "",
@@ -69,7 +94,7 @@ export default {
     };
   },
   methods: {
-    changeSide(operator) {
+    changeSide (operator) {
       if (operator === "plus") {
         if (this.fields.diceSide.model < 20) {
           this.fields.diceSide.model++;
@@ -80,7 +105,7 @@ export default {
         }
       }
     },
-    changeRoll(operator) {
+    changeRoll (operator) {
       if (operator === "plus") {
         if (this.fields.rollNumber.model < 10) {
           this.fields.rollNumber.model++;
@@ -91,15 +116,15 @@ export default {
         }
       }
     },
-    rollDice() {
+    rollDice () {
       this.show = !this.show;
       this.totalValue =
         this.fields.rollNumber.model +
         Math.floor(
           Math.random() *
-            (this.fields.diceSide.model * this.fields.rollNumber.model -
-              this.fields.rollNumber.model +
-              1)
+          (this.fields.diceSide.model * this.fields.rollNumber.model -
+            this.fields.rollNumber.model +
+            1)
         );
     },
   },
@@ -115,7 +140,7 @@ export default {
   height: 60px;
   width: 60px;
   border-radius: 5px;
-  background-color: rgb(104, 63, 63);
+  background-color: #2f4858;
   color: $secondary;
   font-size: 30px;
   text-align: center;

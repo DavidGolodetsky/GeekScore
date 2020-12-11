@@ -1,41 +1,40 @@
 <template>
-  <v-container>
-    <v-row class="mx-auto">
-      <v-col class="col">
-        <v-text-field
-          :value="hours"
-          @input="$emit('update:hours', $event)"
-          maxlength="2"
-          dense
-          label="Hours"
-          outlined
-          :disabled="disabledField"
-        />
-      </v-col>
-      <v-col class="col">
-        <v-text-field
-          :value="minutes"
-          @input="$emit('update:minutes', $event)"
-          maxlength="2"
-          dense
-          label="Minutes"
-          outlined
-          :disabled="disabledField"
-        />
-      </v-col>
-      <v-col class="col">
-        <v-text-field
-          :value="seconds"
-          @input="$emit('update:seconds', $event)"
-          maxlength="2"
-          dense
-          label="Seconds"
-          outlined
-          :disabled="disabledField"
-        />
-      </v-col>
-    </v-row>
-  </v-container>
+  <v-row class="mx-auto">
+    <v-col class="col">
+      <!-- TODO:loop over inputs -->
+      <v-text-field
+        :value="hours"
+        maxlength="2"
+        dense
+        label="Hours"
+        outlined
+        :disabled="disabledField"
+        @input="$emit('update:hours', $event)"
+      />
+    </v-col>
+    <v-col class="col">
+      <v-text-field
+        :value="minutes"
+        maxlength="2"
+        dense
+        label="Minutes"
+        outlined
+        :disabled="disabledField"
+        @input="$emit('update:minutes', $event)"
+      />
+    </v-col>
+    <v-col class="col">
+      <v-text-field
+        :value="seconds"
+        maxlength="2"
+        dense
+        label="Seconds"
+        outlined
+        :disabled="disabledField"
+        @input="$emit('update:seconds', $event)"
+      />
+    </v-col>
+  </v-row>
 </template>
 
 <script>
@@ -56,7 +55,6 @@ export default {
     },
     disabledField: {
       type: Boolean,
-      required: true,
     },
   },
 };

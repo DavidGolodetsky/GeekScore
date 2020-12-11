@@ -1,10 +1,20 @@
 <template>
-  <the-dialog header="Clock Tools" simple>
+  <the-dialog
+    header="Clock Tools"
+    simple
+  >
     <template #activator>
-      <v-card dark raised class="mx-auto card-pointer">
+      <v-card
+        dark
+        raised
+        class="mx-auto card-pointer"
+      >
         <div class="title-wrap">
           <v-card-title class="d-flex">
-            <v-icon class="mr-2" dark>mdi-timer</v-icon>
+            <v-icon
+              class="mr-2"
+              dark
+            >mdi-timer</v-icon>
             <span class="label_text">Clock Tools</span>
           </v-card-title>
         </div>
@@ -20,13 +30,17 @@
         <span class="mt-2">{{ tabItem.name }}</span>
       </v-tab>
     </v-tabs>
-    <v-tabs-items v-model="tab" class="pt-4 px-4">
+    <v-tabs-items
+      v-model="tab"
+      class="pt-4 px-4"
+    >
+      <!-- TODO:loop over ? -->
       <v-tab-item value="tab-timer">
         <clock-tools-fields
           :hours.sync="hours"
           :minutes.sync="minutes"
           :seconds.sync="seconds"
-          :disabledField="true"
+          disabled-field
         />
       </v-tab-item>
       <v-tab-item value="tab-countdown">
@@ -34,7 +48,6 @@
           :hours.sync="hours"
           :minutes.sync="minutes"
           :seconds.sync="seconds"
-          :disabledField="false"
         />
       </v-tab-item>
     </v-tabs-items>
@@ -48,9 +61,14 @@
         <v-icon dark>
           {{ pause ? "mdi-play" : "mdi-pause" }}
         </v-icon>
-        {{ pause ? "Play" : "Pause" }}</v-btn
+        {{ pause ? "Play" : "Pause" }}
+      </v-btn>
+      <!-- TODO:Stop rename to Reset. Add Stop btn -->
+      <v-btn
+        color="secondary darken-1"
+        outlined
+        @click="stopTimer"
       >
-      <v-btn color="secondary darken-1" outlined @click="stopTimer">
         <v-icon dark> mdi-stop </v-icon>
         Stop
       </v-btn>
@@ -66,7 +84,7 @@ export default {
   components: {
     ClockToolsFields,
   },
-  data() {
+  data () {
     return {
       hours: "00",
       minutes: "00",
@@ -87,15 +105,15 @@ export default {
     };
   },
   watch: {
-    tab() {
+    tab () {
       this.stopTimer();
     },
   },
-  destroyed() {
+  destroyed () {
     this.stopTimer();
   },
   methods: {
-    playPauseTimer() {
+    playPauseTimer () {
       this.pause = !this.pause;
 
       if (this.pause) {
@@ -110,7 +128,7 @@ export default {
         }, 1000);
       }
     },
-    stopTimer() {
+    stopTimer () {
       this.hours = "00";
       this.minutes = "00";
       this.seconds = "00";
@@ -118,7 +136,7 @@ export default {
       clearInterval(this.playInterval);
       window.navigator.vibrate(1000);
     },
-    timerMethod() {
+    timerMethod () {
       this.seconds++;
       if (this.seconds > 59) {
         this.seconds = 0;
@@ -139,7 +157,7 @@ export default {
         this.seconds = "0" + this.seconds;
       }
     },
-    countdownMethod() {
+    countdownMethod () {
       this.seconds--;
       if (
         this.hours === "00" &&
@@ -153,7 +171,7 @@ export default {
           this.minutes >= 1 ? this.minutes-- : (this.minutes = "00");
           if (this.minutes <= 0 && this.hours > "00") {
             this.minutes = "59";
-              this.hours >= 1 ? this.hours-- : (this.hours = "00");
+            this.hours >= 1 ? this.hours-- : (this.hours = "00");
           }
         }
         if (this.seconds < 10) {
