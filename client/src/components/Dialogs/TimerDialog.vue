@@ -1,7 +1,6 @@
 <template>
   <the-dialog
-    color="#fff"
-    :header="tab === 'tab-timer' ? 'Timer' : 'Countdown'"
+    header="Clock Tools"
     simple
   >
     <template #activator>
@@ -21,10 +20,7 @@
         </div>
       </v-card>
     </template>
-    <v-tabs
-      v-model="tab"
-      background-color="#d9d9d8"
-    >
+    <v-tabs v-model="tab">
       <v-tabs-slider color="secondary" />
       <v-tab
         v-for="tabItem in tabs"
@@ -38,19 +34,20 @@
       v-model="tab"
       class="pt-4 px-4"
     >
+      <!-- TODO:loop over ? -->
       <v-tab-item value="tab-timer">
-        <v-text-field
-          v-model="time"
-          label="Time"
-          outlined
-          disabled
+        <clock-tools-fields
+          :hours.sync="hours"
+          :minutes.sync="minutes"
+          :seconds.sync="seconds"
+          disabled-field
         />
       </v-tab-item>
       <v-tab-item value="tab-countdown">
-        <v-text-field
-          v-model="time"
-          label="Time"
-          outlined
+        <clock-tools-fields
+          :hours.sync="hours"
+          :minutes.sync="minutes"
+          :seconds.sync="seconds"
         />
       </v-tab-item>
     </v-tabs-items>
@@ -60,24 +57,38 @@
         outlined
         class="mr-2"
         @click="playPauseTimer"
-      >{{
-          pause ? "Play" : "Pause"
-        }}</v-btn>
+      >
+        <v-icon dark>
+          {{ pause ? "mdi-play" : "mdi-pause" }}
+        </v-icon>
+        {{ pause ? "Play" : "Pause" }}
+      </v-btn>
+      <!-- TODO:Stop rename to Reset. Add Stop btn -->
       <v-btn
         color="secondary darken-1"
         outlined
         @click="stopTimer"
-      >Stop</v-btn>
+      >
+        <v-icon dark> mdi-stop </v-icon>
+        Stop
+      </v-btn>
     </template>
   </the-dialog>
 </template>
 
 <script>
+import ClockToolsFields from "@/components/ClockToolsFields";
+
 export default {
   name: "TimerDialog",
+  components: {
+    ClockToolsFields,
+  },
   data () {
     return {
-      time: 0,
+      hours: "00",
+      minutes: "00",
+      seconds: "00",
       tab: null,
       pause: true,
       playInterval: false,
@@ -110,25 +121,72 @@ export default {
       } else {
         this.playInterval = setInterval(() => {
           if (this.tab === "tab-timer") {
-            this.time++;
+            this.timerMethod();
           } else {
-            this.time > 0 ? this.time-- : this.stopTimer();
+            this.countdownMethod();
           }
         }, 1000);
       }
     },
     stopTimer () {
-      this.time = 0;
+      this.hours = "00";
+      this.minutes = "00";
+      this.seconds = "00";
       this.pause = true;
       clearInterval(this.playInterval);
       window.navigator.vibrate(1000);
     },
+    timerMethod () {
+      this.seconds++;
+      if (this.seconds > 59) {
+        this.seconds = 0;
+        this.minutes++;
+        if (this.minutes > 59) {
+          this.minutes = 0;
+          this.hours++;
+          if (this.hours < 10) {
+            this.hours = "0" + this.hours;
+          }
+        }
+
+        if (this.minutes < 10) {
+          this.minutes = "0" + this.minutes;
+        }
+      }
+      if (this.seconds < 10) {
+        this.seconds = "0" + this.seconds;
+      }
+    },
+    countdownMethod () {
+      this.seconds--;
+      if (
+        this.hours === "00" &&
+        this.minutes === "00" &&
+        this.seconds <= "00"
+      ) {
+        this.stopTimer();
+      } else {
+        if (this.seconds < 0) {
+          this.seconds = "59";
+          this.minutes >= 1 ? this.minutes-- : (this.minutes = "00");
+          if (this.minutes <= 0 && this.hours > "00") {
+            this.minutes = "59";
+            this.hours >= 1 ? this.hours-- : (this.hours = "00");
+          }
+        }
+        if (this.seconds < 10) {
+          this.seconds = "0" + this.seconds;
+        }
+
+        if (this.minutes < 10 && this.minutes.toString().length <= 1) {
+          this.minutes = "0" + this.minutes;
+        }
+
+        if (this.hours < 10 && this.hours.toString().length <= 1) {
+          this.hours = "0" + this.hours;
+        }
+      }
+    },
   },
 };
 </script>
-
-<style scoped lang="scss">
-.v-text-field {
-  max-width: 150px;
-}
-</style>

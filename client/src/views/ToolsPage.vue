@@ -5,6 +5,7 @@
       icon="hammer-screwdriver"
     />
     <v-row>
+      <!-- TODO:loop over tools -->
       <v-col
         sm="6"
         md="4"

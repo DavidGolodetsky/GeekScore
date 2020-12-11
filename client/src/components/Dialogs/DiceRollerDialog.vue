@@ -1,6 +1,5 @@
 <template>
   <the-dialog
-    color="#fff"
     header="Dice Roller"
     simple
   >
@@ -48,9 +47,14 @@
         mdi-plus
       </v-icon>
     </v-card-text>
-    <div class="pt-5">
-      <h4>Result: {{ totalValue }} </h4>
-      <v-divider />
+
+    <div
+      :class="show ? 'boxRotate box-transition' : 'box-transition'"
+      class="dice"
+    >
+      <span>
+        {{ totalValue ? totalValue : 0 }}
+      </span>
     </div>
 
     <template #footer>
@@ -58,7 +62,12 @@
         color="secondary darken-1"
         outlined
         @click="rollDice"
-      >Roll</v-btn>
+      >
+        <v-icon
+          class="mr-1"
+          dark
+        > mdi-dice-6 </v-icon>Roll
+      </v-btn>
     </template>
   </the-dialog>
 </template>
@@ -68,6 +77,7 @@ export default {
   name: "DiceRollerDialog",
   data () {
     return {
+      show: true,
       totalValue: "",
       fields: {
         diceSide: {
@@ -107,6 +117,7 @@ export default {
       }
     },
     rollDice () {
+      this.show = !this.show;
       this.totalValue =
         this.fields.rollNumber.model +
         Math.floor(
@@ -123,5 +134,25 @@ export default {
 <style scoped lang="scss">
 .v-text-field {
   max-width: 100px;
+}
+
+.dice {
+  height: 60px;
+  width: 60px;
+  border-radius: 5px;
+  background-color: #2f4858;
+  color: $secondary;
+  font-size: 30px;
+  text-align: center;
+  line-height: 2;
+  margin: auto;
+}
+
+.boxRotate {
+  transform: rotate(360deg);
+}
+
+.box-transition {
+  transition: all 0.5s ease-in-out;
 }
 </style>
