@@ -7,10 +7,10 @@
       <v-alert
         dismissible
         value
-        :type="type"
+        :type="alertType"
         @input="onClose()"
       >
-        {{ text }}
+        {{ alertText }}
       </v-alert>
     </transition>
   </section>
@@ -22,11 +22,11 @@ import { mapActions } from 'vuex';
 export default {
   name: "TheAlert",
   props: {
-    type: {
+    alertType: {
       type: String,
       required: true,
     },
-    text: {
+    alertText: {
       type: String,
       required: true,
     },
