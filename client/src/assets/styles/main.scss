@@ -82,6 +82,14 @@ a {
     background-color: $lightgrey;
   }
 
+  .theme--light.v-tabs-items {
+    background-color: $lightgrey;
+  }
+  
+  .theme--light.v-tabs > .v-tabs-bar {
+    background-color: $lightgrey;
+  }
+
   .submit-btn {
     max-width: 250px;
     width: 100%;
