@@ -25,7 +25,7 @@ import { standardField, requiredField } from "@/utils/validations";
 import { mapActions } from "vuex";
 
 export default {
-  name: "GameAddDialog",
+  name: "GamesAddDialog",
   data () {
     return {
       name: "",

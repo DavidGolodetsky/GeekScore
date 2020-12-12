@@ -4,7 +4,7 @@
       title="Teams"
       icon="account-group"
       :props="{ gameId }"
-      component="team-add-dialog"
+      component="teams-add-dialog"
     />
     <div
       v-if="winRate"
@@ -16,31 +16,31 @@
       >mdi-brightness-percent</v-icon>
       <span>Your win rate is: {{ winRate }}</span>
     </div>
-    <cards-list
+    <the-cards-list
       v-if="gameTeams"
       :items="gameTeams"
       :route="teamRoute"
       @favorite="toggleFavorite"
     >
       <template #action="{ item }">
-        <team-edit-dialog :team="item" />
+        <teams-edit-dialog :team="item" />
       </template>
-    </cards-list>
+    </the-cards-list>
   </section>
 </template>
 
 <script>
 import TheTitle from '@/components/TheTitle';
-import TeamEditDialog from '@/components/TeamEditDialog';
-import CardsList from '@/components/CardsList';
+import TeamsEditDialog from '@/components/TeamsEditDialog';
+import TheCardsList from '@/components/TheCardsList';
 import { mapActions, mapGetters, mapState } from 'vuex';
 
 export default {
-  name: "GameDetails",
+  name: "GamePage",
   components: {
     TheTitle,
-    TeamEditDialog,
-    CardsList,
+    TeamsEditDialog,
+    TheCardsList,
   },
   props: {
     gameId: {

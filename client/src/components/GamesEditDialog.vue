@@ -23,7 +23,7 @@
       contain
     />
     <!-- TODO: for later -->
-    <!-- <scores-table /> -->
+    <!-- <games-scores-table /> -->
     <v-switch
       v-model="toDelete"
       label="Delete game"
@@ -35,13 +35,13 @@
 
 <script>
 import { standardField, requiredField, tooLongField, linkField } from "@/utils/validations";
-// import ScoresTable from "@/components/ScoresTable";
+// import GamesScoresTable from "@/components/GamesScoresTable";
 import { mapActions } from "vuex";
 
 export default {
-  name: "GameEditDialog",
+  name: "GamesEditDialog",
   // components: {
-  //   ScoresTable
+  //   GamesScoresTable
   // },
   props: {
     game: {

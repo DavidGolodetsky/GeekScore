@@ -1,5 +1,5 @@
 <template>
-  <section class="cards-list">
+  <section class="the-cards-list">
     <v-row>
       <v-col
         sm="6"
@@ -133,7 +133,7 @@
 
 <script>
 export default {
-  name: "CardsList",
+  name: "TheCardsList",
   // TODO:refactor
   props: {
     items: {
@@ -219,7 +219,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.cards-list {
+.the-cards-list {
   .title-wrap {
     background-color: rgba(0, 0, 0, 0.9);
   }

@@ -38,7 +38,7 @@
         class="submit-btn"
         ripple
         type="submit"
-        :to="{name: user ? 'games' : 'signIn'}"
+        :to="{name: user ? 'games' : 'SignInPage'}"
       >
         {{ user ? 'Games' : 'Sign In' }}
       </v-btn>

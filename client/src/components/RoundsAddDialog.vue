@@ -1,5 +1,5 @@
 <template>
-  <section class="round-add">
+  <section class="rounds-add">
     <the-dialog
       v-if="team"
       activator-icon="plus"
@@ -22,7 +22,10 @@
             />
           </v-radio-group>
         </v-col>
-        <v-col v-if="!team.coop" cols="6">
+        <v-col
+          v-if="!team.coop"
+          cols="6"
+        >
           <v-radio-group
             v-if="team.players.length > 1"
             v-model="turn"
@@ -56,7 +59,10 @@
               v-on="on"
             />
           </template>
-          <v-date-picker v-model="date" @input="datepicker = false" />
+          <v-date-picker
+            v-model="date"
+            @input="datepicker = false"
+          />
         </v-menu>
       </v-row>
       <v-row>
@@ -78,7 +84,7 @@
 import { requiredField } from '@/utils/validations';
 import { mapActions, mapGetters, mapState } from 'vuex';
 export default {
-  name: 'RoundAddDialog',
+  name: 'RoundsAddDialog',
   // TODO:refactor
   props: {
     teamId: {
@@ -90,7 +96,7 @@ export default {
       required: true,
     },
   },
-  data() {
+  data () {
     return {
       datepicker: false,
       comment: '',
@@ -103,10 +109,10 @@ export default {
   computed: {
     ...mapState('teams', ['teams']),
     ...mapGetters('teams', ['getTeam']),
-    team() {
+    team () {
       return this.teams ? this.getTeam(this.teamId) : null;
     },
-    resultOptions() {
+    resultOptions () {
       if (this.team) {
         if (this.team.coop) return ['Victory', 'Defeat'];
         const options = this.team.players.map((player) => player.name);
@@ -117,11 +123,11 @@ export default {
   },
   methods: {
     ...mapActions('rounds', ['createRound']),
-    onSubmit() {
+    onSubmit () {
       const round = this.cookRound();
       this.createRound(round);
     },
-    cookRound() {
+    cookRound () {
       const round = {
         date: this.date,
         turn: this.turn,

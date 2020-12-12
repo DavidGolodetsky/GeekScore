@@ -36,7 +36,7 @@
     >
       <!-- TODO:loop over ? -->
       <v-tab-item value="tab-timer">
-        <clock-tools-fields
+        <tools-clock-fields
           :hours.sync="hours"
           :minutes.sync="minutes"
           :seconds.sync="seconds"
@@ -44,7 +44,7 @@
         />
       </v-tab-item>
       <v-tab-item value="tab-countdown">
-        <clock-tools-fields
+        <tools-clock-fields
           :hours.sync="hours"
           :minutes.sync="minutes"
           :seconds.sync="seconds"
@@ -77,12 +77,12 @@
 </template>
 
 <script>
-import ClockToolsFields from "@/components/ClockToolsFields";
+import ToolsClockFields from "@/components/ToolsClockFields";
 
 export default {
-  name: "TimerDialog",
+  name: "ToolsTimerDialog",
   components: {
-    ClockToolsFields,
+    ToolsClockFields,
   },
   data () {
     return {

@@ -1,15 +1,15 @@
 <script>
-import GameAddDialog from "@/components/GameAddDialog";
-import TeamAddDialog from "@/components/TeamAddDialog";
-import RoundAddDialog from "@/components/RoundAddDialog";
+import GamesAddDialog from "@/components/GamesAddDialog";
+import TeamsAddDialog from "@/components/TeamsAddDialog";
+import RoundsAddDialog from "@/components/RoundsAddDialog";
 import { VIcon } from "vuetify/lib";
 
 export default {
   name: "TheTitle",
   components: {
-    GameAddDialog,
-    TeamAddDialog,
-    RoundAddDialog,
+    GamesAddDialog,
+    TeamsAddDialog,
+    RoundsAddDialog,
   },
   props: {
     title: {

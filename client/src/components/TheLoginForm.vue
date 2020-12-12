@@ -1,5 +1,5 @@
 <template>
-  <section class="login-form mt-12">
+  <section class="the-login-form mt-12">
     <v-card
       raised
       outlined
@@ -39,7 +39,7 @@
             :rules="EmailRules"
           />
           <v-text-field
-            v-if="formProps.signUp"
+            v-if="formProps.SignUpPage"
             v-model.trim="username"
             clearable
             label="Username"
@@ -57,7 +57,7 @@
             @click:append="showPassword = !showPassword"
           />
           <v-text-field
-            v-if="formProps.signUp"
+            v-if="formProps.SignUpPage"
             v-model.trim="confirmPassword"
             :type="showPassword ? 'text' : 'password'"
             label="Confirm password"
@@ -79,7 +79,7 @@
       </v-form>
       <div class="text-center mb-3">
         <router-link
-          v-if="!formProps.signUp"
+          v-if="!formProps.SignUpPage"
           :to="{ name: 'resetPass' }"
           class="link"
         >Forgot password?</router-link>
@@ -103,7 +103,7 @@ import { fbStart } from '@/auth';
 import { emailField, standardField, requiredField, shortPassword } from '@/utils/validations';
 
 export default {
-  name: 'LoginForm',
+  name: 'TheLoginForm',
   props: {
     formProps: {
       type: Object,
@@ -129,14 +129,14 @@ export default {
       ];
     },
     loginMethod () {
-      return this.formProps.signUp ? this.signUpUser : this.signInUser;
+      return this.formProps.SignUpPage ? this.SignUpPageUser : this.SignInPageUser;
     },
   },
   mounted () {
     fbStart();
   },
   methods: {
-    ...mapActions('user', ['signUpUser', 'signInUser']),
+    ...mapActions('user', ['SignUpPageUser', 'SignInPageUser']),
     onSubmit () {
       const userInfo = {
         email: this.email,
@@ -150,7 +150,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.login-form {
+.the-login-form {
   .or-wrapper {
     position: relative;
     display: flex;

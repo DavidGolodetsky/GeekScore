@@ -3,7 +3,7 @@ import { Line } from 'vue-chartjs'
 
 
 export default {
-  name: "ChartTendencies",
+  name: "TheTendenciesChart",
   extends: Line,
   props: {
     team: {

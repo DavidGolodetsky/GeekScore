@@ -32,7 +32,7 @@
           </td>
         </template>
         <template #item.action="{ item }">
-          <round-edit-dialog :round="item" />
+          <rounds-edit-dialog :round="item" />
         </template>
       </v-data-table>
     </v-card>
@@ -40,13 +40,13 @@
 </template>
 
 <script>
-import RoundEditDialog from "@/components/RoundEditDialog";
+import RoundsEditDialog from "@/components/RoundsEditDialog";
 
 export default {
-  name: "MainTable",
+  name: "RoundsTable",
   // TODO:refactor
   components: {
-    RoundEditDialog
+    RoundsEditDialog
   },
   props: {
     team: {

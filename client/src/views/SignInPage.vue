@@ -1,22 +1,22 @@
 <template>
-  <login-form :form-props="formProps" />
+  <the-login-form :form-props="formProps" />
 </template>
 
 <script>
-import LoginForm from "@/components/LoginForm";
+import TheLoginForm from "@/components/TheLoginForm";
 
 export default {
-  name: "SignIn",
+  name: "SignInPage",
   components: {
-    LoginForm
+    TheLoginForm
   },
-  data() {
+  data () {
     return {
       formProps: {
         title: "Sign In",
         icon: "login",
         redirectText: "Don't have account yet?",
-        redirectLink: { name: "signUp" },
+        redirectLink: { name: "SignUpPage" },
         redirectLinkText: "Sign Up"
       }
     };

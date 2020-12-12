@@ -76,7 +76,7 @@ import { requiredField, standardField } from '@/utils/validations'
 import { mapActions, mapGetters, mapState } from 'vuex'
 
 export default {
-  name: "TeamAddDialog",
+  name: "TeamsAddDialog",
   props: {
     gameId: {
       type: String,

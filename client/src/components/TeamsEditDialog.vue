@@ -26,7 +26,7 @@ import { standardField, requiredField } from "@/utils/validations";
 import { mapActions } from "vuex";
 
 export default {
-  name: "TeamEditDialog",
+  name: "TeamsEditDialog",
   props: {
     team: {
       type: Object,

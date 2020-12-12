@@ -3,33 +3,33 @@
     <the-title
       title="Games"
       icon="dice-multiple"
-      component="game-add-dialog"
+      component="games-add-dialog"
     />
-    <cards-list
+    <the-cards-list
       v-if="games"
       :route="gameRoute"
       :items="games"
       @favorite="toggleFavorite"
     >
       <template #action="{ item }">
-        <game-edit-dialog :game="item" />
+        <games-edit-dialog :game="item" />
       </template>
-    </cards-list>
+    </the-cards-list>
   </section>
 </template>
 
 <script>
 import TheTitle from '@/components/TheTitle';
-import GameEditDialog from '@/components/GameEditDialog';
-import CardsList from '@/components/CardsList';
+import GamesEditDialog from '@/components/GamesEditDialog';
+import TheCardsList from '@/components/TheCardsList';
 import { mapState, mapActions } from 'vuex';
 
 export default {
-  name: 'GameList',
+  name: 'GamesPage',
   components: {
     TheTitle,
-    GameEditDialog,
-    CardsList,
+    GamesEditDialog,
+    TheCardsList,
   },
   data () {
     return {

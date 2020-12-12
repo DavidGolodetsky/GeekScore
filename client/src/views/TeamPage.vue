@@ -5,7 +5,7 @@
       icon="sword-cross"
       class="mb-4"
       :props="{ teamId, gameId }"
-      component="round-add-dialog"
+      component="rounds-add-dialog"
     />
     <div v-if="showTable">
       <v-tabs
@@ -43,19 +43,19 @@
 
 <script>
 import TheTitle from '@/components/TheTitle';
-import MainTable from '@/components/MainTable';
-import ChartBars from '@/components/ChartBars';
-import ChartTendencies from '@/components/ChartTendencies';
+import RoundsTable from '@/components/RoundsTable';
+import TheBarsChart from '@/components/TheBarsChart';
+import TheTendenciesChart from '@/components/TheTendenciesChart';
 import rounds from '@/store/modules/rounds';
 import { mapActions, mapGetters, mapState } from 'vuex';
 
 export default {
-  name: "TeamDetails",
+  name: "TeamPage",
   components: {
-    ChartBars,
-    MainTable,
+    TheBarsChart,
+    RoundsTable,
     TheTitle,
-    ChartTendencies
+    TheTendenciesChart
   },
   props: {
     teamId: {
@@ -84,7 +84,7 @@ export default {
           icon: 'chart-line',
         },
       ],
-      tabComponents: ['main-table', 'chart-bars', 'chart-tendencies'],
+      tabComponents: ['rounds-table', 'the-bars-chart', 'the-tendencies-chart'],
     };
   },
   computed: {

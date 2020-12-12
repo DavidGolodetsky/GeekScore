@@ -11,14 +11,14 @@
         md="4"
         cols="12"
       >
-        <dice-roller-dialog />
+        <tools-dice-dialog />
       </v-col>
       <v-col
         sm="6"
         md="4"
         cols="12"
       >
-        <timer-dialog />
+        <tools-timer-dialog />
       </v-col>
     </v-row>
   </section>
@@ -26,15 +26,15 @@
 
 <script>
 import TheTitle from "@/components/TheTitle";
-import DiceRollerDialog from "@/components/DiceRollerDialog";
-import TimerDialog from "@/components/TimerDialog";
+import ToolsDiceDialog from "@/components/ToolsDiceDialog";
+import ToolsTimerDialog from "@/components/ToolsTimerDialog";
 
 export default {
   name: "ToolsPage",
   components: {
     TheTitle,
-    DiceRollerDialog,
-    TimerDialog,
+    ToolsDiceDialog,
+    ToolsTimerDialog,
   },
   data () {
     return {

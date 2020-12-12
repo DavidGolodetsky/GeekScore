@@ -39,7 +39,7 @@
 
 <script>
 export default {
-  name: "ClockToolsFields",
+  name: "ToolsClockFields",
   props: {
     hours: {
       type: [String, Number],

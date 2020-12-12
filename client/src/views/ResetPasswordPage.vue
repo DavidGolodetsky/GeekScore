@@ -1,7 +1,17 @@
 <template>
   <section>
-    <v-card v-if="!isResetPasswordDone" raised outlined dark class="auth-card">
-      <v-form ref="form" v-model="valid" @submit.prevent="onSubmit">
+    <v-card
+      v-if="!isResetPasswordPageDone"
+      raised
+      outlined
+      dark
+      class="auth-card"
+    >
+      <v-form
+        ref="form"
+        v-model="valid"
+        @submit.prevent="onSubmit"
+      >
         <v-card-title class="pb-10">
           <div class="d-flex align-center">
             <v-icon class="mr-3">mdi-lock-reset</v-icon>
@@ -20,7 +30,12 @@
         </v-card-text>
         <v-divider />
         <v-card-actions>
-          <v-btn ripple class="submit-btn" type="submit" :disabled="!valid">Submit</v-btn>
+          <v-btn
+            ripple
+            class="submit-btn"
+            type="submit"
+            :disabled="!valid"
+          >Submit</v-btn>
         </v-card-actions>
       </v-form>
     </v-card>
@@ -36,13 +51,8 @@ import { mapActions, mapState } from "vuex";
 import { emailField, requiredField } from "@/utils/validations";
 
 export default {
-  name: "ResetPassword",
-  props: {
-    signupMode: {
-      type: Boolean
-    }
-  },
-  data() {
+  name: "ResetPasswordPage",
+  data () {
     return {
       valid: false,
       email: "",
@@ -51,12 +61,12 @@ export default {
     };
   },
   computed: {
-    ...mapState("user", ["resetPassword"])
+    ...mapState("user", ["ResetPasswordPage"])
   },
   methods: {
-    ...mapActions("user", ["resetPassword"]),
-    onSubmit() {
-      this.resetPassword(this.email);
+    ...mapActions("user", ["ResetPasswordPage"]),
+    onSubmit () {
+      this.ResetPasswordPage(this.email);
     }
   }
 };

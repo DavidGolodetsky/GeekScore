@@ -74,7 +74,7 @@
 
 <script>
 export default {
-  name: "DiceRollerDialog",
+  name: "ToolsDiceDialog",
   data () {
     return {
       show: true,
