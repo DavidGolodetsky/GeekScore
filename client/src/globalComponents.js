@@ -1,11 +1,9 @@
-import Vue from 'vue'
+import Vue from "vue";
 
-Vue.component(
-    'TheDialog',
-    () => import(/* webpackChunkName: "theDialog" */  '@/components/Dialogs/TheDialog')
-)
+Vue.component("TheDialog", () =>
+  import(/* webpackChunkName: "theDialog" */ "@/components/TheDialog")
+);
 
-Vue.component(
-    'TheGoBack',
-    () => import(/* webpackChunkName: "theGoBack" */  '@/components/TheGoBack')
-)
+Vue.component("TheGoBack", () =>
+  import(/* webpackChunkName: "theGoBack" */ "@/components/TheGoBack")
+);

@@ -40,7 +40,7 @@
 </template>
 
 <script>
-import RoundEditDialog from "@/components/Dialogs/RoundEditDialog";
+import RoundEditDialog from "@/components/RoundEditDialog";
 
 export default {
   name: "MainTable",

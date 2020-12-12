@@ -26,8 +26,8 @@
 
 <script>
 import TheTitle from "@/components/TheTitle";
-import DiceRollerDialog from "@/components/Dialogs/DiceRollerDialog";
-import TimerDialog from "@/components/Dialogs/TimerDialog";
+import DiceRollerDialog from "@/components/DiceRollerDialog";
+import TimerDialog from "@/components/TimerDialog";
 
 export default {
   name: "ToolsPage",

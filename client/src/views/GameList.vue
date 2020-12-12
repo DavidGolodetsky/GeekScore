@@ -20,7 +20,7 @@
 
 <script>
 import TheTitle from '@/components/TheTitle';
-import GameEditDialog from '@/components/Dialogs/GameEditDialog';
+import GameEditDialog from '@/components/GameEditDialog';
 import CardsList from '@/components/CardsList';
 import { mapState, mapActions } from 'vuex';
 

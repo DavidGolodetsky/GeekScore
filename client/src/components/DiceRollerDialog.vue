@@ -87,7 +87,7 @@ export default {
         },
         rollNumber: {
           func: this.changeRoll,
-          label: "Roll Numbers",
+          label: "Number of dices",
           model: 1,
         },
       },
@@ -146,6 +146,7 @@ export default {
   text-align: center;
   line-height: 2;
   margin: auto;
+  border: 3px solid #07add9;
 }
 
 .boxRotate {

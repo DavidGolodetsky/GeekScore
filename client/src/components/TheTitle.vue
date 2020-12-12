@@ -1,7 +1,7 @@
 <script>
-import GameAddDialog from "@/components/Dialogs/GameAddDialog";
-import TeamAddDialog from "@/components/Dialogs/TeamAddDialog";
-import RoundAddDialog from "@/components/Dialogs/RoundAddDialog";
+import GameAddDialog from "@/components/GameAddDialog";
+import TeamAddDialog from "@/components/TeamAddDialog";
+import RoundAddDialog from "@/components/RoundAddDialog";
 import { VIcon } from "vuetify/lib";
 
 export default {
