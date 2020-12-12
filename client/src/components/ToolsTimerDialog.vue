@@ -134,7 +134,6 @@ export default {
       this.seconds = "00";
       this.pause = true;
       clearInterval(this.playInterval);
-      window.navigator.vibrate(1000);
     },
     timerMethod () {
       this.seconds++;
@@ -165,6 +164,7 @@ export default {
         this.seconds <= "00"
       ) {
         this.stopTimer();
+        window.navigator.vibrate(1000);
       } else {
         if (this.seconds < 0) {
           this.seconds = "59";
