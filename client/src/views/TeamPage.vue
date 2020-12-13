@@ -17,22 +17,22 @@
       >
         <v-tabs-slider color="secondary" />
         <v-tab
-          v-for="(tabItem, i) in tabs"
-          :key="tabItem.name"
+          v-for="(tab, i) in tabs"
+          :key="i"
           :href="`#tab-${i}`"
         >
-          <span class="mt-2">{{ tabItem.name }}</span>
-          <v-icon>{{ `mdi-${tabItem.icon}` }}</v-icon>
+          <span class="mt-2">{{ tab.name }}</span>
+          <v-icon>{{ `mdi-${tab.icon}` }}</v-icon>
         </v-tab>
       </v-tabs>
       <v-tabs-items v-model="tab">
         <v-tab-item
-          v-for="(component, i) in tabComponents"
+          v-for="(tabItem, i) in tabs"
           :key="i"
           :value="`tab-${i}`"
         >
           <component
-            :is="component"
+            :is="tabItem.component"
             v-bind="{team, rounds}"
           />
         </v-tab-item>
@@ -71,17 +71,19 @@ export default {
         {
           name: 'Table',
           icon: 'table-large',
+          component: 'rounds-table'
         },
         {
           name: 'Statistics',
           icon: 'chart-bar',
+          component: 'the-bars-chart'
         },
         {
           name: 'Tendencies',
           icon: 'chart-line',
+          component: 'the-tendencies-chart'
         },
       ],
-      tabComponents: ['rounds-table', 'the-bars-chart', 'the-tendencies-chart'],
     };
   },
   computed: {

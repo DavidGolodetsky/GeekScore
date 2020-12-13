@@ -32,6 +32,7 @@ a {
 }
 
 .app {
+  user-select: none;
   .v-main__wrap {
     background-color: $bg;
   }

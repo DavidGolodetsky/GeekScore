@@ -21,12 +21,54 @@
         </div>
       </v-card>
     </template>
+    <v-tabs v-model="tab">
+      <v-tabs-slider color="secondary" />
+      <v-tab
+        v-for="(tabItem, i) in tabs"
+        :key="i"
+        :href="`#tab-${i}`"
+      >
+        <span class="mt-2">{{ tabItem.name }}</span>
+      </v-tab>
+    </v-tabs>
+    <v-tabs-items
+      v-model="tab"
+      class="pt-4 px-4"
+    >
+      <v-tab-item
+        v-for="(tabItem, i) in tabs"
+        :key="i"
+        :value="`tab-${i}`"
+      >
+        <component :is="tabItem.component" />
+      </v-tab-item>
+    </v-tabs-items>
   </the-dialog>
 </template>
 
 <script>
-export default {
+import ToolsCalc from "@/components/ToolsCalc";
 
+export default {
+  name: "ToolsDialog",
+  components: {
+    ToolsCalc,
+  },
+  data () {
+    return {
+      tab: null,
+      tabs: [
+        {
+          name: "Select Calculator",
+          component: ""
+        },
+        {
+          name: "Create New",
+          component: "tools-calc"
+        }
+      ],
+    }
+  }
 }
 </script>
 

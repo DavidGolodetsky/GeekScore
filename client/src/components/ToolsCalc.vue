@@ -1,67 +1,43 @@
 <template>
   <div class="tools-scores-table">
-    <div
-      v-if="!isActive"
-      class="activator"
-    >
+
+    <div class="row_between mb-2">
+      <span>Table fields</span>
       <v-btn
-        id="tools-scores-table"
         small
         fab
         text
-        color="#607d8b"
-        @click="isActive = true"
+        @click="addField"
       >
-        <v-icon dark>mdi-plus-minus-variant</v-icon>
+        <v-icon dark>mdi-plus</v-icon>
       </v-btn>
-      <label
-        for="tools-scores-table"
-        class="label_text"
-      >Scores Calculator</label>
     </div>
-    <div
-      v-else
-      class="calculator"
+    <v-text-field
+      v-for="(field, i) in fields"
+      :key="i"
+      hide-details
+      dense
+      rounded
+      filled
+      class="scores-input"
+      placeholder="Parameter"
     >
-      <div class="row_between mb-2">
-        <h3 class="label_text">Table fields</h3>
-        <v-btn
-          small
-          fab
-          text
-          @click="addField"
-        >
-          <v-icon dark>mdi-plus</v-icon>
-        </v-btn>
-      </div>
-      <v-text-field
-        v-for="(field, i) in fields"
-        :key="i"
-        hide-details
-        dense
-        rounded
-        filled
-        class="scores-input"
-        placeholder="Parameter"
-      >
-        <template #prepend-inner>
-          <v-select
-            v-model="selectedOperator"
-            dense
-            :items="operators"
-          />
-        </template>
-      </v-text-field>
-    </div>
+      <template #prepend-inner>
+        <v-select
+          v-model="selectedOperator"
+          dense
+          :items="operators"
+        />
+      </template>
+    </v-text-field>
   </div>
 </template>
 
 <script>
 export default {
-  name: "ToolsCalcCalc",
+  name: "ToolsCalc",
   data () {
     return {
-      isActive: false,
       selectedOperator: "+",
       operators: ["+", "-"],
       fields: 1
@@ -77,14 +53,10 @@ export default {
 
 <style lang="scss" scoped>
 .tools-scores-table {
-  .activator {
-    margin-left: -10px;
-  }
-  .calculator {
-    border: 1px solid $label;
-    padding: 10px;
-    border-radius: $border-radius;
-  }
+  border: 1px solid $label;
+  padding: 10px;
+  border-radius: $border-radius;
+
   .scores-input {
     margin-bottom: 10px;
     ::v-deep .v-input__prepend-inner {

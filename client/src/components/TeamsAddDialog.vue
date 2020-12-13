@@ -9,11 +9,11 @@
     <v-tabs v-model="tab">
       <v-tabs-slider color="secondary" />
       <v-tab
-        v-for="(tabItem, i) in tabs"
-        :key="tabItem"
+        v-for="(tab, i) in tabs"
+        :key="i"
         :href="`#tab-${i}`"
       >
-        <span class="mt-2">{{ tabItem }}</span>
+        <span class="mt-2">{{ tab }}</span>
       </v-tab>
     </v-tabs>
     <v-tabs-items
