@@ -8,7 +8,7 @@
         dense
         label="Hours"
         outlined
-        :disabled="disabledField"
+        :disabled="disabled"
         @input="$emit('update:hours', $event)"
       />
     </v-col>
@@ -19,7 +19,7 @@
         dense
         label="Minutes"
         outlined
-        :disabled="disabledField"
+        :disabled="disabled"
         @input="$emit('update:minutes', $event)"
       />
     </v-col>
@@ -30,7 +30,7 @@
         dense
         label="Seconds"
         outlined
-        :disabled="disabledField"
+        :disabled="disabled"
         @input="$emit('update:seconds', $event)"
       />
     </v-col>
@@ -53,7 +53,7 @@ export default {
       type: [String, Number],
       required: true,
     },
-    disabledField: {
+    disabled: {
       type: Boolean,
     },
   },

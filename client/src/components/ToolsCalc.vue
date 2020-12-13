@@ -1,11 +1,11 @@
 <template>
-  <div class="games-scores-table">
+  <div class="tools-scores-table">
     <div
       v-if="!isActive"
       class="activator"
     >
       <v-btn
-        id="games-scores-table"
+        id="tools-scores-table"
         small
         fab
         text
@@ -15,7 +15,7 @@
         <v-icon dark>mdi-plus-minus-variant</v-icon>
       </v-btn>
       <label
-        for="games-scores-table"
+        for="tools-scores-table"
         class="label_text"
       >Scores Calculator</label>
     </div>
@@ -58,7 +58,7 @@
 
 <script>
 export default {
-  name: "GamesScoresTable",
+  name: "ToolsCalcCalc",
   data () {
     return {
       isActive: false,
@@ -76,7 +76,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.games-scores-table {
+.tools-scores-table {
   .activator {
     margin-left: -10px;
   }

@@ -10,10 +10,10 @@
       <v-tabs-slider color="secondary" />
       <v-tab
         v-for="(tabItem, i) in tabs"
-        :key="tabItem.name"
+        :key="tabItem"
         :href="`#tab-${i}`"
       >
-        <span class="mt-2">{{ tabItem.name }}</span>
+        <span class="mt-2">{{ tabItem }}</span>
       </v-tab>
     </v-tabs>
     <v-tabs-items
@@ -93,16 +93,7 @@ export default {
       selectRules: [requiredField],
       selectedTeam: null,
       tab: null,
-      tabs: [
-        {
-          name: 'Select team',
-          href: 'tab-0',
-        },
-        {
-          name: 'Create New',
-          href: 'tab-1',
-        },
-      ],
+      tabs: ['Select team', 'Create New'],
       // Generates number of players from 1 to N
       numberOfPlayers: Array(8)
         .join(0)

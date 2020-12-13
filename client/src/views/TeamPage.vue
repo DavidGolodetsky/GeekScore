@@ -70,17 +70,14 @@ export default {
       tabs: [
         {
           name: 'Table',
-          href: 'tab-0',
           icon: 'table-large',
         },
         {
           name: 'Statistics',
-          href: 'tab-1',
           icon: 'chart-bar',
         },
         {
           name: 'Tendencies',
-          href: 'tab-2',
           icon: 'chart-line',
         },
       ],

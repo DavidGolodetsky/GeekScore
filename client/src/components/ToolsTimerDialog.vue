@@ -23,31 +23,27 @@
     <v-tabs v-model="tab">
       <v-tabs-slider color="secondary" />
       <v-tab
-        v-for="tabItem in tabs"
-        :key="tabItem.name"
-        :href="`#${tabItem.href}`"
+        v-for="(tabItem, i) in tabs"
+        :key="tabItem"
+        :href="`#tab-${i}`"
       >
-        <span class="mt-2">{{ tabItem.name }}</span>
+        <span class="mt-2">{{ tabItem }}</span>
       </v-tab>
     </v-tabs>
     <v-tabs-items
       v-model="tab"
       class="pt-4 px-4"
     >
-      <!-- TODO:loop over ? -->
-      <v-tab-item value="tab-timer">
+      <v-tab-item
+        v-for="(tabItem, i) in tabs"
+        :key="i"
+        :value="`tab-${i}`"
+      >
         <tools-clock-fields
           :hours.sync="hours"
           :minutes.sync="minutes"
           :seconds.sync="seconds"
-          disabled-field
-        />
-      </v-tab-item>
-      <v-tab-item value="tab-countdown">
-        <tools-clock-fields
-          :hours.sync="hours"
-          :minutes.sync="minutes"
-          :seconds.sync="seconds"
+          :disabled="i === 0"
         />
       </v-tab-item>
     </v-tabs-items>
@@ -92,16 +88,7 @@ export default {
       tab: null,
       pause: true,
       playInterval: false,
-      tabs: [
-        {
-          name: "Timer",
-          href: "tab-timer",
-        },
-        {
-          name: "Countdown",
-          href: "tab-countdown",
-        },
-      ],
+      tabs: ["Timer", "Countdown"],
     };
   },
   watch: {
