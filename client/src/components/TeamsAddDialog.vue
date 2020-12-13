@@ -6,7 +6,7 @@
     button-text="Add team"
     :submit-logic="onSubmit"
   >
-    <v-tabs v-model="tab">
+    <v-tabs v-model="currentTab">
       <v-tabs-slider color="secondary" />
       <v-tab
         v-for="(tab, i) in tabs"
@@ -17,7 +17,7 @@
       </v-tab>
     </v-tabs>
     <v-tabs-items
-      v-model="tab"
+      v-model="currentTab"
       class="pt-4 px-4"
     >
       <!-- TODO: rename tabs with meaningful names -->
@@ -92,7 +92,7 @@ export default {
       playerRules: [...standardField, requiredField],
       selectRules: [requiredField],
       selectedTeam: null,
-      tab: null,
+      currentTab: null,
       tabs: ['Select team', 'Create New'],
       // Generates number of players from 1 to N
       numberOfPlayers: Array(8)

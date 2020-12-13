@@ -21,7 +21,7 @@
         </div>
       </v-card>
     </template>
-    <v-tabs v-model="tab">
+    <v-tabs v-model="currentTab">
       <v-tabs-slider color="secondary" />
       <v-tab
         v-for="(tabItem, i) in tabs"
@@ -32,7 +32,7 @@
       </v-tab>
     </v-tabs>
     <v-tabs-items
-      v-model="tab"
+      v-model="currentTab"
       class="pt-4 px-4"
     >
       <v-tab-item
@@ -56,7 +56,7 @@ export default {
   },
   data () {
     return {
-      tab: null,
+      currentTab: null,
       tabs: [
         {
           name: "Select Calculator",

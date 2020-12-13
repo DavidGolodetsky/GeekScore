@@ -9,7 +9,7 @@
     />
     <div v-if="showTable">
       <v-tabs
-        v-model="tab"
+        v-model="currentTab"
         background-color="primary"
         centered
         dark
@@ -25,7 +25,7 @@
           <v-icon>{{ `mdi-${tab.icon}` }}</v-icon>
         </v-tab>
       </v-tabs>
-      <v-tabs-items v-model="tab">
+      <v-tabs-items v-model="currentTab">
         <v-tab-item
           v-for="(tabItem, i) in tabs"
           :key="i"
@@ -65,7 +65,7 @@ export default {
   },
   data () {
     return {
-      tab: null,
+      currentTab: null,
       gameId: this.$route.query.gameId,
       tabs: [
         {
