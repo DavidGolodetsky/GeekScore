@@ -9,6 +9,7 @@
       <v-form
         ref="form"
         v-model="valid"
+        lazy-validation
         @submit.prevent="onSubmit"
       >
         <div class="d-flex align-items-center">
