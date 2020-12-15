@@ -20,7 +20,6 @@
       v-model="currentTab"
       class="pt-4 px-4"
     >
-      <!-- TODO: rename tabs with meaningful names -->
       <v-tab-item value="tab-0">
         <v-select
           v-model="selectedTeam"
