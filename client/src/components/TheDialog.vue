@@ -42,6 +42,7 @@
         <v-form
           ref="form"
           v-model="valid"
+          lazy-validation
           @submit.prevent="onSubmit"
         >
           <v-card-text>
