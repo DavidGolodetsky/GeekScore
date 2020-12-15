@@ -1,5 +1,5 @@
 <template>
-  <section class="game-details">
+  <section class="game-page">
     <the-title
       title="Teams"
       icon="account-group"
@@ -12,6 +12,7 @@
     >
       <v-icon
         dark
+        color="primary"
         class="mr-3"
       >mdi-brightness-percent</v-icon>
       <span>Your win rate is: {{ winRate }}</span>
@@ -97,13 +98,15 @@ export default {
 </script>
 
 <style lang="scss">
-.game-details {
+.game-page {
   .win-rate {
     background-color: $secondary;
     padding: 15px;
     font-weight: 600;
     display: flex;
     align-items: center;
+    margin-bottom: 16px;
+    color: $primary;
   }
 }
 </style>

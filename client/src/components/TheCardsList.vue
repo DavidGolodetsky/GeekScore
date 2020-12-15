@@ -10,8 +10,10 @@
           v-if="items.length > 3"
           v-model="search"
           clearable
-          prepend-icon="mdi-magnify"
+          append-icon="mdi-magnify"
           dark
+          outlined
+          rounded
           label="Search"
         />
       </v-col>

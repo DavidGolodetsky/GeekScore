@@ -32,7 +32,7 @@
 </template>
 
 <script>
-import { standardField, requiredField, tooLongField, linkField } from "@/utils/validations";
+import { standardField, requiredField, linkField } from "@/utils/validations";
 import { mapActions } from "vuex";
 
 export default {
@@ -57,25 +57,25 @@ export default {
           label: "Board geek game URL",
           icon: "cards",
           value: this.game.bggURL === undefined ? "" : this.game.bggURL,
-          rules: [tooLongField, linkField]
+          rules: [linkField]
         },
         melodiceURL: {
           label: "Melodice URL",
           icon: "music",
           value: this.game.melodiceURL === undefined ? "" : this.game.melodiceURL,
-          rules: [tooLongField, linkField]
+          rules: [linkField]
         },
         rulesURL: {
           label: "Rules URL",
           icon: "book-open-variant",
           value: this.game.rulesURL === undefined ? "" : this.game.rulesURL,
-          rules: [tooLongField, linkField]
+          rules: [linkField]
         },
         imageUrl: {
           label: "Image URL",
           icon: "image",
           value: this.game.imageUrl === undefined ? "" : this.game.imageUrl,
-          rules: [tooLongField, linkField]
+          rules: [linkField]
         }
       }
     };

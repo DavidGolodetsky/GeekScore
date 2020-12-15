@@ -20,7 +20,7 @@
         </div>
       </v-card>
     </template>
-    <v-tabs v-model="tab">
+    <v-tabs v-model="currentTab">
       <v-tabs-slider color="secondary" />
       <v-tab
         v-for="(tab, i) in tabs"
@@ -31,7 +31,7 @@
       </v-tab>
     </v-tabs>
     <v-tabs-items
-      v-model="tab"
+      v-model="currentTab"
       class="pt-4 px-4"
     >
       <v-tab-item
@@ -87,7 +87,7 @@ export default {
       seconds: "00",
       pause: true,
       playInterval: false,
-      tab: null,
+      currentTab: null,
       tabs: ["Timer", "Countdown"],
     };
   },
