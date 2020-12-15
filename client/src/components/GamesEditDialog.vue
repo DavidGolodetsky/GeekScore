@@ -62,6 +62,7 @@ export default {
         bggURL: {
           label: "Board geek game URL",
           icon: "cards",
+          // TODO:refactor
           value: this.game.bggURL === undefined ? "" : this.game.bggURL,
           rules: [tooLongField, linkField]
         },
