@@ -4,19 +4,19 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/browserconfig.xml"
   },
   {
-    "revision": "4dcc731f2d33703f6ab9",
-    "url": "/css/SignInPage.f071e7e2.css"
+    "revision": "e79602d9d6f57936bbfd",
+    "url": "/css/SignInPage.2609c15b.css"
   },
   {
     "revision": "bca32b8d3d1faaba971a",
     "url": "/css/SignInPage~SignUpPage~game~games~profile~resetPass~team~tools.a41e1dae.css"
   },
   {
-    "revision": "84d89c10f85865079f02",
-    "url": "/css/SignUpPage.f071e7e2.css"
+    "revision": "cd24493ab383e96ca951",
+    "url": "/css/SignUpPage.2609c15b.css"
   },
   {
-    "revision": "795bc15e49d0d95aedba",
+    "revision": "f1766b8b436745762fa6",
     "url": "/css/app.3ff4af38.css"
   },
   {
@@ -24,11 +24,11 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/css/chunk-vendors.a0b752f4.css"
   },
   {
-    "revision": "2b884ee7cd17c0d72cb3",
+    "revision": "26c7078581a1af0a4767",
     "url": "/css/game.5de539d2.css"
   },
   {
-    "revision": "3e030216f9856c3f04c1",
+    "revision": "7ab2409546ba8710abce",
     "url": "/css/games.85e75b97.css"
   },
   {
@@ -36,7 +36,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/css/game~games~profile~team~tools.c944fa59.css"
   },
   {
-    "revision": "fc48933089916a65c90c",
+    "revision": "a4aa55d1f474cd35c7f8",
     "url": "/css/home.c951d6af.css"
   },
   {
@@ -124,7 +124,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/img/team.bf4c6f13.webp"
   },
   {
-    "revision": "4863ce9e61d7efe4caf659a07fec8886",
+    "revision": "232d3cf2a8251e6fe1a59f9f7c63e23c",
     "url": "/index.html"
   },
   {
@@ -132,48 +132,48 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/js/NotFoundPage.1a57729d.js"
   },
   {
-    "revision": "4dcc731f2d33703f6ab9",
-    "url": "/js/SignInPage.9c737ac2.js"
+    "revision": "e79602d9d6f57936bbfd",
+    "url": "/js/SignInPage.1ae48c16.js"
   },
   {
     "revision": "bca32b8d3d1faaba971a",
     "url": "/js/SignInPage~SignUpPage~game~games~profile~resetPass~team~tools.4673b2c9.js"
   },
   {
-    "revision": "84d89c10f85865079f02",
-    "url": "/js/SignUpPage.e5081702.js"
+    "revision": "cd24493ab383e96ca951",
+    "url": "/js/SignUpPage.52314240.js"
   },
   {
-    "revision": "795bc15e49d0d95aedba",
-    "url": "/js/app.824c21fd.js"
+    "revision": "f1766b8b436745762fa6",
+    "url": "/js/app.d2be4099.js"
   },
   {
     "revision": "b3f354adbd6f61a65376",
     "url": "/js/chunk-vendors.8b00a109.js"
   },
   {
-    "revision": "2b884ee7cd17c0d72cb3",
-    "url": "/js/game.12b04e2e.js"
+    "revision": "26c7078581a1af0a4767",
+    "url": "/js/game.2d72d8db.js"
   },
   {
-    "revision": "3e030216f9856c3f04c1",
-    "url": "/js/games.38902925.js"
+    "revision": "7ab2409546ba8710abce",
+    "url": "/js/games.379224e1.js"
   },
   {
     "revision": "0cbc8021ff9cbcabc3a0",
     "url": "/js/game~games~profile~team~tools.919a77c0.js"
   },
   {
-    "revision": "fc48933089916a65c90c",
-    "url": "/js/home.8a2de65b.js"
+    "revision": "a4aa55d1f474cd35c7f8",
+    "url": "/js/home.5a170e4a.js"
   },
   {
     "revision": "2bd666b7e8ba795bd0d7",
     "url": "/js/profile.f62dbda5.js"
   },
   {
-    "revision": "34cb2766b4ddf5c78eca",
-    "url": "/js/resetPass.5258bd7f.js"
+    "revision": "b97dc145b176c7c8f668",
+    "url": "/js/resetPass.cee404cf.js"
   },
   {
     "revision": "d4363a9caad8a85aea0c",
