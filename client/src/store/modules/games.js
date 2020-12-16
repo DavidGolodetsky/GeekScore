@@ -65,7 +65,7 @@ export default {
     async loadGamesOffline({ commit }) {
       try {
         commit("LOADING", true, { root: true });
-        const games = VueOfflineStorage.get("games", games);
+        const games = VueOfflineStorage.get("games");
         commit("SET_GAMES", games);
       } catch (e) {
         commit("ERROR", e, { root: true });
