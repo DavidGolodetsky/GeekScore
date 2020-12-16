@@ -70,11 +70,7 @@ export default {
     },
   },
   created () {
-    if (this.isOnline) {
-      this.loadData();
-    } else {
-      this.loadFromCache()
-    }
+    this.isOffline ? this.loadFromCache() : this.loadData();
   },
   beforeDestroy () {
     this.setBackTitle();

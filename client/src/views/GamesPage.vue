@@ -42,7 +42,7 @@ export default {
     ...mapState('games', ['games']),
   },
   created () {
-    this.isOnline ? this.loadData() : this.loadGamesOffline()
+    this.isOffline ? this.loadGamesOffline() : this.loadData()
   },
   methods: {
     ...mapActions('games', ['loadGames', 'loadGamesOffline', 'updateGame']),

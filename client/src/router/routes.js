@@ -69,28 +69,28 @@ const routes = [
     },
   },
   {
-    path: "/SignInPage",
-    name: "SignInPage",
+    path: "/sign-in",
+    name: "signIn",
     component: () =>
       import(/* webpackChunkName: "SignInPage" */ "../views/SignInPage"),
     meta: {
       title: "Geek Score - Sign in page",
       metaTags: {
         name: "description",
-        content: "A page for SignInPageg in",
+        content: "A page for Signing In in",
       },
     },
   },
   {
-    path: "/SignUpPage",
-    name: "SignUpPage",
+    path: "/sign-up",
+    name: "signUp",
     component: () =>
       import(/* webpackChunkName: "SignUpPage" */ "../views/SignUpPage"),
     meta: {
       title: "Geek Score - Sign up page",
       metaTags: {
         name: "description",
-        content: "A page for SignInPageg up",
+        content: "A page for Signing up up",
       },
     },
   },

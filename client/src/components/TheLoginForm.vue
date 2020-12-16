@@ -39,7 +39,7 @@
             :rules="EmailRules"
           />
           <v-text-field
-            v-if="formProps.SignUpPage"
+            v-if="formProps.signUp"
             v-model.trim="username"
             clearable
             label="Username"
@@ -57,7 +57,7 @@
             @click:append="showPassword = !showPassword"
           />
           <v-text-field
-            v-if="formProps.SignUpPage"
+            v-if="formProps.signUp"
             v-model.trim="confirmPassword"
             :type="showPassword ? 'text' : 'password'"
             label="Confirm password"
@@ -79,7 +79,7 @@
       </v-form>
       <div class="text-center mb-3">
         <router-link
-          v-if="!formProps.SignUpPage"
+          v-if="!formProps.signUp"
           :to="{ name: 'resetPass' }"
           class="link"
         >Forgot password?</router-link>
@@ -129,21 +129,21 @@ export default {
       ];
     },
     loginMethod () {
-      return this.formProps.SignUpPage ? this.SignUpPageUser : this.SignInPageUser;
+      return this.formProps.signUp ? this.signUpUser : this.signInUser;
     },
   },
   mounted () {
     fbStart();
   },
   methods: {
-    ...mapActions('user', ['SignUpPageUser', 'SignInPageUser']),
+    ...mapActions('user', ['signUpUser', 'signInUser']),
     onSubmit () {
       const userInfo = {
         email: this.email,
         username: this.username,
         password: this.password,
       };
-      this.loginMethod(userInfo).catch(() => { });
+      this.loginMethod(userInfo)
     },
   },
 };

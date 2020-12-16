@@ -16,7 +16,7 @@ export default {
         title: "Sign In",
         icon: "login",
         redirectText: "Don't have account yet?",
-        redirectLink: { name: "SignUpPage" },
+        redirectLink: { name: "signUp" },
         redirectLinkText: "Sign Up"
       }
     };
