@@ -132,7 +132,6 @@ export default {
       const isRounds = this.$store.hasModule('rounds');
       isRounds || this.$store.registerModule('rounds', rounds);
       this.loadRounds();
-      this.teams && this.setBackTitle(`${this.team.name}: ${this.game.name}`);
     },
   },
 };

@@ -34,6 +34,7 @@ import TheTitle from '@/components/TheTitle';
 import TeamsEditDialog from '@/components/TeamsEditDialog';
 import TheCardsList from '@/components/TheCardsList';
 import { mapActions, mapGetters, mapState } from 'vuex';
+import { VueOfflineMixin } from 'vue-offline';
 
 export default {
   name: "GamePage",
@@ -42,6 +43,7 @@ export default {
     TeamsEditDialog,
     TheCardsList,
   },
+  mixins: [VueOfflineMixin],
   props: {
     gameId: {
       type: String,
@@ -68,14 +70,18 @@ export default {
     },
   },
   created () {
-    this.loadData();
+    if (this.isOnline) {
+      this.loadData();
+    } else {
+      this.loadFromCache()
+    }
   },
   beforeDestroy () {
     this.setBackTitle();
   },
   methods: {
     ...mapActions(['setBackTitle']),
-    ...mapActions('games', ['loadGames', 'loadWinRate']),
+    ...mapActions('games', ['loadGames', 'loadGamesOffline', 'loadWinRate']),
     ...mapActions('teams', ['updateTeam', 'loadTeams', 'loadGameTeams']),
     toggleFavorite (teamInfo) {
       const team = {
@@ -90,8 +96,12 @@ export default {
       });
       this.teams ?? this.loadTeams();
       this.loadWinRate(this.gameId)
-      this.games && this.setBackTitle(this.getGame(this.gameId).name);
     },
+    loadFromCache () {
+      this.games ?? this.loadGamesOffline().then(() => {
+        this.setBackTitle(this.getGame(this.gameId).name);
+      });
+    }
   },
 };
 </script>
