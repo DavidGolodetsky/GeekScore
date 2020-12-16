@@ -92,6 +92,7 @@ export default {
       });
       this.teams ?? this.loadTeams();
       this.loadWinRate(this.gameId)
+      this.games && this.setBackTitle(this.getGame(this.gameId).name);
     },
     loadFromCache () {
       this.games ?? this.loadGamesOffline().then(() => {
