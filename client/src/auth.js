@@ -16,18 +16,18 @@ const firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 firebase.auth().onAuthStateChanged((user) => {
   if (user) {
-    store.dispatch("user/autoSignInPage", user);
+    store.dispatch("user/autoSignIn", user);
   }
 });
 
 const uiConfig = {
-  SignInPageFlow: "popup",
-  SignInPageOptions: [
+  signInFlow: "popup",
+  signInOptions: [
     firebase.auth.GoogleAuthProvider.PROVIDER_ID,
     firebase.auth.FacebookAuthProvider.PROVIDER_ID,
   ],
   callbacks: {
-    SignInPageSuccessWithAuthResult: () => false,
+    signInSuccessWithAuthResult: () => false,
     uiShown() {
       document.getElementById("loader").style.display = "none";
     },

@@ -124,6 +124,7 @@ export default {
     ...mapActions('teams', ['loadTeams']),
     ...mapActions('rounds', ['loadRounds']),
     loadData () {
+      // TODO:refactor
       this.games ?? this.loadGames();
       this.teams ?? this.loadTeams().then(() => {
         this.setBackTitle(`${this.team.name}: ${this.game.name}`);

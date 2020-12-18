@@ -7,7 +7,7 @@ export default {
   state: {
     user: null,
     winRates: null,
-    ResetPasswordPage: false,
+    resetPassword: false,
   },
   mutations: {
     SET_USER(state, payload) {
@@ -19,20 +19,19 @@ export default {
       state.user = payload;
     },
     RESET_PASSWORD(state) {
-      state.ResetPasswordPage = true;
+      state.resetPassword = true;
     },
     SET_WIN_RATES(state, payload) {
       state.winRates = payload;
     },
   },
   actions: {
-    async SignUpPageUser({ commit }, payload) {
+    async signUpUser({ commit }, payload) {
       try {
         commit("LOADING", true, { root: true });
         const user = await firebase
           .auth()
           .createUserWithEmailAndPassword(payload.email, payload.password);
-        console.log(user);
         await user.user.updateProfile({ displayName: payload.username });
         const userPayload = { id: user.user.uid, username: payload.username };
         await axios.post("/api/users", userPayload);
@@ -44,12 +43,12 @@ export default {
         commit("LOADING", false, { root: true });
       }
     },
-    async SignInPageUser({ commit }, payload) {
+    async signInUser({ commit }, payload) {
       try {
         commit("LOADING", true, { root: true });
         const user = await firebase
           .auth()
-          .SignInPageWithEmailAndPassword(payload.email, payload.password);
+          .signInWithEmailAndPassword(payload.email, payload.password);
         const userInfo = await axios.get(`/api/users/${user.user.uid}`);
         const userPayload = {
           id: userInfo.data[0].id,
@@ -62,7 +61,7 @@ export default {
         commit("LOADING", false, { root: true });
       }
     },
-    autoSignInPage({ commit }, payload) {
+    autoSignIn({ commit }, payload) {
       commit("LOADING", true, { root: true });
       commit("SET_USER", { id: payload.uid, username: payload.displayName });
       if (router.currentRoute.path === "/") {
@@ -84,7 +83,7 @@ export default {
         commit("LOADING", false, { root: true });
       }
     },
-    async ResetPasswordPage({ commit }, payload) {
+    async resetPassword({ commit }, payload) {
       try {
         commit("LOADING", true, { root: true });
         await firebase.auth().sendPasswordResetEmail(payload);

@@ -16,9 +16,9 @@ export default {
         title: "Sign Up",
         icon: "account-circle",
         redirectText: "Already have account?",
-        redirectLink: { name: "SignInPage" },
+        redirectLink: { name: "signIn" },
         redirectLinkText: "Sign In",
-        SignUpPage: true
+        signUp: true
       }
     };
   }

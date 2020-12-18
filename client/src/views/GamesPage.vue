@@ -23,6 +23,7 @@ import TheTitle from '@/components/TheTitle';
 import GamesEditDialog from '@/components/GamesEditDialog';
 import TheCardsList from '@/components/TheCardsList';
 import { mapState, mapActions } from 'vuex';
+import { VueOfflineMixin } from 'vue-offline';
 
 export default {
   name: 'GamesPage',
@@ -31,6 +32,7 @@ export default {
     GamesEditDialog,
     TheCardsList,
   },
+  mixins: [VueOfflineMixin],
   data () {
     return {
       gameRoute: { name: 'game', params: { gameId: '' } },
@@ -40,10 +42,10 @@ export default {
     ...mapState('games', ['games']),
   },
   created () {
-    this.loadData();
+    this.isOffline ? this.loadGamesOffline() : this.loadData()
   },
   methods: {
-    ...mapActions('games', ['loadGames', 'updateGame']),
+    ...mapActions('games', ['loadGames', 'loadGamesOffline', 'updateGame']),
     toggleFavorite (game) {
       this.updateGame(game);
     },

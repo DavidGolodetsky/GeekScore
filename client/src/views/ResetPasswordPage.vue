@@ -1,7 +1,7 @@
 <template>
   <section>
     <v-card
-      v-if="!isResetPasswordPageDone"
+      v-if="!isResetPasswordDone"
       raised
       outlined
       dark
@@ -62,12 +62,12 @@ export default {
     };
   },
   computed: {
-    ...mapState("user", ["ResetPasswordPage"])
+    ...mapState("user", ["resetPassword"])
   },
   methods: {
-    ...mapActions("user", ["ResetPasswordPage"]),
+    ...mapActions("user", ["resetPassword"]),
     onSubmit () {
-      this.ResetPasswordPage(this.email);
+      this.resetPassword(this.email);
     }
   }
 };
