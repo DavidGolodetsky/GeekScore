@@ -43,7 +43,7 @@ export default {
   computed: {
     ...mapState('user', ['user', 'winRates']),
     isUsername () {
-      return this.user && this.user.username
+      return this.user?.username
     }
   },
   created () {

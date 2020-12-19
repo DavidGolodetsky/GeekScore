@@ -91,8 +91,12 @@ export default {
   methods: {
     ...mapActions(['setError']),
     onScroll () {
-      if (window.pageYOffset > 500) this.showTop = true;
-      if (this.showTop && window.pageYOffset < 500) this.showTop = false;
+      if (window.pageYOffset > 500) {
+        this.showTop = true;
+      }
+      else if (this.showTop && window.pageYOffset < 500) {
+        this.showTop = false;
+      }
     },
   },
 };

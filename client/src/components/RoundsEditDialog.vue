@@ -34,7 +34,9 @@ export default {
   methods: {
     ...mapActions("rounds", ["deleteRound"]),
     onSubmit () {
-      this.toDelete && this.deleteRound(this.round._id);
+      if (this.toDelete) {
+        this.deleteRound(this.round._id)
+      }
     }
   }
 };

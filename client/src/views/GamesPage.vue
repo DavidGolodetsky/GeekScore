@@ -42,10 +42,10 @@ export default {
     ...mapState('games', ['games']),
   },
   created () {
-    this.isOffline ? this.loadGamesOffline() : this.loadData()
+    this.loadData()
   },
   methods: {
-    ...mapActions('games', ['loadGames', 'loadGamesOffline', 'updateGame']),
+    ...mapActions('games', ['loadGames', 'updateGame']),
     toggleFavorite (game) {
       this.updateGame(game);
     },

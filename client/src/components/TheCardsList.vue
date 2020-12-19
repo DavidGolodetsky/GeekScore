@@ -154,7 +154,11 @@ export default {
   },
   computed: {
     filteredItems () {
-      !this.search && this.getItemsOrder(this.items);
+      // Reset filtering
+      if (!this.search) {
+        return this.getItemsOrder(this.items)
+      }
+      // Filter
       const filtered = this.items.filter(item =>
         this.search
           .toLowerCase()

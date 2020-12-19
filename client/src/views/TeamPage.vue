@@ -112,6 +112,16 @@ export default {
       return this.gameTeam && this.rounds?.length;
     },
   },
+  watch: {
+    teams: {
+      handler (val) {
+        if (val) {
+          this.setBackTitle(`${this.team.name}: ${this.game.name}`);
+        }
+      },
+      immediate: true
+    }
+  },
   created () {
     this.loadData();
   },
@@ -124,16 +134,15 @@ export default {
     ...mapActions('teams', ['loadTeams']),
     ...mapActions('rounds', ['loadRounds']),
     loadData () {
-      // TODO:refactor
       this.games ?? this.loadGames();
-      this.teams ?? this.loadTeams().then(() => {
-        this.setBackTitle(`${this.team.name}: ${this.game.name}`);
-      });
+      this.teams ?? this.loadTeams()
+      this.loadRoundsData()
+    },
+    loadRoundsData () {
       const isRounds = this.$store.hasModule('rounds');
       isRounds || this.$store.registerModule('rounds', rounds);
       this.loadRounds();
-      this.teams && this.setBackTitle(`${this.team.name}: ${this.game.name}`);
-    },
+    }
   },
 };
 </script>

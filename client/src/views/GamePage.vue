@@ -70,15 +70,25 @@ export default {
       };
     },
   },
+  watch: {
+    games: {
+      handler (val) {
+        if (val) {
+          this.setBackTitle(this.getGame(this.gameId).name)
+        }
+      },
+      immediate: true
+    },
+  },
   created () {
-    this.isOffline ? this.loadFromCache() : this.loadData();
+    this.loadData()
   },
   beforeDestroy () {
     this.setBackTitle();
   },
   methods: {
     ...mapActions(['setBackTitle']),
-    ...mapActions('games', ['loadGames', 'loadGamesOffline', 'loadWinRate']),
+    ...mapActions('games', ['loadGames', 'loadWinRate']),
     ...mapActions('teams', ['updateTeam', 'loadTeams', 'loadGameTeams']),
     toggleFavorite (teamInfo) {
       const team = {
@@ -88,18 +98,10 @@ export default {
       this.updateTeam(team);
     },
     loadData () {
-      this.games ?? this.loadGames().then(() => {
-        this.setBackTitle(this.getGame(this.gameId).name);
-      });
+      this.games ?? this.loadGames();
       this.teams ?? this.loadTeams();
       this.loadWinRate(this.gameId)
-      this.games && this.setBackTitle(this.getGame(this.gameId).name);
     },
-    loadFromCache () {
-      this.games ?? this.loadGamesOffline().then(() => {
-        this.setBackTitle(this.getGame(this.gameId).name);
-      });
-    }
   },
 };
 </script>
