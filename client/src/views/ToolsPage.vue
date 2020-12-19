@@ -22,7 +22,7 @@
 import TheTitle from "@/components/TheTitle";
 import ToolsDiceDialog from "@/components/ToolsDiceDialog";
 import ToolsTimerDialog from "@/components/ToolsTimerDialog";
-import ToolsCalcDialog from "@/components/ToolsCalcDialog";
+// import ToolsCalcDialog from "@/components/ToolsCalcDialog";
 
 export default {
   name: "ToolsPage",
@@ -30,11 +30,15 @@ export default {
     TheTitle,
     ToolsDiceDialog,
     ToolsTimerDialog,
-    ToolsCalcDialog,
+    // ToolsCalcDialog,
   },
   data () {
     return {
-      tools: ['tools-dice-dialog', 'tools-timer-dialog', 'tools-calc-dialog'],
+      tools: [
+        'tools-dice-dialog',
+        'tools-timer-dialog',
+        // 'tools-calc-dialog'
+      ],
     };
   }
 };
