@@ -16,7 +16,7 @@
       :dense="$vuetify.breakpoint.smAndDown"
     >
       <v-timeline-item
-        v-for="{title, icon, text} in items"
+        v-for="{title, icon, text} in demoSteps"
         :key="title"
         color="secondary"
         :icon="`mdi-${icon}`"
@@ -26,7 +26,9 @@
           color="silver"
           light
         >
-          <v-card-title class="title">{{ title }}</v-card-title>
+          <v-card-title class="title">
+            {{ title }}
+          </v-card-title>
           <v-card-text class="white text--primary">
             <p>{{ text }}</p>
           </v-card-text>
@@ -47,14 +49,16 @@
 </template>
 
 <script>
-// import { mapState } from "vuex";
-import { ref } from '@vue/composition-api'
+import { ref, computed } from '@vue/composition-api'
 export default {
-
   // TODO:components name in composition api?
   // name: "HomePage",
-  setup () {
-    const items = ref([
+  setup (_, ctx) {
+    // TODO:rewrite with useStore later
+    const store = ctx.root.$store
+    const user = computed(() => store.state.user.user)
+
+    const demoSteps = ref([
       {
         title: "Games",
         text:
@@ -84,17 +88,15 @@ export default {
       }
     ])
 
-    const user = ref(true)
+    // TODO:figure out how to use map helpers with vuex
 
     return {
-      items,
+      demoSteps,
       user
     }
   }
 
-  // computed: {
-  //   ...mapState("user", ["user"])
-  // }
+
 }
 </script>
 
