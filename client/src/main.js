@@ -1,18 +1,21 @@
-import Vue from 'vue';
-import App from './App';
-import vuetify from './plugins/vuetify';
-import router from './router';
-import store from './store';
-import VueOffline from 'vue-offline';
-import '@/globalComponents';
-import './registerServiceWorker';
+import Vue from "vue";
+import App from "./App";
+import vuetify from "./plugins/vuetify";
+import router from "./router";
+import store from "./store";
+import VueOffline from "vue-offline";
+import VueCompositionAPI from "@vue/composition-api";
+import "@/globalComponents";
+import "./registerServiceWorker";
 
-const isDev = process.env.NODE_ENV !== 'production';
+const isDev = process.env.NODE_ENV !== "production";
 
 Vue.config.productionTip = isDev;
 Vue.config.performance = isDev;
 
 Vue.prototype.$log = console.log;
+
+Vue.use(VueCompositionAPI);
 
 Vue.use(VueOffline, {
   mixin: false,
@@ -31,4 +34,4 @@ new Vue({
   router,
   store,
   render: (h) => h(App),
-}).$mount('#app');
+}).$mount("#app");

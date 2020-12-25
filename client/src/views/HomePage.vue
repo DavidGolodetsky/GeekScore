@@ -47,47 +47,55 @@
 </template>
 
 <script>
-import { mapState } from "vuex";
-
+// import { mapState } from "vuex";
+import { ref } from '@vue/composition-api'
 export default {
-  name: "HomePage",
-  data () {
+
+  // TODO:components name in composition api?
+  // name: "HomePage",
+  setup () {
+    const items = ref([
+      {
+        title: "Games",
+        text:
+          "Add your favorite board games. Add more info about this awesome game!",
+        color: "warning",
+        icon: "dice-multiple"
+      },
+      {
+        title: "Teams",
+        text:
+          "Create team of buddies to dive in the world of board games! You can add as many teams per game as you want.",
+        color: "accent",
+        icon: "account-group"
+      },
+      {
+        title: "Rounds",
+        text:
+          "When team is ready to play - roll the dice! Add result of your game to rounds table which is there per team in this game.",
+        color: "info",
+        icon: "sword-cross"
+      },
+      {
+        title: "Statistics",
+        text: "Check out statistics - see who is the best!",
+        color: "success",
+        icon: "chart-bar"
+      }
+    ])
+
+    const user = ref(true)
+
     return {
-      items: [
-        {
-          title: "Games",
-          text:
-            "Add your favorite board games. Add more info about this awesome game!",
-          color: "warning",
-          icon: "dice-multiple"
-        },
-        {
-          title: "Teams",
-          text:
-            "Create team of buddies to dive in the world of board games! You can add as many teams per game as you want.",
-          color: "accent",
-          icon: "account-group"
-        },
-        {
-          title: "Rounds",
-          text:
-            "When team is ready to play - roll the dice! Add result of your game to rounds table which is there per team in this game.",
-          color: "info",
-          icon: "sword-cross"
-        },
-        {
-          title: "Statistics",
-          text: "Check out statistics - see who is the best!",
-          color: "success",
-          icon: "chart-bar"
-        }
-      ]
+      items,
+      user
     }
-  },
-  computed: {
-    ...mapState("user", ["user"])
   }
-};
+
+  // computed: {
+  //   ...mapState("user", ["user"])
+  // }
+}
 </script>
 
 
