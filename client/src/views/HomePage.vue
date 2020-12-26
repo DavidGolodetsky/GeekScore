@@ -40,9 +40,9 @@
         class="submit-btn"
         ripple
         type="submit"
-        :to="{name: user ? 'games' : 'signIn'}"
+        :to="{name: loggedInUser ? 'games' : 'signIn'}"
       >
-        {{ user ? 'Games' : 'Sign In' }}
+        {{ loggedInUser ? 'Games' : 'Sign In' }}
       </v-btn>
     </div>
   </section>
@@ -56,7 +56,7 @@ export default {
   setup (_, ctx) {
     // TODO:rewrite with useStore later
     const store = ctx.root.$store
-    const user = computed(() => store.state.user.user)
+    const loggedInUser = computed(() => store.state.user.user)
 
     const demoSteps = ref([
       {
