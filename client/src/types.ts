@@ -1,6 +1,4 @@
-// export interface DemoSteps {
-//   title: string;
-//   text: string;
-//   color: string;
-//   icon: string;
-// }
+export interface Error {
+  message: string;
+  code: string;
+}

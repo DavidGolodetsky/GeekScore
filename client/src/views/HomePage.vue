@@ -97,7 +97,7 @@ export default defineComponent({
     // TODO:figure out how to use map helpers with vuex
 
     return {
-      state,
+      ...state,
     };
   },
 });

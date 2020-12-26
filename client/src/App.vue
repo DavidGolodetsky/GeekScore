@@ -8,7 +8,7 @@
     <v-main>
       <v-container class="app-container">
         <the-alert
-          v-if="showAlert"
+          v-if="isAlert"
           v-bind="{alertType, alertText}"
         />
         <transition
@@ -18,7 +18,7 @@
           <router-view />
         </transition>
         <div
-          v-if="loading"
+          v-if="isLoading"
           class="loader-wrap"
         >
           <v-progress-circular
@@ -28,12 +28,12 @@
           />
         </div>
         <v-btn
-          v-if="showTop"
+          v-if="isGoTopBtn"
           class="go-top"
           aria-label="Go to top"
           dark
           fab
-          @click="$vuetify.goTo(0, options)"
+          @click="$vuetify.goTo(0, GoTopBtnOtions)"
         >
           <v-icon dark>mdi-chevron-up</v-icon>
         </v-btn>
@@ -43,63 +43,90 @@
   </v-app>
 </template>
 
-<script>
-import TheHeader from '@/components/TheHeader';
-import TheFooter from '@/components/TheFooter';
-import TheAlert from '@/components/TheAlert';
-import { mapActions, mapGetters } from 'vuex';
-import { VueOfflineMixin } from 'vue-offline';
-import { setupFb } from '@/auth';
+<script lang="ts">
+import {
+  defineComponent,
+  reactive,
+  watch,
+  computed,
+  onMounted,
+} from "@vue/composition-api";
+import TheHeader from "@/components/TheHeader.vue";
+import TheFooter from "@/components/TheFooter.vue";
+import TheAlert from "@/components/TheAlert.vue";
+// import { VueOfflineMixin } from 'vue-offline';
+import { setupFb } from "@/auth";
 
-export default {
-  name: 'App',
+export default defineComponent({
+  name: "App",
   components: {
     TheHeader,
     TheFooter,
     TheAlert,
   },
-  mixins: [VueOfflineMixin],
-  data: () => ({
-    showTop: false,
-    offlineText: 'Geek Score is offline. Some features might be disabled',
-    options: {
+  // TODO: composition-api with mixins?
+  // mixins: [VueOfflineMixin],
+  setup(_, ctx) {
+    const store = ctx.root.$store;
+    const isLoading = computed(() => store.getters.loading);
+    // TODO: add type
+    const error: any = computed(() => store.getters.error);
+
+    let isGoTopBtn = false;
+    const GoTopBtnOtions = {
       duration: 300,
       offset: 0,
-      easing: 'easeInOutCubic',
-    },
-  }),
-  computed: {
-    ...mapGetters(['loading', 'error']),
-    showAlert () {
-      return this.isOffline || this.error;
-    },
-    alertType () {
-      return this.isOffline ? 'warning' : 'error';
-    },
-    alertText () {
-      return this.isOffline ? this.offlineText : this.error.message;
-    },
-  },
-  watch: {
-    showAlert (val) {
-      if (val) setTimeout(() => this.setError(), 10000);
-    },
-  },
-  mounted () {
-    setupFb();
-  },
-  methods: {
-    ...mapActions(['setError']),
-    onScroll () {
+      easing: "easeInOutCubic",
+    };
+    // TODO: remove after VueOfflineMixin is fixed
+    let isOffline = false;
+
+    const offlineMessage =
+      "Geek Score is offline. Some features might be disabled";
+
+    const alertType = computed(() => (isOffline ? "warning" : "error"));
+    const alertText = computed(() =>
+      isOffline ? offlineMessage : error.value.message
+    );
+    const isAlert = computed(() => isOffline || error.value);
+
+    watch(isAlert, (val) => {
+      if (val) {
+        setTimeout(() => setError(), 10000);
+      }
+    });
+
+    onMounted(() => setupFb());
+
+    function onScroll() {
       if (window.pageYOffset > 500) {
-        this.showTop = true;
+        isGoTopBtn = true;
+      } else if (isGoTopBtn && window.pageYOffset < 500) {
+        isGoTopBtn = false;
       }
-      else if (this.showTop && window.pageYOffset < 500) {
-        this.showTop = false;
-      }
-    },
+    }
+
+    function setError() {
+      store.dispatch("setError");
+    }
+
+    const state = reactive({
+      isGoTopBtn,
+      GoTopBtnOtions,
+      isOffline,
+      offlineMessage,
+    });
+
+    return {
+      isLoading,
+      alertType,
+      alertText,
+      isAlert,
+      onScroll,
+      ...state,
+    };
   },
-};
+});
 </script>
 
 <style scoped lang="scss">
