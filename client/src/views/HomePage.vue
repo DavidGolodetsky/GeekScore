@@ -48,56 +48,59 @@
   </section>
 </template>
 
-<script>
-import { ref, computed } from '@vue/composition-api'
-export default {
+<script lang="ts">
+import { defineComponent, reactive, computed } from "@vue/composition-api";
+
+export default defineComponent({
   // TODO:components name in composition api?
   // name: "HomePage",
-  setup (_, ctx) {
+  setup(_, ctx) {
     // TODO:rewrite with useStore later
-    const store = ctx.root.$store
-    const loggedInUser = computed(() => store.state.user.user)
+    const store = ctx.root.$store;
+    const loggedInUser = computed(() => store.state.user.user);
 
-    const demoSteps = ref([
+    const demoSteps = [
       {
         title: "Games",
         text:
           "Add your favorite board games. Add more info about this awesome game!",
         color: "warning",
-        icon: "dice-multiple"
+        icon: "dice-multiple",
       },
       {
         title: "Teams",
         text:
           "Create team of buddies to dive in the world of board games! You can add as many teams per game as you want.",
         color: "accent",
-        icon: "account-group"
+        icon: "account-group",
       },
       {
         title: "Rounds",
         text:
           "When team is ready to play - roll the dice! Add result of your game to rounds table which is there per team in this game.",
         color: "info",
-        icon: "sword-cross"
+        icon: "sword-cross",
       },
       {
         title: "Statistics",
         text: "Check out statistics - see who is the best!",
         color: "success",
-        icon: "chart-bar"
-      }
-    ])
+        icon: "chart-bar",
+      },
+    ];
+
+    const state = reactive({
+      loggedInUser,
+      demoSteps,
+    });
 
     // TODO:figure out how to use map helpers with vuex
 
     return {
-      demoSteps,
-      user
-    }
-  }
-
-
-}
+      state,
+    };
+  },
+});
 </script>
 
 
