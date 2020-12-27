@@ -49,7 +49,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, reactive, computed } from "@vue/composition-api";
+import { defineComponent, computed } from "@vue/composition-api";
 
 export default defineComponent({
   // TODO:components name in composition api?
@@ -89,15 +89,11 @@ export default defineComponent({
       },
     ];
 
-    const state = reactive({
-      loggedInUser,
-      demoSteps,
-    });
-
     // TODO:figure out how to use map helpers with vuex
 
     return {
-      ...state,
+      loggedInUser,
+      demoSteps,
     };
   },
 });
