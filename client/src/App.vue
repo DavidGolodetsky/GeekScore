@@ -47,6 +47,7 @@
 import {
   defineComponent,
   reactive,
+  toRefs,
   watch,
   computed,
   onMounted,
@@ -114,7 +115,6 @@ export default defineComponent({
       isGoTopBtn,
       GoTopBtnOtions,
       isOffline,
-      offlineMessage,
     });
 
     return {
@@ -123,7 +123,7 @@ export default defineComponent({
       alertText,
       isAlert,
       onScroll,
-      ...state,
+      ...toRefs(state),
     };
   },
 });
