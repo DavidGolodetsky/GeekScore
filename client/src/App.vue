@@ -69,27 +69,30 @@ export default defineComponent({
   // mixins: [VueOfflineMixin],
   setup(_, ctx) {
     const store = ctx.root.$store;
-    const isLoading = computed(() => store.getters.loading);
+
     // TODO: add type
     const error: any = computed(() => store.getters.error);
 
-    let isGoTopBtn = false;
-    const GoTopBtnOtions = {
-      duration: 300,
-      offset: 0,
-      easing: "easeInOutCubic",
-    };
-    // TODO: remove after VueOfflineMixin is fixed
-    let isOffline = false;
+    const state = reactive({
+      isGoTopBtn: false,
+      // TODO: remove after VueOfflineMixin is fixed
+      isOffline: false,
+      GoTopBtnOtions: {
+        duration: 300,
+        offset: 0,
+        easing: "easeInOutCubic",
+      },
+      isLoading: computed(() => store.getters.loading),
+    });
 
     const offlineMessage =
       "Geek Score is offline. Some features might be disabled";
 
-    const alertType = computed(() => (isOffline ? "warning" : "error"));
+    const alertType = computed(() => (state.isOffline ? "warning" : "error"));
     const alertText = computed(() =>
-      isOffline ? offlineMessage : error.value.message
+      state.isOffline ? offlineMessage : error.value.message
     );
-    const isAlert = computed(() => isOffline || error.value);
+    const isAlert = computed(() => state.isOffline || error.value);
 
     watch(isAlert, (val) => {
       if (val) {
@@ -101,9 +104,9 @@ export default defineComponent({
 
     function onScroll() {
       if (window.pageYOffset > 500) {
-        isGoTopBtn = true;
-      } else if (isGoTopBtn && window.pageYOffset < 500) {
-        isGoTopBtn = false;
+        state.isGoTopBtn = true;
+      } else if (state.isGoTopBtn && window.pageYOffset < 500) {
+        state.isGoTopBtn = false;
       }
     }
 
@@ -111,14 +114,7 @@ export default defineComponent({
       store.dispatch("setError");
     }
 
-    const state = reactive({
-      isGoTopBtn,
-      GoTopBtnOtions,
-      isOffline,
-    });
-
     return {
-      isLoading,
       alertType,
       alertText,
       isAlert,
