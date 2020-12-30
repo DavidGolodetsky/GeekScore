@@ -3,7 +3,7 @@ const routes = [
     path: "/",
     name: "home",
     component: () => import(/* webpackChunkName: "home" */ "../views/HomePage"),
-    // TODO: add vue-meta
+    // TODO: fix title and descr
     meta: {
       title: "Geek Score - Homepage",
       metaTags: {

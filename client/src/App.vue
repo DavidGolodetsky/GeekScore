@@ -71,7 +71,7 @@ export default defineComponent({
     const store = ctx.root.$store;
 
     // TODO: add type
-    const error: any = computed(() => store.getters.error);
+    const error: any = computed(() => store.getters["error"]);
 
     const state = reactive({
       isGoTopBtn: false,
@@ -102,17 +102,15 @@ export default defineComponent({
 
     onMounted(() => setupFb());
 
-    function onScroll() {
+    const onScroll = () => {
       if (window.pageYOffset > 500) {
         state.isGoTopBtn = true;
       } else if (state.isGoTopBtn && window.pageYOffset < 500) {
         state.isGoTopBtn = false;
       }
-    }
+    };
 
-    function setError() {
-      store.dispatch("setError");
-    }
+    const setError = () => store.dispatch("setError");
 
     return {
       alertType,
