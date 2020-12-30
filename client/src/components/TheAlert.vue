@@ -32,10 +32,17 @@ export default {
     },
   },
   mounted () {
-    window.navigator.vibrate(300);
+    this.vibrate()
+
   },
   methods: {
     ...mapActions(['setError']),
+    // TODO:extract to utilities composable api
+    vibrate (time = 300) {
+      if (window.innerWidth < 600) {
+        window.navigator.vibrate(time);
+      }
+    },
 
     onClose () {
       this.setError();

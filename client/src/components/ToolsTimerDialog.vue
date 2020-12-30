@@ -115,6 +115,11 @@ export default {
         }, 1000);
       }
     },
+    vibrate (time = 300) {
+      if (window.innerWidth < 600) {
+        window.navigator.vibrate(time);
+      }
+    },
     stopTimer () {
       this.hours = "00";
       this.minutes = "00";
@@ -151,7 +156,7 @@ export default {
         this.seconds <= "00"
       ) {
         this.stopTimer();
-        window.navigator.vibrate(1000);
+        this.vibrate()
       } else {
         if (this.seconds < 0) {
           this.seconds = "59";
