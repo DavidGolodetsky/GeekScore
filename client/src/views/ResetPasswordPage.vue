@@ -49,7 +49,7 @@
 
 <script>
 import { mapActions, mapState } from "vuex";
-import { emailField, requiredField } from "@/utils/validations";
+import { emailField, requiredField } from "@/use/validations";
 
 export default {
   name: "ResetPasswordPage",

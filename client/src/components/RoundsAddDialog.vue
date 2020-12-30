@@ -81,7 +81,7 @@
 </template>
 
 <script>
-import { requiredField } from '@/utils/validations';
+import { requiredField } from '@/use/validations';
 import { mapActions, mapGetters, mapState } from 'vuex';
 export default {
   name: 'RoundsAddDialog',

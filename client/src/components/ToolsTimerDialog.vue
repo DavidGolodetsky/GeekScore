@@ -115,6 +115,7 @@ export default {
         }, 1000);
       }
     },
+    // TODO:use from use/common
     vibrate (time = 300) {
       if (window.innerWidth < 600) {
         window.navigator.vibrate(time);
