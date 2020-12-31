@@ -70,8 +70,7 @@ export default defineComponent({
   setup(_, ctx) {
     const store = ctx.root.$store;
 
-    // TODO: add type
-    const error: any = computed(() => store.getters["error"]);
+    const error = computed(() => store.getters["error"]);
 
     const state = reactive({
       isGoTopBtn: false,
