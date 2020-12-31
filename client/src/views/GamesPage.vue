@@ -34,11 +34,14 @@ export default defineComponent({
   setup(_, ctx) {
     const store = ctx.root.$store;
     // TODO: add types
-    const updateGame = (game) => store.dispatch("games/updateGame", game);
+    const updateGame = (game: any) => store.dispatch("games/updateGame", game);
 
     const loadGames = () => store.dispatch("games/loadGames");
 
-    const gameRoute = { name: "game", params: { gameId: "" } };
+    const gameRoute = {
+      name: "game",
+      params: { gameId: "" },
+    };
 
     const games = computed(() => store.state.games.games);
 
