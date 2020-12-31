@@ -11,10 +11,11 @@ $success: #8bc34a;
 $lightgrey: #d9d9d8;
 $label: #6c6c6b;
 
-// media
 $tablet: "(min-width: 768px)";
 $desktop: "(min-width: 1200px)";
 
-// sizes
 $app-max-width: 1400px;
 $border-radius: 4px;
+$font-size-base: 16px;
+$space-base: 8px;
+$space-2: ($space-base * 2);

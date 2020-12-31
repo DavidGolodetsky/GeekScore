@@ -46,7 +46,7 @@ a {
   }
 
   .label_text {
-    font-size: 16px;
+    font-size: $font-size-base;
     color: #fff;
     cursor: pointer;
   }
@@ -72,7 +72,7 @@ a {
     }
   }
   .v-input--radio-group--column .v-input--radio-group__input > .v-label {
-    margin-bottom: 8px;
+    margin-bottom: $space-base;
   }
 
   .theme--light .v-tabs-items {
@@ -88,8 +88,8 @@ a {
     width: 100%;
     color: #fff;
     text-transform: uppercase;
-    padding: 8px 0;
-    margin: 8px auto;
+    padding: $space-base 0;
+    margin: $space-base auto;
   }
 
   .theme--dark.v-card.auth-card {

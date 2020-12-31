@@ -114,7 +114,7 @@ export default {
     font-weight: 600;
     display: flex;
     align-items: center;
-    margin-bottom: 16px;
+    margin-bottom: $space-2;
     color: $primary;
   }
 }

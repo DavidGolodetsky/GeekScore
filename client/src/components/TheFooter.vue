@@ -45,7 +45,7 @@ export default {
   .layout {
     justify-content: space-between;
     flex-wrap: wrap;
-    padding: 8px 0;
+    padding: $space-base 0;
   }
   .container {
     display: flex;

@@ -23,7 +23,6 @@ import { defineComponent, computed } from "@vue/composition-api";
 import TheTitle from "@/components/TheTitle";
 import GamesEditDialog from "@/components/GamesEditDialog";
 import TheCardsList from "@/components/TheCardsList";
-import { Game } from "@/types";
 
 export default defineComponent({
   name: "GamesPage",
@@ -34,8 +33,8 @@ export default defineComponent({
   },
   setup(_, ctx) {
     const store = ctx.root.$store;
-    // TODO: is this type works?
-    const updateGame = (game: Game) => store.dispatch("games/updateGame", game);
+    // TODO: add types
+    const updateGame = (game) => store.dispatch("games/updateGame", game);
 
     const loadGames = () => store.dispatch("games/loadGames");
 
@@ -43,7 +42,7 @@ export default defineComponent({
 
     const games = computed(() => store.state.games.games);
 
-    const toggleFavoriteGame = (game: Game) => updateGame(game);
+    const toggleFavoriteGame = (game: any) => updateGame(game);
 
     (() => games?.value ?? loadGames())();
 
