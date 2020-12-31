@@ -34,7 +34,7 @@ export default {
   name: "TheFooter",
   data () {
     return {
-      copy: ` ${new Date().getFullYear()} — Geek Score`
+      copy: `Geek Score: 2020 - ${new Date().getFullYear()}`
     };
   }
 };
