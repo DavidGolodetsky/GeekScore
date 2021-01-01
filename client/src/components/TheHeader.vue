@@ -90,7 +90,6 @@
 
 <script lang="ts">
 import { defineComponent, ref, computed } from '@vue/composition-api'
-import { useRoute } from 'vue-router'
 
 export default defineComponent({
   name: 'TheHeader',
@@ -98,7 +97,7 @@ export default defineComponent({
   setup(_, ctx) {
     const store = ctx.root.$store
 
-    const route = ctx.root._route
+    const route = ctx.root.$route
 
     const user = computed(() => store.state.user.user)
 
