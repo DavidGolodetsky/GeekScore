@@ -53,13 +53,13 @@
           </nav>
           <v-app-bar-nav-icon
             class="d-sm-none"
-            @click.stop="sideNav = !sideNav"
+            @click.stop="isSideNav = !isSideNav"
           />
         </template>
       </v-container>
     </v-app-bar>
     <v-navigation-drawer
-      v-model="sideNav"
+      v-model="isSideNav"
       app
       right
       dark
@@ -88,47 +88,60 @@
   </div>
 </template>
 
-<script>
-import { mapState, mapActions, mapGetters } from "vuex";
+<script lang="ts">
+import { defineComponent, ref, computed } from '@vue/composition-api'
+import { useRoute } from 'vue-router'
 
-export default {
-  name: "TheHeader",
-  data () {
-    return {
-      sideNav: false
-    };
-  },
-  computed: {
-    ...mapState("user", ["user"]),
-    ...mapGetters(["backTitle"]),
-    navItems () {
-      return [
-        {
-          text: "Games",
-          icon: "dice-multiple",
-          link: "/games"
-        },
-        {
-          text: "Tools",
-          icon: "hammer-screwdriver",
-          link: "/tools"
-        },
-        {
-          text: "Profile",
-          icon: "account-details",
-          link: "/profile"
-        }
-      ];
+export default defineComponent({
+  name: 'TheHeader',
+
+  setup(_, ctx) {
+    const route = ctx.root._route
+
+    const store = ctx.root.$store
+
+    const isSideNav = ref(false)
+
+    const user = computed(() => store.state.user.user)
+
+    const backTitle = computed(() => store.getters['backTitle'])
+
+    const logout = () => store.dispatch('user/logout')
+
+    const onLogout = () => {
+      if (route.fullPath === '/') {
+        isSideNav.value = false
+      }
+      logout()
     }
-  },
-  methods: {
-    ...mapActions("user", ["logout"]),
-    onLogout () {
-      if (this.$route.fullPath === "/") this.sideNav = false;
-      this.logout();
+
+    const navItems = [
+      {
+        text: 'Games',
+        icon: 'dice-multiple',
+        link: '/games'
+      },
+      {
+        text: 'Tools',
+        icon: 'hammer-screwdriver',
+        link: '/tools'
+      },
+      {
+        text: 'Profile',
+        icon: 'account-details',
+        link: '/profile'
+      }
+    ]
+
+    return {
+      isSideNav,
+      backTitle,
+      user,
+      navItems,
+      onLogout
     }
   }
-};
+})
 </script>
 
 <style scoped lang="scss">

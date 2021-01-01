@@ -83,9 +83,10 @@ export default defineComponent({
         duration: 300,
         offset: 0,
         easing: 'easeInOutCubic'
-      },
-      isLoading: computed(() => store.getters.loading)
+      }
     })
+
+    const isLoading = computed(() => store.getters.loading)
 
     const offlineMessage =
       'Geek Score is offline. Some features might be disabled'
@@ -119,6 +120,7 @@ export default defineComponent({
       alertText,
       isAlert,
       onScroll,
+      isLoading,
       ...toRefs(state)
     }
   }

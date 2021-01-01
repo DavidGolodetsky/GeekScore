@@ -47,7 +47,9 @@ export default defineComponent({
 
     const toggleFavoriteGame = (game: any) => updateGame(game)
 
-    ;(() => games?.value ?? loadGames())()
+    const isLoadGames = () => games?.value ?? loadGames()
+
+    isLoadGames()
 
     return {
       gameRoute,
