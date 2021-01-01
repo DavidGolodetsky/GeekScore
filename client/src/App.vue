@@ -4,10 +4,10 @@
     v-scroll="onScroll"
     class="app"
   >
-    <the-header />
+    <TheHeader />
     <v-main>
       <v-container class="app-container">
-        <the-alert
+        <TheAlert
           v-if="isAlert"
           v-bind="{alertType, alertText}"
         />
@@ -39,13 +39,14 @@
         </v-btn>
       </v-container>
     </v-main>
-    <the-footer />
+    <TheFooter />
   </v-app>
 </template>
 
 <script lang="ts">
 import {
   defineComponent,
+  // defineAsyncComponent,
   reactive,
   toRefs,
   watch,
@@ -57,6 +58,8 @@ import TheFooter from '@/components/TheFooter.vue'
 import TheAlert from '@/components/TheAlert.vue'
 // import { VueOfflineMixin } from 'vue-offline';
 import { setupFb } from '@/auth'
+// TODO: load async
+// const TheAlert = defineAsyncComponent(() => import('@/components/TheAlert.vue'))
 
 export default defineComponent({
   name: 'App',
