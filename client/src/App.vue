@@ -50,27 +50,27 @@ import {
   toRefs,
   watch,
   computed,
-  onMounted,
-} from "@vue/composition-api";
-import TheHeader from "@/components/TheHeader.vue";
-import TheFooter from "@/components/TheFooter.vue";
-import TheAlert from "@/components/TheAlert.vue";
+  onMounted
+} from '@vue/composition-api'
+import TheHeader from '@/components/TheHeader.vue'
+import TheFooter from '@/components/TheFooter.vue'
+import TheAlert from '@/components/TheAlert.vue'
 // import { VueOfflineMixin } from 'vue-offline';
-import { setupFb } from "@/auth";
+import { setupFb } from '@/auth'
 
 export default defineComponent({
-  name: "App",
+  name: 'App',
   components: {
     TheHeader,
     TheFooter,
-    TheAlert,
+    TheAlert
   },
   // TODO: composition-api with mixins?
   // mixins: [VueOfflineMixin],
   setup(_, ctx) {
-    const store = ctx.root.$store;
+    const store = ctx.root.$store
 
-    const error = computed(() => store.getters["error"]);
+    const error = computed(() => store.getters['error'])
 
     const state = reactive({
       isGoTopBtn: false,
@@ -79,47 +79,47 @@ export default defineComponent({
       GoTopBtnOtions: {
         duration: 300,
         offset: 0,
-        easing: "easeInOutCubic",
+        easing: 'easeInOutCubic'
       },
-      isLoading: computed(() => store.getters.loading),
-    });
+      isLoading: computed(() => store.getters.loading)
+    })
 
     const offlineMessage =
-      "Geek Score is offline. Some features might be disabled";
+      'Geek Score is offline. Some features might be disabled'
 
-    const alertType = computed(() => (state.isOffline ? "warning" : "error"));
+    const alertType = computed(() => (state.isOffline ? 'warning' : 'error'))
     const alertText = computed(() =>
       state.isOffline ? offlineMessage : error.value.message
-    );
-    const isAlert = computed(() => state.isOffline || error.value);
+    )
+    const isAlert = computed(() => state.isOffline || error.value)
 
     watch(isAlert, (val) => {
       if (val) {
-        setTimeout(() => setError(), 10000);
+        setTimeout(() => setError(), 10000)
       }
-    });
+    })
 
-    onMounted(() => setupFb());
+    onMounted(() => setupFb())
 
     const onScroll = () => {
       if (window.pageYOffset > 500) {
-        state.isGoTopBtn = true;
+        state.isGoTopBtn = true
       } else if (state.isGoTopBtn && window.pageYOffset < 500) {
-        state.isGoTopBtn = false;
+        state.isGoTopBtn = false
       }
-    };
+    }
 
-    const setError = () => store.dispatch("setError");
+    const setError = () => store.dispatch('setError')
 
     return {
       alertType,
       alertText,
       isAlert,
       onScroll,
-      ...toRefs(state),
-    };
-  },
-});
+      ...toRefs(state)
+    }
+  }
+})
 </script>
 
 <style scoped lang="scss">
