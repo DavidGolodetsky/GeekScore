@@ -96,15 +96,15 @@ export default defineComponent({
   name: 'TheHeader',
 
   setup(_, ctx) {
-    const route = ctx.root._route
-
     const store = ctx.root.$store
 
-    const isSideNav = ref(false)
+    const route = ctx.root._route
 
     const user = computed(() => store.state.user.user)
 
     const backTitle = computed(() => store.getters['backTitle'])
+
+    const isSideNav = ref(false)
 
     const logout = () => store.dispatch('user/logout')
 

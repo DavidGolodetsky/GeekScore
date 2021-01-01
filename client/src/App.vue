@@ -73,7 +73,7 @@ export default defineComponent({
   setup(_, ctx) {
     const store = ctx.root.$store
 
-    const error = computed(() => store.getters['error'])
+    onMounted(() => setupFb())
 
     const state = reactive({
       isGoTopBtn: false,
@@ -86,16 +86,13 @@ export default defineComponent({
       }
     })
 
-    const isLoading = computed(() => store.getters.loading)
+    const isLoading = computed(() => store.getters['loading'])
 
-    const offlineMessage =
-      'Geek Score is offline. Some features might be disabled'
+    const error = computed(() => store.getters['error'])
 
-    const alertType = computed(() => (state.isOffline ? 'warning' : 'error'))
-    const alertText = computed(() =>
-      state.isOffline ? offlineMessage : error.value.message
-    )
     const isAlert = computed(() => state.isOffline || error.value)
+
+    const setError = () => store.dispatch('setError')
 
     watch(isAlert, (val) => {
       if (val) {
@@ -103,7 +100,14 @@ export default defineComponent({
       }
     })
 
-    onMounted(() => setupFb())
+    const offlineMessage =
+      'Geek Score is offline. Some features might be disabled'
+
+    const alertType = computed(() => (state.isOffline ? 'warning' : 'error'))
+
+    const alertText = computed(() =>
+      state.isOffline ? offlineMessage : error.value.message
+    )
 
     const onScroll = () => {
       if (window.pageYOffset > 500) {
@@ -112,8 +116,6 @@ export default defineComponent({
         state.isGoTopBtn = false
       }
     }
-
-    const setError = () => store.dispatch('setError')
 
     return {
       alertType,

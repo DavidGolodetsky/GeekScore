@@ -33,23 +33,24 @@ export default defineComponent({
   },
   setup(_, ctx) {
     const store = ctx.root.$store
-    // TODO: add types
-    const updateGame = (game: any) => store.dispatch('games/updateGame', game)
+
+    const games = computed(() => store.state.games.games)
+
+    const isLoadGames = () => games?.value ?? loadGames()
 
     const loadGames = () => store.dispatch('games/loadGames')
+
+    isLoadGames()
+
+    // TODO: add types
+    const updateGame = (game: any) => store.dispatch('games/updateGame', game)
 
     const gameRoute = {
       name: 'game',
       params: { gameId: '' }
     }
 
-    const games = computed(() => store.state.games.games)
-
     const toggleFavoriteGame = (game: any) => updateGame(game)
-
-    const isLoadGames = () => games?.value ?? loadGames()
-
-    isLoadGames()
 
     return {
       gameRoute,
