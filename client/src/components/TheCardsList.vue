@@ -7,7 +7,7 @@
         cols="12"
       >
         <v-text-field
-          v-if="items.length > 3"
+          v-if="cardItems.length > 3"
           v-model="searchedValue"
           clearable
           append-icon="mdi-magnify"
@@ -35,6 +35,8 @@
           <TheCard
             :card-info="card"
             :card-route="cardRoute"
+            :is-favorite="cardItems.length > 1"
+            @favorite="$emit('favorite', $event)"
           />
         </v-lazy>
       </v-col>
@@ -43,7 +45,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, computed } from 'vue'
+import { defineComponent, ref, computed } from '@vue/composition-api'
 import TheCard from '@/components/TheCard.vue'
 
 export default defineComponent({
@@ -61,21 +63,21 @@ export default defineComponent({
       required: true
     }
   },
-  setup(props, ctx) {
+  setup(props) {
     const searchedValue = ref('')
 
     const getCardsOrder = (cards: any) => {
       const reversed = cards.slice().reverse()
-      return reversed.sort((x, y) => y.favorite - x.favorite)
+      return reversed.sort((x: any, y: any) => y.favorite - x.favorite)
     }
 
     const filteredCards = computed(() => {
-      if (searchedValue) {
-        const filtered = props.cardItems.filter((card) =>
-          searchedValue
+      if (searchedValue.value) {
+        const filtered = props.cardItems.filter((card: any) =>
+          searchedValue.value
             .toLowerCase()
             .split(' ')
-            .every((value) => card.name.toLowerCase().includes(value))
+            .every((value: string) => card.name.toLowerCase().includes(value))
         )
         return getCardsOrder(filtered)
       } else {

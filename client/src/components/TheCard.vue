@@ -6,7 +6,7 @@
     class="mx-auto app-card"
     :aria-describedby="cardInfo.name"
   >
-    <router-link :to="setRoute(cardInfo._id)">
+    <router-link :to="formattedRoute">
       <div class="title-wrap">
         <v-card-title class="row_between">
           <span class="card-list-name">{{ cardInfo.name }}</span>
@@ -64,18 +64,18 @@
                 <v-icon dark>mdi-{{ link.icon }}</v-icon>
               </v-btn>
             </template>
-            <!-- <v-btn
-              v-if="items.length > 1"
+            <v-btn
+              v-if="isFavorite"
               class="px-0 mx-1"
               small
               text
               aria-label="Favorite"
               fab
               :color="cardInfo.favorite ? 'error' : '#fff'"
-              @click.stop.prevent="favorite(item)"
+              @click.stop.prevent="toggleFavorite"
             >
               <v-icon dark>mdi-heart</v-icon>
-            </v-btn> -->
+            </v-btn>
           </v-card-title>
         </div>
         <template #placeholder>
@@ -96,7 +96,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, computed } from 'vue'
+import { defineComponent, computed } from '@vue/composition-api'
 
 export default defineComponent({
   name: 'TheCard',
@@ -108,6 +108,9 @@ export default defineComponent({
     cardInfo: {
       type: Object,
       required: true
+    },
+    isFavorite: {
+      type: Boolean
     }
   },
   setup(props, ctx) {
@@ -117,7 +120,7 @@ export default defineComponent({
       let linkInfo = null
       if (bggURL) {
         linkInfo = {
-          href: card.bggURL,
+          href: bggURL,
           name: 'Board game geek',
           icon: 'cards'
         }
@@ -125,7 +128,7 @@ export default defineComponent({
       }
       if (rulesURL) {
         linkInfo = {
-          href: card.rulesURL,
+          href: rulesURL,
           name: 'Rules',
           icon: 'book-open-variant',
           download: true
@@ -134,7 +137,7 @@ export default defineComponent({
       }
       if (melodiceURL) {
         linkInfo = {
-          href: card.melodiceURL,
+          href: melodiceURL,
           name: 'Melodice',
           icon: 'music'
         }
@@ -154,27 +157,28 @@ export default defineComponent({
       }
     }
 
-    return {
-      additionalLinks,
-      getImagePath
-    }
-  },
-
-  methods: {
-    setRoute(id) {
-      let route = { ...this.route }
+    const formattedRoute = computed(() => {
+      const route = { ...props.cardRoute }
       route.params = {
-        [Object.keys(this.route.params)[0]]: id
+        [Object.keys(props.cardRoute.params)[0]]: props.cardInfo._id
       }
       return route
-    },
-    favorite(item) {
-      const favorite = !item.favorite
+    })
+
+    const toggleFavorite = () => {
+      const favorite = !props.cardInfo.favorite
       const data = {
         favorite,
-        _id: item._id
+        _id: props.cardInfo._id
       }
-      this.$emit('favorite', data)
+      ctx.emit('favorite', data)
+    }
+
+    return {
+      additionalLinks,
+      formattedRoute,
+      getImagePath,
+      toggleFavorite
     }
   }
 })
