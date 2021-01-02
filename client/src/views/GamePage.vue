@@ -19,8 +19,8 @@
     </div>
     <TheCardsList
       v-if="gameTeams"
-      :items="gameTeams"
-      :route="teamRoute"
+      :card-items="gameTeams"
+      :card-route="teamRoute"
       @favorite="toggleFavoriteTeam"
     >
       <template #action="{ item }">

@@ -7,8 +7,8 @@
     />
     <TheCardsList
       v-if="games"
-      :route="gameRoute"
-      :items="games"
+      :card-route="gameRoute"
+      :card-items="games"
       @favorite="toggleFavoriteGame"
     >
       <template #action="{ item }">
