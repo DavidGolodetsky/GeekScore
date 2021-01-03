@@ -1,115 +1,116 @@
-<script>
-import GamesAddDialog from "@/components/GamesAddDialog";
-import TeamsAddDialog from "@/components/TeamsAddDialog";
-import RoundsAddDialog from "@/components/RoundsAddDialog";
-import { VIcon } from "vuetify/lib";
+<script lang="ts">
+import { defineComponent } from '@vue/composition-api'
+import GamesAddDialog from '@/components/GamesAddDialog'
+import TeamsAddDialog from '@/components/TeamsAddDialog'
+import RoundsAddDialog from '@/components/RoundsAddDialog'
+import { VIcon } from 'vuetify/lib'
 
-export default {
-  name: "TheTitle",
+export default defineComponent({
+  name: 'TheTitle',
   components: {
     GamesAddDialog,
     TeamsAddDialog,
-    RoundsAddDialog,
+    RoundsAddDialog
   },
   props: {
     title: {
       type: String,
-      required: true,
+      required: true
     },
     component: {
       type: String,
-      default: "",
+      default: ''
     },
     icon: {
       type: String,
-      default: "",
+      default: ''
     },
     props: {
       type: Object,
-      default () {
-        return {};
-      },
-    },
+      default() {
+        return {}
+      }
+    }
   },
-  render (h) {
-    let template;
-    if (this.component !== "") {
+  render(h) {
+    let template
+    if (this.component !== '') {
       template = h(
-        "div",
+        'div',
         {
-          class: "row_between mb-6",
+          class: 'row_between mb-6'
         },
         [
           h(
-            "div",
+            'div',
             {
-              class: "d-flex",
+              class: 'd-flex'
             },
             [
               h(
                 VIcon,
                 {
-                  class: "mx-2",
+                  class: 'mx-2',
                   props: {
-                    color: "secondary",
-                  },
+                    color: 'secondary'
+                  }
                 },
                 `mdi-${this.icon}`
               ),
               h(
-                "h1",
+                'h1',
                 {
-                  class: "app-headline",
+                  class: 'app-headline'
                 },
                 this.title
-              ),
+              )
             ]
           ),
           h(this.component, {
-            class: "d-flex justify-end my-2",
+            class: 'd-flex justify-end my-2',
             props: {
-              ...this.props,
-            },
-          }),
+              ...this.props
+            }
+          })
         ]
-      );
+      )
     } else {
       template = h(
-        "div",
+        'div',
         {
-          class: "row_between mb-6 pt-5",
+          class: 'row_between mb-6 pt-5'
         },
         [
           h(
-            "div",
+            'div',
             {
-              class: "d-flex",
+              class: 'd-flex'
             },
             [
               h(
                 VIcon,
                 {
-                  class: "mx-2",
+                  class: 'mx-2',
                   props: {
-                    color: "secondary",
-                  },
+                    color: 'secondary'
+                  }
                 },
                 `mdi-${this.icon}`
               ),
               h(
-                "h1",
+                'h1',
                 {
-                  class: "app-headline",
+                  class: 'app-headline'
                 },
                 this.title
-              ),
+              )
             ]
-          ),
+          )
         ]
-      );
+      )
     }
 
-    return template;
-  },
-};
+    return template
+  }
+})
 </script>

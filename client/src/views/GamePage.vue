@@ -69,8 +69,8 @@ export default defineComponent({
     const loadTeams = () => store.dispatch('teams/loadTeams')
 
     const loadData = () => {
-      allTeams?.value ?? loadGames()
-      allGames?.value ?? loadTeams()
+      allTeams?.value ?? loadTeams()
+      allGames?.value ?? loadGames()
       loadWinRate()
     }
 
@@ -107,7 +107,7 @@ export default defineComponent({
 
     watchEffect(() => {
       if (allGames.value) {
-        const { gameName } = getGame()
+        const { name: gameName } = getGame()
         setBackTitle(gameName)
       }
     })
