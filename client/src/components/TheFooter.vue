@@ -35,7 +35,8 @@ import { defineComponent } from '@vue/composition-api'
 export default defineComponent({
   name: 'TheFooter',
   setup() {
-    const copyright = `2020 - ${new Date().getFullYear()}`
+    const currentYear = new Date().getFullYear()
+    const copyright = `2020 - ${currentYear}`
 
     return {
       copyright

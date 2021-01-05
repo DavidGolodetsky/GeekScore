@@ -36,14 +36,16 @@ export default defineComponent({
       nameRules: [...standardField, requiredField]
     })
 
-    const createGame = (game: any) => store.dispatch('games/createGame', game)
-
-    const onSubmit = () => {
+    const createGame = () => {
       const game = {
         coop: state.coop,
         name: state.name
       }
-      createGame(game)
+      store.dispatch('games/createGame', game)
+    }
+
+    const onSubmit = () => {
+      createGame()
       state.name = ''
     }
 
