@@ -117,9 +117,8 @@ export default defineComponent({
     const additionalLinks = computed(() => {
       const links = []
       const { bggURL, rulesURL, melodiceURL } = props.cardInfo
-      let linkInfo = null
       if (bggURL) {
-        linkInfo = {
+        const linkInfo = {
           href: bggURL,
           name: 'Board game geek',
           icon: 'cards'
@@ -127,7 +126,7 @@ export default defineComponent({
         links.push(linkInfo)
       }
       if (rulesURL) {
-        linkInfo = {
+        const linkInfo = {
           href: rulesURL,
           name: 'Rules',
           icon: 'book-open-variant',
@@ -136,7 +135,7 @@ export default defineComponent({
         links.push(linkInfo)
       }
       if (melodiceURL) {
-        linkInfo = {
+        const linkInfo = {
           href: melodiceURL,
           name: 'Melodice',
           icon: 'music'

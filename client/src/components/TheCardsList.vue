@@ -71,14 +71,18 @@ export default defineComponent({
       return reversed.sort((x: any, y: any) => y.favorite - x.favorite)
     }
 
+    const filterCards = () => {
+      props.cardItems.filter((card: any) =>
+        searchedValue.value
+          .toLowerCase()
+          .split(' ')
+          .every((value: string) => card.name.toLowerCase().includes(value))
+      )
+    }
+
     const filteredCards = computed(() => {
       if (searchedValue.value) {
-        const filtered = props.cardItems.filter((card: any) =>
-          searchedValue.value
-            .toLowerCase()
-            .split(' ')
-            .every((value: string) => card.name.toLowerCase().includes(value))
-        )
+        const filtered = filterCards()
         return getCardsOrder(filtered)
       } else {
         // Reset filtering
