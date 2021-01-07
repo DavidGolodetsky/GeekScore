@@ -32,7 +32,7 @@
 </template>
 
 <script>
-import { standardField, requiredField, linkField } from "@/utils/validations";
+import { standardField, requiredField, linkField } from "@/use/validations";
 import { mapActions } from "vuex";
 
 export default {

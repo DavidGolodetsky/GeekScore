@@ -9,7 +9,7 @@
       v-if="games"
       :route="gameRoute"
       :items="games"
-      @favorite="toggleFavorite"
+      @favorite="toggleFavoriteGame"
     >
       <template #action="{ item }">
         <games-edit-dialog :game="item" />
@@ -18,40 +18,42 @@
   </section>
 </template>
 
-<script>
-import TheTitle from '@/components/TheTitle';
-import GamesEditDialog from '@/components/GamesEditDialog';
-import TheCardsList from '@/components/TheCardsList';
-import { mapState, mapActions } from 'vuex';
-import { VueOfflineMixin } from 'vue-offline';
+<script lang="ts">
+import { defineComponent, computed } from "@vue/composition-api";
+import TheTitle from "@/components/TheTitle";
+import GamesEditDialog from "@/components/GamesEditDialog";
+import TheCardsList from "@/components/TheCardsList";
 
-export default {
-  name: 'GamesPage',
+export default defineComponent({
+  name: "GamesPage",
   components: {
     TheTitle,
     GamesEditDialog,
     TheCardsList,
   },
-  mixins: [VueOfflineMixin],
-  data () {
+  setup(_, ctx) {
+    const store = ctx.root.$store;
+    // TODO: add types
+    const updateGame = (game: any) => store.dispatch("games/updateGame", game);
+
+    const loadGames = () => store.dispatch("games/loadGames");
+
+    const gameRoute = {
+      name: "game",
+      params: { gameId: "" },
+    };
+
+    const games = computed(() => store.state.games.games);
+
+    const toggleFavoriteGame = (game: any) => updateGame(game);
+
+    (() => games?.value ?? loadGames())();
+
     return {
-      gameRoute: { name: 'game', params: { gameId: '' } },
+      gameRoute,
+      games,
+      toggleFavoriteGame,
     };
   },
-  computed: {
-    ...mapState('games', ['games']),
-  },
-  created () {
-    this.loadData()
-  },
-  methods: {
-    ...mapActions('games', ['loadGames', 'updateGame']),
-    toggleFavorite (game) {
-      this.updateGame(game);
-    },
-    loadData () {
-      this.games ?? this.loadGames();
-    },
-  },
-};
+});
 </script>

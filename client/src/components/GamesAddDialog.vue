@@ -21,7 +21,7 @@
 </template>
 
 <script>
-import { standardField, requiredField } from "@/utils/validations";
+import { standardField, requiredField } from "@/use/validations";
 import { mapActions } from "vuex";
 
 export default {

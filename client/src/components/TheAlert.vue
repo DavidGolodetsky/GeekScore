@@ -16,10 +16,10 @@
   </section>
 </template>
 
-<script>
-import { mapActions } from 'vuex';
-
-export default {
+<script lang="ts">
+import { defineComponent, onMounted } from "@vue/composition-api";
+import { vibrate } from "@/use/common";
+export default defineComponent({
   name: "TheAlert",
   props: {
     alertType: {
@@ -31,18 +31,23 @@ export default {
       required: true,
     },
   },
-  mounted () {
-    window.navigator.vibrate(300);
-  },
-  methods: {
-    ...mapActions(['setError']),
+  setup(_, ctx) {
+    const store = ctx.root.$store;
 
-    onClose () {
-      this.setError();
-      this.$emit('dismissed');
-    },
+    onMounted(() => vibrate());
+
+    const setError = () => store.dispatch("setError");
+
+    const onClose = () => {
+      setError();
+      ctx.emit("dismissed");
+    };
+
+    return {
+      onClose,
+    };
   },
-};
+});
 </script>
 
 <style lang="scss">

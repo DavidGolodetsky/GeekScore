@@ -11,7 +11,7 @@
         <span
           class="mr-6"
           data-test-copy
-        >&copy; {{ copy }}</span>
+        >&copy; {{ copyrights }}</span>
         <a
           class="link"
           href="https://github.com/DavidGolodetsky/GeekScore-2"
@@ -29,15 +29,18 @@
   </v-footer>
 </template>
 
-<script>
-export default {
+<script lang="ts">
+import { defineComponent } from "@vue/composition-api";
+
+export default defineComponent({
   name: "TheFooter",
-  data () {
+  setup() {
+    const copyrights = `2020 - ${new Date().getFullYear()}`;
     return {
-      copy: ` ${new Date().getFullYear()} — Geek Score`
+      copyrights,
     };
-  }
-};
+  },
+});
 </script>
 
 <style scoped lang="scss">
@@ -45,7 +48,7 @@ export default {
   .layout {
     justify-content: space-between;
     flex-wrap: wrap;
-    padding: 8px 0;
+    padding: $space-base 0;
   }
   .container {
     display: flex;

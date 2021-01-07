@@ -32,9 +32,13 @@ export default {
         const user = await firebase
           .auth()
           .createUserWithEmailAndPassword(payload.email, payload.password);
-        await user.user.updateProfile({ displayName: payload.username });
-        const userPayload = { id: user.user.uid, username: payload.username };
+        await user.user.updateProfile({ username: payload.username });
+        const userPayload = {
+          id: user.user.uid,
+          username: payload.username,
+        };
         await axios.post("/api/users", userPayload);
+        router.push({ name: "games" });
         commit("SET_USER", userPayload);
       } catch (e) {
         commit("ERROR", e, { root: true });
@@ -49,11 +53,11 @@ export default {
         const user = await firebase
           .auth()
           .signInWithEmailAndPassword(payload.email, payload.password);
-        const userInfo = await axios.get(`/api/users/${user.user.uid}`);
         const userPayload = {
-          id: userInfo.data[0].id,
-          username: userInfo.data[0].username,
+          id: user.user.uid,
+          username: payload.username,
         };
+        router.push({ name: "games" });
         await commit("SET_USER", userPayload);
       } catch (e) {
         commit("ERROR", e, { root: true });
@@ -63,9 +67,13 @@ export default {
     },
     autoSignIn({ commit }, payload) {
       commit("LOADING", true, { root: true });
-      commit("SET_USER", { id: payload.uid, username: payload.displayName });
+      const userPayload = {
+        id: payload.uid,
+        username: payload.username,
+      };
+      commit("SET_USER", userPayload);
       if (router.currentRoute.path === "/") {
-        router.push("/games");
+        router.push({ name: "games" });
       }
       commit("LOADING", false, { root: true });
     },

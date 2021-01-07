@@ -101,7 +101,7 @@
 <script>
 import { mapActions } from 'vuex';
 import { fbStart } from '@/auth';
-import { emailField, standardField, requiredField, shortPassword } from '@/utils/validations';
+import { emailField, standardField, requiredField, shortPassword } from '@/use/validations';
 
 export default {
   name: 'TheLoginForm',
