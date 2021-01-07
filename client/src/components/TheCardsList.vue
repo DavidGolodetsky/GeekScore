@@ -72,7 +72,7 @@ export default defineComponent({
     }
 
     const filterCards = () => {
-      props.cardItems.filter((card: any) =>
+      return props.cardItems.filter((card: any) =>
         searchedValue.value
           .toLowerCase()
           .split(' ')
