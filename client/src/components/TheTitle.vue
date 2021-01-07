@@ -1,8 +1,8 @@
 <script lang="ts">
 import { defineComponent } from '@vue/composition-api'
-import GamesAddDialog from '@/components/GamesAddDialog'
-import TeamsAddDialog from '@/components/TeamsAddDialog'
-import RoundsAddDialog from '@/components/RoundsAddDialog'
+import GamesAddDialog from '@/components/GamesAddDialog.vue'
+import TeamsAddDialog from '@/components/TeamsAddDialog.vue'
+import RoundsAddDialog from '@/components/RoundsAddDialog.vue'
 import { VIcon } from 'vuetify/lib'
 
 export default defineComponent({

@@ -37,10 +37,10 @@ import {
   watchEffect,
   onBeforeUnmount
 } from '@vue/composition-api'
-import TheTitle from '@/components/TheTitle'
-import TheCardsList from '@/components/TheCardsList'
+import TheTitle from '@/components/TheTitle.vue'
+import TheCardsList from '@/components/TheCardsList.vue'
 // TODO:load aync
-import TeamsEditDialog from '@/components/TeamsEditDialog'
+import TeamsEditDialog from '@/components/TeamsEditDialog.vue'
 
 export default defineComponent({
   name: 'GamePage',

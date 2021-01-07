@@ -20,9 +20,10 @@
 
 <script lang="ts">
 import { defineComponent, computed } from '@vue/composition-api'
-import TheTitle from '@/components/TheTitle'
-import GamesEditDialog from '@/components/GamesEditDialog'
-import TheCardsList from '@/components/TheCardsList'
+import TheTitle from '@/components/TheTitle.vue'
+import GamesEditDialog from '@/components/GamesEditDialog.vue'
+import TheCardsList from '@/components/TheCardsList.vue'
+// import { Game } from '@/types'
 
 export default defineComponent({
   name: 'GamesPage',

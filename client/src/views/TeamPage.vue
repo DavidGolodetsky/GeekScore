@@ -42,10 +42,10 @@
 </template>
 
 <script>
-import TheTitle from '@/components/TheTitle';
-import RoundsTable from '@/components/RoundsTable';
-import TheBarsChart from '@/components/TheBarsChart';
-import TheTendenciesChart from '@/components/TheTendenciesChart';
+import TheTitle from '@/components/TheTitle.vue';
+import RoundsTable from '@/components/RoundsTable.vue';
+import TheBarsChart from '@/components/TheBarsChart.vue';
+import TheTendenciesChart from '@/components/TheTendenciesChart.vue';
 import rounds from '@/store/modules/rounds';
 import { mapActions, mapGetters, mapState } from 'vuex';
 

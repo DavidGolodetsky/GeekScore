@@ -3,7 +3,7 @@
 </template>
 
 <script>
-import TheLoginForm from "@/components/TheLoginForm";
+import TheLoginForm from "@/components/TheLoginForm.vue";
 
 export default {
   name: "SignInPage",
