@@ -34,18 +34,14 @@
 import {
   defineComponent,
   computed,
-  watchEffect,
-  onMounted,
+  watch,
   onUnmounted,
-  ref,
-  onBeforeMount,
 } from "@vue/composition-api";
 import TheTitle from "@/components/TheTitle.vue";
 import RoundsTable from "@/components/RoundsTable.vue";
 import TheBarsChart from "@/components/TheBarsChart.vue";
 import TheTendenciesChart from "@/components/TheTendenciesChart.vue";
 import roundsModule from "@/store/modules/rounds";
-import { mapActions } from "vuex";
 
 export default defineComponent({
   name: "TeamPage",
@@ -64,6 +60,8 @@ export default defineComponent({
   setup(props, ctx) {
     const store = ctx.root.$store;
     const route = ctx.root.$route;
+
+    loadData(store);
 
     //DATA
     const currentTab = "tab-0";
@@ -89,7 +87,7 @@ export default defineComponent({
     //COMPUTED
     const games = computed(() => store.state.games);
     const getGame = computed(() => store.getters["games/getGame"](gameId));
-    const game = computed(() => (games ? getGame : null));
+    const game = computed(() => (games ? getGame.value : null));
 
     const teams = computed(() => store.state.teams);
     const getTeams = computed(() =>
@@ -105,40 +103,29 @@ export default defineComponent({
       if (rounds) rounds.forEach((round) => (round[round.winner] = "VICTORY"));
       return rounds;
     });
-    // rounds() {
-    //   const query = { teamId: this.teamId, gameId: this.gameId };
-    //   const rounds = this.getRounds(query);
-    //   if (rounds) rounds.forEach((round) => (round[round.winner] = "VICTORY"));
-    //   return rounds;
-    // },
 
     const showTable = computed(() => gameTeam && rounds.value?.length);
 
-    //WATCH
-    // watchEffect(() => {});
-
     //LIFECYCLE HOOKS
-    // onUnmounted(() => setBackTitle());
+    onUnmounted(() => store.dispatch("setBackTitle"));
 
-    //METHODS
-    // const setBackTitle = store.dispatch("setBackTitle");
-    // const loadGames = store.dispatch("games/loadGames");
-    // const loadTeams = store.dispatch("teams/loadTeams");
-    // const loadRounds = store.dispatch("rounds/loadRounds");
+    //WATCH
+    watch(
+      teams,
+      (val) => {
+        if (val && game.value !== undefined) {
+          store.dispatch(
+            "setBackTitle",
+            `${team.value.name}: ${game.value.name}`
+          );
+        }
+      },
+      {
+        immediate: true,
+        deep: true,
+      }
+    );
 
-    // const loadData = () => {
-    //   store.dispatch("games/loadGames");
-    //   store.dispatch("teams/loadTeams");
-    //   loadRoundsData();
-    // };
-
-    // const loadRoundsData = () => {
-    //   const isRounds = store.hasModule("rounds");
-    //   isRounds || store.registerModule("rounds", roundsModule);
-    //   store.dispatch("rounds/loadRounds");
-    // };
-
-    loadData(store);
     return {
       currentTab,
       gameId,
@@ -148,77 +135,17 @@ export default defineComponent({
       gameTeam,
       rounds,
       showTable,
-      loadRoundsData,
     };
-  },
-  computed: {
-    // ...mapState("teams", ["teams"]),
-    // ...mapState("games", ["games"]),
-    // ...mapGetters("teams", ["getTeam"]),
-    // ...mapGetters("games", ["getGame"]),
-    // ...mapGetters("rounds", ["getRounds"]),
-    // game() {
-    //   return this.games ? this.getGame(this.gameId) : null;
-    // },
-    // team() {
-    //   return this.teams ? this.getTeam(this.teamId) : null;
-    // },
-    // gameTeam() {
-    //   return this.game && this.team;
-    // },
-    // rounds() {
-    //   const query = { teamId: this.teamId, gameId: this.gameId };
-    //   const rounds = this.getRounds(query);
-    //   if (rounds) rounds.forEach((round) => (round[round.winner] = "VICTORY"));
-    //   return rounds;
-    // },
-    // showTable() {
-    //   return this.gameTeam && this.rounds?.length;
-    // },
-  },
-  watch: {
-    teams: {
-      handler(val) {
-        if (val) {
-          this.setBackTitle(`${this.team.name}: ${this.game.name}`);
-        }
-      },
-      immediate: true,
-    },
-  },
-  // created() {
-  //   this.loadData();
-  // },
-  // beforeDestroy() {
-  //   this.setBackTitle();
-  // },
-  methods: {
-    ...mapActions(["setBackTitle"]),
-    // ...mapActions("games", ["loadGames"]),
-    // ...mapActions("teams", ["loadTeams"]),
-    // ...mapActions("rounds", ["loadRounds"]),
-    // loadData() {
-    //   console.log("1");
-    //   this.games ?? this.loadGames();
-    //   this.teams ?? this.loadTeams();
-    //   this.loadRoundsData();
-    // },
-    // loadRoundsData() {
-    //   const isRounds = this.$store.hasModule("rounds");
-    //   isRounds || this.$store.registerModule("rounds", rounds);
-    //   this.loadRounds();
-    // },
   },
 });
 
-const loadRoundsData = (store) => {
+const loadRoundsData = (store: Store<any>) => {
   const isRounds = store.hasModule("rounds");
   isRounds || store.registerModule("rounds", roundsModule);
   store.dispatch("rounds/loadRounds");
 };
 
-const loadData = (store) => {
-  console.log(store);
+const loadData = (store: Store<any>) => {
   store.dispatch("games/loadGames");
   store.dispatch("teams/loadTeams");
   loadRoundsData(store);
