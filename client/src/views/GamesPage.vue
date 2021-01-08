@@ -23,7 +23,7 @@ import { defineComponent, computed } from '@vue/composition-api'
 import TheTitle from '@/components/TheTitle.vue'
 import GamesEditDialog from '@/components/GamesEditDialog.vue'
 import TheCardsList from '@/components/TheCardsList.vue'
-// import { Game } from '@/types'
+import { Game } from '@/types'
 
 export default defineComponent({
   name: 'GamesPage',
@@ -44,14 +44,14 @@ export default defineComponent({
     isLoadGames()
 
     // TODO: add types
-    const updateGame = (game: any) => store.dispatch('games/updateGame', game)
+    const updateGame = (game: Game) => store.dispatch('games/updateGame', game)
 
     const gameRoute = {
       name: 'game',
       params: { gameId: '' }
     }
 
-    const toggleFavoriteGame = (game: any) => updateGame(game)
+    const toggleFavoriteGame = (game: Game) => updateGame(game)
 
     return {
       gameRoute,
