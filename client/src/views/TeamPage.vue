@@ -36,12 +36,15 @@ import {
   computed,
   watch,
   onUnmounted,
+  ComputedRef,
 } from "@vue/composition-api";
 import TheTitle from "@/components/TheTitle.vue";
 import RoundsTable from "@/components/RoundsTable.vue";
 import TheBarsChart from "@/components/TheBarsChart.vue";
 import TheTendenciesChart from "@/components/TheTendenciesChart.vue";
 import roundsModule from "@/store/modules/rounds";
+import { Game, Round, Team } from "@/types";
+import { Store } from "vuex";
 
 export default defineComponent({
   name: "TeamPage",
@@ -85,22 +88,31 @@ export default defineComponent({
     ];
 
     //COMPUTED
-    const games = computed(() => store.state.games);
-    const getGame = computed(() => store.getters["games/getGame"](gameId));
-    const game = computed(() => (games ? getGame.value : null));
+    const games: ComputedRef<Game[]> = computed(() => store.state.games);
+    const getGame: ComputedRef<Game> = computed(() =>
+      store.getters["games/getGame"](gameId)
+    );
+    const game: ComputedRef<Game | null> = computed(() =>
+      games ? getGame.value : null
+    );
 
-    const teams = computed(() => store.state.teams);
-    const getTeams = computed(() =>
+    const teams: ComputedRef<Team[]> = computed(() => store.state.teams);
+    const getTeams: ComputedRef<Team> = computed(() =>
       store.getters["teams/getTeam"](props.teamId)
     );
-    const team = computed(() => (teams ? getTeams.value : null));
+    const team: ComputedRef<Team | null> = computed(() =>
+      teams ? getTeams.value : null
+    );
 
     const gameTeam = computed(() => game && team);
 
-    const rounds = computed(() => {
+    const rounds: ComputedRef<Round[]> = computed(() => {
       const query = { teamId: props.teamId, gameId: gameId };
-      const rounds = store.getters["rounds/getRounds"](query);
-      if (rounds) rounds.forEach((round) => (round[round.winner] = "VICTORY"));
+      const rounds: Round[] = store.getters["rounds/getRounds"](query);
+      if (rounds) {
+        rounds.forEach((round) => (round[round.winner] = "VICTORY"));
+      }
+
       return rounds;
     });
 
@@ -113,7 +125,7 @@ export default defineComponent({
     watch(
       teams,
       (val) => {
-        if (val && game.value !== undefined) {
+        if (val && !!game.value && !!team.value) {
           store.dispatch(
             "setBackTitle",
             `${team.value.name}: ${game.value.name}`
