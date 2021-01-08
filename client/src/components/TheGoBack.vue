@@ -1,23 +1,25 @@
-<script>
-import { VIcon } from "vuetify/lib";
+<script lang="ts">
+import { defineComponent } from '@vue/composition-api'
 
-export default {
-  name: "TheGoBack",
+import { VIcon } from 'vuetify/lib'
+
+export default defineComponent({
+  name: 'TheGoBack',
   functional: true,
   props: {
     title: {
       type: String,
-      default: "Back"
+      default: 'Back'
     }
   },
   render(h, ctx) {
-    const title = ctx.props.title;
-    const media = ctx.parent.$vuetify.breakpoint.xsOnly;
-    const router = ctx.parent.$router;
+    const title = ctx.props.title
+    const media = ctx.parent.$vuetify.breakpoint.xsOnly
+    const router = ctx.parent.$router
     return h(
-      "div",
+      'div',
       {
-        class: "d-flex align-center go-back",
+        class: 'd-flex align-center go-back',
         on: {
           click: () => router.go(-1)
         }
@@ -26,27 +28,27 @@ export default {
         h(
           VIcon,
           {
-            class: "mr-2",
+            class: 'mr-2',
             props: {
-              color: "secondary",
+              color: 'secondary',
               dark: true
             }
           },
-          "mdi-arrow-left"
+          'mdi-arrow-left'
         ),
         title
           ? h(
-              "span",
+              'span',
               {
-                class: ["header-title", { truncate: media }]
+                class: ['header-title', { truncate: media }]
               },
               title
             )
-          : ""
+          : ''
       ]
-    );
+    )
   }
-};
+})
 </script>
 
 <style scoped lang="scss">

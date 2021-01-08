@@ -19,9 +19,9 @@
 </template>
 
 <script>
-import TheTitle from "@/components/TheTitle";
-import ToolsDiceDialog from "@/components/ToolsDiceDialog";
-import ToolsTimerDialog from "@/components/ToolsTimerDialog";
+import TheTitle from "@/components/TheTitle.vue";
+import ToolsDiceDialog from "@/components/ToolsDiceDialog.vue";
+import ToolsTimerDialog from "@/components/ToolsTimerDialog.vue";
 // import ToolsCalcDialog from "@/components/ToolsCalcDialog";
 
 export default {

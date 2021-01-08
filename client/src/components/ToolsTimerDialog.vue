@@ -73,7 +73,7 @@
 </template>
 
 <script>
-import ToolsClockFields from "@/components/ToolsClockFields";
+import ToolsClockFields from "@/components/ToolsClockFields.vue";
 
 export default {
   name: "ToolsTimerDialog",

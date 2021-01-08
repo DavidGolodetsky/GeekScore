@@ -1,6 +1,6 @@
 export interface Error {
-  message: string;
-  code: string;
+  message: string
+  code: string
 }
 
 export interface Player {

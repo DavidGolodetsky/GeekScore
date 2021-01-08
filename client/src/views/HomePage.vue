@@ -49,54 +49,55 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, computed } from "@vue/composition-api";
+import { defineComponent, computed } from '@vue/composition-api'
 
 export default defineComponent({
   // TODO:components name in composition api?
   // name: "HomePage",
   setup(_, ctx) {
     // TODO:rewrite with useStore later
-    const store = ctx.root.$store;
-    const loggedInUser = computed(() => store.state.user.user);
+    const store = ctx.root.$store
+
+    const loggedInUser = computed(() => store.state.user.user)
 
     const demoSteps = [
       {
-        title: "Games",
+        title: 'Games',
         text:
-          "Add your favorite board games. Add more info about this awesome game!",
-        color: "warning",
-        icon: "dice-multiple",
+          'Add your favorite board games. Add more info about this awesome game!',
+        color: 'warning',
+        icon: 'dice-multiple'
       },
       {
-        title: "Teams",
+        title: 'Teams',
         text:
-          "Create team of buddies to dive in the world of board games! You can add as many teams per game as you want.",
-        color: "accent",
-        icon: "account-group",
+          'Create team of buddies to dive in the world of board games! You can add as many teams per game as you want.',
+        color: 'accent',
+        icon: 'account-group'
       },
       {
-        title: "Rounds",
+        title: 'Rounds',
         text:
-          "When team is ready to play - roll the dice! Add result of your game to rounds table which is there per team in this game.",
-        color: "info",
-        icon: "sword-cross",
+          'When team is ready to play - roll the dice! Add result of your game to rounds table which is there per team in this game.',
+        color: 'info',
+        icon: 'sword-cross'
       },
       {
-        title: "Statistics",
-        text: "Check out statistics - see who is the best!",
-        color: "success",
-        icon: "chart-bar",
-      },
-    ];
+        title: 'Statistics',
+        text: 'Check out statistics - see who is the best!',
+        color: 'success',
+        icon: 'chart-bar'
+      }
+    ]
 
     // TODO:figure out how to use map helpers with vuex
 
     return {
       loggedInUser,
-      demoSteps,
-    };
-  },
-});
+      demoSteps
+    }
+  }
+})
 </script>
 
 
