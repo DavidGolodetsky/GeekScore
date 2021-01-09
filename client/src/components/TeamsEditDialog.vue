@@ -6,12 +6,7 @@
     simple
     :submit-logic="onSubmit"
   >
-    <v-text-field
-      v-model="name"
-      clearable
-      :rules="nameRules"
-      label="Name"
-    />
+    <v-text-field v-model="name" clearable :rules="nameRules" label="Name" />
     <v-switch
       v-model="toDelete"
       label="Delete team"
@@ -21,40 +16,43 @@
   </the-dialog>
 </template>
 
-<script>
+<script lang="ts">
 import { standardField, requiredField } from "@/use/validations";
-import { mapActions } from "vuex";
+import { defineComponent, ref } from "@vue/composition-api";
 
-export default {
+export default defineComponent({
   name: "TeamsEditDialog",
   props: {
     team: {
       type: Object,
-      required: true
-    }
-  },
-  data () {
-    return {
-      name: this.team.name,
-      toDelete: false,
-      nameRules: [...standardField, requiredField]
-    };
-  },
-  methods: {
-    ...mapActions("teams", ["updateTeam", "deleteTeam"]),
-    onSubmit () {
-      if (this.toDelete) return this.deleteTeam(this.team._id);
-      this.updateTheTeam();
-
+      required: true,
     },
-    updateTheTeam () {
+  },
+  setup(props, ctx) {
+    const store = ctx.root.$store;
+
+    //DATA
+    const name = ref(props.team.name);
+    const toDelete = ref(false);
+    const nameRules = [...standardField, requiredField];
+
+    //FUNCTIONS
+    const updateTheTeam = () => {
       const team = {
-        _id: this.team._id,
-        gameId: this.team.gameId,
-        name: this.name
+        _id: props.team._id,
+        gameId: props.team.gameId,
+        name: name.value,
       };
-      this.updateTeam(team);
-    }
-  }
-};
+      store.dispatch("teams/updateTeam", team);
+    };
+
+    const onSubmit = () => {
+      if (toDelete.value)
+        return store.dispatch("teams/deleteTeam", props.team._id);
+      updateTheTeam();
+    };
+
+    return { name, toDelete, nameRules, onSubmit };
+  },
+});
 </script>

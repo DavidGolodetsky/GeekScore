@@ -1,5 +1,5 @@
 <template>
-  <the-dialog
+  <TheDialog
     activator-icon="plus"
     header="Add new game"
     :submit-logic="onSubmit"
@@ -17,32 +17,42 @@
       color="secondary"
       hide-details
     />
-  </the-dialog>
+  </TheDialog>
 </template>
 
-<script>
-import { standardField, requiredField } from "@/use/validations";
-import { mapActions } from "vuex";
+<script lang="ts">
+import { defineComponent, reactive, toRefs } from '@vue/composition-api'
+import { standardField, requiredField } from '@/use/validations'
 
-export default {
-  name: "GamesAddDialog",
-  data () {
-    return {
-      name: "",
+export default defineComponent({
+  name: 'GamesAddDialog',
+
+  setup(_, ctx) {
+    const store = ctx.root.$store
+
+    const state = reactive({
+      name: '',
       coop: false,
       nameRules: [...standardField, requiredField]
-    };
-  },
-  methods: {
-    ...mapActions("games", ["createGame"]),
-    onSubmit () {
+    })
+
+    const createGame = () => {
       const game = {
-        coop: this.coop,
-        name: this.name
-      };
-      this.createGame(game);
-      this.name = "";
+        coop: state.coop,
+        name: state.name
+      }
+      store.dispatch('games/createGame', game)
+    }
+
+    const onSubmit = () => {
+      createGame()
+      state.name = ''
+    }
+
+    return {
+      onSubmit,
+      ...toRefs(state)
     }
   }
-};
+})
 </script>

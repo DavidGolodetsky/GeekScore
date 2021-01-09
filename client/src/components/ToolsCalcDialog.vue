@@ -47,7 +47,7 @@
 </template>
 
 <script>
-import ToolsCalc from "@/components/ToolsCalc";
+import ToolsCalc from "@/components/ToolsCalc.vue";
 
 export default {
   name: "ToolsDialog",

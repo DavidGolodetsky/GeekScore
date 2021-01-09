@@ -4,10 +4,10 @@
     v-scroll="onScroll"
     class="app"
   >
-    <the-header />
+    <TheHeader />
     <v-main>
       <v-container class="app-container">
-        <the-alert
+        <TheAlert
           v-if="isAlert"
           v-bind="{alertType, alertText}"
         />
@@ -39,38 +39,41 @@
         </v-btn>
       </v-container>
     </v-main>
-    <the-footer />
+    <TheFooter />
   </v-app>
 </template>
 
 <script lang="ts">
 import {
   defineComponent,
+  // defineAsyncComponent,
   reactive,
   toRefs,
   watch,
   computed,
-  onMounted,
-} from "@vue/composition-api";
-import TheHeader from "@/components/TheHeader.vue";
-import TheFooter from "@/components/TheFooter.vue";
-import TheAlert from "@/components/TheAlert.vue";
+  onMounted
+} from '@vue/composition-api'
+import TheHeader from '@/components/TheHeader.vue'
+import TheFooter from '@/components/TheFooter.vue'
+import TheAlert from '@/components/TheAlert.vue'
 // import { VueOfflineMixin } from 'vue-offline';
-import { setupFb } from "@/auth";
+import { setupFb } from '@/auth'
+// TODO: load async
+// const TheAlert = defineAsyncComponent(() => import('@/components/TheAlert.vue'))
 
 export default defineComponent({
-  name: "App",
+  name: 'App',
   components: {
     TheHeader,
     TheFooter,
-    TheAlert,
+    TheAlert
   },
   // TODO: composition-api with mixins?
   // mixins: [VueOfflineMixin],
   setup(_, ctx) {
-    const store = ctx.root.$store;
+    const store = ctx.root.$store
 
-    const error = computed(() => store.getters["error"]);
+    onMounted(() => setupFb())
 
     const state = reactive({
       isGoTopBtn: false,
@@ -79,47 +82,51 @@ export default defineComponent({
       GoTopBtnOtions: {
         duration: 300,
         offset: 0,
-        easing: "easeInOutCubic",
-      },
-      isLoading: computed(() => store.getters.loading),
-    });
+        easing: 'easeInOutCubic'
+      }
+    })
 
-    const offlineMessage =
-      "Geek Score is offline. Some features might be disabled";
+    const isLoading = computed(() => store.getters['loading'])
 
-    const alertType = computed(() => (state.isOffline ? "warning" : "error"));
-    const alertText = computed(() =>
-      state.isOffline ? offlineMessage : error.value.message
-    );
-    const isAlert = computed(() => state.isOffline || error.value);
+    const error = computed(() => store.getters['error'])
+
+    const isAlert = computed(() => state.isOffline || error.value)
+
+    const setError = () => store.dispatch('setError')
 
     watch(isAlert, (val) => {
       if (val) {
-        setTimeout(() => setError(), 10000);
+        setTimeout(() => setError(), 10000)
       }
-    });
+    })
 
-    onMounted(() => setupFb());
+    const offlineMessage =
+      'Geek Score is offline. Some features might be disabled'
+
+    const alertType = computed(() => (state.isOffline ? 'warning' : 'error'))
+
+    const alertText = computed(() =>
+      state.isOffline ? offlineMessage : error.value.message
+    )
 
     const onScroll = () => {
       if (window.pageYOffset > 500) {
-        state.isGoTopBtn = true;
+        state.isGoTopBtn = true
       } else if (state.isGoTopBtn && window.pageYOffset < 500) {
-        state.isGoTopBtn = false;
+        state.isGoTopBtn = false
       }
-    };
-
-    const setError = () => store.dispatch("setError");
+    }
 
     return {
       alertType,
       alertText,
       isAlert,
       onScroll,
-      ...toRefs(state),
-    };
-  },
-});
+      isLoading,
+      ...toRefs(state)
+    }
+  }
+})
 </script>
 
 <style scoped lang="scss">

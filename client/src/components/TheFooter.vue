@@ -11,7 +11,7 @@
         <span
           class="mr-6"
           data-test-copy
-        >&copy; {{ copyrights }}</span>
+        >&copy; {{ copyright }}</span>
         <a
           class="link"
           href="https://github.com/DavidGolodetsky/GeekScore-2"
@@ -30,17 +30,19 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from "@vue/composition-api";
+import { defineComponent } from '@vue/composition-api'
 
 export default defineComponent({
-  name: "TheFooter",
+  name: 'TheFooter',
   setup() {
-    const copyrights = `2020 - ${new Date().getFullYear()}`;
+    const currentYear = new Date().getFullYear()
+    const copyright = `2020 - ${currentYear}`
+
     return {
-      copyrights,
-    };
-  },
-});
+      copyright
+    }
+  }
+})
 </script>
 
 <style scoped lang="scss">

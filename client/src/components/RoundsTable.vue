@@ -40,7 +40,7 @@
 </template>
 
 <script>
-import RoundsEditDialog from "@/components/RoundsEditDialog";
+import RoundsEditDialog from "@/components/RoundsEditDialog.vue";
 
 export default {
   name: "RoundsTable",
