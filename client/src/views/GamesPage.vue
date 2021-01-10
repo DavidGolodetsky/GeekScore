@@ -5,14 +5,12 @@
       icon="dice-multiple"
       component="games-add-dialog"
     />
-
     <TheCardsList
       v-if="games"
       :card-route="gameRoute"
       :card-items="games"
       @favorite="toggleFavoriteGame"
     >
-
       <template #action="{ item }">
         <GamesEditDialog :game="item" />
       </template>

@@ -1,17 +1,15 @@
-const { resolve } = require('path')
 module.exports = {
   root: true,
   env: {
-    browser: true
+    node: true
   },
   extends: [
+    'plugin:vue/recommended',
     'eslint:recommended',
     '@vue/typescript',
     'prettier',
     'prettier/@typescript-eslint',
-    'prettier/vue',
-    'plugin:vue/recommended',
-    'plugin:@typescript-eslint/recommended'
+    'prettier/vue'
   ],
   rules: {
     'vue/max-attributes-per-line': 0,
@@ -20,8 +18,6 @@ module.exports = {
     'vue/html-closing-bracket-newline': 0,
     'vue/html-indent': 0,
     'no-unused-vars': 1,
-    'no-console': process.env.NODE_ENV === 'production' ? 'error' : 'off',
-    'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off',
 
     // TypeScript
     '@typescript-eslint/explicit-function-return-type': 'off',
@@ -31,14 +27,8 @@ module.exports = {
     '@typescript-eslint/no-unsafe-return': 'off',
     '@typescript-eslint/ban-ts-comment': 'off'
   },
-  plugins: ['@typescript-eslint', 'vue'],
   parserOptions: {
-    extraFileExtensions: ['.vue'],
-    parser: '@typescript-eslint/parser',
-    project: resolve(__dirname, './tsconfig.json'),
-    tsconfigRootDir: __dirname,
-    ecmaVersion: 2018,
-    sourceType: 'module'
+    parser: '@typescript-eslint/parser'
   },
   overrides: [
     {
