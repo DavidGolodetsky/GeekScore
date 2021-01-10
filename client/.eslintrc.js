@@ -4,13 +4,13 @@ module.exports = {
     node: true
   },
   extends: [
+    'eslint:recommended',
+    '@vue/typescript',
     'prettier',
-    'plugin:@typescript-eslint/recommended',
     'prettier/@typescript-eslint',
-    'plugin:prettier/recommended',
+    'prettier/vue',
     'plugin:vue/recommended',
-    '@vue/prettier',
-    '@vue/typescript'
+    'plugin:@typescript-eslint/recommended'
   ],
   rules: {
     'vue/max-attributes-per-line': 0,
@@ -20,7 +20,15 @@ module.exports = {
     'vue/html-indent': 0,
     'no-unused-vars': 1,
     'no-console': process.env.NODE_ENV === 'production' ? 'error' : 'off',
-    'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off'
+    'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off',
+
+    // TypeScript
+    '@typescript-eslint/explicit-function-return-type': 'off',
+    '@typescript-eslint/explicit-module-boundary-types': 'off',
+    '@typescript-eslint/no-explicit-any': 'off',
+    '@typescript-eslint/no-unsafe-member-access': 'off',
+    '@typescript-eslint/no-unsafe-return': 'off',
+    '@typescript-eslint/ban-ts-comment': 'off'
   },
   parserOptions: {
     parser: '@typescript-eslint/parser'

@@ -52,8 +52,7 @@
 import { defineComponent, computed } from '@vue/composition-api'
 
 export default defineComponent({
-  // TODO:components name in composition api?
-  // name: "HomePage",
+  name: 'HomePage',
   setup(_, ctx) {
     // TODO:rewrite with useStore later
     const store = ctx.root.$store
