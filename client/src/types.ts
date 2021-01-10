@@ -4,40 +4,48 @@ export interface Error {
 }
 
 export interface Player {
-  name: string;
-  isMe?: boolean;
+  name: string
+  isMe?: boolean
 }
 
 export interface Game {
-  name: string;
-  user: User;
-  coop: boolean;
-  favorite: boolean;
-  teams: Team[];
-  imageUrl?: string;
-  bggURL?: string;
-  melodiceURL?: string;
-  rulesURL?: string;
+  name: string
+  user: User
+  coop: boolean
+  favorite: boolean
+  teams: Team[]
+  imageUrl?: string
+  bggURL?: string
+  melodiceURL?: string
+  rulesURL?: string
 }
 
 export interface Team {
-  name: string;
-  user: User;
-  coop: boolean;
-  favorite: boolean;
-  games: Game[];
-  players: Player[];
+  name: string
+  user: User
+  coop: boolean
+  favorite: boolean
+  games: Game[]
+  players: Player[]
 }
 
 export interface Round {
-  user: string;
-  comment: string;
-  date: string;
-  winner: string;
-  gameId: string;
-  teamId: string;
+  user: string
+  comment: string
+  date: string
+  winner: string
+  gameId: string
+  teamId: string
 }
 
 export interface User {
-  username: string;
+  id: string
+  username: string
+}
+
+export interface DemoStep {
+  title: string
+  text: string
+  color: string
+  icon: string
 }

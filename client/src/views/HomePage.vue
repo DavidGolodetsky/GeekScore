@@ -49,7 +49,8 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, computed } from '@vue/composition-api'
+import { defineComponent, computed, ComputedRef } from '@vue/composition-api'
+import { DemoStep, User } from '@/types'
 
 export default defineComponent({
   name: 'HomePage',
@@ -57,9 +58,11 @@ export default defineComponent({
     // TODO:rewrite with useStore later
     const store = ctx.root.$store
 
-    const loggedInUser = computed(() => store.state.user.user)
+    const loggedInUser: ComputedRef<User> = computed(
+      () => store.state.user.user
+    )
 
-    const demoSteps = [
+    const demoSteps: DemoStep[] = [
       {
         title: 'Games',
         text:

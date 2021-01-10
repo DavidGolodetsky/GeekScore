@@ -18,6 +18,7 @@ module.exports = {
     'vue/html-closing-bracket-newline': 0,
     'vue/html-indent': 0,
     'no-unused-vars': 1,
+    'no-unused-vars': 'off',
 
     // TypeScript
     '@typescript-eslint/explicit-function-return-type': 'off',
@@ -25,7 +26,8 @@ module.exports = {
     '@typescript-eslint/no-explicit-any': 'off',
     '@typescript-eslint/no-unsafe-member-access': 'off',
     '@typescript-eslint/no-unsafe-return': 'off',
-    '@typescript-eslint/ban-ts-comment': 'off'
+    '@typescript-eslint/ban-ts-comment': 'off',
+    '@typescript-eslint/no-unused-vars': 'error'
   },
   parserOptions: {
     parser: '@typescript-eslint/parser'
