@@ -1,7 +1,8 @@
+const { resolve } = require('path')
 module.exports = {
   root: true,
   env: {
-    node: true
+    browser: true
   },
   extends: [
     'eslint:recommended',
@@ -30,8 +31,14 @@ module.exports = {
     '@typescript-eslint/no-unsafe-return': 'off',
     '@typescript-eslint/ban-ts-comment': 'off'
   },
+  plugins: ['@typescript-eslint', 'vue'],
   parserOptions: {
-    parser: '@typescript-eslint/parser'
+    extraFileExtensions: ['.vue'],
+    parser: '@typescript-eslint/parser',
+    project: resolve(__dirname, './tsconfig.json'),
+    tsconfigRootDir: __dirname,
+    ecmaVersion: 2018,
+    sourceType: 'module'
   },
   overrides: [
     {
