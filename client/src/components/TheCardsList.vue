@@ -37,7 +37,15 @@
             :card-route="cardRoute"
             :is-favorite="cardItems.length > 1"
             @favorite="$emit('favorite', $event)"
-          />
+          >
+            <template #action="{ item }">
+              <slot
+                name="action"
+                :item="item"
+              />
+            </template>
+
+          </TheCard>
         </v-lazy>
       </v-col>
     </v-row>

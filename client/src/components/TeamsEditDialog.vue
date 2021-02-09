@@ -6,7 +6,12 @@
     simple
     :submit-logic="onSubmit"
   >
-    <v-text-field v-model="name" clearable :rules="nameRules" label="Name" />
+    <v-text-field
+      v-model="name"
+      clearable
+      :rules="nameRules"
+      label="Name"
+    />
     <v-switch
       v-model="toDelete"
       label="Delete team"
@@ -17,42 +22,44 @@
 </template>
 
 <script lang="ts">
-import { standardField, requiredField } from "@/use/validations";
-import { defineComponent, ref } from "@vue/composition-api";
+import { standardField, requiredField } from '@/use/validations'
+import { defineComponent, ref } from '@vue/composition-api'
 
+// TODO:refactor
 export default defineComponent({
-  name: "TeamsEditDialog",
+  name: 'TeamsEditDialog',
   props: {
     team: {
       type: Object,
-      required: true,
-    },
+      required: true
+    }
   },
   setup(props, ctx) {
-    const store = ctx.root.$store;
+    console.log(ctx)
+    const store = ctx.root.$store
 
     //DATA
-    const name = ref(props.team.name);
-    const toDelete = ref(false);
-    const nameRules = [...standardField, requiredField];
+    const name = ref(props.team.name)
+    const toDelete = ref(false)
+    const nameRules = [...standardField, requiredField]
 
     //FUNCTIONS
     const updateTheTeam = () => {
       const team = {
         _id: props.team._id,
         gameId: props.team.gameId,
-        name: name.value,
-      };
-      store.dispatch("teams/updateTeam", team);
-    };
+        name: name.value
+      }
+      store.dispatch('teams/updateTeam', team)
+    }
 
     const onSubmit = () => {
       if (toDelete.value)
-        return store.dispatch("teams/deleteTeam", props.team._id);
-      updateTheTeam();
-    };
+        return store.dispatch('teams/deleteTeam', props.team._id)
+      updateTheTeam()
+    }
 
-    return { name, toDelete, nameRules, onSubmit };
-  },
-});
+    return { name, toDelete, nameRules, onSubmit }
+  }
+})
 </script>

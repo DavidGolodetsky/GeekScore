@@ -46,6 +46,7 @@ import roundsModule from "@/store/modules/rounds";
 import { Game, Round, Team } from "@/types";
 import { Store } from "vuex";
 
+// TODO:refactor
 export default defineComponent({
   name: "TeamPage",
   components: {
