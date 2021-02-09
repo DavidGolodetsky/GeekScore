@@ -23,9 +23,8 @@
 
 <script lang="ts">
 import { standardField, requiredField } from '@/use/validations'
-import { defineComponent, ref } from '@vue/composition-api'
+import { defineComponent, reactive, toRefs } from '@vue/composition-api'
 
-// TODO:refactor
 export default defineComponent({
   name: 'TeamsEditDialog',
   props: {
@@ -35,31 +34,35 @@ export default defineComponent({
     }
   },
   setup(props, ctx) {
-    console.log(ctx)
     const store = ctx.root.$store
 
-    //DATA
-    const name = ref(props.team.name)
-    const toDelete = ref(false)
-    const nameRules = [...standardField, requiredField]
+    const state = reactive({
+      name: props.team.name,
+      toDelete: false,
+      nameRules: [...standardField, requiredField]
+    })
 
-    //FUNCTIONS
-    const updateTheTeam = () => {
+    const updateTeam = () => {
       const team = {
         _id: props.team._id,
         gameId: props.team.gameId,
-        name: name.value
+        name: state.name
       }
       store.dispatch('teams/updateTeam', team)
     }
 
     const onSubmit = () => {
-      if (toDelete.value)
-        return store.dispatch('teams/deleteTeam', props.team._id)
-      updateTheTeam()
+      if (state.toDelete) {
+        store.dispatch('teams/deleteTeam', props.team._id)
+      } else {
+        updateTeam()
+      }
     }
 
-    return { name, toDelete, nameRules, onSubmit }
+    return {
+      onSubmit,
+      ...toRefs(state)
+    }
   }
 })
 </script>
