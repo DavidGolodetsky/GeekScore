@@ -14,7 +14,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-push": "editorconfig-checker"
+      "pre-push": "npm run editorconfig"
     }
   },
   "license": "ISC",
