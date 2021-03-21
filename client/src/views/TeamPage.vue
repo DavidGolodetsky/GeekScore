@@ -16,14 +16,25 @@
         icons-and-text
       >
         <v-tabs-slider color="secondary" />
-        <v-tab v-for="(tab, i) in tabs" :key="i" :href="`#tab-${i}`">
+        <v-tab
+          v-for="(tab, i) in tabs"
+          :key="i"
+          :href="`#tab-${i}`"
+        >
           <span class="mt-2">{{ tab.name }}</span>
           <v-icon>{{ `mdi-${tab.icon}` }}</v-icon>
         </v-tab>
       </v-tabs>
       <v-tabs-items v-model="currentTab">
-        <v-tab-item v-for="(tabItem, i) in tabs" :key="i" :value="`tab-${i}`">
-          <component :is="tabItem.component" v-bind="{ team, rounds }" />
+        <v-tab-item
+          v-for="(tabItem, i) in tabs"
+          :key="i"
+          :value="`tab-${i}`"
+        >
+          <component
+            :is="tabItem.component"
+            v-bind="{ team, rounds }"
+          />
         </v-tab-item>
       </v-tabs-items>
     </div>
@@ -36,91 +47,91 @@ import {
   computed,
   watch,
   onUnmounted,
-  ComputedRef,
-} from "@vue/composition-api";
-import TheTitle from "@/components/TheTitle.vue";
-import RoundsTable from "@/components/RoundsTable.vue";
-import TheBarsChart from "@/components/TheBarsChart.vue";
-import TheTendenciesChart from "@/components/TheTendenciesChart.vue";
-import roundsModule from "@/store/modules/rounds";
-import { Game, Round, Team } from "@/types";
-import { Store } from "vuex";
+  ComputedRef
+} from '@vue/composition-api'
+import TheTitle from '@/components/TheTitle.vue'
+import RoundsTable from '@/components/RoundsTable.vue'
+import TheBarsChart from '@/components/TheBarsChart.vue'
+import TheTendenciesChart from '@/components/TheTendenciesChart.vue'
+import roundsModule from '@/store/modules/rounds'
+import { Game, Round, Team } from '@/types'
+import { Store } from 'vuex'
 
 // TODO:refactor
 export default defineComponent({
-  name: "TeamPage",
+  name: 'TeamPage',
   components: {
     TheBarsChart,
     RoundsTable,
     TheTitle,
-    TheTendenciesChart,
+    TheTendenciesChart
   },
   props: {
     teamId: {
       type: String,
-      required: true,
-    },
+      required: true
+    }
   },
   setup(props, ctx) {
-    const store = ctx.root.$store;
-    const route = ctx.root.$route;
+    const store = ctx.root.$store
+    const route = ctx.root.$route
 
-    loadData(store);
+    loadData(store)
 
     //DATA
-    const currentTab = "tab-0";
-    const gameId = route.query.gameId;
+    const currentTab = 'tab-0'
+    const gameId = route.query.gameId
     const tabs = [
       {
-        name: "Table",
-        icon: "table-large",
-        component: "rounds-table",
+        name: 'Table',
+        icon: 'table-large',
+        component: 'rounds-table'
       },
       {
-        name: "Statistics",
-        icon: "chart-bar",
-        component: "the-bars-chart",
+        name: 'Statistics',
+        icon: 'chart-bar',
+        component: 'the-bars-chart'
       },
       {
-        name: "Tendencies",
-        icon: "chart-line",
-        component: "the-tendencies-chart",
-      },
-    ];
+        name: 'Tendencies',
+        icon: 'chart-line',
+        component: 'the-tendencies-chart'
+      }
+    ]
 
     //COMPUTED
-    const games: ComputedRef<Game[]> = computed(() => store.state.games);
+    const games: ComputedRef<Game[]> = computed(() => store.state.games)
     const getGame: ComputedRef<Game> = computed(() =>
-      store.getters["games/getGame"](gameId)
-    );
+      store.getters['games/getGame'](gameId)
+    )
     const game: ComputedRef<Game | null> = computed(() =>
       games ? getGame.value : null
-    );
+    )
 
-    const teams: ComputedRef<Team[]> = computed(() => store.state.teams);
+    const teams: ComputedRef<Team[]> = computed(() => store.state.teams)
     const getTeams: ComputedRef<Team> = computed(() =>
-      store.getters["teams/getTeam"](props.teamId)
-    );
+      store.getters['teams/getTeam'](props.teamId)
+    )
     const team: ComputedRef<Team | null> = computed(() =>
       teams ? getTeams.value : null
-    );
+    )
 
-    const gameTeam = computed(() => game && team);
+    const gameTeam = computed(() => game && team)
 
     const rounds: ComputedRef<Round[]> = computed(() => {
-      const query = { teamId: props.teamId, gameId: gameId };
-      const rounds: Round[] = store.getters["rounds/getRounds"](query);
+      const query = { teamId: props.teamId, gameId: gameId }
+      const rounds: Round[] = store.getters['rounds/getRounds'](query)
       if (rounds) {
-        rounds.forEach((round) => (round[round.winner] = "VICTORY"));
+        rounds.forEach((round: any) => (round[round.winner] = 'VICTORY'))
       }
 
-      return rounds;
-    });
+      return rounds
+    })
 
-    const showTable = computed(() => gameTeam && rounds.value?.length);
+    const showTable = computed(() => gameTeam && rounds.value?.length)
 
     //LIFECYCLE HOOKS
-    onUnmounted(() => store.dispatch("setBackTitle"));
+    onUnmounted(() => store.dispatch('setBackTitle'))
 
     //WATCH
     watch(
@@ -128,16 +139,16 @@ export default defineComponent({
       (val) => {
         if (val && !!game.value && !!team.value) {
           store.dispatch(
-            "setBackTitle",
+            'setBackTitle',
             `${team.value.name}: ${game.value.name}`
-          );
+          )
         }
       },
       {
         immediate: true,
-        deep: true,
+        deep: true
       }
-    );
+    )
 
     return {
       currentTab,
@@ -147,20 +158,20 @@ export default defineComponent({
       team,
       gameTeam,
       rounds,
-      showTable,
-    };
-  },
-});
+      showTable
+    }
+  }
+})
 
 const loadRoundsData = (store: Store<any>) => {
-  const isRounds = store.hasModule("rounds");
-  isRounds || store.registerModule("rounds", roundsModule);
-  store.dispatch("rounds/loadRounds");
-};
+  const isRounds = store.hasModule('rounds')
+  isRounds || store.registerModule('rounds', roundsModule)
+  store.dispatch('rounds/loadRounds')
+}
 
 const loadData = (store: Store<any>) => {
-  store.dispatch("games/loadGames");
-  store.dispatch("teams/loadTeams");
-  loadRoundsData(store);
-};
+  store.dispatch('games/loadGames')
+  store.dispatch('teams/loadTeams')
+  loadRoundsData(store)
+}
 </script>
