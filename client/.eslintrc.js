@@ -17,8 +17,7 @@ module.exports = {
     'vue/multiline-html-element-content-newline': 0,
     'vue/html-closing-bracket-newline': 0,
     'vue/html-indent': 0,
-    'no-unused-vars': 1,
-    'no-unused-vars': 'off',
+    'no-unused-vars': process.env.NODE_ENV === 'production' ? 0 : 1,
 
     // TypeScript
     '@typescript-eslint/explicit-function-return-type': 'off',
@@ -27,7 +26,8 @@ module.exports = {
     '@typescript-eslint/no-unsafe-member-access': 'off',
     '@typescript-eslint/no-unsafe-return': 'off',
     '@typescript-eslint/ban-ts-comment': 'off',
-    '@typescript-eslint/no-unused-vars': 'error'
+    '@typescript-eslint/no-unused-vars':
+      process.env.NODE_ENV === 'production' ? 0 : 1
   },
   parserOptions: {
     parser: '@typescript-eslint/parser'
