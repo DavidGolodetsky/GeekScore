@@ -1,140 +1,150 @@
+import store from '@/store'
+
 const routes = [
   {
-    path: "/",
-    name: "home",
-    component: () => import(/* webpackChunkName: "home" */ "../views/HomePage"),
+    path: '/',
+    name: 'home',
+    component: () => import(/* webpackChunkName: "home" */ '../views/HomePage'),
     // TODO: fix title and descr
     meta: {
-      title: "Geek Score - Homepage",
+      title: 'Geek Score - Homepage',
       metaTags: {
-        name: "description",
-        content: "A starting page where described the idea of Geek Score",
-      },
-    },
+        name: 'description',
+        content: 'A starting page where described the idea of Geek Score'
+      }
+    }
   },
   {
-    path: "/games",
-    name: "games",
+    path: '/games',
+    name: 'games',
     component: () =>
-      import(/* webpackChunkName: "games" */ "../views/GamesPage"),
+      import(/* webpackChunkName: "games" */ '../views/GamesPage'),
     meta: {
       requiresAuth: true,
-      title: "Geek Score - Games page",
+      title: 'Geek Score - Games page',
       metaTags: {
-        name: "description",
-        content: "A list of user's games",
-      },
-    },
+        name: 'description',
+        content: "A list of user's games"
+      }
+    }
   },
   {
-    path: "/game/:gameId",
-    name: "game",
+    path: '/game/:gameId',
+    name: 'game',
     props: true,
-    component: () => import(/* webpackChunkName: "game" */ "../views/GamePage"),
+    component: () => import(/* webpackChunkName: "game" */ '../views/GamePage'),
     meta: {
       requiresAuth: true,
-      title: "Geek Score - Game page",
+      title: 'Geek Score - Game page',
       metaTags: {
-        name: "description",
-        content: "Game details page",
-      },
+        name: 'description',
+        content: 'Game details page'
+      }
     },
+    beforeEnter(to, _, next) {
+      const game = store.getters['games/getGame'](to.params.gameId)
+      game ? next() : next({ name: 'NotFoundPage' })
+    }
   },
   {
-    path: "/profile",
-    name: "profile",
+    path: '/profile',
+    name: 'profile',
     component: () =>
-      import(/* webpackChunkName: "profile" */ "../views/ProfilePage"),
+      import(/* webpackChunkName: "profile" */ '../views/ProfilePage'),
     meta: {
       requiresAuth: true,
-      title: "Geek Score - Profile page",
+      title: 'Geek Score - Profile page',
       metaTags: {
-        name: "User Profile",
-        content: "User Profile page",
-      },
-    },
+        name: 'User Profile',
+        content: 'User Profile page'
+      }
+    }
   },
   {
-    path: "/team/:teamId",
-    name: "team",
+    path: '/team/:teamId',
+    name: 'team',
     props: true,
-    component: () => import(/* webpackChunkName: "team" */ "../views/TeamPage"),
+    component: () => import(/* webpackChunkName: "team" */ '../views/TeamPage'),
     meta: {
       requiresAuth: true,
-      title: "Geek Score - Team page",
+      title: 'Geek Score - Team page',
       metaTags: {
-        name: "description",
-        content: "Team details page",
-      },
+        name: 'description',
+        content: 'Team details page'
+      }
     },
+    beforeEnter(to, _, next) {
+      const game = store.getters['teams/getTeam'](to.params.teamId)
+      game ? next() : next({ name: 'NotFoundPage' })
+    }
   },
   {
-    path: "/sign-in",
-    name: "signIn",
+    path: '/sign-in',
+    name: 'signIn',
     component: () =>
-      import(/* webpackChunkName: "SignInPage" */ "../views/SignInPage"),
+      import(/* webpackChunkName: "SignInPage" */ '../views/SignInPage'),
     meta: {
-      title: "Geek Score - Sign in page",
+      title: 'Geek Score - Sign in page',
       metaTags: {
-        name: "description",
-        content: "A page for Signing In in",
-      },
-    },
+        name: 'description',
+        content: 'A page for Signing In in'
+      }
+    }
   },
   {
-    path: "/sign-up",
-    name: "signUp",
+    path: '/sign-up',
+    name: 'signUp',
     component: () =>
-      import(/* webpackChunkName: "SignUpPage" */ "../views/SignUpPage"),
+      import(/* webpackChunkName: "SignUpPage" */ '../views/SignUpPage'),
     meta: {
-      title: "Geek Score - Sign up page",
+      title: 'Geek Score - Sign up page',
       metaTags: {
-        name: "description",
-        content: "A page for Signing up up",
-      },
-    },
+        name: 'description',
+        content: 'A page for Signing up up'
+      }
+    }
   },
   {
-    path: "/reset",
-    name: "resetPass",
+    path: '/reset',
+    name: 'resetPass',
     component: () =>
-      import(/* webpackChunkName: "resetPass" */ "../views/ResetPasswordPage"),
+      import(/* webpackChunkName: "resetPass" */ '../views/ResetPasswordPage'),
     meta: {
-      title: "Geek Score - Reset password page",
+      title: 'Geek Score - Reset password page',
       metaTags: {
-        name: "description",
-        content: "A page for resetting a password",
-      },
-    },
+        name: 'description',
+        content: 'A page for resetting a password'
+      }
+    }
   },
   {
-    path: "/tools",
-    name: "tools",
+    path: '/tools',
+    name: 'tools',
     component: () =>
-      import(/* webpackChunkName: "tools" */ "../views/ToolsPage"),
+      import(/* webpackChunkName: "tools" */ '../views/ToolsPage'),
     meta: {
       requiresAuth: true,
-      title: "Geek Score - Tools page",
+      title: 'Geek Score - Tools page',
       metaTags: {
-        name: "description",
-        content: "A list of tools for games",
-      },
-    },
+        name: 'description',
+        content: 'A list of tools for games'
+      }
+    }
   },
   {
-    path: "/404",
-    alias: "*",
-    name: "NotFoundPage",
+    path: '/404',
+    alias: '*',
+    name: 'NotFoundPage',
     component: () =>
-      import(/* webpackChunkName: "NotFoundPage" */ "../views/NotFoundPage"),
+      import(/* webpackChunkName: "NotFoundPage" */ '../views/NotFoundPage'),
     meta: {
-      title: "Geek Score - Not found page",
+      title: 'Geek Score - Not found page',
       metaTags: {
-        name: "description",
-        content: "An error page",
-      },
-    },
-  },
-];
+        name: 'description',
+        content: 'An error page'
+      }
+    }
+  }
+]
 
-export default routes;
+export default routes
