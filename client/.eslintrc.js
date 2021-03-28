@@ -5,7 +5,6 @@ module.exports = {
   },
   extends: [
     'plugin:vue/recommended',
-    'eslint:recommended',
     '@vue/typescript',
     'prettier',
     'prettier/@typescript-eslint',
@@ -17,7 +16,6 @@ module.exports = {
     'vue/multiline-html-element-content-newline': 0,
     'vue/html-closing-bracket-newline': 0,
     'vue/html-indent': 0,
-    'no-unused-vars': process.env.NODE_ENV === 'production' ? 0 : 1,
 
     // TypeScript
     '@typescript-eslint/explicit-function-return-type': 'off',
