@@ -1,9 +1,8 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import games from "./modules/games"
-import teams from "./modules/teams"
-import user from "./modules/user"
-
+import games from './modules/games'
+import teams from './modules/teams'
+import user from './modules/user'
 
 Vue.use(Vuex)
 
@@ -40,7 +39,7 @@ const store = new Vuex.Store({
     },
     setLoading({ commit }, payload = null) {
       commit('LOADING', payload)
-    },
+    }
   },
   getters: {
     loading(state) {
@@ -54,6 +53,5 @@ const store = new Vuex.Store({
     }
   }
 })
-
 
 export default store
