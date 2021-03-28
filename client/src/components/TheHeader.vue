@@ -7,7 +7,7 @@
       dark
     >
       <v-container class="row_between app-container">
-        <the-go-back
+        <BaseBackBtn
           v-if="backTitle"
           :title="backTitle"
         />

@@ -1,5 +1,5 @@
 <template>
-  <the-dialog
+  <BaseDialog
     header="Score Calculator"
     simple
   >
@@ -43,7 +43,7 @@
         <component :is="tabItem.component" />
       </v-tab-item>
     </v-tabs-items>
-  </the-dialog>
+  </BaseDialog>
 </template>
 
 <script>

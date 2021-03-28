@@ -4,7 +4,7 @@ import { defineComponent } from '@vue/composition-api'
 import { VIcon } from 'vuetify/lib'
 
 export default defineComponent({
-  name: 'TheGoBack',
+  name: 'BaseBackBtn',
   functional: true,
   props: {
     title: {

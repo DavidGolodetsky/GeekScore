@@ -42,7 +42,7 @@
     </v-card>
     <template v-else>
       <h3 class="mb-5">Check your email for a new password</h3>
-      <the-go-back title="Back to Sign in" />
+      <BaseBackBtn title="Back to Sign in" />
     </template>
   </section>
 </template>

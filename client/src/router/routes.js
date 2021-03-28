@@ -5,7 +5,6 @@ const routes = [
     path: '/',
     name: 'home',
     component: () => import(/* webpackChunkName: "home" */ '../pages/Home'),
-    // TODO: fix title and descr
     meta: {
       title: 'Geek Score - Homepage',
       metaTags: {
@@ -80,7 +79,7 @@ const routes = [
   {
     path: '/sign-in',
     name: 'signIn',
-    component: () => import(/* webpackChunkName: "SignIn" */ '../pages/SignIn'),
+    component: () => import(/* webpackChunkName: "signIn" */ '../pages/SignIn'),
     meta: {
       title: 'Geek Score - Sign in page',
       metaTags: {
@@ -92,7 +91,7 @@ const routes = [
   {
     path: '/sign-up',
     name: 'signUp',
-    component: () => import(/* webpackChunkName: "SignUp" */ '../pages/SignUp'),
+    component: () => import(/* webpackChunkName: "signUp" */ '../pages/SignUp'),
     meta: {
       title: 'Geek Score - Sign up page',
       metaTags: {
@@ -132,7 +131,7 @@ const routes = [
     alias: '*',
     name: 'NotFound',
     component: () =>
-      import(/* webpackChunkName: "NotFound" */ '../pages/NotFound'),
+      import(/* webpackChunkName: "notFound" */ '../pages/NotFound'),
     meta: {
       title: 'Geek Score - Not found page',
       metaTags: {

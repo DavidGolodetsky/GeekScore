@@ -1,5 +1,5 @@
 <template>
-  <the-dialog
+  <BaseDialog
     header="Dice Roller"
     simple
   >
@@ -69,7 +69,7 @@
         > mdi-dice-6 </v-icon>Roll
       </v-btn>
     </template>
-  </the-dialog>
+  </BaseDialog>
 </template>
 
 <script>

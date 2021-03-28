@@ -1,5 +1,5 @@
 <template>
-  <the-dialog
+  <BaseDialog
     activator-icon="pencil"
     color="#fff"
     header="Edit game info"
@@ -28,7 +28,7 @@
       color="error"
       hide-details
     />
-  </the-dialog>
+  </BaseDialog>
 </template>
 
 <script>

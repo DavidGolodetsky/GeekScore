@@ -1,6 +1,6 @@
 <template>
   <section class="rounds-add">
-    <the-dialog
+    <BaseDialog
       v-if="team"
       activator-icon="plus"
       header="Add new round"
@@ -76,7 +76,7 @@
           prepend-icon="mdi-comment"
         />
       </v-row>
-    </the-dialog>
+    </BaseDialog>
   </section>
 </template>
 

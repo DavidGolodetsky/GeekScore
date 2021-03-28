@@ -1,5 +1,5 @@
 <template>
-  <the-dialog
+  <BaseDialog
     activator-icon="pencil"
     color="#607d8b"
     header="Edit round info"
@@ -12,7 +12,7 @@
       color="error"
       hide-details
     />
-  </the-dialog>
+  </BaseDialog>
 </template>
 
 <script>

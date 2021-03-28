@@ -1,6 +1,6 @@
 <template>
 
-  <the-dialog
+  <BaseDialog
     activator-icon="plus"
     header="Add team"
     button-text="Add team"
@@ -67,7 +67,7 @@
         />
       </v-tab-item>
     </v-tabs-items>
-  </the-dialog>
+  </BaseDialog>
 </template>
 
 <script>

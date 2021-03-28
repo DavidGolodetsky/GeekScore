@@ -1,5 +1,5 @@
 <template>
-  <TheDialog
+  <BaseDialog
     activator-icon="plus"
     header="Add new game"
     :submit-logic="onSubmit"
@@ -17,7 +17,7 @@
       color="secondary"
       hide-details
     />
-  </TheDialog>
+  </BaseDialog>
 </template>
 
 <script lang="ts">

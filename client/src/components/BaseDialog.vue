@@ -25,7 +25,7 @@
       v-model="dialog"
       max-width="600"
     >
-      <v-card class="the-dialog">
+      <v-card class="BaseDialog">
         <v-card-title>
           <h3 class="app-headline">{{ header }}</h3>
           <v-spacer />
@@ -75,7 +75,7 @@
 
 <script>
 export default {
-  name: "TheDialog",
+  name: "BaseDialog",
   // TODO:refactor
   props: {
     activatorIcon: {
@@ -121,7 +121,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.the-dialog {
+.BaseDialog {
   ::v-deep .v-card__text {
     padding-top: 0;
     padding-bottom: 5px;

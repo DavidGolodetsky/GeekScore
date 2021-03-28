@@ -1,5 +1,5 @@
 <template>
-  <the-dialog
+  <BaseDialog
     header="Clock Tools"
     simple
   >
@@ -69,7 +69,7 @@
         Stop
       </v-btn>
     </template>
-  </the-dialog>
+  </BaseDialog>
 </template>
 
 <script>

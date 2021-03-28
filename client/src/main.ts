@@ -5,7 +5,6 @@ import router from './router'
 import store from './store'
 import VueOffline from 'vue-offline'
 import VueCompositionAPI from '@vue/composition-api'
-import '@/globalComponents'
 import './registerServiceWorker'
 
 const isDev = process.env.NODE_ENV !== 'production'
@@ -25,6 +24,21 @@ Vue.use(VueCompositionAPI)
 Vue.use(VueOffline, {
   mixin: false,
   storage: false
+})
+
+// Registering global components automatically
+const requireComponent = require.context(
+  './components',
+  true,
+  /Base[A-Z]\w+\.(vue|js)$/
+)
+requireComponent.keys().forEach(fileName => {
+  let baseComponentConfig = requireComponent(fileName)
+  baseComponentConfig = baseComponentConfig.default || baseComponentConfig
+  const baseComponentName =
+    baseComponentConfig.name ||
+    fileName.replace(/^.+\//, '').replace(/\.\w+$/, '')
+  Vue.component(baseComponentName, baseComponentConfig)
 })
 
 new Vue({

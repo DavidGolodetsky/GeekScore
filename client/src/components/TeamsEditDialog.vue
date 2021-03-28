@@ -1,5 +1,5 @@
 <template>
-  <the-dialog
+  <BaseDialog
     activator-icon="pencil"
     color="#fff"
     header="Edit team info"
@@ -18,7 +18,7 @@
       color="error"
       hide-details
     />
-  </the-dialog>
+  </BaseDialog>
 </template>
 
 <script lang="ts">
