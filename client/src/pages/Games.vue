@@ -26,7 +26,7 @@ import TheCardsList from '@/components/TheCardsList.vue'
 import { Game } from '@/types'
 
 export default defineComponent({
-  name: 'GamesPage',
+  name: 'Games',
   components: {
     TheTitle,
     GamesEditDialog,

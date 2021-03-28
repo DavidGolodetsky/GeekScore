@@ -36,7 +36,7 @@ import TheTitle from '@/components/TheTitle';
 import { mapActions, mapState } from 'vuex';
 
 export default {
-  name: 'ProfilePage',
+  name: 'Profile',
   components: {
     TheTitle,
   },

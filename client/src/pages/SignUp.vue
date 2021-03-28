@@ -6,7 +6,7 @@
 import TheLoginForm from "@/components/TheLoginForm.vue";
 
 export default {
-  name: "SignUpPage",
+  name: "SignUp",
   components: {
     TheLoginForm
   },

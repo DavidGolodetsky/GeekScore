@@ -25,7 +25,7 @@ import ToolsTimerDialog from "@/components/ToolsTimerDialog.vue";
 // import ToolsCalcDialog from "@/components/ToolsCalcDialog";
 
 export default {
-  name: "ToolsPage",
+  name: "Tools",
   components: {
     TheTitle,
     ToolsDiceDialog,

@@ -52,7 +52,7 @@ import { mapActions, mapState } from "vuex";
 import { emailField, requiredField } from "@/use/validations";
 
 export default {
-  name: "ResetPasswordPage",
+  name: "ResetPassword",
   data () {
     return {
       valid: false,

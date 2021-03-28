@@ -4,7 +4,7 @@ const routes = [
   {
     path: '/',
     name: 'home',
-    component: () => import(/* webpackChunkName: "home" */ '../views/HomePage'),
+    component: () => import(/* webpackChunkName: "home" */ '../pages/Home'),
     // TODO: fix title and descr
     meta: {
       title: 'Geek Score - Homepage',
@@ -17,8 +17,7 @@ const routes = [
   {
     path: '/games',
     name: 'games',
-    component: () =>
-      import(/* webpackChunkName: "games" */ '../views/GamesPage'),
+    component: () => import(/* webpackChunkName: "games" */ '../pages/Games'),
     meta: {
       requiresAuth: true,
       title: 'Geek Score - Games page',
@@ -32,7 +31,7 @@ const routes = [
     path: '/game/:gameId',
     name: 'game',
     props: true,
-    component: () => import(/* webpackChunkName: "game" */ '../views/GamePage'),
+    component: () => import(/* webpackChunkName: "game" */ '../pages/Game'),
     meta: {
       requiresAuth: true,
       title: 'Geek Score - Game page',
@@ -43,14 +42,14 @@ const routes = [
     },
     beforeEnter(to, _, next) {
       const game = store.getters['games/getGame'](to.params.gameId)
-      game ? next() : next({ name: 'NotFoundPage' })
+      game ? next() : next({ name: 'NotFound' })
     }
   },
   {
     path: '/profile',
     name: 'profile',
     component: () =>
-      import(/* webpackChunkName: "profile" */ '../views/ProfilePage'),
+      import(/* webpackChunkName: "profile" */ '../pages/Profile'),
     meta: {
       requiresAuth: true,
       title: 'Geek Score - Profile page',
@@ -64,7 +63,7 @@ const routes = [
     path: '/team/:teamId',
     name: 'team',
     props: true,
-    component: () => import(/* webpackChunkName: "team" */ '../views/TeamPage'),
+    component: () => import(/* webpackChunkName: "team" */ '../pages/Team'),
     meta: {
       requiresAuth: true,
       title: 'Geek Score - Team page',
@@ -75,14 +74,13 @@ const routes = [
     },
     beforeEnter(to, _, next) {
       const game = store.getters['teams/getTeam'](to.params.teamId)
-      game ? next() : next({ name: 'NotFoundPage' })
+      game ? next() : next({ name: 'NotFound' })
     }
   },
   {
     path: '/sign-in',
     name: 'signIn',
-    component: () =>
-      import(/* webpackChunkName: "SignInPage" */ '../views/SignInPage'),
+    component: () => import(/* webpackChunkName: "SignIn" */ '../pages/SignIn'),
     meta: {
       title: 'Geek Score - Sign in page',
       metaTags: {
@@ -94,8 +92,7 @@ const routes = [
   {
     path: '/sign-up',
     name: 'signUp',
-    component: () =>
-      import(/* webpackChunkName: "SignUpPage" */ '../views/SignUpPage'),
+    component: () => import(/* webpackChunkName: "SignUp" */ '../pages/SignUp'),
     meta: {
       title: 'Geek Score - Sign up page',
       metaTags: {
@@ -108,7 +105,7 @@ const routes = [
     path: '/reset',
     name: 'resetPass',
     component: () =>
-      import(/* webpackChunkName: "resetPass" */ '../views/ResetPasswordPage'),
+      import(/* webpackChunkName: "resetPass" */ '../pages/ResetPassword'),
     meta: {
       title: 'Geek Score - Reset password page',
       metaTags: {
@@ -120,8 +117,7 @@ const routes = [
   {
     path: '/tools',
     name: 'tools',
-    component: () =>
-      import(/* webpackChunkName: "tools" */ '../views/ToolsPage'),
+    component: () => import(/* webpackChunkName: "tools" */ '../pages/Tools'),
     meta: {
       requiresAuth: true,
       title: 'Geek Score - Tools page',
@@ -134,9 +130,9 @@ const routes = [
   {
     path: '/404',
     alias: '*',
-    name: 'NotFoundPage',
+    name: 'NotFound',
     component: () =>
-      import(/* webpackChunkName: "NotFoundPage" */ '../views/NotFoundPage'),
+      import(/* webpackChunkName: "NotFound" */ '../pages/NotFound'),
     meta: {
       title: 'Geek Score - Not found page',
       metaTags: {

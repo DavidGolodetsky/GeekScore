@@ -1,5 +1,5 @@
 <template>
-  <section class="game-page">
+  <section class="game">
     <TheTitle
       title="Teams"
       icon="account-group"
@@ -43,7 +43,7 @@ import TheCardsList from '@/components/TheCardsList.vue'
 import TeamsEditDialog from '@/components/TeamsEditDialog.vue'
 
 export default defineComponent({
-  name: 'GamePage',
+  name: 'Game',
   components: {
     TheTitle,
     TeamsEditDialog,
@@ -123,7 +123,7 @@ export default defineComponent({
 </script>
 
 <style lang="scss">
-.game-page {
+.game {
   .win-rate {
     background-color: $secondary;
     padding: 15px;

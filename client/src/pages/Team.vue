@@ -59,7 +59,7 @@ import { Store } from 'vuex'
 
 // TODO:refactor
 export default defineComponent({
-  name: 'TeamPage',
+  name: 'Team',
   components: {
     TheBarsChart,
     RoundsTable,
