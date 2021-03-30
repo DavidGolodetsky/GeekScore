@@ -113,12 +113,10 @@ export default {
       return this.teams ? this.getTeam(this.teamId) : null;
     },
     resultOptions () {
-      if (this.team) {
-        if (this.team.coop) return ['Victory', 'Defeat'];
-        const options = this.team.players.map((player) => player.name);
-        return [...options, 'Tie'];
-      }
-      return null;
+      if (!this.team) return null;
+      if (this.team.coop) return ['Victory', 'Defeat'];
+      const options = this.team.players.map((player) => player.name);
+      return [...options, 'Tie'];
     },
   },
   methods: {

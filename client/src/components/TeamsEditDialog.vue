@@ -52,11 +52,8 @@ export default defineComponent({
     }
 
     const onSubmit = () => {
-      if (state.toDelete) {
-        store.dispatch('teams/deleteTeam', props.team._id)
-      } else {
-        updateTeam()
-      }
+      if (!state.toDelete) return updateTeam()
+      store.dispatch('teams/deleteTeam', props.team._id)
     }
 
     return {

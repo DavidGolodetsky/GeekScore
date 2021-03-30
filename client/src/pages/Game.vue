@@ -106,10 +106,9 @@ export default defineComponent({
     onBeforeUnmount(() => setBackTitle())
 
     watchEffect(() => {
-      if (allGames.value) {
-        const { name: gameName } = getGame()
-        setBackTitle(gameName)
-      }
+      if (!allGames.value) return
+      const { name: gameName } = getGame()
+      setBackTitle(gameName)
     })
 
     return {

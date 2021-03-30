@@ -75,10 +75,9 @@ export default {
       )
     },
     updateChart () {
-      if (this.$data._chart) {
-        this.$data._chart.data = this.chartdata;
-        this.$data._chart.update();
-      }
+      if (!this.$data._chart) return
+      this.$data._chart.data = this.chartdata;
+      this.$data._chart.update();
     },
   }
 }

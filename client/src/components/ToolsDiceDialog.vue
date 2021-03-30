@@ -95,25 +95,23 @@ export default {
   },
   methods: {
     changeSide (operator) {
-      if (operator === "plus") {
-        if (this.fields.diceSide.model < 20) {
-          this.fields.diceSide.model++;
-        }
-      } else {
+      if (operator !== "plus") {
         if (this.fields.diceSide.model > 3) {
           this.fields.diceSide.model--;
         }
       }
+      if (this.fields.diceSide.model < 20) {
+        this.fields.diceSide.model++;
+      }
     },
     changeRoll (operator) {
-      if (operator === "plus") {
-        if (this.fields.rollNumber.model < 10) {
-          this.fields.rollNumber.model++;
-        }
-      } else {
+      if (operator !== "plus") {
         if (this.fields.rollNumber.model > 1) {
           this.fields.rollNumber.model--;
         }
+      }
+      if (this.fields.rollNumber.model < 10) {
+        this.fields.rollNumber.model++;
       }
     },
     rollDice () {

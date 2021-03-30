@@ -34,47 +34,7 @@ export default defineComponent({
   },
   render(h) {
     let template
-    if (this.component !== '') {
-      template = h(
-        'div',
-        {
-          class: 'row_between mb-6'
-        },
-        [
-          h(
-            'div',
-            {
-              class: 'd-flex'
-            },
-            [
-              h(
-                VIcon,
-                {
-                  class: 'mx-2',
-                  props: {
-                    color: 'secondary'
-                  }
-                },
-                `mdi-${this.icon}`
-              ),
-              h(
-                'h1',
-                {
-                  class: 'app-headline'
-                },
-                this.title
-              )
-            ]
-          ),
-          h(this.component, {
-            class: 'd-flex justify-end my-2',
-            props: {
-              ...this.props
-            }
-          })
-        ]
-      )
-    } else {
+    if (this.component === '') {
       template = h(
         'div',
         {
@@ -109,6 +69,45 @@ export default defineComponent({
         ]
       )
     }
+    template = h(
+      'div',
+      {
+        class: 'row_between mb-6'
+      },
+      [
+        h(
+          'div',
+          {
+            class: 'd-flex'
+          },
+          [
+            h(
+              VIcon,
+              {
+                class: 'mx-2',
+                props: {
+                  color: 'secondary'
+                }
+              },
+              `mdi-${this.icon}`
+            ),
+            h(
+              'h1',
+              {
+                class: 'app-headline'
+              },
+              this.title
+            )
+          ]
+        ),
+        h(this.component, {
+          class: 'd-flex justify-end my-2',
+          props: {
+            ...this.props
+          }
+        })
+      ]
+    )
 
     return template
   }

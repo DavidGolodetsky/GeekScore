@@ -72,8 +72,8 @@ const routes = [
       }
     },
     beforeEnter(to, _, next) {
-      const game = store.getters['teams/getTeam'](to.params.teamId)
-      game ? next() : next({ name: 'NotFound' })
+      const team = store.getters['teams/getTeam'](to.params.teamId)
+      team ? next() : next({ name: 'NotFound' })
     }
   },
   {

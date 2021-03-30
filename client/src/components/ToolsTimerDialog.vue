@@ -103,17 +103,12 @@ export default {
     playPauseTimer () {
       this.pause = !this.pause;
 
-      if (this.pause) {
-        clearInterval(this.playInterval);
-      } else {
+      if (!this.pause) {
         this.playInterval = setInterval(() => {
-          if (this.tab === "tab-timer") {
-            this.timerMethod();
-          } else {
-            this.countdownMethod();
-          }
+          this.tab === "tab-timer" ? this.timerMethod() : this.countdownMethod();
         }, 1000);
       }
+      clearInterval(this.playInterval);
     },
     // TODO:use from use/common
     vibrate (time = 300) {

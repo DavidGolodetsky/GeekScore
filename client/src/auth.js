@@ -15,9 +15,8 @@ const firebaseConfig = {
 
 firebase.initializeApp(firebaseConfig)
 firebase.auth().onAuthStateChanged(user => {
-  if (user) {
-    store.dispatch('user/autoSignIn', user)
-  }
+  if (!user) return
+  store.dispatch('user/autoSignIn', user)
 })
 
 const uiConfig = {

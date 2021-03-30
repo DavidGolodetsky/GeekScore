@@ -119,10 +119,9 @@ export default {
   methods: {
     ...mapActions('teams', ['createTeam', 'updateTeam']),
     setInitialPlayer () {
-      if (this.user?.username) {
-        const name = this.user.username ? this.user.username : 'Me'
-        this.players.push({ name })
-      }
+      if (!this.user?.username) return
+      const name = this.user.username ? this.user.username : 'Me'
+      this.players.push({ name })
     },
     setPlayers ($ev) {
       let myName = this.user.username ? this.user.username : "Me"

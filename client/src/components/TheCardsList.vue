@@ -89,13 +89,9 @@ export default defineComponent({
     }
 
     const filteredCards = computed(() => {
-      if (searchedValue.value) {
-        const filtered = filterCards()
-        return getCardsOrder(filtered)
-      } else {
-        // Reset filtering
-        return getCardsOrder(props.cardItems)
-      }
+      if (!searchedValue.value) return getCardsOrder(props.cardItems)
+      const filtered = filterCards()
+      return getCardsOrder(filtered)
     })
 
     return {
