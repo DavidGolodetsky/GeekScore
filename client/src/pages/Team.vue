@@ -76,7 +76,7 @@ export default defineComponent({
     const store = ctx.root.$store
     const route = ctx.root.$route
 
-    loadData(store)
+    loadRoundsData(store)
 
     //DATA
     const currentTab = 'tab-0'
@@ -167,11 +167,5 @@ const loadRoundsData = (store: Store<any>) => {
   const isRounds = store.hasModule('rounds')
   isRounds || store.registerModule('rounds', roundsModule)
   store.dispatch('rounds/loadRounds')
-}
-
-const loadData = (store: Store<any>) => {
-  store.dispatch('games/loadGames')
-  store.dispatch('teams/loadTeams')
-  loadRoundsData(store)
 }
 </script>

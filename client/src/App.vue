@@ -110,9 +110,9 @@ export default defineComponent({
     )
 
     const onScroll = () => {
-      if (window.pageYOffset > 500) {
-        state.isGoTopBtn = true
-      } else if (state.isGoTopBtn && window.pageYOffset < 500) {
+      if (window.pageYOffset > 500) return (state.isGoTopBtn = true)
+
+      if (state.isGoTopBtn && window.pageYOffset < 500) {
         state.isGoTopBtn = false
       }
     }

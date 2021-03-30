@@ -147,13 +147,9 @@ export default defineComponent({
 
     const getImagePath = (extension = 'jpg') => {
       const { imageUrl, teams } = props.cardInfo
-      if (imageUrl) {
-        return imageUrl
-      } else if (teams) {
-        return require(`@/assets/img/game.${extension}`)
-      } else {
-        return require(`@/assets/img/team.${extension}`)
-      }
+      if (!imageUrl) return require(`@/assets/img/team.${extension}`)
+      if (teams) return require(`@/assets/img/game.${extension}`)
+      return imageUrl
     }
 
     const formattedRoute = computed(() => {

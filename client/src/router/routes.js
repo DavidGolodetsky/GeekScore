@@ -39,8 +39,10 @@ const routes = [
         content: 'Game details page'
       }
     },
-    beforeEnter(to, _, next) {
-      const game = store.getters['games/getGame'](to.params.gameId)
+    async beforeEnter(to, _, next) {
+      const games = store.state.games.games
+      games ?? (await store.dispatch('games/loadGames'))
+      const game = await store.getters['games/getGame'](to.params.gameId)
       game ? next() : next({ name: 'NotFound' })
     }
   },
@@ -71,8 +73,12 @@ const routes = [
         content: 'Team details page'
       }
     },
-    beforeEnter(to, _, next) {
-      const team = store.getters['teams/getTeam'](to.params.teamId)
+    async beforeEnter(to, _, next) {
+      const games = store.state.games.games
+      games ?? (await store.dispatch('games/loadGames'))
+      const teams = store.state.teams.teams
+      teams ?? (await store.dispatch('teams/loadTeams'))
+      const team = await store.getters['teams/getTeam'](to.params.teamId)
       team ? next() : next({ name: 'NotFound' })
     }
   },
