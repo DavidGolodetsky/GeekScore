@@ -2,6 +2,7 @@ import firebase from 'firebase/app'
 import 'firebase/auth'
 import { auth } from 'firebaseui'
 import store from '@/store'
+import router from '@/router'
 
 const firebaseConfig = {
   apiKey: 'AIzaSyAscgoXoqL2LOk84LfNxq1BCu-JnFwyNug',
@@ -26,7 +27,7 @@ const uiConfig = {
     firebase.auth.FacebookAuthProvider.PROVIDER_ID
   ],
   callbacks: {
-    signInSuccessWithAuthResult: () => false,
+    signInSuccessWithAuthResult: () => router.push({ name: 'games' }),
     uiShown() {
       document.getElementById('loader').style.display = 'none'
     }

@@ -11,7 +11,7 @@ export default {
   },
   mutations: {
     SET_USER(state, payload) {
-      if (!payload?.id) return localStorage.clear()
+      if (!payload?.id) localStorage.clear()
       localStorage.setItem('userId', payload?.id)
       state.user = payload
     },
