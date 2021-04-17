@@ -1,6 +1,11 @@
 <template>
   <section class="game">
-    <TheTitle title="Teams" icon="account-group" :props="{ gameId }" component="teams-add-dialog" />
+    <TheTitle
+      title="Teams"
+      icon="account-group"
+      :props="{ gameId }"
+      component="teams-add-dialog"
+    />
     <div v-if="winRate" class="win-rate">
       <v-icon dark color="primary" class="mr-3">mdi-brightness-percent</v-icon>
       <span>Your win rate is: {{ winRate }}</span>
@@ -118,8 +123,8 @@ export default defineComponent({
     background-color: $secondary;
     padding: 15px;
     font-weight: 600;
-    display: flex;
-    align-items: center;
+    display: grid;
+    place-items: center;
     margin-bottom: $space-2;
     color: $primary;
   }

@@ -1,11 +1,6 @@
 <template>
   <section class="the-login-form mt-12">
-    <v-card
-      raised
-      outlined
-      dark
-      class="auth-card"
-    >
+    <v-card raised outlined dark class="auth-card">
       <v-form
         ref="form"
         v-model="valid"
@@ -18,15 +13,8 @@
         </div>
         <v-card-text>
           <div id="firebaseui-auth-container" />
-          <div
-            id="loader"
-            class="text-center"
-          >
-            <v-progress-circular
-              size="30"
-              indeterminate
-              color="secondary"
-            />
+          <div id="loader" class="text-center">
+            <v-progress-circular size="30" indeterminate color="secondary" />
           </div>
           <div class="d-md-flex d-none or-wrapper">
             <span class="or">OR</span>
@@ -70,12 +58,9 @@
         </v-card-text>
         <v-divider />
         <v-card-actions>
-          <v-btn
-            class="submit-btn"
-            ripple
-            type="submit"
-            :disabled="!valid"
-          >Submit</v-btn>
+          <v-btn class="submit-btn" ripple type="submit" :disabled="!valid"
+            >Submit</v-btn
+          >
         </v-card-actions>
       </v-form>
       <div class="text-center mb-3">
@@ -83,14 +68,12 @@
           v-if="!formProps.signUp"
           :to="{ name: 'resetPass' }"
           class="link"
-        >Forgot password?</router-link>
+          >Forgot password?</router-link
+        >
       </div>
       <div class="text-center mb-3">
         <span class="mr-3">{{ formProps.redirectText }}</span>
-        <router-link
-          :to="formProps.redirectLink"
-          class="link"
-        >{{
+        <router-link :to="formProps.redirectLink" class="link">{{
           formProps.redirectLinkText
         }}</router-link>
       </div>
@@ -99,19 +82,24 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex';
-import { fbStart } from '@/auth';
-import { emailField, standardField, requiredField, shortPassword } from '@/use/validations';
+import { mapActions } from 'vuex'
+import { fbStart } from '@/auth'
+import {
+  emailField,
+  standardField,
+  requiredField,
+  shortPassword
+} from '@/use/validations'
 
 export default {
   name: 'TheLoginForm',
   props: {
     formProps: {
       type: Object,
-      required: true,
-    },
+      required: true
+    }
   },
-  data () {
+  data() {
     return {
       valid: false,
       showPassword: false,
@@ -120,34 +108,32 @@ export default {
       email: '',
       EmailRules: [requiredField, emailField],
       username: '',
-      passwordRules: [...standardField, requiredField, shortPassword],
-    };
+      passwordRules: [...standardField, requiredField, shortPassword]
+    }
   },
   computed: {
-    comparePasswords () {
-      return [
-        this.password === this.confirmPassword || "Passwords don't match",
-      ];
+    comparePasswords() {
+      return [this.password === this.confirmPassword || "Passwords don't match"]
     },
-    loginMethod () {
-      return this.formProps.signUp ? this.signUpUser : this.signInUser;
-    },
+    loginMethod() {
+      return this.formProps.signUp ? this.signUpUser : this.signInUser
+    }
   },
-  mounted () {
-    fbStart();
+  mounted() {
+    fbStart()
   },
   methods: {
     ...mapActions('user', ['signUpUser', 'signInUser']),
-    onSubmit () {
+    onSubmit() {
       const userInfo = {
         email: this.email,
         username: this.username,
-        password: this.password,
-      };
+        password: this.password
+      }
       this.loginMethod(userInfo)
-    },
-  },
-};
+    }
+  }
+}
 </script>
 
 <style scoped lang="scss">
@@ -156,7 +142,8 @@ export default {
     position: relative;
     display: flex;
     justify-content: center;
-    align-items: center;
+    display: grid;
+    place-items: center;
     margin: 50px 0 30px 0;
   }
   .or {
@@ -164,15 +151,14 @@ export default {
     height: 53px;
     font-weight: 700;
     color: #000;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    display: grid;
+    place-items: center;
     background-color: #fff;
     border-radius: 50%;
     position: absolute;
     z-index: 1;
     &::after {
-      content: "";
+      content: '';
       z-index: -1;
       position: absolute;
       background-color: #fff;
