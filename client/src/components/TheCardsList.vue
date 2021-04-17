@@ -1,11 +1,7 @@
 <template>
   <section class="the-cards-list">
     <v-row>
-      <v-col
-        sm="6"
-        md="4"
-        cols="12"
-      >
+      <v-col sm="6" md="4" cols="12">
         <v-text-field
           v-if="cardItems.length > 3"
           v-model="searchedValue"
@@ -19,19 +15,8 @@
       </v-col>
     </v-row>
     <v-row>
-      <v-col
-        v-for="card in filteredCards"
-        :key="card._id"
-        sm="6"
-        md="4"
-        cols="12"
-        class="mb-6"
-      >
-        <v-lazy
-          :options="{ threshold: 0.5 }"
-          min-height="200"
-          transition="fade-transition"
-        >
+      <v-col v-for="card in filteredCards" :key="card._id" sm="6" md="4" cols="12" class="mb-6">
+        <v-lazy :options="{ threshold: 0.5 }" min-height="200" transition="fade-transition">
           <TheCard
             :card-info="card"
             :card-route="cardRoute"
@@ -39,12 +24,8 @@
             @favorite="$emit('favorite', $event)"
           >
             <template #action="{ item }">
-              <slot
-                name="action"
-                :item="item"
-              />
+              <slot name="action" :item="item" />
             </template>
-
           </TheCard>
         </v-lazy>
       </v-col>
@@ -53,7 +34,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, computed } from '@vue/composition-api'
+import { defineComponent, ref, computed, toRefs } from '@vue/composition-api'
 import TheCard from '@/components/TheCard.vue'
 
 export default defineComponent({
@@ -72,6 +53,8 @@ export default defineComponent({
     }
   },
   setup(props) {
+    const { cardItems }: any = toRefs(props)
+
     const searchedValue = ref('')
 
     const getCardsOrder = (cards: any) => {
@@ -80,7 +63,7 @@ export default defineComponent({
     }
 
     const filterCards = () => {
-      return props.cardItems.filter((card: any) =>
+      return cardItems.value.filter((card: any) =>
         searchedValue.value
           .toLowerCase()
           .split(' ')
@@ -89,7 +72,7 @@ export default defineComponent({
     }
 
     const filteredCards = computed(() => {
-      if (!searchedValue.value) return getCardsOrder(props.cardItems)
+      if (!searchedValue.value) return getCardsOrder(cardItems.value)
       const filtered = filterCards()
       return getCardsOrder(filtered)
     })

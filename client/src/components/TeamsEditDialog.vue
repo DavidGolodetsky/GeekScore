@@ -6,18 +6,8 @@
     simple
     :submit-logic="onSubmit"
   >
-    <v-text-field
-      v-model="name"
-      clearable
-      :rules="nameRules"
-      label="Name"
-    />
-    <v-switch
-      v-model="toDelete"
-      label="Delete team"
-      color="error"
-      hide-details
-    />
+    <v-text-field v-model="name" clearable :rules="nameRules" label="Name" />
+    <v-switch v-model="toDelete" label="Delete team" color="error" hide-details />
   </BaseDialog>
 </template>
 
@@ -34,26 +24,28 @@ export default defineComponent({
     }
   },
   setup(props, ctx) {
+    const { team }: any = toRefs(props)
+
     const store = ctx.root.$store
 
     const state = reactive({
-      name: props.team.name,
+      name: team.value.name,
       toDelete: false,
       nameRules: [...standardField, requiredField]
     })
 
     const updateTeam = () => {
-      const team = {
-        _id: props.team._id,
-        gameId: props.team.gameId,
+      const teamPayload = {
+        _id: team.value._id,
+        gameId: team.value.gameId,
         name: state.name
       }
-      store.dispatch('teams/updateTeam', team)
+      store.dispatch('teams/updateTeam', teamPayload)
     }
 
     const onSubmit = () => {
       if (!state.toDelete) return updateTeam()
-      store.dispatch('teams/deleteTeam', props.team._id)
+      store.dispatch('teams/deleteTeam', team.value._id)
     }
 
     return {

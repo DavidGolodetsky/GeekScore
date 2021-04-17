@@ -1,20 +1,8 @@
 <template>
   <section class="game">
-    <TheTitle
-      title="Teams"
-      icon="account-group"
-      :props="{ gameId }"
-      component="teams-add-dialog"
-    />
-    <div
-      v-if="winRate"
-      class="win-rate"
-    >
-      <v-icon
-        dark
-        color="primary"
-        class="mr-3"
-      >mdi-brightness-percent</v-icon>
+    <TheTitle title="Teams" icon="account-group" :props="{ gameId }" component="teams-add-dialog" />
+    <div v-if="winRate" class="win-rate">
+      <v-icon dark color="primary" class="mr-3">mdi-brightness-percent</v-icon>
       <span>Your win rate is: {{ winRate }}</span>
     </div>
     <TheCardsList
@@ -35,7 +23,8 @@ import {
   defineComponent,
   computed,
   watchEffect,
-  onBeforeUnmount
+  onBeforeUnmount,
+  toRefs
 } from '@vue/composition-api'
 import TheTitle from '@/components/TheTitle.vue'
 import TheCardsList from '@/components/TheCardsList.vue'
@@ -56,6 +45,8 @@ export default defineComponent({
     }
   },
   setup(props, ctx) {
+    const { gameId }: any = toRefs(props)
+
     const store = ctx.root.$store
 
     const allTeams = computed(() => store.state.teams.teams)
@@ -64,7 +55,7 @@ export default defineComponent({
 
     const loadGames = () => store.dispatch('games/loadGames')
 
-    const loadWinRate = () => store.dispatch('games/loadWinRate', props.gameId)
+    const loadWinRate = () => store.dispatch('games/loadWinRate', gameId.value)
 
     const loadTeams = () => store.dispatch('teams/loadTeams')
 
@@ -78,16 +69,16 @@ export default defineComponent({
 
     const winRate = computed(() => store.state.games.winRate)
 
-    const getGameTeams = () => store.getters['teams/getGameTeams'](props.gameId)
+    const getGameTeams = () => store.getters['teams/getGameTeams'](gameId.value)
 
     const gameTeams = computed(() => (allTeams?.value ? getGameTeams() : null))
 
-    const getGame = () => store.getters['games/getGame'](props.gameId)
+    const getGame = () => store.getters['games/getGame'](gameId.value)
 
     const teamRoute = computed(() => ({
       name: 'team',
       params: { teamId: '' },
-      query: { gameId: props.gameId }
+      query: { gameId: gameId.value }
     }))
 
     const updateTeam = (team: any) => store.dispatch('teams/updateTeam', team)
@@ -95,7 +86,7 @@ export default defineComponent({
     const toggleFavoriteTeam = (teamInfo: any) => {
       const team = {
         ...teamInfo,
-        gameId: props.gameId
+        gameId: gameId.value
       }
       updateTeam(team)
     }

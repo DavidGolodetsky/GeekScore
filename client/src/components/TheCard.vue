@@ -10,24 +10,13 @@
       <div class="title-wrap">
         <v-card-title class="row_between">
           <span class="card-list-name">{{ cardInfo.name }}</span>
-          <slot
-            name="action"
-            :item="cardInfo"
-          />
+          <slot name="action" :item="cardInfo" />
         </v-card-title>
       </div>
 
-      <v-list
-        v-if="cardInfo.players"
-        dense
-        disabled
-        class="players"
-      >
+      <v-list v-if="cardInfo.players" dense disabled class="players">
         <v-list-item-group>
-          <v-list-item
-            v-for="{name} in cardInfo.players"
-            :key="name"
-          >
+          <v-list-item v-for="{name} in cardInfo.players" :key="name">
             <v-list-item-icon>
               <v-icon v-text="'mdi-account'" />
             </v-list-item-icon>
@@ -79,15 +68,8 @@
           </v-card-title>
         </div>
         <template #placeholder>
-          <v-row
-            class="fill-height ma-0"
-            align="center"
-            justify="center"
-          >
-            <v-progress-circular
-              indeterminate
-              color="secondary"
-            />
+          <v-row class="fill-height ma-0" align="center" justify="center">
+            <v-progress-circular indeterminate color="secondary" />
           </v-row>
         </template>
       </v-img>
@@ -96,7 +78,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, computed } from '@vue/composition-api'
+import { defineComponent, computed, toRefs } from '@vue/composition-api'
 
 export default defineComponent({
   name: 'TheCard',
@@ -114,9 +96,11 @@ export default defineComponent({
     }
   },
   setup(props, ctx) {
+    const { cardInfo, cardRoute }: any = toRefs(props)
+
     const additionalLinks = computed(() => {
       const links = []
-      const { bggURL, rulesURL, melodiceURL } = props.cardInfo
+      const { bggURL, rulesURL, melodiceURL } = cardInfo.value
       if (bggURL) {
         const linkInfo = {
           href: bggURL,
@@ -146,25 +130,25 @@ export default defineComponent({
     })
 
     const getImagePath = (extension = 'jpg') => {
-      const { imageUrl, teams } = props.cardInfo
+      const { imageUrl, teams } = cardInfo.value
       if (!imageUrl) return require(`@/assets/img/team.${extension}`)
       if (teams) return require(`@/assets/img/game.${extension}`)
       return imageUrl
     }
 
     const formattedRoute = computed(() => {
-      const route = { ...props.cardRoute }
+      const route = { ...cardRoute.value }
       route.params = {
-        [Object.keys(props.cardRoute.params)[0]]: props.cardInfo._id
+        [Object.keys(cardRoute.value.params)[0]]: cardInfo.value._id
       }
       return route
     })
 
     const toggleFavorite = () => {
-      const favorite = !props.cardInfo.favorite
+      const favorite = !cardInfo.value.favorite
       const data = {
         favorite,
-        _id: props.cardInfo._id
+        _id: cardInfo.value._id
       }
       ctx.emit('favorite', data)
     }
