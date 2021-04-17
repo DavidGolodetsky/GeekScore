@@ -11,9 +11,12 @@ export default {
   },
   mutations: {
     SET_USER(state, payload) {
-      if (!payload?.id) localStorage.clear()
       localStorage.setItem('userId', payload?.id)
       state.user = payload
+    },
+    CLEAR_USER(state) {
+      localStorage.clear()
+      state.user = null
     },
     RESET_PASSWORD(state) {
       state.resetPassword = true
@@ -106,7 +109,7 @@ export default {
         if (router.currentRoute.path !== '/') router.push('/')
         commit('games/SET_GAMES', null, { root: true })
         commit('teams/SET_TEAMS', null, { root: true })
-        commit('SET_USER', null)
+        commit('CLEAR_USER')
       } catch (e) {
         commit('ERROR', e, { root: true })
       } finally {

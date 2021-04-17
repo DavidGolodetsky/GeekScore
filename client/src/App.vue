@@ -1,31 +1,14 @@
 <template>
-  <v-app
-    v-cloak
-    v-scroll="onScroll"
-    class="app"
-  >
+  <v-app v-cloak v-scroll="onScroll" class="app">
     <TheHeader />
     <v-main>
       <v-container class="app-container">
-        <TheAlert
-          v-if="isAlert"
-          v-bind="{alertType, alertText}"
-        />
-        <transition
-          name="slide"
-          mode="out-in"
-        >
+        <TheAlert v-if="isAlert" v-bind="{alertType, alertText}" />
+        <transition name="slide" mode="out-in">
           <router-view />
         </transition>
-        <div
-          v-if="isLoading"
-          class="loader-wrap"
-        >
-          <v-progress-circular
-            :size="50"
-            indeterminate
-            color="secondary"
-          />
+        <div v-if="isLoading" class="loader-wrap">
+          <v-progress-circular :size="50" indeterminate color="secondary" />
         </div>
         <v-btn
           v-if="isGoTopBtn"
@@ -139,9 +122,8 @@ export default defineComponent({
     right: 0;
     top: 0;
     bottom: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    display: grid;
+    place-items: center;
     background-color: rgba(0, 0, 0, 0.4);
   }
 
