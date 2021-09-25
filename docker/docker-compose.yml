@@ -1,5 +1,21 @@
 # Docker compose File for the the MEVN stack applicaton
-version: '3.8'
+
+# When running the app with Docker, the port can be specified for each service (database, backend, frontend) in the `/docker/.env` file. Also, there is a possibility to set the database name, database user, and database password.
+# Before running the docker-compose command a configuration must be done in the `.env` file of `/client/.env`. The `VUE_APP_BACKEND_HOST` variable must be set to the service name of the backend defined in `/docker/docker-compose.yml` file, which is geek-backend.
+# This must be done before building the Image. After that, it can be changed back to localhost.
+
+##### Running the App with docker-compose
+# To run the app with docker-compose, the working dir of the cmd must be `/docker` (where the docker-compose file is located)
+##### Start and rebuild Images
+# To rebuild the Images before starting the app following command must be typed `docker-compose up --build`
+##### Start without rebuild Images
+# To start the docker-compose file just type in the following command `docker-compose up`
+##### Basic commands for docker-compose
+# - `docker-compose stop` -> Stops the whole app containers
+# - `docker-compose down` -> Stops and removes the whole app containers
+# - `docker-compose logs` -> Gets the logs of all containers included in the docker-compose file
+
+version: "3.8"
 
 # Network
 networks:
