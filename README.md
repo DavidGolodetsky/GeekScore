@@ -1,8 +1,8 @@
 
 #  <img src="https://i.ibb.co/gWTjWGK/mstile-144x144.png" width=40> Geek Score
 
-A PWA for board games fans. It allows you to store your games, creates teams, and collect statistics. Build with MEVN stack.
-https://geekscore.herokuapp.com
+A PWA for board games fans build with MEVN stack. It allows you to store your games, creates teams, and collect statistics. 
+Check it out https://geekscore.herokuapp.com
 
 <img src="https://i.ibb.co/GFyt0c3/Screenshot-at-Sep-19-11-21-40.png" width=240><img src="https://i.ibb.co/c38dqdM/Phone-Screenshot-2.png" width=240>
 
