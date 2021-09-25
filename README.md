@@ -1,41 +1,46 @@
 
 #  <img src="https://i.ibb.co/gWTjWGK/mstile-144x144.png" width=40> Geek Score
 
-A PWA for board games fans build with MEVN stack. It allows you to store your games, creates teams, and collect statistics. 
+A PWA for board games fans. It allows you to store your games, creates teams, and collect statistics. 
 
-Check it out https://geekscore.herokuapp.com
+Check out the first stable version: https://geekscore.netlify.app
 
 <img src="https://i.ibb.co/GFyt0c3/Screenshot-at-Sep-19-11-21-40.png" width=240><img src="https://i.ibb.co/c38dqdM/Phone-Screenshot-2.png" width=240>
 
 <img src="https://i.ibb.co/9rqvSrP/Phone-Screenshot-3.png" width=240><img src="https://i.ibb.co/CWrw6vc/Phone-Screenshot-4.png" width=240><img src="https://i.ibb.co/LxyqVmm/Phone-Screenshot-5.png" width=240> 
 
-This is a second version of the app. The first one is up and running [here](http://geekscore.netlify.com/).
-Source code of the first version could be found [here](https://github.com/DavidGolodetsky/GeekScore-1).
-The main difference, for now, is that the first version is using Firebase as a backend, while the second version is written with Node.js and Mongo DB. The idea is that both versions would exist in the future, but the second one would be continuously improved, while the first one would be sealed. Here is an [article](https://davidgo.netlify.app/blog/geek-score.html) on my blog if you want to learn more about the project's path:)
+This is the second version of the app, build with MEVN stack, vue-composition-api, and Typescript. The first one was using Firebase as a backend.
+(If you want to learn more about the project's path here is an [article](https://davidgo.netlify.app/blog/geek-score.html) on my blog)
 
 ## For contributors:
 
 See the [Planning board](https://github.com/DavidGolodetsky/GeekScore-2/projects/1)
 
 ### Requirements
+* docker
+OR
 * node (preferably >=14)
 * npm
 
 ### How to contribute?
 
-0. If you're about to work on a particular issue, ask for an assignment to notify other developers that you're working on that.
+0. If you're about to work on a particular issue, ask for an assignment to notify other developers that you're working on that
 1. Fork the repo
-2. Clone your fork
-3. Run `cd GeekScore-2/docker` 
-4. Run `docker-compose up --build`
-6. Create your branch, commit, push, create a pull request
+2. Clone your fork to the local machine
+3. Create your branch, and a pull request
+
+### How to start up the project?
+If you're using docer:
+1. Run `cd GeekScore-2/docker` 
+2. Run `docker-compose up --build`
+3. The app will be running at http://localhost:8080/
 
 ## Project structure
 
-**Main logical parts** are Games, Teams, Rounds, and Users. Those 4 entities could be found all over the project structure. 
+**Main logical parts** are Games, Teams, Rounds, and Users.
 
 #### Backend
-Backend is written in Node.js (Express) and it's using MongoDB as a database (hence MEVN stack). Index file is `server.js` in the **root** folder. Here all routes are applied. Routes could be found in the **routes/api** folder. They are divided into 4 logical entities. Every route has its Mongoose schema. All Mongoose models could be found in the **models** folder (again they are divided into those 4 entities). Firebase is using only for authentication and it's temporary solution before migrating authentication to node.js.
+Backend is written in Node.js (Express) and it's using MongoDB as a database. Index file is `server.js` in the **root** folder. Here all routes are applied. Routes could be found in the **routes/api** folder. They are divided into 4 logical entities. Every route has its Mongoose schema. All Mongoose models could be found in the **models** folder (again they are divided into those 4 entities). Firebase is using only for authentication and it's temporary solution before migrating authentication to node.js.
 
 #### Frontend
 Frontend is written on Vue.js (^2.6). We're also using Vuetify as a UI library, and Vuex as a state management library. For routing, we're using Vue Router and Vue Test Utils (based on Jest) for unit tests. Frontend index point is `main.js`. Pages could be found in **views** folder, components are in **components** folder. For structuring components, we're sticking to official Vue [styleguide](https://vuejs.org/v2/style-guide/#Tightly-coupled-component-names-strongly-recommended).
