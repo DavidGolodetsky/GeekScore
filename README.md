@@ -38,7 +38,7 @@ If you're using docer:
 OR
 1. Run `npm i` inside the root folder
 2. Start Backend: run `npm run serve`
-3. Go to **client** folder `cd client` and run `npm i`
+3. Go to **client** folder `cd client` and run `npm i --legacy-peer-deps`
 4. Start Frontend: run `npm run serve` in the **client** folder
 
 ## Project structure
