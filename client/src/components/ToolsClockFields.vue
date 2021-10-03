@@ -41,31 +41,31 @@
 import { defineComponent } from '@vue/composition-api'
 
 export default defineComponent({
-  name: "ToolsClockFields",
+  name: 'ToolsClockFields',
   props: {
     hours: {
       type: [String, Number],
-      required: true,
+      required: true
     },
     minutes: {
       type: [String, Number],
-      required: true,
+      required: true
     },
     seconds: {
       type: [String, Number],
-      required: true,
+      required: true
     },
     disabled: {
-      type: Boolean,
-    },
+      type: Boolean
+    }
   },
   setup() {
     const padValue = (value: number | string) => {
-      return value < 10 ? `0${value}` : value;
+      return value < 10 ? `0${value}` : value
     }
     return {
-      padValue,
+      padValue
     }
   }
-});
+})
 </script>
