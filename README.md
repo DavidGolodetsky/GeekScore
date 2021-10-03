@@ -35,7 +35,6 @@ If you're using docer:
 
 1. Run `cd GeekScore-2/docker`
 2. Run `docker-compose up --build`
-3. The app will be available at http://localhost:8080/
 4. Since you already have an Image of the app. Next time you want to start it just run `docker-compose up`
    OR
 5. Run `npm i` inside the root folder
