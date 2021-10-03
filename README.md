@@ -18,7 +18,9 @@ See the [Planning board](https://github.com/DavidGolodetsky/GeekScore-2/projects
 ### Requirements
 
 - docker
-  OR
+
+OR
+
 - node (preferably >=14)
 - npm
 
@@ -35,12 +37,14 @@ If you're using docer:
 
 1. Run `cd GeekScore-2/docker`
 2. Run `docker-compose up --build`
-4. Since you already have an Image of the app. Next time you want to start it just run `docker-compose up`
-   OR
-5. Run `npm i` inside the root folder
-6. Start Backend: run `npm run serve`
-7. Go to **client** folder `cd client` and run `npm i`
-8. Start Frontend: run `npm run serve` in the **client** folder
+3. Since you already have an Image of the app. Next time you want to start it just run `docker-compose up`
+
+OR
+
+1. Run `npm i` inside the root folder
+2. Start Backend: run `npm run serve`
+3. Go to **client** folder `cd client` and run `npm i`
+4. Start Frontend: run `npm run serve` in the **client** folder
 
 ## Project structure
 
