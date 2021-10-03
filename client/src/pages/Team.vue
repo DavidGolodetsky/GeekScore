@@ -8,7 +8,13 @@
       component="rounds-add-dialog"
     />
     <div v-if="showTable">
-      <v-tabs v-model="currentTab" background-color="primary" centered dark icons-and-text>
+      <v-tabs
+        v-model="currentTab"
+        background-color="primary"
+        centered
+        dark
+        icons-and-text
+      >
         <v-tabs-slider color="secondary" />
         <v-tab v-for="(tab, i) in tabs" :key="i" :href="`#tab-${i}`">
           <span class="mt-2">{{ tab.name }}</span>
@@ -64,7 +70,6 @@ export default defineComponent({
 
     loadRoundsData(store)
 
-    //DATA
     const currentTab = 'tab-0'
     const gameId = route.query.gameId
     const tabs = [
@@ -85,7 +90,6 @@ export default defineComponent({
       }
     ]
 
-    //COMPUTED
     const games: ComputedRef<Game[]> = computed(() => store.state.games)
     const getGame: ComputedRef<Game> = computed(() =>
       store.getters['games/getGame'](gameId)
@@ -116,13 +120,11 @@ export default defineComponent({
 
     const showTable = computed(() => gameTeam && rounds.value?.length)
 
-    //LIFECYCLE HOOKS
     onUnmounted(() => store.dispatch('setBackTitle'))
 
-    //WATCH
     watch(
       teams,
-      (val) => {
+      val => {
         if (val && !!game.value && !!team.value) {
           store.dispatch(
             'setBackTitle',

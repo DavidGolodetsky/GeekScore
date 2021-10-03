@@ -49,3 +49,17 @@ export interface DemoStep {
   color: string
   icon: string
 }
+
+export interface AuthForm {
+  title: string
+  icon: string
+  redirectText: string
+  redirectLink: { name: string }
+  redirectLinkText: string
+  signUp?: boolean
+}
+
+export interface ToolsDialogTab {
+  name: string
+  component: string
+}

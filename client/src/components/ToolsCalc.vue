@@ -1,14 +1,8 @@
 <template>
   <div class="tools-scores-table">
-
     <div class="row_between mb-2">
       <span>Table fields</span>
-      <v-btn
-        small
-        fab
-        text
-        @click="addField"
-      >
+      <v-btn small fab text @click="addField">
         <v-icon dark>mdi-plus</v-icon>
       </v-btn>
     </div>
@@ -23,32 +17,32 @@
       placeholder="Parameter"
     >
       <template #prepend-inner>
-        <v-select
-          v-model="selectedOperator"
-          dense
-          :items="operators"
-        />
+        <v-select v-model="selectedOperator" dense :items="operators" />
       </template>
     </v-text-field>
   </div>
 </template>
 
-<script>
-export default {
-  name: "ToolsCalc",
-  data () {
-    return {
-      selectedOperator: "+",
-      operators: ["+", "-"],
+<script lang="ts">
+import { defineComponent, reactive, toRefs } from '@vue/composition-api'
+
+export default defineComponent({
+  name: 'ToolsCalc',
+  setup() {
+    const state = reactive({
+      selectedOperator: '+',
+      operators: ['+', '-'],
       fields: 1
-    };
-  },
-  methods: {
-    addField () {
-      this.fields++;
+    })
+
+    const addField = () => state.fields++
+
+    return {
+      addField,
+      ...toRefs(state)
     }
   }
-};
+})
 </script>
 
 <style lang="scss" scoped>

@@ -12,7 +12,7 @@ COPY ./package.json /app/package.json
 
 COPY . /app/src
 
-RUN npm install
+RUN npm install --legacy-peer-deps
 RUN npm install @vue/cli@3.7.0 -g
 
 # set working directory to source

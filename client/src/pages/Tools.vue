@@ -1,45 +1,38 @@
 <template>
   <section>
-    <the-title
-      title="Tools"
-      icon="hammer-screwdriver"
-    />
+    <the-title title="Tools" icon="hammer-screwdriver" />
     <v-row>
-      <v-col
-        v-for="(tool, i) in tools"
-        :key="i"
-        sm="6"
-        md="4"
-        cols="12"
-      >
+      <v-col v-for="(tool, i) in tools" :key="i" sm="6" md="4" cols="12">
         <component :is="tool" />
       </v-col>
     </v-row>
   </section>
 </template>
 
-<script>
-import TheTitle from "@/components/TheTitle.vue";
-import ToolsDiceDialog from "@/components/ToolsDiceDialog.vue";
-import ToolsTimerDialog from "@/components/ToolsTimerDialog.vue";
+<script lang="ts">
+import { defineComponent } from '@vue/composition-api'
+import TheTitle from '@/components/TheTitle.vue'
+import ToolsDiceDialog from '@/components/ToolsDiceDialog.vue'
+import ToolsTimerDialog from '@/components/ToolsTimerDialog.vue'
 // import ToolsCalcDialog from "@/components/ToolsCalcDialog";
 
-export default {
-  name: "Tools",
+export default defineComponent({
+  name: 'Tools',
   components: {
     TheTitle,
     ToolsDiceDialog,
-    ToolsTimerDialog,
+    ToolsTimerDialog
     // ToolsCalcDialog,
   },
-  data () {
+  setup() {
+    const tools = [
+      'tools-dice-dialog',
+      'tools-timer-dialog'
+      // 'tools-calc-dialog'
+    ]
     return {
-      tools: [
-        'tools-dice-dialog',
-        'tools-timer-dialog',
-        // 'tools-calc-dialog'
-      ],
-    };
+      tools
+    }
   }
-};
+})
 </script>

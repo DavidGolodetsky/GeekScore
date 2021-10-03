@@ -26,7 +26,6 @@ import { standardField, requiredField } from '@/use/validations'
 
 export default defineComponent({
   name: 'GamesAddDialog',
-
   setup(_, ctx) {
     const store = ctx.root.$store
 
