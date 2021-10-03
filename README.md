@@ -18,7 +18,7 @@ See the [Planning board](https://github.com/DavidGolodetsky/GeekScore-2/projects
 ### Requirements
 
 - docker
-OR
+  OR
 - node (preferably >=14)
 - npm
 
@@ -35,7 +35,7 @@ If you're using docer:
 
 1. Run `cd GeekScore-2/docker`
 2. Run `docker-compose up --build`
-4. Since you already have an Image of the app. Next time you want to start it just run `docker-compose up`
+3. Since you already have an Image of the app. Next time you want to start it just run `docker-compose up`
 
 OR
 
