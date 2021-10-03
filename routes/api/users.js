@@ -1,12 +1,12 @@
-const express = require('express');
-const User = require('../../models/user');
-const Game = require('../../models/game');
-const Round = require('../../models/round');
+const express = require("express");
+const User = require("../../models/user");
+const Game = require("../../models/game");
+const Round = require("../../models/round");
 const router = express.Router();
 
 // TODO:do you use it currently?
 
-router.post('/', async (req, res) => {
+router.post("/", async (req, res) => {
   const { id, username } = req.body;
   const user = new User({
     id,
@@ -20,11 +20,11 @@ router.post('/', async (req, res) => {
   }
 });
 
-router.put('/:id', async (req, res) => {
+router.put("/:id", async (req, res) => {
   const { id, username } = req.body;
   const user = new User({
     id,
-    username
+    username,
   });
   try {
     const updatedUser = await User.update(
@@ -44,7 +44,7 @@ router.put('/:id', async (req, res) => {
   }
 });
 
-router.get('/', async (req, res) => {
+router.get("/", async (req, res) => {
   try {
     const users = await User.find();
     res.status(200).json(users);
@@ -53,7 +53,7 @@ router.get('/', async (req, res) => {
   }
 });
 
-router.get('/:id', async (req, res) => {
+router.get("/:id", async (req, res) => {
   try {
     const user = await User.find({ id: req.params.id });
     res.status(200).json(user);
@@ -62,7 +62,7 @@ router.get('/:id', async (req, res) => {
   }
 });
 
-router.get('/win-rate/:id', async (req, res) => {
+router.get("/win-rate/:id", async (req, res) => {
   try {
     const user = req.params.id;
     const games = await Game.find({ user });
@@ -73,13 +73,13 @@ router.get('/win-rate/:id', async (req, res) => {
       const game = games.find((e) => e.id === rounds[i].gameId);
       if (winRates[game.name]) {
         winRates[game.name].totalGames += 1;
-        if (rounds[i].winner === 'me' || rounds[i].winner === 'victory') {
+        if (rounds[i].winner === "me" || rounds[i].winner === "victory") {
           winRates[game.name].wins += 1;
         }
       } else {
         winRates[game.name] = {};
         winRates[game.name].totalGames = 1;
-        if (rounds[i].winner === 'me' || rounds[i].winner === 'victory') {
+        if (rounds[i].winner === "me" || rounds[i].winner === "victory") {
           winRates[game.name].wins = 1;
         } else {
           winRates[game.name].wins = 0;

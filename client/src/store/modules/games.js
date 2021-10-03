@@ -17,12 +17,12 @@ export default {
       state.games = payload
     },
     UPDATE_GAME(state, payload) {
-      const game = state.games.find(game => game._id === payload._id)
-      state.games = state.games.filter(game => game._id !== payload._id)
+      const game = state.games.find((game) => game._id === payload._id)
+      state.games = state.games.filter((game) => game._id !== payload._id)
       state.games.push({ ...game, ...payload })
     },
     DELETE_GAME(state, payload) {
-      const games = state.games.filter(game => game._id !== payload)
+      const games = state.games.filter((game) => game._id !== payload)
       games.length ? (state.games = games) : (state.games = null)
     },
     SET_WIN_RATE(state, payload) {
@@ -100,8 +100,8 @@ export default {
   },
   getters: {
     getGame(state) {
-      return gameId => {
-        if (state.games) return state.games.find(game => game._id === gameId)
+      return (gameId) => {
+        if (state.games) return state.games.find((game) => game._id === gameId)
       }
     }
   }

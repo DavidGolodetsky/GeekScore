@@ -16,28 +16,28 @@
 </template>
 
 <script>
-import { mapActions } from "vuex";
+import { mapActions } from 'vuex'
 
 export default {
-  name: "RoundsEditDialog",
+  name: 'RoundsEditDialog',
   props: {
     round: {
       type: Object,
       required: true
     }
   },
-  data () {
+  data() {
     return {
       toDelete: false
-    };
+    }
   },
   methods: {
-    ...mapActions("rounds", ["deleteRound"]),
-    onSubmit () {
+    ...mapActions('rounds', ['deleteRound']),
+    onSubmit() {
       if (this.toDelete) {
         this.deleteRound(this.round._id)
       }
     }
   }
-};
+}
 </script>

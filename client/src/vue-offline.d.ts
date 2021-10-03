@@ -1,1 +1,1 @@
-declare module "vue-offline";
+declare module 'vue-offline'

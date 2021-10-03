@@ -15,8 +15,19 @@
       </v-col>
     </v-row>
     <v-row>
-      <v-col v-for="card in filteredCards" :key="card._id" sm="6" md="4" cols="12" class="mb-6">
-        <v-lazy :options="{ threshold: 0.5 }" min-height="200" transition="fade-transition">
+      <v-col
+        v-for="card in filteredCards"
+        :key="card._id"
+        sm="6"
+        md="4"
+        cols="12"
+        class="mb-6"
+      >
+        <v-lazy
+          :options="{ threshold: 0.5 }"
+          min-height="200"
+          transition="fade-transition"
+        >
           <TheCard
             :card-info="card"
             :card-route="cardRoute"

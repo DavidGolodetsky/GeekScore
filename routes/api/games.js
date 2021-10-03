@@ -1,9 +1,9 @@
-const express = require('express');
-const Game = require('../../models/game');
-const Round = require('../../models/round');
+const express = require("express");
+const Game = require("../../models/game");
+const Round = require("../../models/round");
 const router = express.Router();
 
-router.post('/', async (req, res) => {
+router.post("/", async (req, res) => {
   const { name, coop, teams, user, favorite, imageUrl } = req.body;
   const game = new Game({
     name,
@@ -21,7 +21,7 @@ router.post('/', async (req, res) => {
   }
 });
 
-router.get('/', async (req, res) => {
+router.get("/", async (req, res) => {
   const user = req.query.user;
   try {
     const games = await Game.find({ user });
@@ -31,32 +31,32 @@ router.get('/', async (req, res) => {
   }
 });
 
-router.patch('/:id', async (req, res) => {
+router.patch("/:id", async (req, res) => {
   try {
     await Game.findByIdAndUpdate(req.params.id, req.body);
-    res.status(200).json({ state: 'updated' });
+    res.status(200).json({ state: "updated" });
   } catch (err) {
     res.status(400).json({ message: err.message });
   }
 });
 
-router.delete('/:id', async (req, res) => {
+router.delete("/:id", async (req, res) => {
   try {
     await Game.findByIdAndRemove(req.params.id);
-    res.status(200).json({ state: 'deleted' });
+    res.status(200).json({ state: "deleted" });
   } catch (err) {
     res.status(400).json({ message: err.message });
   }
 });
 
-router.get('/win-rate/:id', async (req, res) => {
+router.get("/win-rate/:id", async (req, res) => {
   try {
     const gameId = req.params.id;
     const rounds = await Round.find({ gameId });
 
     let wins = 0;
     for (let i = 0; i < rounds.length; i++) {
-      if (rounds[i].winner === 'me' || rounds[i].winner === 'victory') wins++;
+      if (rounds[i].winner === "me" || rounds[i].winner === "victory") wins++;
     }
 
     const totalRounds = rounds.length;

@@ -1,34 +1,34 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
 const schema = new mongoose.Schema({
-    date: {
-        type: String,
-        required: true
-    },
-    user: {
-        type: String,
-        required: true
-    },
-    gameId: {
-        type: String,
-        required: true
-    },
-    teamId: {
-        type: String,
-        required: true
-    },
-    result: {
-        type: String
-    },
-    winner: {
-        type: String
-    },
-    comment: {
-        type: String
-    },
-    turn: {
-        type: String
-    }
+  date: {
+    type: String,
+    required: true,
+  },
+  user: {
+    type: String,
+    required: true,
+  },
+  gameId: {
+    type: String,
+    required: true,
+  },
+  teamId: {
+    type: String,
+    required: true,
+  },
+  result: {
+    type: String,
+  },
+  winner: {
+    type: String,
+  },
+  comment: {
+    type: String,
+  },
+  turn: {
+    type: String,
+  },
 });
 
-module.exports = mongoose.model('Round', schema);
+module.exports = mongoose.model("Round", schema);

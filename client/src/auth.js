@@ -15,7 +15,7 @@ const firebaseConfig = {
 }
 
 firebase.initializeApp(firebaseConfig)
-firebase.auth().onAuthStateChanged(user => {
+firebase.auth().onAuthStateChanged((user) => {
   if (!user) return
   store.dispatch('user/autoSignIn', user)
 })

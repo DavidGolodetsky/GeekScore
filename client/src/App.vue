@@ -3,7 +3,7 @@
     <TheHeader />
     <v-main>
       <v-container class="app-container">
-        <TheAlert v-if="isAlert" v-bind="{alertType, alertText}" />
+        <TheAlert v-if="isAlert" v-bind="{ alertType, alertText }" />
         <transition name="slide" mode="out-in">
           <router-view />
         </transition>

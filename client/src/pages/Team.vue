@@ -124,7 +124,7 @@ export default defineComponent({
 
     watch(
       teams,
-      val => {
+      (val) => {
         if (val && !!game.value && !!team.value) {
           store.dispatch(
             'setBackTitle',

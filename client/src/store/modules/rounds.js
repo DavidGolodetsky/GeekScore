@@ -15,7 +15,7 @@ export default {
       state.rounds = payload
     },
     DELETE_ROUND(state, payload) {
-      const rounds = state.rounds.filter(round => round._id !== payload)
+      const rounds = state.rounds.filter((round) => round._id !== payload)
       rounds.length ? (state.rounds = rounds) : (state.rounds = null)
     }
   },
@@ -62,12 +62,12 @@ export default {
   },
   getters: {
     getRounds(state) {
-      return query => {
+      return (query) => {
         if (!state.rounds) return
         const teamRounds = state.rounds.filter(
-          round => round.teamId === query.teamId
+          (round) => round.teamId === query.teamId
         )
-        return teamRounds.filter(round => round.gameId === query.gameId)
+        return teamRounds.filter((round) => round.gameId === query.gameId)
       }
     }
   }

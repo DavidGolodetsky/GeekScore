@@ -15,12 +15,12 @@ export default {
       state.teams = payload
     },
     UPDATE_TEAM(state, payload) {
-      const team = state.teams.find(team => team._id === payload._id)
-      state.teams = state.teams.filter(team => team._id !== payload._id)
+      const team = state.teams.find((team) => team._id === payload._id)
+      state.teams = state.teams.filter((team) => team._id !== payload._id)
       state.teams.push({ ...team, ...payload })
     },
     DELETE_TEAM(state, payload) {
-      const teams = state.teams.filter(team => team._id !== payload)
+      const teams = state.teams.filter((team) => team._id !== payload)
       teams.length ? (state.teams = teams) : (state.teams = null)
     }
   },
@@ -79,14 +79,14 @@ export default {
   },
   getters: {
     getTeam(state) {
-      return teamId => {
-        if (state.teams) return state.teams.find(team => team._id === teamId)
+      return (teamId) => {
+        if (state.teams) return state.teams.find((team) => team._id === teamId)
       }
     },
     getGameTeams(state) {
-      return gameId => {
+      return (gameId) => {
         if (state.teams)
-          return state.teams.filter(team => team.games.includes(gameId))
+          return state.teams.filter((team) => team.games.includes(gameId))
       }
     }
   }

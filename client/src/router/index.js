@@ -12,7 +12,7 @@ const router = new Router({
   scrollBehavior(to, from, savedPosition) {
     let position = { x: 0, y: 0 }
     if (savedPosition) position = savedPosition
-    return new Promise(resolve => {
+    return new Promise((resolve) => {
       setTimeout(() => {
         resolve(position)
       }, 300)
@@ -21,7 +21,7 @@ const router = new Router({
 })
 
 router.beforeEach((to, from, next) => {
-  if (!to.matched.some(record => record.meta.requiresAuth)) return next()
+  if (!to.matched.some((record) => record.meta.requiresAuth)) return next()
   store.state['user'] ? next() : next({ name: 'signIn' })
 })
 

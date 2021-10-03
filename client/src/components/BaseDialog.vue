@@ -13,29 +13,17 @@
         >
           <v-icon dark>mdi-{{ activatorIcon }}</v-icon>
         </v-btn>
-        <label
-          :for="`activator_${activatorText}`"
-          class="label_text"
-        >{{
-      activatorText
-    }}</label>
+        <label :for="`activator_${activatorText}`" class="label_text">{{
+          activatorText
+        }}</label>
       </slot>
     </div>
-    <v-dialog
-      v-model="dialog"
-      max-width="600"
-    >
+    <v-dialog v-model="dialog" max-width="600">
       <v-card class="BaseDialog">
         <v-card-title>
           <h3 class="app-headline">{{ header }}</h3>
           <v-spacer />
-          <v-btn
-            small
-            aria-label="Close modal"
-            fab
-            text
-            @click="close"
-          >
+          <v-btn small aria-label="Close modal" fab text @click="close">
             <v-icon dark>mdi-close</v-icon>
           </v-btn>
         </v-card-title>
@@ -58,13 +46,15 @@
                 class="mr-2"
                 outlined
                 @click="close"
-              >Cancel</v-btn>
+                >Cancel</v-btn
+              >
               <v-btn
                 color="secondary darken-1"
                 outlined
                 type="submit"
                 :disabled="!valid"
-              >Submit</v-btn>
+                >Submit</v-btn
+              >
             </slot>
           </v-card-actions>
         </v-form>
@@ -75,49 +65,49 @@
 
 <script>
 export default {
-  name: "BaseDialog",
+  name: 'BaseDialog',
   // TODO:refactor
   props: {
     activatorIcon: {
       type: String,
-      default: "",
+      default: ''
     },
     header: {
       type: String,
-      required: true,
+      required: true
     },
     color: {
       type: String,
-      default: "secondary",
+      default: 'secondary'
     },
     submitLogic: {
       type: Function,
-      default: () => { },
+      default: () => {}
     },
     activatorText: {
       type: String,
-      default: "",
+      default: ''
     },
     simple: {
-      type: Boolean,
-    },
+      type: Boolean
+    }
   },
-  data () {
+  data() {
     return {
       dialog: false,
-      valid: false,
-    };
+      valid: false
+    }
   },
   methods: {
-    onSubmit () {
-      this.submitLogic();
-      this.close();
+    onSubmit() {
+      this.submitLogic()
+      this.close()
     },
-    close () {
-      this.dialog = false;
-    },
-  },
-};
+    close() {
+      this.dialog = false
+    }
+  }
+}
 </script>
 
 <style scoped lang="scss">

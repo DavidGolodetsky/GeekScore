@@ -32,7 +32,7 @@ const requireComponent = require.context(
   true,
   /Base[A-Z]\w+\.(vue|js)$/
 )
-requireComponent.keys().forEach(fileName => {
+requireComponent.keys().forEach((fileName) => {
   let baseComponentConfig = requireComponent(fileName)
   baseComponentConfig = baseComponentConfig.default || baseComponentConfig
   const baseComponentName =
@@ -45,5 +45,5 @@ new Vue({
   vuetify,
   router,
   store,
-  render: h => h(App)
+  render: (h) => h(App)
 }).$mount('#app')

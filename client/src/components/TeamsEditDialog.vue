@@ -7,7 +7,12 @@
     :submit-logic="onSubmit"
   >
     <v-text-field v-model="name" clearable :rules="nameRules" label="Name" />
-    <v-switch v-model="toDelete" label="Delete team" color="error" hide-details />
+    <v-switch
+      v-model="toDelete"
+      label="Delete team"
+      color="error"
+      hide-details
+    />
   </BaseDialog>
 </template>
 

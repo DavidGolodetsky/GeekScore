@@ -129,7 +129,7 @@ export default {
     },
     isUniqueName($ev) {
       let duplicatedPlayerName = this.players.filter(
-        player => player.name === $ev
+        (player) => player.name === $ev
       )
       const isDuplicated =
         duplicatedPlayerName.length < 2 || 'This field should be unique'

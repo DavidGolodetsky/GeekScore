@@ -1,10 +1,6 @@
 <template>
   <section>
-    <TheTitle
-      title="Games"
-      icon="dice-multiple"
-      component="games-add-dialog"
-    />
+    <TheTitle title="Games" icon="dice-multiple" component="games-add-dialog" />
     <TheCardsList
       v-if="games"
       :card-route="gameRoute"

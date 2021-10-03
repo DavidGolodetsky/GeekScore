@@ -1,15 +1,7 @@
 <template>
   <section class="the-alert">
-    <transition
-      appear
-      name="fade-down"
-    >
-      <v-alert
-        dismissible
-        value
-        :type="alertType"
-        @input="onClose()"
-      >
+    <transition appear name="fade-down">
+      <v-alert dismissible value :type="alertType" @input="onClose()">
         {{ alertText }}
       </v-alert>
     </transition>
@@ -17,37 +9,37 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, onMounted } from "@vue/composition-api";
-import { vibrate } from "@/use/common";
+import { defineComponent, onMounted } from '@vue/composition-api'
+import { vibrate } from '@/use/common'
 export default defineComponent({
-  name: "TheAlert",
+  name: 'TheAlert',
   props: {
     alertType: {
       type: String,
-      required: true,
+      required: true
     },
     alertText: {
       type: String,
-      required: true,
-    },
+      required: true
+    }
   },
   setup(_, ctx) {
-    const store = ctx.root.$store;
+    const store = ctx.root.$store
 
-    onMounted(() => vibrate());
+    onMounted(() => vibrate())
 
-    const setError = () => store.dispatch("setError");
+    const setError = () => store.dispatch('setError')
 
     const onClose = () => {
-      setError();
-      ctx.emit("dismissed");
-    };
+      setError()
+      ctx.emit('dismissed')
+    }
 
     return {
-      onClose,
-    };
-  },
-});
+      onClose
+    }
+  }
+})
 </script>
 
 <style lang="scss">

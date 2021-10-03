@@ -39,23 +39,23 @@
 
 <script>
 export default {
-  name: "ToolsClockFields",
+  name: 'ToolsClockFields',
   props: {
     hours: {
       type: [String, Number],
-      required: true,
+      required: true
     },
     minutes: {
       type: [String, Number],
-      required: true,
+      required: true
     },
     seconds: {
       type: [String, Number],
-      required: true,
+      required: true
     },
     disabled: {
-      type: Boolean,
-    },
-  },
-};
+      type: Boolean
+    }
+  }
+}
 </script>

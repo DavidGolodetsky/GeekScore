@@ -24,10 +24,7 @@
       >
         <template #expanded-item="{ item, headers }">
           <td :colspan="headers.length">
-            <div
-              v-if="item.turn"
-              class="turn"
-            >First turn: {{ item.turn }}</div>
+            <div v-if="item.turn" class="turn">First turn: {{ item.turn }}</div>
             <div v-if="item.comment">Comment: {{ item.comment }}</div>
           </td>
         </template>
@@ -40,10 +37,10 @@
 </template>
 
 <script>
-import RoundsEditDialog from "@/components/RoundsEditDialog.vue";
+import RoundsEditDialog from '@/components/RoundsEditDialog.vue'
 
 export default {
-  name: "RoundsTable",
+  name: 'RoundsTable',
   // TODO:refactor
   components: {
     RoundsEditDialog
@@ -58,37 +55,37 @@ export default {
       required: true
     }
   },
-  data () {
+  data() {
     return {
-      search: "",
+      search: '',
       expanded: [],
       headers: []
-    };
+    }
   },
-  created () {
-    this.cookHeaders();
+  created() {
+    this.cookHeaders()
   },
   methods: {
-    cookHeaders () {
+    cookHeaders() {
       const fields = [
         this.team.coop
-          ? { text: "Result", value: "result" }
-          : { text: "Tie", value: "tie" },
-        { text: "Date", value: "date" },
-        { text: "Actions", value: "action", sortable: false }
-      ];
-      if (!this.team.coop) this.countPlayers();
-      this.headers.push(...fields);
+          ? { text: 'Result', value: 'result' }
+          : { text: 'Tie', value: 'tie' },
+        { text: 'Date', value: 'date' },
+        { text: 'Actions', value: 'action', sortable: false }
+      ]
+      if (!this.team.coop) this.countPlayers()
+      this.headers.push(...fields)
     },
-    countPlayers () {
-      const players = this.team.players.map(player => ({
+    countPlayers() {
+      const players = this.team.players.map((player) => ({
         text: player.name,
         value: player.name.toLowerCase()
-      }));
-      this.headers.push(...players);
+      }))
+      this.headers.push(...players)
     }
   }
-};
+}
 </script>
 
 <style scoped lang="scss">

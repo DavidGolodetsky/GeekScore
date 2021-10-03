@@ -32,62 +32,63 @@
 </template>
 
 <script>
-import { standardField, requiredField, linkField } from "@/use/validations";
-import { mapActions } from "vuex";
+import { standardField, requiredField, linkField } from '@/use/validations'
+import { mapActions } from 'vuex'
 
 export default {
-  name: "GamesEditDialog",
+  name: 'GamesEditDialog',
   props: {
     game: {
       type: Object,
       required: true
     }
   },
-  data () {
+  data() {
     return {
       toDelete: false,
       fields: {
         name: {
-          label: "Name",
-          icon: "dice-multiple",
+          label: 'Name',
+          icon: 'dice-multiple',
           value: this.game.name,
           rules: [...standardField, requiredField]
         },
         bggURL: {
-          label: "Board geek game URL",
-          icon: "cards",
+          label: 'Board geek game URL',
+          icon: 'cards',
           // TODO:refactor
-          value: this.game.bggURL === undefined ? "" : this.game.bggURL,
+          value: this.game.bggURL === undefined ? '' : this.game.bggURL,
           rules: [linkField]
         },
         melodiceURL: {
-          label: "Melodice URL",
-          icon: "music",
-          value: this.game.melodiceURL === undefined ? "" : this.game.melodiceURL,
+          label: 'Melodice URL',
+          icon: 'music',
+          value:
+            this.game.melodiceURL === undefined ? '' : this.game.melodiceURL,
           rules: [linkField]
         },
         rulesURL: {
-          label: "Rules URL",
-          icon: "book-open-variant",
-          value: this.game.rulesURL === undefined ? "" : this.game.rulesURL,
+          label: 'Rules URL',
+          icon: 'book-open-variant',
+          value: this.game.rulesURL === undefined ? '' : this.game.rulesURL,
           rules: [linkField]
         },
         imageUrl: {
-          label: "Image URL",
-          icon: "image",
-          value: this.game.imageUrl === undefined ? "" : this.game.imageUrl,
+          label: 'Image URL',
+          icon: 'image',
+          value: this.game.imageUrl === undefined ? '' : this.game.imageUrl,
           rules: [linkField]
         }
       }
-    };
+    }
   },
   methods: {
-    ...mapActions("games", ["updateGame", "deleteGame"]),
-    onSubmit () {
+    ...mapActions('games', ['updateGame', 'deleteGame']),
+    onSubmit() {
       if (this.toDelete) return this.deleteGame(this.game._id)
-      this.updateTheGame();
+      this.updateTheGame()
     },
-    updateTheGame () {
+    updateTheGame() {
       const game = {
         _id: this.game._id,
         name: this.fields.name.value,
@@ -95,10 +96,9 @@ export default {
         melodiceURL: this.fields.melodiceURL.value,
         rulesURL: this.fields.rulesURL.value,
         imageUrl: this.fields.imageUrl.value
-      };
-      this.updateGame(game);
+      }
+      this.updateGame(game)
     }
   }
-};
+}
 </script>
-

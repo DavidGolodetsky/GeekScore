@@ -1,17 +1,8 @@
 <template>
-  <v-footer
-    class="the-footer"
-    padless
-  >
-    <v-layout
-      primary
-      white--text
-    >
+  <v-footer class="the-footer" padless>
+    <v-layout primary white--text>
       <v-container>
-        <span
-          class="mr-6"
-          data-test-copy
-        >&copy; {{ copyright }}</span>
+        <span class="mr-6" data-test-copy>&copy; {{ copyright }}</span>
         <a
           class="link"
           href="https://github.com/DavidGolodetsky/GeekScore-2"
@@ -19,10 +10,7 @@
           target="_blank"
         >
           <span class="mr-2">Repo</span>
-          <v-icon
-            size="18"
-            dark
-          >mdi-code-tags</v-icon>
+          <v-icon size="18" dark>mdi-code-tags</v-icon>
         </a>
       </v-container>
     </v-layout>
