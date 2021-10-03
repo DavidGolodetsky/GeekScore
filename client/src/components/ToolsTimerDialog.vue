@@ -123,7 +123,7 @@ export default defineComponent({
         }
       }
     }
-    
+
     const playPauseTimer = () => {
       pause.value = !pause.value;
 
