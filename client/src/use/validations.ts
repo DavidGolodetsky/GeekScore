@@ -1,7 +1,7 @@
 export const requiredField = (v: string | number) => !!v || 'Field is required'
 
 export const tooLongField = (v: string): true | string => {
-  const condition = !!(v.length <= 60)
+  const condition = !!(v.length <= 100)
   const message = 'Field is too long'
   return v ? condition || message : true
 }
