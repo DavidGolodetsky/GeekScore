@@ -1,7 +1,7 @@
-***Related Issues***
+**_Related Issues_**
 
 Closes #
 
-***Short Description and Why It's Useful***
+**_Short Description and Why It's Useful_**
 
-***Screenshots of Visual Changes before/after (if There Are Any)***
+**_Screenshots of Visual Changes before/after (if There Are Any)_**
