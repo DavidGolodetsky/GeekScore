@@ -41,10 +41,10 @@ If you're using docer:
 
 OR
 
-5. Run `npm i` inside the root folder
-6. Start Backend: run `npm run serve`
-7. Go to **client** folder `cd client` and run `npm i`
-8. Start Frontend: run `npm run serve` in the **client** folder
+1. Run `npm i` inside the root folder
+2. Start Backend: run `npm run serve`
+3. Go to **client** folder `cd client` and run `npm i`
+4. Start Frontend: run `npm run serve` in the **client** folder
 
 ## Project structure
 
