@@ -1,5 +1,6 @@
 export const requiredField = (v: string | number): boolean | string  => !!v || 'Field is required'
 
+
 export const tooLongField = (v: string): boolean | string  => {
   const condition = !!(v.length <= 60)
   const message = 'Field is too long'
@@ -23,6 +24,7 @@ export const emailField = (v: string): boolean | string  => {
   const message = 'E-mail must be valid'
   return v ? condition || message : true
 }
+
 
 export const shortPassword = (v: string): boolean | string  => {
   const condition = !!(v.length >= 6)
