@@ -18,7 +18,9 @@ See the [Planning board](https://github.com/DavidGolodetsky/GeekScore-2/projects
 ### Requirements
 
 - docker
+
 OR
+
 - node (preferably >=14)
 - npm
 
