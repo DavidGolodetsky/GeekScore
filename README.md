@@ -17,8 +17,6 @@ This is the second version of the app, build with MEVN stack, vue-composition-ap
 See the [Planning board](https://github.com/DavidGolodetsky/GeekScore-2/projects/1)
 
 ### Requirements
-* docker
-OR
 * node (preferably >=14)
 * npm
 
@@ -30,12 +28,6 @@ OR
 3. Create your branch, and a pull request
 
 ### How to start up the project?
-If you're using docer:
-1. Run `cd GeekScore-2/docker` 
-2. Run `docker-compose up --build`
-3. The app will be available at http://localhost:8080/
-4. Since you already have an Image of the app. Next time you want to start it just run `docker-compose up`
-OR
 1. Run `npm i` inside the root folder
 2. Start Backend: run `npm run serve`
 3. Go to **client** folder `cd client` and run `npm i --legacy-peer-deps`
