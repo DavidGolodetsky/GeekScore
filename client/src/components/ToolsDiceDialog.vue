@@ -72,61 +72,60 @@
   </BaseDialog>
 </template>
 
-<script>
-export default {
+<script lang="ts">
+import { defineComponent, reactive, ref } from '@vue/composition-api'
+
+export default defineComponent({
   name: "ToolsDiceDialog",
-  data () {
-    return {
-      show: true,
-      totalValue: "",
-      fields: {
-        diceSide: {
-          func: this.changeSide,
-          label: "Dice Sides",
-          model: 3,
-        },
-        rollNumber: {
-          func: this.changeRoll,
-          label: "Number of dices",
-          model: 1,
-        },
+
+  setup() {
+    const show = ref(true)
+    const totalValue = ref(0)
+    const fields = reactive({
+      diceSide: {
+        label: "Dice Sides",
+        model: 3,
+        func: (type: string) => {
+          if (type === "plus" && fields.diceSide.model < 20) {
+            fields.diceSide.model++
+          } else if (type === "minus" && fields.diceSide.model > 3) {
+            fields.diceSide.model--
+          }
+        }
       },
-    };
-  },
-  methods: {
-    changeSide (operator) {
-      if (operator !== "plus") {
-        if (this.fields.diceSide.model > 3) {
-          this.fields.diceSide.model--;
+      rollNumber: {
+        label: "Number of dices",
+        model: 1,
+        func: (type: string) => {
+          if (type === "plus" && fields.rollNumber.model < 10) {
+            fields.rollNumber.model++
+          } else if (type === "minus" && fields.rollNumber.model > 1) {
+            fields.rollNumber.model--
+          }
         }
       }
-      if (this.fields.diceSide.model < 20) {
-        this.fields.diceSide.model++;
-      }
-    },
-    changeRoll (operator) {
-      if (operator !== "plus") {
-        if (this.fields.rollNumber.model > 1) {
-          this.fields.rollNumber.model--;
-        }
-      }
-      if (this.fields.rollNumber.model < 10) {
-        this.fields.rollNumber.model++;
-      }
-    },
-    rollDice () {
-      this.show = !this.show;
-      this.totalValue =
-        this.fields.rollNumber.model +
+    })
+
+    const rollDice = () => {
+      show.value = !show.value;
+      totalValue.value =
+        fields.rollNumber.model +
         Math.floor(
           Math.random() *
-          (this.fields.diceSide.model * this.fields.rollNumber.model -
-            this.fields.rollNumber.model +
+          (fields.diceSide.model * fields.rollNumber.model -
+            fields.rollNumber.model +
             1)
         );
-    },
+    }
+
+    return {
+      show,
+      totalValue,
+      fields,
+      rollDice,
+    }
   },
-};
+})
 </script>
 
 <style scoped lang="scss">
