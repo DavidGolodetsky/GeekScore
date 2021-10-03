@@ -1,31 +1,23 @@
 <template>
-
   <BaseDialog
     activator-icon="plus"
     header="Add team"
     button-text="Add team"
     :submit-logic="onSubmit"
   >
-    <v-tabs v-model="currentTab">
+    <v-tabs v-model="currentTab" @change="resetSelectedTeam">
       <v-tabs-slider color="secondary" />
-      <v-tab
-        v-for="(tab, i) in tabs"
-        :key="i"
-        :href="`#tab-${i}`"
-      >
+      <v-tab v-for="(tab, i) in tabs" :key="i" :href="`#tab-${i}`">
         <span class="mt-2">{{ tab }}</span>
       </v-tab>
     </v-tabs>
-    <v-tabs-items
-      v-model="currentTab"
-      class="pt-4 px-4"
-    >
+    <v-tabs-items v-model="currentTab" class="pt-4 px-4">
       <v-tab-item value="tab-0">
         <v-select
           v-model="selectedTeam"
           prepend-icon="mdi-account-multiple-plus"
           :items="teams"
-          :rules="selectRules"
+          :rules="selectedTeam ? selectRules : []"
           item-text="name"
           item-value="_id"
           label="Team"
@@ -75,14 +67,14 @@ import { requiredField, standardField } from '@/use/validations'
 import { mapActions, mapGetters, mapState } from 'vuex'
 
 export default {
-  name: "TeamsAddDialog",
+  name: 'TeamsAddDialog',
   props: {
     gameId: {
       type: String,
-      required: true,
-    },
+      required: true
+    }
   },
-  data () {
+  data() {
     return {
       name: '',
       coop: false,
@@ -97,34 +89,37 @@ export default {
       numberOfPlayers: Array(8)
         .join(0)
         .split(0)
-        .map((v, i) => i + 1),
+        .map((v, i) => i + 1)
     }
   },
   computed: {
     ...mapState('user', ['user']),
     ...mapState('games', ['games']),
     ...mapState('teams', ['teams']),
-    ...mapGetters('games', ['getGame',]),
+    ...mapGetters('games', ['getGame']),
     ...mapGetters('teams', ['getTeam']),
-    game () {
+    game() {
       return this.games ?? this.getGame(this.gameId)
     },
-    isCoop () {
+    isCoop() {
       return this.game ? this.game.coop || this.coop : null
-    },
+    }
   },
-  created () {
+  created() {
     this.setInitialPlayer()
   },
   methods: {
     ...mapActions('teams', ['createTeam', 'updateTeam']),
-    setInitialPlayer () {
+    setInitialPlayer() {
       if (!this.user?.username) return
       const name = this.user.username ? this.user.username : 'Me'
       this.players.push({ name })
     },
-    setPlayers ($ev) {
-      let myName = this.user.username ? this.user.username : "Me"
+    resetSelectedTeam() {
+      if (this.selectedTeam) this.selectedTeam = ''
+    },
+    setPlayers($ev) {
+      let myName = this.user.username ? this.user.username : 'Me'
       this.players = [{ name: myName, isMe: true }]
       for (let i = 1; i < $ev; i++) {
         let player = { name: '' }
@@ -132,28 +127,28 @@ export default {
       }
       if ($ev === 1) this.coop = true
     },
-    isUniqueName ($ev) {
+    isUniqueName($ev) {
       let duplicatedPlayerName = this.players.filter(
-        (player) => player.name === $ev
+        player => player.name === $ev
       )
       const isDuplicated =
         duplicatedPlayerName.length < 2 || 'This field should be unique'
       this.playerRules = [...this.playerRules, isDuplicated]
     },
-    onSubmit () {
+    onSubmit() {
       this.selectedTeam ? this.addExistingTeam() : this.createNewTeam()
     },
-    createNewTeam () {
+    createNewTeam() {
       const team = {
         games: [this.gameId],
         gameName: this.game.name,
         name: this.name,
         coop: this.isCoop,
-        players: this.players,
+        players: this.players
       }
       this.createTeam(team)
     },
-    addExistingTeam () {
+    addExistingTeam() {
       const team = this.getTeam(this.selectedTeam)
       const payload = {
         _id: this.selectedTeam,
@@ -161,8 +156,6 @@ export default {
       }
       this.updateTeam(payload)
     }
-  },
+  }
 }
 </script>
-
-
