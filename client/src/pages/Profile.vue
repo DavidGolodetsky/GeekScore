@@ -31,26 +31,35 @@
   </section>
 </template>
 
-<script>
-import TheTitle from '@/components/TheTitle';
-import { mapActions, mapState } from 'vuex';
+<script lang="ts">
+import {
+  defineComponent, computed, onMounted
+} from '@vue/composition-api'
+import TheTitle from '../components/TheTitle.vue';
 
-export default {
+export default defineComponent({
   name: 'Profile',
   components: {
     TheTitle,
   },
-  computed: {
-    ...mapState('user', ['user', 'winRates']),
-    isUsername () {
-      return this.user?.username
+  setup(_, ctx) {
+    const store = ctx.root.$store
+    const user = store.state.user
+
+    const isUsername = computed(() => store.state.user.user?.username)
+    const winRates = computed(() => store.state.user.winRates)
+
+    const loadWinRates = () => (store.dispatch('user/loadWinRates'))
+
+    onMounted(() => {
+      loadWinRates()
+    })
+
+    return {
+      user,
+      winRates,
+      isUsername
     }
-  },
-  created () {
-    this.loadWinRates()
-  },
-  methods: {
-    ...mapActions('user', ['loadWinRates']),
-  },
-};
+  }
+});
 </script>
