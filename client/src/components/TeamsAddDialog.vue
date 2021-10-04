@@ -95,7 +95,7 @@ export default {
         .map((v, i) => i + 1)
     }
   },
-   setup(props, ctx) {
+  setup(props, ctx) {
     const store = ctx.root.$store
 
     const getGameTeams = () => store.getters['teams/getGameTeams'](props.gameId)
@@ -105,7 +105,7 @@ export default {
     return {
       gameTeams
     }
-   },
+  },
   computed: {
     ...mapState('user', ['user']),
     ...mapState('games', ['games']),
