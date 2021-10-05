@@ -16,7 +16,7 @@
         <v-select
           v-model="selectedTeam"
           prepend-icon="mdi-account-multiple-plus"
-          :items="teams"
+          :items="filteredTeams"
           :rules="selectedTeam ? selectRules : []"
           item-text="name"
           item-value="_id"
@@ -65,6 +65,9 @@
 <script>
 import { requiredField, standardField } from '@/use/validations'
 import { mapActions, mapGetters, mapState } from 'vuex'
+import {
+  computed,
+} from '@vue/composition-api'
 
 export default {
   name: 'TeamsAddDialog',
@@ -92,6 +95,17 @@ export default {
         .map((v, i) => i + 1)
     }
   },
+  setup(props, ctx) {
+    const store = ctx.root.$store
+
+    const getGameTeams = () => store.getters['teams/getGameTeams'](props.gameId)
+
+    const gameTeams = computed(() => (props.gameId ? getGameTeams() : null))
+
+    return {
+      gameTeams
+    }
+  },
   computed: {
     ...mapState('user', ['user']),
     ...mapState('games', ['games']),
@@ -103,7 +117,15 @@ export default {
     },
     isCoop() {
       return this.game ? this.game.coop || this.coop : null
-    }
+    },
+    filteredTeams(){
+
+        let teamNames = this.gameTeams && this.gameTeams.map(team => {
+            return team.name
+        });
+
+        return this.teams ? this.teams.filter(item => !teamNames.includes(item.name)) : [];
+      }
   },
   created() {
     this.setInitialPlayer()
