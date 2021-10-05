@@ -27,10 +27,10 @@ Vue.use(VueOffline, {
 })
 
 // Registering global components automatically
-// skipcq: JS-S001
 const requireComponent = require.context(
   './components',
   true,
+  // skipcq: JS-S001
   /Base[A-Z]\w+\.(vue|js)$/
 )
 requireComponent.keys().forEach(fileName => {
