@@ -27,6 +27,7 @@ Vue.use(VueOffline, {
 })
 
 // Registering global components automatically
+// skipcq: JS-S001
 const requireComponent = require.context(
   './components',
   true,
