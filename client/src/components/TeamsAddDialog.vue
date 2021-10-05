@@ -65,9 +65,7 @@
 <script>
 import { requiredField, standardField } from '@/use/validations'
 import { mapActions, mapGetters, mapState } from 'vuex'
-import {
-  computed,
-} from '@vue/composition-api'
+import { computed } from '@vue/composition-api'
 
 export default {
   name: 'TeamsAddDialog',
@@ -118,14 +116,17 @@ export default {
     isCoop() {
       return this.game ? this.game.coop || this.coop : null
     },
-    filteredTeams(){
+    filteredTeams() {
+      let teamNames =
+        this.gameTeams &&
+        this.gameTeams.map((team) => {
+          return team.name
+        })
 
-        let teamNames = this.gameTeams && this.gameTeams.map(team => {
-            return team.name
-        });
-
-        return this.teams ? this.teams.filter(item => !teamNames.includes(item.name)) : [];
-      }
+      return this.teams
+        ? this.teams.filter((item) => !teamNames.includes(item.name))
+        : []
+    }
   },
   created() {
     this.setInitialPlayer()
@@ -151,7 +152,7 @@ export default {
     },
     isUniqueName($ev) {
       let duplicatedPlayerName = this.players.filter(
-        player => player.name === $ev
+        (player) => player.name === $ev
       )
       const isDuplicated =
         duplicatedPlayerName.length < 2 || 'This field should be unique'
