@@ -1,12 +1,6 @@
 <template>
   <section>
-    <v-card
-      v-if="!isResetPasswordDone"
-      raised
-      outlined
-      dark
-      class="auth-card"
-    >
+    <v-card v-if="!isResetPasswordDone" raised outlined dark class="auth-card">
       <v-form
         ref="form"
         v-model="valid"
@@ -31,12 +25,9 @@
         </v-card-text>
         <v-divider />
         <v-card-actions>
-          <v-btn
-            ripple
-            class="submit-btn"
-            type="submit"
-            :disabled="!valid"
-          >Submit</v-btn>
+          <v-btn ripple class="submit-btn" type="submit" :disabled="!valid"
+            >Submit</v-btn
+          >
         </v-card-actions>
       </v-form>
     </v-card>
@@ -49,23 +40,24 @@
 
 <script lang="ts">
 import { defineComponent, ref } from '@vue/composition-api'
-import { emailField, requiredField } from "../use/validations";
+import { emailField, requiredField } from '../use/validations'
 
 export default defineComponent({
-  name: "ResetPassword",
-  setup(_, ctx)  {
-    const store = ctx.root.$store;
-    const valid = ref(false);
-    const isResetPasswordDone = ref(false);
-    const email = ref("");
-    const EmailRules = [requiredField, emailField];
+  name: 'ResetPassword',
+  setup(_, ctx) {
+    const store = ctx.root.$store
+    const valid = ref(false)
+    const isResetPasswordDone = ref(false)
+    const email = ref('')
+    const EmailRules = [requiredField, emailField]
 
-    const resetPassword = (email: string) => store.dispatch("user/resetPassword", email);
+    const resetPassword = (email: string) =>
+      store.dispatch('user/resetPassword', email)
 
     const onSubmit = async () => {
-        await resetPassword(email.value);
-        isResetPasswordDone.value = true;
-    };
+      await resetPassword(email.value)
+      isResetPasswordDone.value = true
+    }
 
     return {
       valid,
@@ -73,7 +65,7 @@ export default defineComponent({
       EmailRules,
       isResetPasswordDone,
       onSubmit
-    };
-  },
-});
+    }
+  }
+})
 </script>
