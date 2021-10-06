@@ -47,28 +47,33 @@
   </section>
 </template>
 
-<script>
-import { mapActions, mapState } from "vuex";
-import { emailField, requiredField } from "@/use/validations";
+<script lang="ts">
+import { defineComponent, ref } from '@vue/composition-api'
+import { emailField, requiredField } from "../use/validations";
 
-export default {
+export default defineComponent({
   name: "ResetPassword",
-  data () {
+  setup(_, ctx)  {
+    const store = ctx.root.$store;
+    const valid = ref(false);
+    const isResetPasswordDone = ref(false);
+    const email = ref("");
+    const EmailRules = [requiredField, emailField];
+
+    const resetPassword = (email: string) => store.dispatch("user/resetPassword", email);
+
+    const onSubmit = async () => {
+        await resetPassword(email.value);
+        isResetPasswordDone.value = true;
+    };
+
     return {
-      valid: false,
-      email: "",
-      resetted: false,
-      EmailRules: [requiredField, emailField]
+      valid,
+      email,
+      EmailRules,
+      isResetPasswordDone,
+      onSubmit
     };
   },
-  computed: {
-    ...mapState("user", ["resetPassword"])
-  },
-  methods: {
-    ...mapActions("user", ["resetPassword"]),
-    onSubmit () {
-      this.resetPassword(this.email);
-    }
-  }
-};
+});
 </script>
