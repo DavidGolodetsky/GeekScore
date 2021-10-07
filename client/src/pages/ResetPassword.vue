@@ -1,12 +1,6 @@
 <template>
   <section>
-    <v-card
-      v-if="!isResetPasswordDone"
-      raised
-      outlined
-      dark
-      class="auth-card"
-    >
+    <v-card v-if="!isResetPasswordDone" raised outlined dark class="auth-card">
       <v-form
         ref="form"
         v-model="valid"
@@ -31,12 +25,9 @@
         </v-card-text>
         <v-divider />
         <v-card-actions>
-          <v-btn
-            ripple
-            class="submit-btn"
-            type="submit"
-            :disabled="!valid"
-          >Submit</v-btn>
+          <v-btn ripple class="submit-btn" type="submit" :disabled="!valid"
+            >Submit</v-btn
+          >
         </v-card-actions>
       </v-form>
     </v-card>
@@ -47,28 +38,34 @@
   </section>
 </template>
 
-<script>
-import { mapActions, mapState } from "vuex";
-import { emailField, requiredField } from "@/use/validations";
+<script lang="ts">
+import { defineComponent, ref } from '@vue/composition-api'
+import { emailField, requiredField } from '../use/validations'
 
-export default {
-  name: "ResetPassword",
-  data () {
+export default defineComponent({
+  name: 'ResetPassword',
+  setup(_, ctx) {
+    const store = ctx.root.$store
+    const valid = ref(false)
+    const isResetPasswordDone = ref(false)
+    const email = ref('')
+    const EmailRules = [requiredField, emailField]
+
+    const resetPassword = (email: string) =>
+      store.dispatch('user/resetPassword', email)
+
+    const onSubmit = async () => {
+      await resetPassword(email.value)
+      isResetPasswordDone.value = true
+    }
+
     return {
-      valid: false,
-      email: "",
-      resetted: false,
-      EmailRules: [requiredField, emailField]
-    };
-  },
-  computed: {
-    ...mapState("user", ["resetPassword"])
-  },
-  methods: {
-    ...mapActions("user", ["resetPassword"]),
-    onSubmit () {
-      this.resetPassword(this.email);
+      valid,
+      email,
+      EmailRules,
+      isResetPasswordDone,
+      onSubmit
     }
   }
-};
+})
 </script>

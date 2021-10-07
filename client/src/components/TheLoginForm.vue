@@ -88,7 +88,8 @@ import {
   emailField,
   standardField,
   requiredField,
-  shortPassword
+  shortPassword,
+  tooLongField
 } from '@/use/validations'
 
 export default {
@@ -106,7 +107,7 @@ export default {
       password: '',
       confirmPassword: '',
       email: '',
-      EmailRules: [requiredField, emailField],
+      EmailRules: [requiredField, emailField, tooLongField],
       username: '',
       passwordRules: [...standardField, requiredField, shortPassword]
     }
