@@ -123,9 +123,11 @@ export default defineComponent({
         username: username.value,
         password: password.value
       }
-      props.formProps.signUp
-        ? store.dispatch('user/signUpUser', userInfo)
-        : store.dispatch('user/signInUser', userInfo)
+      if (props.formProps.signUp) {
+        store.dispatch('user/signUpUser', userInfo)
+      } else {
+        store.dispatch('user/signInUser', userInfo)
+      }
     }
 
     onMounted(() => {
