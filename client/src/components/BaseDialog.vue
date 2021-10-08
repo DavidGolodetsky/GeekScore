@@ -13,12 +13,9 @@
         >
           <v-icon dark>mdi-{{ activatorIcon }}</v-icon>
         </v-btn>
-        <label
-          :for="`activator_${activatorText}`"
-          class="label_text"
-        >{{
-      activatorText
-    }}</label>
+        <label :for="`activator_${activatorText}`" class="label_text">{{
+          activatorText
+        }}</label>
       </slot>
     </div>
     <v-dialog v-model="dialog" max-width="600">
@@ -49,13 +46,15 @@
                 class="mr-2"
                 outlined
                 @click="close"
-              >Cancel</v-btn>
+                >Cancel</v-btn
+              >
               <v-btn
                 color="secondary darken-1"
                 outlined
                 type="submit"
                 :disabled="!valid"
-              >Submit</v-btn>
+                >Submit</v-btn
+              >
             </slot>
           </v-card-actions>
         </v-form>
