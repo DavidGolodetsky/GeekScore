@@ -69,7 +69,6 @@ import { defineComponent, ref } from '@vue/composition-api'
 
 export default defineComponent({
   name: 'BaseDialog',
-  emits: ['submitLogic'],
   props: {
     activatorIcon: {
       type: String,
