@@ -21,21 +21,12 @@
     }}</label>
       </slot>
     </div>
-    <v-dialog
-      v-model="dialog"
-      max-width="600"
-    >
+    <v-dialog v-model="dialog" max-width="600">
       <v-card class="BaseDialog">
         <v-card-title>
           <h3 class="app-headline">{{ header }}</h3>
           <v-spacer />
-          <v-btn
-            small
-            aria-label="Close modal"
-            fab
-            text
-            @click="close"
-          >
+          <v-btn small aria-label="Close modal" fab text @click="close">
             <v-icon dark>mdi-close</v-icon>
           </v-btn>
         </v-card-title>
@@ -73,51 +64,47 @@
   </section>
 </template>
 
-<script>
-export default {
-  name: "BaseDialog",
-  // TODO:refactor
+<script lang="ts">
+import { defineComponent, ref } from '@vue/composition-api'
+
+export default defineComponent({
+  name: 'BaseDialog',
   props: {
     activatorIcon: {
       type: String,
-      default: "",
+      default: ''
     },
     header: {
       type: String,
-      required: true,
+      required: true
     },
     color: {
       type: String,
-      default: "secondary",
-    },
-    submitLogic: {
-      type: Function,
-      default: () => { },
+      default: 'secondary'
     },
     activatorText: {
       type: String,
-      default: "",
+      default: ''
     },
     simple: {
-      type: Boolean,
-    },
+      type: Boolean
+    }
   },
-  data () {
-    return {
-      dialog: false,
-      valid: false,
-    };
-  },
-  methods: {
-    onSubmit () {
-      this.submitLogic();
-      this.close();
-    },
-    close () {
-      this.dialog = false;
-    },
-  },
-};
+  setup(_, ctx) {
+    const dialog = ref(false)
+    const valid = ref(false)
+
+    const close = () => {
+      dialog.value = false
+    }
+    const onSubmit = () => {
+      ctx.emit('submitLogic')
+      close()
+    }
+
+    return { dialog, valid, onSubmit, close }
+  }
+})
 </script>
 
 <style scoped lang="scss">
