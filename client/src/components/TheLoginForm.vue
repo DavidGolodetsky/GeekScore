@@ -87,7 +87,8 @@ import {
   ref,
   onMounted,
   computed,
-  reactive
+  reactive,
+  toRefs
 } from '@vue/composition-api'
 import { fbStart } from '../auth'
 import {
@@ -108,7 +109,6 @@ export default defineComponent({
   },
   setup(props, ctx) {
     const store = ctx.root.$store
-    const { formProps } = props
     const formData = reactive({
       email: '',
       password: '',
@@ -128,7 +128,7 @@ export default defineComponent({
     })
 
     const onSubmit = () => {
-      if (formProps.signUp) {
+      if (props.formProps.signUp) {
         store.dispatch('user/signUpUser', formData)
       } else {
         store.dispatch('user/signInUser', formData)
@@ -140,7 +140,7 @@ export default defineComponent({
     })
 
     return {
-      ...formData,
+      ...toRefs(formData),
       showPassword,
       valid,
       onSubmit,
