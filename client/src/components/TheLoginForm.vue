@@ -52,7 +52,7 @@
             label="Confirm password"
             prepend-icon="mdi-lock"
             :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
-            :rules="comparePasswords"
+            :rules="[comparePasswords]"
             @click:append="showPassword = !showPassword"
           />
         </v-card-text>
@@ -81,9 +81,16 @@
   </section>
 </template>
 
-<script>
-import { mapActions } from 'vuex'
-import { fbStart } from '@/auth'
+<script lang="ts">
+import {
+  defineComponent,
+  ref,
+  onMounted,
+  computed,
+  reactive,
+  toRefs
+} from '@vue/composition-api'
+import { fbStart } from '../auth'
 import {
   emailField,
   standardField,
@@ -92,7 +99,7 @@ import {
   tooLongField
 } from '@/use/validations'
 
-export default {
+export default defineComponent({
   name: 'TheLoginForm',
   props: {
     formProps: {
@@ -100,41 +107,49 @@ export default {
       required: true
     }
   },
-  data() {
-    return {
-      valid: false,
-      showPassword: false,
-      password: '',
-      confirmPassword: '',
+  setup(props, ctx) {
+    const store = ctx.root.$store
+    const formData = reactive({
       email: '',
-      EmailRules: [requiredField, emailField, tooLongField],
+      password: '',
       username: '',
-      passwordRules: [...standardField, requiredField, shortPassword]
-    }
-  },
-  computed: {
-    comparePasswords() {
-      return [this.password === this.confirmPassword || "Passwords don't match"]
-    },
-    loginMethod() {
-      return this.formProps.signUp ? this.signUpUser : this.signInUser
-    }
-  },
-  mounted() {
-    fbStart()
-  },
-  methods: {
-    ...mapActions('user', ['signUpUser', 'signInUser']),
-    onSubmit() {
-      const userInfo = {
-        email: this.email,
-        username: this.username,
-        password: this.password
+      confirmPassword: ''
+    })
+    const showPassword = ref(false)
+    const valid = ref(false)
+    const EmailRules = [requiredField, emailField, tooLongField]
+    const passwordRules = [...standardField, requiredField, shortPassword]
+
+    const comparePasswords = computed(() => {
+      return (
+        formData.password === formData.confirmPassword ||
+        'Passwords do not match'
+      )
+    })
+
+    const onSubmit = () => {
+      if (props.formProps.signUp) {
+        store.dispatch('user/signUpUser', formData)
+      } else {
+        store.dispatch('user/signInUser', formData)
       }
-      this.loginMethod(userInfo)
+    }
+
+    onMounted(() => {
+      fbStart()
+    })
+
+    return {
+      ...toRefs(formData),
+      showPassword,
+      valid,
+      onSubmit,
+      EmailRules,
+      passwordRules,
+      comparePasswords
     }
   }
-}
+})
 </script>
 
 <style scoped lang="scss">
