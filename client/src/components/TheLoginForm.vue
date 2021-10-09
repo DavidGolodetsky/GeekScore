@@ -20,7 +20,7 @@
             <span class="or">OR</span>
           </div>
           <v-text-field
-            v-model.trim="formData.email"
+            v-model.trim="email"
             clearable
             label="Email"
             type="email"
@@ -29,14 +29,14 @@
           />
           <v-text-field
             v-if="formProps.signUp"
-            v-model.trim="formData.username"
+            v-model.trim="username"
             clearable
             label="Username"
             type="text"
             prepend-icon="mdi-account"
           />
           <v-text-field
-            v-model.trim="formData.password"
+            v-model.trim="password"
             :type="showPassword ? 'text' : 'password'"
             label="Password"
             autocomplite="on"
@@ -47,7 +47,7 @@
           />
           <v-text-field
             v-if="formProps.signUp"
-            v-model.trim="formData.confirmPassword"
+            v-model.trim="confirmPassword"
             :type="showPassword ? 'text' : 'password'"
             label="Confirm password"
             prepend-icon="mdi-lock"
@@ -140,7 +140,7 @@ export default defineComponent({
     })
 
     return {
-      formData,
+      ...formData,
       showPassword,
       valid,
       onSubmit,
