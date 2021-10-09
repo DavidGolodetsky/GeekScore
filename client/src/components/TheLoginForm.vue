@@ -20,7 +20,7 @@
             <span class="or">OR</span>
           </div>
           <v-text-field
-            v-model.trim="email"
+            v-model.trim="formData.email"
             clearable
             label="Email"
             type="email"
@@ -29,14 +29,14 @@
           />
           <v-text-field
             v-if="formProps.signUp"
-            v-model.trim="username"
+            v-model.trim="formData.username"
             clearable
             label="Username"
             type="text"
             prepend-icon="mdi-account"
           />
           <v-text-field
-            v-model.trim="password"
+            v-model.trim="formData.password"
             :type="showPassword ? 'text' : 'password'"
             label="Password"
             autocomplite="on"
@@ -47,7 +47,7 @@
           />
           <v-text-field
             v-if="formProps.signUp"
-            v-model.trim="confirmPassword"
+            v-model.trim="formData.confirmPassword"
             :type="showPassword ? 'text' : 'password'"
             label="Confirm password"
             prepend-icon="mdi-lock"
@@ -82,7 +82,13 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, onMounted, computed } from '@vue/composition-api'
+import {
+  defineComponent,
+  ref,
+  onMounted,
+  computed,
+  reactive
+} from '@vue/composition-api'
 import { fbStart } from '../auth'
 import {
   emailField,
@@ -90,7 +96,7 @@ import {
   requiredField,
   shortPassword,
   tooLongField
-} from '../use/validations'
+} from '@/use/validations'
 
 export default defineComponent({
   name: 'TheLoginForm',
@@ -102,10 +108,13 @@ export default defineComponent({
   },
   setup(props, ctx) {
     const store = ctx.root.$store
-    const username = ref('')
-    const email = ref('')
-    const password = ref('')
-    const confirmPassword = ref('')
+    const { formProps } = props
+    const formData = reactive({
+      email: '',
+      password: '',
+      username: '',
+      confirmPassword: ''
+    })
     const showPassword = ref(false)
     const valid = ref(false)
     const EmailRules = [requiredField, emailField, tooLongField]
@@ -113,20 +122,16 @@ export default defineComponent({
 
     const comparePasswords = computed(() => {
       return (
-        password.value === confirmPassword.value || 'Passwords do not match'
+        formData.password === formData.confirmPassword ||
+        'Passwords do not match'
       )
     })
 
     const onSubmit = () => {
-      const userInfo = {
-        email: email.value,
-        username: username.value,
-        password: password.value
-      }
-      if (props.formProps.signUp) {
-        store.dispatch('user/signUpUser', userInfo)
+      if (formProps.signUp) {
+        store.dispatch('user/signUpUser', formData)
       } else {
-        store.dispatch('user/signInUser', userInfo)
+        store.dispatch('user/signInUser', formData)
       }
     }
 
@@ -135,10 +140,7 @@ export default defineComponent({
     })
 
     return {
-      email,
-      password,
-      confirmPassword,
-      username,
+      formData,
       showPassword,
       valid,
       onSubmit,
