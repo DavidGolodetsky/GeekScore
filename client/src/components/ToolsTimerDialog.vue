@@ -121,14 +121,11 @@ export default defineComponent({
       clearInterval(playInterval)
     }
 
-    watch(
-      currentTab,
-      (value, oldValue) => {
-        if (value !== oldValue) {
-          stopTimer()
-        }
+    watch(currentTab, (value, oldValue) => {
+      if (value !== oldValue) {
+        stopTimer()
       }
-    )
+    })
 
     onUnmounted(() => {
       stopTimer()
