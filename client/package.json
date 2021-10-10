@@ -28,7 +28,6 @@
     "firebase": "^7.21.1",
     "firebaseui": "^4.6.1",
     "flush-promises": "^1.0.2",
-    "html-validator": "^5.1.17",
     "register-service-worker": "^1.6.2",
     "standard-version": "^9.0.0",
     "sw-precache": "^5.2.1",

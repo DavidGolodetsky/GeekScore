@@ -1,7 +1,5 @@
 <template>
   <section class="the-login-form mt-12">
-    <h1>в</h1>
-    <h1>ф</h1>
     <v-card raised outlined dark class="auth-card">
       <v-form
         ref="form"
@@ -81,6 +79,14 @@
       </div>
     </v-card>
   </section>
+
+
+
+
+
+
+
+  
 </template>
 
 <script lang="ts">
