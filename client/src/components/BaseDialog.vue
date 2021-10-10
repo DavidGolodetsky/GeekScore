@@ -97,7 +97,7 @@ export default defineComponent({
       dialog.value = false
     }
     const onSubmit = () => {
-      ctx.emit('submitLogic')
+      ctx.emit('submit')
       close()
     }
 

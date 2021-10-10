@@ -1,9 +1,5 @@
 <template>
-  <BaseDialog
-    activator-icon="plus"
-    header="Add new game"
-    :submit-logic="onSubmit"
-  >
+  <BaseDialog activator-icon="plus" header="Add new game" @submit="submitGame">
     <v-text-field
       v-model.trim="name"
       clearable
@@ -43,13 +39,14 @@ export default defineComponent({
       store.dispatch('games/createGame', game)
     }
 
-    const onSubmit = () => {
+    const submitGame = () => {
+      console.log('test')
       createGame()
       state.name = ''
     }
 
     return {
-      onSubmit,
+      submitGame,
       ...toRefs(state)
     }
   }

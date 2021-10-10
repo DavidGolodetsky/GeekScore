@@ -3,7 +3,7 @@
     activator-icon="plus"
     header="Add team"
     button-text="Add team"
-    :submit-logic="onSubmit"
+    @submit="submitTeam"
   >
     <v-tabs v-model="currentTab" @change="resetSelectedTeam">
       <v-tabs-slider color="secondary" />
@@ -119,12 +119,12 @@ export default {
     filteredTeams() {
       let teamNames =
         this.gameTeams &&
-        this.gameTeams.map((team) => {
+        this.gameTeams.map(team => {
           return team.name
         })
 
       return this.teams
-        ? this.teams.filter((item) => !teamNames.includes(item.name))
+        ? this.teams.filter(item => !teamNames.includes(item.name))
         : []
     }
   },
@@ -158,7 +158,7 @@ export default {
         duplicatedPlayerName.length < 2 || 'This field should be unique'
       this.playerRules = [...this.playerRules, isDuplicated]
     },
-    onSubmit() {
+    submitTeam() {
       this.selectedTeam ? this.addExistingTeam() : this.createNewTeam()
     },
     createNewTeam() {

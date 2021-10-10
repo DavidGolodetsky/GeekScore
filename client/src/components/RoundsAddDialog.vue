@@ -4,7 +4,7 @@
       v-if="team"
       activator-icon="plus"
       header="Add new round"
-      :submit-logic="onSubmit"
+      @submit="submitRound"
     >
       <v-row>
         <v-col cols="6">
@@ -22,10 +22,7 @@
             />
           </v-radio-group>
         </v-col>
-        <v-col
-          v-if="!team.coop"
-          cols="6"
-        >
+        <v-col v-if="!team.coop" cols="6">
           <v-radio-group
             v-if="team.players.length > 1"
             v-model="turn"
@@ -59,10 +56,7 @@
               v-on="on"
             />
           </template>
-          <v-date-picker
-            v-model="date"
-            @input="datepicker = false"
-          />
+          <v-date-picker v-model="date" @input="datepicker = false" />
         </v-menu>
       </v-row>
       <v-row>
@@ -81,63 +75,63 @@
 </template>
 
 <script>
-import { requiredField } from '@/use/validations';
-import { mapActions, mapGetters, mapState } from 'vuex';
+import { requiredField } from '@/use/validations'
+import { mapActions, mapGetters, mapState } from 'vuex'
 export default {
   name: 'RoundsAddDialog',
   // TODO:refactor
   props: {
     teamId: {
       type: String,
-      required: true,
+      required: true
     },
     gameId: {
       type: String,
-      required: true,
-    },
+      required: true
+    }
   },
-  data () {
+  data() {
     return {
       datepicker: false,
       comment: '',
       turn: '',
       result: null,
       date: new Date().toISOString().substr(0, 10),
-      resultRules: [requiredField],
-    };
+      resultRules: [requiredField]
+    }
   },
   computed: {
     ...mapState('teams', ['teams']),
     ...mapGetters('teams', ['getTeam']),
-    team () {
-      return this.teams ? this.getTeam(this.teamId) : null;
+    team() {
+      return this.teams ? this.getTeam(this.teamId) : null
     },
-    resultOptions () {
-      if (!this.team) return null;
-      if (this.team.coop) return ['Victory', 'Defeat'];
-      const options = this.team.players.map((player) => player.name);
-      return [...options, 'Tie'];
-    },
+    resultOptions() {
+      if (!this.team) return null
+      if (this.team.coop) return ['Victory', 'Defeat']
+      const options = this.team.players.map(player => player.name)
+      return [...options, 'Tie']
+    }
   },
   methods: {
     ...mapActions('rounds', ['createRound']),
-    onSubmit () {
-      const round = this.cookRound();
-      this.createRound(round);
+    submitRound() {
+      const round = this.cookRound()
+      this.createRound(round)
     },
-    cookRound () {
+    cookRound() {
       const round = {
         date: this.date,
         turn: this.turn,
         gameId: this.gameId,
         teamId: this.teamId,
         comment: this.comment,
-        winner: this.result.toLowerCase(),
-      };
-      if (this.team.coop) round.result = this.result.toUpperCase();
+        winner: this.result.toLowerCase()
+      }
+      if (this.team.coop) round.result = this.result.toUpperCase()
       // TODO: highlight result, maybe with icon, not VICTORY
-      return round;
-    },
-  },
-};
+      return round
+    }
+  }
+}
 </script>

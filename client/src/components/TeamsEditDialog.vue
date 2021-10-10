@@ -4,10 +4,15 @@
     color="#fff"
     header="Edit team info"
     simple
-    :submit-logic="onSubmit"
+    @submit="submitTeam"
   >
     <v-text-field v-model="name" clearable :rules="nameRules" label="Name" />
-    <v-switch v-model="toDelete" label="Delete team" color="error" hide-details />
+    <v-switch
+      v-model="toDelete"
+      label="Delete team"
+      color="error"
+      hide-details
+    />
   </BaseDialog>
 </template>
 
@@ -43,13 +48,13 @@ export default defineComponent({
       store.dispatch('teams/updateTeam', teamPayload)
     }
 
-    const onSubmit = () => {
+    const submitTeam = () => {
       if (!state.toDelete) return updateTeam()
       store.dispatch('teams/deleteTeam', team.value._id)
     }
 
     return {
-      onSubmit,
+      submitTeam,
       ...toRefs(state)
     }
   }
