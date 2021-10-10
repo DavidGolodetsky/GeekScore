@@ -4,7 +4,7 @@ import vuetify from './plugins/vuetify'
 import router from './router'
 import store from './store'
 import VueOffline from 'vue-offline'
-import VueAnalytics from 'vue-analytics'
+import VueGtag from 'vue-gtag'
 import VueCompositionAPI from '@vue/composition-api'
 import './registerServiceWorker'
 
@@ -22,9 +22,7 @@ Vue.prototype.$log = console.log
 
 Vue.use(VueCompositionAPI)
 
-Vue.use(VueAnalytics, {
-  id: 'G-K9MXTWVK3R'
-})
+Vue.use(VueGtag, { config: { id: 'G-K9MXTWVK3R' } })
 
 Vue.use(VueOffline, {
   mixin: false,
