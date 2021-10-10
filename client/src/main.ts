@@ -4,6 +4,7 @@ import vuetify from './plugins/vuetify'
 import router from './router'
 import store from './store'
 import VueOffline from 'vue-offline'
+import VueAnalytics from 'vue-analytics'
 import VueCompositionAPI from '@vue/composition-api'
 import './registerServiceWorker'
 
@@ -21,6 +22,10 @@ Vue.prototype.$log = console.log
 
 Vue.use(VueCompositionAPI)
 
+Vue.use(VueAnalytics, {
+  id: 'G-K9MXTWVK3R'
+})
+
 Vue.use(VueOffline, {
   mixin: false,
   storage: false
@@ -33,7 +38,7 @@ const requireComponent = require.context(
   // skipcq: JS-S001
   /Base[A-Z]\w+\.(vue|js)$/
 )
-requireComponent.keys().forEach((fileName) => {
+requireComponent.keys().forEach(fileName => {
   let baseComponentConfig = requireComponent(fileName)
   baseComponentConfig = baseComponentConfig.default || baseComponentConfig
   const baseComponentName =
@@ -46,5 +51,5 @@ new Vue({
   vuetify,
   router,
   store,
-  render: (h) => h(App)
+  render: h => h(App)
 }).$mount('#app')
