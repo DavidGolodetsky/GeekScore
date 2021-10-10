@@ -154,9 +154,10 @@ export default {
       let duplicatedPlayerName = this.players.filter(
         (player) => player.name === $ev
       )
-      const duplicateRules = (duplicatedPlayerName.length > 1) ? 'This field should be unique' : requiredField
-      this.playerRules[Object.keys(this.playerRules).length-1] = duplicateRules
-      this.playerRules = [...this.playerRules]
+      // set variable to determine which rule will be used: unique-field-rule or required-field-rule
+      const playerLastRules = (duplicatedPlayerName.length > 1) ? 'This field should be unique' : requiredField
+      // update the last part of player-rules
+      this.playerRules[Object.keys(this.playerRules).length-1] = playerLastRules
     },
     onSubmit() {
       this.selectedTeam ? this.addExistingTeam() : this.createNewTeam()
