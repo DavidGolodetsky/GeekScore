@@ -79,14 +79,6 @@
       </div>
     </v-card>
   </section>
-
-
-
-
-
-
-
-  
 </template>
 
 <script lang="ts">

@@ -23,5 +23,4 @@ enabled = true
   dockerfile_paths = ["docker"]
 
 [[transformers]]
-name = "prettier"
 enabled = true
