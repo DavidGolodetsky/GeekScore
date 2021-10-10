@@ -23,7 +23,7 @@ Vue.prototype.$log = console.log
 Vue.use(VueCompositionAPI)
 
 Vue.use(VueAnalytics, {
-  id: 'UA-164228749-1'
+  id: 'G-L6H6SKLYNG'
 })
 
 Vue.use(VueOffline, {
