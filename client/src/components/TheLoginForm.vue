@@ -79,6 +79,14 @@
       </div>
     </v-card>
   </section>
+
+
+
+
+
+
+
+  
 </template>
 
 <script lang="ts">
@@ -90,7 +98,7 @@ import {
   reactive,
   toRefs
 } from '@vue/composition-api'
-import { fbStart } from '../auth'
+import { fbStart } from '@/auth'
 import {
   emailField,
   standardField,
