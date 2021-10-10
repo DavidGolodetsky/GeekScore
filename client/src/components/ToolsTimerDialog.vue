@@ -122,9 +122,11 @@ export default defineComponent({
     }
 
     watch(
-      () => tabs,
-      () => {
-        stopTimer()
+      currentTab,
+      (value, oldValue) => {
+        if (value !== oldValue) {
+          stopTimer()
+        }
       }
     )
 
