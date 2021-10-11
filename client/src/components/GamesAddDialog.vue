@@ -4,7 +4,7 @@
       v-model.trim="name"
       clearable
       :rules="nameRules"
-      prepend-icon="mdi-dice-multiple"
+      prepend-icon="mdi-dice-multiple-outline"
       label="Name"
     />
     <v-switch

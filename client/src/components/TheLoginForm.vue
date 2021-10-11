@@ -24,7 +24,7 @@
             clearable
             label="Email"
             type="email"
-            prepend-icon="mdi-email"
+            prepend-icon="mdi-email-outline"
             :rules="EmailRules"
           />
           <v-text-field
@@ -33,15 +33,17 @@
             clearable
             label="Username"
             type="text"
-            prepend-icon="mdi-account"
+            prepend-icon="mdi-account-outline"
           />
           <v-text-field
             v-model.trim="password"
             :type="showPassword ? 'text' : 'password'"
             label="Password"
             autocomplite="on"
-            prepend-icon="mdi-lock"
-            :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
+            prepend-icon="mdi-lock-outline"
+            :append-icon="
+              showPassword ? 'mdi-eye-outline' : 'mdi-eye-off-outline'
+            "
             :rules="passwordRules"
             @click:append="showPassword = !showPassword"
           />
@@ -50,8 +52,10 @@
             v-model.trim="confirmPassword"
             :type="showPassword ? 'text' : 'password'"
             label="Confirm password"
-            prepend-icon="mdi-lock"
-            :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
+            prepend-icon="mdi-lock-outline"
+            :append-icon="
+              showPassword ? 'mdi-eye-outline' : 'mdi-eye-off-outline'
+            "
             :rules="[comparePasswords]"
             @click:append="showPassword = !showPassword"
           />

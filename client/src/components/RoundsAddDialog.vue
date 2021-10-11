@@ -51,7 +51,7 @@
             <v-text-field
               v-model="date"
               label="Date"
-              prepend-icon="mdi-calendar"
+              prepend-icon="mdi-calendar-outline"
               readonly
               v-on="on"
             />
@@ -67,7 +67,7 @@
           auto-grow
           filled
           clearable
-          prepend-icon="mdi-comment"
+          prepend-icon="mdi-comment-outline"
         />
       </v-row>
     </BaseDialog>

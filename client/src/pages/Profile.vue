@@ -1,7 +1,7 @@
 <template>
   <section>
     <!-- TODO:add cta to update profile info -->
-    <the-title title="Profile" icon="account-details" />
+    <the-title title="Profile" icon="account-details-outline" />
     <div v-if="isUsername" class="d-flex mb-4">
       <span class="mr-3">Username:</span>
       <span>{{ user.username }}</span>

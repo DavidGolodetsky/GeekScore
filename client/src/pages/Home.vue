@@ -1,12 +1,6 @@
 <template>
-  <section
-    class="home-page"
-    aria-labelledby="greeting"
-  >
-    <h1
-      id="greeting"
-      class="app-headline text-center mb-6"
-    >
+  <section class="home-page" aria-labelledby="greeting">
+    <h1 id="greeting" class="app-headline text-center mb-6">
       Welcome to Geek Score!
     </h1>
     <v-timeline
@@ -16,16 +10,13 @@
       :dense="$vuetify.breakpoint.smAndDown"
     >
       <v-timeline-item
-        v-for="{title, icon, text} in demoSteps"
+        v-for="{ title, icon, text } in demoSteps"
         :key="title"
         color="secondary"
         :icon="`mdi-${icon}`"
         fill-dot
       >
-        <v-card
-          color="silver"
-          light
-        >
+        <v-card color="silver" light>
           <v-card-title class="title">
             {{ title }}
           </v-card-title>
@@ -40,7 +31,7 @@
         class="submit-btn"
         ripple
         type="submit"
-        :to="{name: loggedInUser ? 'games' : 'signIn'}"
+        :to="{ name: loggedInUser ? 'games' : 'signIn' }"
       >
         {{ loggedInUser ? 'Games' : 'Sign In' }}
       </v-btn>
@@ -68,14 +59,14 @@ export default defineComponent({
         text:
           'Add your favorite board games. Add more info about this awesome game!',
         color: 'warning',
-        icon: 'dice-multiple'
+        icon: 'dice-multiple-outline'
       },
       {
         title: 'Teams',
         text:
           'Create team of buddies to dive in the world of board games! You can add as many teams per game as you want.',
         color: 'accent',
-        icon: 'account-group'
+        icon: 'account-group-outline'
       },
       {
         title: 'Rounds',
@@ -101,5 +92,3 @@ export default defineComponent({
   }
 })
 </script>
-
-

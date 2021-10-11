@@ -4,7 +4,7 @@
       <v-card dark raised class="mx-auto card-pointer">
         <div class="title-wrap">
           <v-card-title class="d-flex">
-            <v-icon class="mr-2" dark>mdi-timer</v-icon>
+            <v-icon class="mr-2" dark>mdi-timer-outline</v-icon>
             <span class="label_text">Clock Tools</span>
           </v-card-title>
         </div>
@@ -34,7 +34,7 @@
         @click="playPauseTimer"
       >
         <v-icon dark>
-          {{ pause ? 'mdi-play' : 'mdi-pause' }}
+          {{ pause ? 'mdi-play-outline' : 'mdi-pause' }}
         </v-icon>
         {{ pause ? 'Play' : 'Pause' }}
       </v-btn>
@@ -121,14 +121,11 @@ export default defineComponent({
       clearInterval(playInterval)
     }
 
-    watch(
-      currentTab,
-      (value, oldValue) => {
-        if (value !== oldValue) {
-          stopTimer()
-        }
+    watch(currentTab, (value, oldValue) => {
+      if (value !== oldValue) {
+        stopTimer()
       }
-    )
+    })
 
     onUnmounted(() => {
       stopTimer()

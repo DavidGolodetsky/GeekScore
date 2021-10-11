@@ -4,7 +4,11 @@
       <v-container class="row_between app-container">
         <BaseBackBtn v-if="backTitle" :title="backTitle" />
         <router-link v-else class="d-flex align-center" :to="{ name: 'home' }">
-          <v-img class="logo" :src="require(`@/assets/img/logo.svg`)" alt="Geek Score" />
+          <v-img
+            class="logo"
+            :src="require(`@/assets/img/logo.svg`)"
+            alt="Geek Score"
+          />
           <span class="header-title">Geek Score</span>
         </router-link>
         <v-spacer />
@@ -18,19 +22,30 @@
                 </v-btn>
               </li>
               <li>
-                <v-btn :small="$vuetify.breakpoint.smOnly" text @click="onLogout">
+                <v-btn
+                  :small="$vuetify.breakpoint.smOnly"
+                  text
+                  @click="onLogout"
+                >
                   <v-icon>mdi-logout</v-icon>Log out
                 </v-btn>
               </li>
             </ul>
           </nav>
-          <v-app-bar-nav-icon class="d-sm-none" @click.stop="isSideNav = !isSideNav" />
+          <v-app-bar-nav-icon
+            class="d-sm-none"
+            @click.stop="isSideNav = !isSideNav"
+          />
         </template>
       </v-container>
     </v-app-bar>
     <v-navigation-drawer v-model="isSideNav" app right dark fixed temporary>
       <v-list>
-        <v-list-item v-for="{ text, icon, link } in navItems" :key="text" :to="link">
+        <v-list-item
+          v-for="{ text, icon, link } in navItems"
+          :key="text"
+          :to="link"
+        >
           <v-list-item-icon>
             <v-icon>mdi-{{ icon }}</v-icon>
           </v-list-item-icon>
@@ -76,7 +91,7 @@ export default defineComponent({
     const navItems = [
       {
         text: 'Games',
-        icon: 'dice-multiple',
+        icon: 'dice-multiple-outline',
         link: '/games'
       },
       {
@@ -86,7 +101,7 @@ export default defineComponent({
       },
       {
         text: 'Profile',
-        icon: 'account-details',
+        icon: 'account-details-outline',
         link: '/profile'
       }
     ]

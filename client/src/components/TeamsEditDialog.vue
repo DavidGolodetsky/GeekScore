@@ -1,6 +1,6 @@
 <template>
   <BaseDialog
-    activator-icon="pencil"
+    activator-icon="pencil-outline"
     color="#fff"
     header="Edit team info"
     simple

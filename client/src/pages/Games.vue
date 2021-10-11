@@ -2,7 +2,7 @@
   <section>
     <TheTitle
       title="Games"
-      icon="dice-multiple"
+      icon="dice-multiple-outline"
       component="games-add-dialog"
     />
     <TheCardsList

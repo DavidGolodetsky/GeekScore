@@ -1,6 +1,6 @@
 <template>
   <BaseDialog
-    activator-icon="pencil"
+    activator-icon="pencil-outline"
     color="#fff"
     header="Edit game info"
     simple
@@ -49,33 +49,33 @@ export default {
       fields: {
         name: {
           label: 'Name',
-          icon: 'dice-multiple',
+          icon: 'dice-multiple-outline',
           value: this.game.name,
           rules: [...standardField, requiredField]
         },
         bggURL: {
           label: 'Board geek game URL',
-          icon: 'cards',
+          icon: 'cards-outline',
           // TODO:refactor
           value: this.game.bggURL === undefined ? '' : this.game.bggURL,
           rules: [linkField]
         },
         melodiceURL: {
           label: 'Melodice URL',
-          icon: 'music',
+          icon: 'music-outline',
           value:
             this.game.melodiceURL === undefined ? '' : this.game.melodiceURL,
           rules: [linkField]
         },
         rulesURL: {
           label: 'Rules URL',
-          icon: 'book-open-variant',
+          icon: 'book-open-variant-outline',
           value: this.game.rulesURL === undefined ? '' : this.game.rulesURL,
           rules: [linkField]
         },
         imageUrl: {
           label: 'Image URL',
-          icon: 'image',
+          icon: 'image-outline',
           value: this.game.imageUrl === undefined ? '' : this.game.imageUrl,
           rules: [linkField]
         }

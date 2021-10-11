@@ -19,7 +19,7 @@
             clearable
             label="Email"
             type="email"
-            prepend-icon="mdi-email"
+            prepend-icon="mdi-email-outline"
             :rules="EmailRules"
           />
         </v-card-text>

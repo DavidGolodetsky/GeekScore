@@ -2,7 +2,7 @@
   <section class="game">
     <TheTitle
       title="Teams"
-      icon="account-group"
+      icon="account-group-outline"
       :props="{ gameId }"
       component="teams-add-dialog"
     />

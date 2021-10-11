@@ -16,9 +16,9 @@
 
       <v-list v-if="cardInfo.players" dense disabled class="players">
         <v-list-item-group>
-          <v-list-item v-for="{name} in cardInfo.players" :key="name">
+          <v-list-item v-for="{ name } in cardInfo.players" :key="name">
             <v-list-item-icon>
-              <v-icon v-text="'mdi-account'" />
+              <v-icon v-text="'mdi-account-outline'" />
             </v-list-item-icon>
             <v-list-item-content v-text="name" />
           </v-list-item>

@@ -1,6 +1,6 @@
 <template>
   <BaseDialog
-    activator-icon="pencil"
+    activator-icon="pencil-outline"
     color="#607d8b"
     header="Edit round info"
     simple

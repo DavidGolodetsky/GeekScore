@@ -15,7 +15,7 @@
       <v-tab-item value="tab-0">
         <v-select
           v-model="selectedTeam"
-          prepend-icon="mdi-account-multiple-plus"
+          prepend-icon="mdi-account-multiple-plus-outline"
           :items="filteredTeams"
           :rules="selectedTeam ? selectRules : []"
           item-text="name"
@@ -28,11 +28,11 @@
           v-model.trim="name"
           clearable
           :rules="nameRules"
-          prepend-icon="mdi-account-group"
+          prepend-icon="mdi-account-group-outline"
           label="Name"
         />
         <v-select
-          prepend-icon="mdi-account-multiple-plus"
+          prepend-icon="mdi-account-multiple-plus-outline"
           :items="numberOfPlayers"
           :rules="selectRules"
           label="Number of players"
@@ -45,7 +45,7 @@
             v-model.trim="player.name"
             :readonly="player.isMe"
             :clearable="!player.isMe"
-            prepend-icon="mdi-account"
+            prepend-icon="mdi-account-outline"
             :rules="playerRules"
             :label="`Player #${i + 1}`"
             @input="isUniqueName"
@@ -152,7 +152,7 @@ export default {
     },
     isUniqueName($ev) {
       let duplicatedPlayerName = this.players.filter(
-        (player) => player.name === $ev
+        player => player.name === $ev
       )
       const isDuplicated =
         duplicatedPlayerName.length < 2 || 'This field should be unique'
