@@ -25,7 +25,7 @@ router.put("/:id", async (req, res) => {
     username,
   });
   try {
-    const updatedUser = await User.update(
+    await user.update(
       { id: id },
       { username: username },
       { upsert: false },
