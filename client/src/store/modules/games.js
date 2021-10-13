@@ -17,9 +17,9 @@ export default {
       state.games = payload
     },
     UPDATE_GAME(state, payload) {
-      const game = state.games.find(game => game._id === payload._id)
-      state.games = state.games.filter(game => game._id !== payload._id)
-      state.games.push({ ...game, ...payload })
+      const updatedGame = state.games.find(game => game._id === payload._id)
+      state.games = state.games.filter(item => item._id !== payload._id)
+      state.games.push({ ...updatedGame, ...payload })
     },
     DELETE_GAME(state, payload) {
       const games = state.games.filter(game => game._id !== payload)

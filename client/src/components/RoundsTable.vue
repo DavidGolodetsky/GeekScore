@@ -13,7 +13,7 @@
         />
       </v-card-title>
       <v-data-table
-        :headers="headers"
+        :headers="tableHeaders"
         :items="rounds"
         :search="search"
         single-expand
@@ -59,7 +59,7 @@ export default {
     return {
       search: '',
       expanded: [],
-      headers: []
+      tableHeaders: []
     }
   },
   created() {
@@ -75,14 +75,14 @@ export default {
         { text: 'Actions', value: 'action', sortable: false }
       ]
       if (!this.team.coop) this.countPlayers()
-      this.headers.push(...fields)
+      this.tableHeaders.push(...fields)
     },
     countPlayers() {
       const players = this.team.players.map(player => ({
         text: player.name,
         value: player.name.toLowerCase()
       }))
-      this.headers.push(...players)
+      this.tableHeaders.push(...players)
     }
   }
 }

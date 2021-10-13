@@ -15,9 +15,9 @@ export default {
       state.teams = payload
     },
     UPDATE_TEAM(state, payload) {
-      const team = state.teams.find(team => team._id === payload._id)
-      state.teams = state.teams.filter(team => team._id !== payload._id)
-      state.teams.push({ ...team, ...payload })
+      const updatedTeam = state.teams.find(team => team._id === payload._id)
+      state.teams = state.teams.filter(item => item._id !== payload._id)
+      state.teams.push({ ...updatedTeam, ...payload })
     },
     DELETE_TEAM(state, payload) {
       const teams = state.teams.filter(team => team._id !== payload)
