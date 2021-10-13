@@ -16,7 +16,7 @@ describe('Components: TheFooter', () => {
     })
   })
 
-  test('it should render copy footer', () => {
+  it('it should render copy footer', () => {
     expect(wrapper.find('[data-test-copy]').text()).toBe('©  2020 — Geek Score')
   })
 })
