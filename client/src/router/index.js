@@ -22,7 +22,7 @@ const router = new Router({
 
 router.beforeEach((to, from, next) => {
   if (!to.matched.some(record => record.meta.requiresAuth)) return next()
-  store.state['user'] ? next() : next({ name: 'signIn' })
+  store.state.user ? next() : next({ name: 'signIn' })
 })
 
 export default router
