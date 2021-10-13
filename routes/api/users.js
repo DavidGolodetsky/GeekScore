@@ -29,7 +29,7 @@ router.put("/:id", async (req, res) => {
       { id: id },
       { username: username },
       { upsert: false },
-      function (error, result) {
+      (error, result) => {
         if (error) {
           res.status(400).json(error);
         } else {
