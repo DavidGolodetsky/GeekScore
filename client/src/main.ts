@@ -33,7 +33,6 @@ Vue.use(VueOffline, {
 const requireComponent = require.context(
   './components',
   true,
-  // skipcq: JS-S001
   /Base[A-Z]\w+\.(vue|js)$/
 )
 requireComponent.keys().forEach(fileName => {

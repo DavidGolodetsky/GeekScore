@@ -20,7 +20,6 @@ export const onlyWhitespaces = (v: string) => {
 
 export const emailField = (v: string) => {
   const slicedV = v?.slice(0, 100)
-  // skipcq: JS-S001
   const condition = /.+@.+\..+/.test(slicedV)
   const message = 'E-mail must be valid'
   return v ? condition || message : true
