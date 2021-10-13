@@ -40,7 +40,6 @@ export default defineComponent({
     }
 
     const submitGame = () => {
-      console.log('test')
       createGame()
       state.name = ''
     }
