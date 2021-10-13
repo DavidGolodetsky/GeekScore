@@ -21,6 +21,3 @@ enabled = true
 
   [analyzers.meta]
   dockerfile_paths = ["docker"]
-
-[[transformers]]
-enabled = true
