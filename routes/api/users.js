@@ -86,9 +86,11 @@ router.get("/win-rate/:id", async (req, res) => {
     }
     const response = {};
     for (let game in winRates) {
-      response[game] = `${Math.floor(
-        (winRates[game].wins / winRates[game].totalGames) * 100
-      )}%`;
+      if ({}.hasOwnProperty.call(winRates, game)) {
+        response[game] = `${Math.floor(
+          (winRates[game].wins / winRates[game].totalGames) * 100
+        )}%`;
+      }
     }
     res.status(200).json(response);
   } catch (err) {
