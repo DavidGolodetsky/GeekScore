@@ -79,6 +79,10 @@ a {
     background-color: $lightgrey;
   }
 
+  .theme--light.v-tabs-items {
+    background-color: transparent;
+  }
+
   .theme--light .v-tabs > .v-tabs-bar {
     background-color: $lightgrey;
   }
