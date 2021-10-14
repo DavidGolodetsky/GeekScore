@@ -17,6 +17,7 @@
 </template>
 
 <script lang="ts">
+import { Game } from '@/types'
 import { defineComponent, reactive, toRefs } from '@vue/composition-api'
 import { standardField, requiredField } from '@/use/validations'
 
@@ -25,10 +26,16 @@ export default defineComponent({
   setup(_, ctx) {
     const store = ctx.root.$store
 
+    const getGameNames = () => {
+     return store.state.games.games?.map((g: Game) => {return g.name});
+    }
+
     const state = reactive({
       name: '',
       coop: false,
-      nameRules: [...standardField, requiredField]
+      nameRules: [...standardField, (v: any) => {
+      return !getGameNames()?.includes(v) || `The name ${v} already exists.`
+      }]
     })
 
     const createGame = () => {
