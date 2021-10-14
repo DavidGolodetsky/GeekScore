@@ -66,7 +66,7 @@ router.get("/win-rate/:id", async (req, res) => {
     const games = await Game.find({ user });
     const gameIds = games.map((e) => e.id);
     const rounds = await Round.find({ gameId: { $in: gameIds } });
-    let winRates = {};
+    const winRates = {};
     for (let i = 0; i < rounds.length; i++) {
       const game = games.find((e) => e.id === rounds[i].gameId);
       if (winRates[game.name]) {
@@ -85,7 +85,7 @@ router.get("/win-rate/:id", async (req, res) => {
       }
     }
     const response = {};
-    for (let game in winRates) {
+    for (const game in winRates) {
       if ({}.hasOwnProperty.call(winRates, game)) {
         response[game] = `${Math.floor(
           (winRates[game].wins / winRates[game].totalGames) * 100

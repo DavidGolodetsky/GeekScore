@@ -74,9 +74,9 @@ const routes = [
       }
     },
     async beforeEnter(to, _, next) {
-      const games = store.state.games.games
+      const { games } = store.state.games
       games ?? (await store.dispatch('games/loadGames'))
-      const teams = store.state.teams.teams
+      const { teams } = store.state.teams
       teams ?? (await store.dispatch('teams/loadTeams'))
       const team = await store.getters['teams/getTeam'](to.params.teamId)
       team ? next() : next({ name: 'NotFound' })

@@ -90,7 +90,7 @@ export default {
         let winRate = await axios.get(`/api/games/win-rate/${payload}`)
         if (!winRate.data) return commit('SET_WIN_RATE', null)
         winRate = `${winRate.data}%`
-        commit('SET_WIN_RATE', winRate)
+        return commit('SET_WIN_RATE', winRate)
       } catch (e) {
         commit('ERROR', e, { root: true })
       } finally {
@@ -101,7 +101,10 @@ export default {
   getters: {
     getGame(state) {
       return gameId => {
-        if (state.games) return state.games.find(game => game._id === gameId)
+        if (state.games) {
+          return state.games.find(game => game._id === gameId)
+        }
+        return null
       }
     }
   }

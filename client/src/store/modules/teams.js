@@ -80,13 +80,18 @@ export default {
   getters: {
     getTeam(state) {
       return teamId => {
-        if (state.teams) return state.teams.find(team => team._id === teamId)
+        if (state.teams) {
+          return state.teams.find(team => team._id === teamId)
+        }
+        return null
       }
     },
     getGameTeams(state) {
       return gameId => {
-        if (state.teams)
+        if (state.teams) {
           return state.teams.filter(team => team.games.includes(gameId))
+        }
+        return []
       }
     }
   }
