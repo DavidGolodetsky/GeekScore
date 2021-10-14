@@ -9,7 +9,7 @@ const localVue = createLocalVue()
 localVue.use(Vuetify)
 
 describe('Components: TheFooter', () => {
-  let wrapper
+  let wrapper = null
   beforeEach(() => {
     wrapper = shallowMount(TheFooter, {
       localVue
