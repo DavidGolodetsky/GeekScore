@@ -26,8 +26,8 @@ router.put("/:id", async (req, res) => {
   });
   try {
     await user.update(
-      { id: id },
-      { username: username },
+      { id },
+      { username },
       { upsert: false },
       (error, result) => {
         if (error) {
