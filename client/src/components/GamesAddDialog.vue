@@ -17,18 +17,27 @@
 </template>
 
 <script lang="ts">
+import { Game } from '@/types'
 import { defineComponent, reactive, toRefs } from '@vue/composition-api'
-import { standardField, requiredField } from '@/use/validations'
+import { standardField, requiredField, uniqueField } from '@/use/validations'
 
 export default defineComponent({
   name: 'GamesAddDialog',
   setup(_, ctx) {
     const store = ctx.root.$store
 
+    const getGameNames = () => {
+      return store.state.games.games?.map((g: Game) => {return g.name});
+    }
+
+    const checkUnique = (v: any) => {
+      return uniqueField(v, getGameNames())
+    }
+
     const state = reactive({
       name: '',
       coop: false,
-      nameRules: [...standardField, requiredField]
+      nameRules: [...standardField, requiredField, checkUnique]
     })
 
     const createGame = () => {
