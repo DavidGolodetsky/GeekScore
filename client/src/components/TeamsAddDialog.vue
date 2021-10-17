@@ -30,6 +30,7 @@
           :rules="nameRules"
           prepend-icon="mdi-account-group-outline"
           label="Name"
+          @input="isUniqueTeam"
         />
         <v-select
           prepend-icon="mdi-account-multiple-plus-outline"
@@ -63,7 +64,7 @@
 </template>
 
 <script>
-import { requiredField, standardField } from '@/use/validations'
+import { requiredField, standardField, uniqueField } from '@/use/validations'
 import { mapActions, mapGetters, mapState } from 'vuex'
 import { computed } from '@vue/composition-api'
 
@@ -80,7 +81,7 @@ export default {
       name: '',
       coop: false,
       players: [],
-      nameRules: [...standardField, requiredField],
+      nameRules: [...standardField, requiredField, uniqueField],
       playerRules: [...standardField, requiredField],
       selectRules: [requiredField],
       selectedTeam: null,
@@ -158,6 +159,11 @@ export default {
       const playerLastRules = (duplicatedPlayerName.length > 1) ? 'This field should be unique' : requiredField
       // update the last part of player-rules
       this.playerRules[Object.keys(this.playerRules).length-1] = playerLastRules
+    },
+    isUniqueTeam($ev) {
+      const teamNames = this.teams.map((t) => {return t.name})
+      const uniqueRule = uniqueField($ev, teamNames)
+      this.nameRules[Object.keys(this.nameRules).length-1] = uniqueRule
     },
     submitTeam() {
       this.selectedTeam ? this.addExistingTeam() : this.createNewTeam()
