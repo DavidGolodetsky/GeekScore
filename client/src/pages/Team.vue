@@ -72,23 +72,6 @@ export default defineComponent({
 
     const currentTab = 'tab-0'
     const gameId = route.query.gameId
-    const tabs = [
-      {
-        name: 'Table',
-        icon: 'table-large',
-        component: 'rounds-table'
-      },
-      {
-        name: 'Statistics',
-        icon: 'chart-bar',
-        component: 'the-bars-chart'
-      },
-      {
-        name: 'Tendencies',
-        icon: 'chart-line',
-        component: 'the-tendencies-chart'
-      }
-    ]
 
     const games: ComputedRef<Game[]> = computed(() => store.state.games)
     const getGame: ComputedRef<Game> = computed(() =>
@@ -117,6 +100,35 @@ export default defineComponent({
 
       return rounds
     })
+
+    const tabs = computed(() => {
+      const tabsToShow = [
+        {
+          name: 'Table',
+          icon: 'table-large',
+          component: 'rounds-table'
+        },
+        {
+          name: 'Statistics',
+          icon: 'chart-bar',
+          component: 'the-bars-chart'
+        }
+      ];
+      const roundsMonths = rounds.value
+        .map((round: any) => round.date && new Date(round.date).getMonth())
+        .filter((hasValue: any) => hasValue);
+      const hasRoundsInDifferentMonths = new Set(roundsMonths).size > 1;
+
+      if (hasRoundsInDifferentMonths) {
+        tabsToShow.push({
+          name: 'Tendencies',
+          icon: 'chart-line',
+          component: 'the-tendencies-chart'
+        });
+      }
+
+      return tabsToShow;
+    });
 
     const showTable = computed(() => gameTeam && rounds.value?.length)
 
