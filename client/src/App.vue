@@ -33,14 +33,12 @@ import {
   reactive,
   toRefs,
   watch,
-  computed,
-  onMounted
+  computed
 } from '@vue/composition-api';
 import TheHeader from '@/components/TheHeader.vue';
 import TheFooter from '@/components/TheFooter.vue';
 import TheAlert from '@/components/TheAlert.vue';
 // import { VueOfflineMixin } from 'vue-offline';
-import { fbStart } from '@/auth';
 // TODO: load async
 // const TheAlert = defineAsyncComponent(() => import('@/components/TheAlert.vue'))
 
@@ -55,8 +53,6 @@ export default defineComponent({
   // mixins: [VueOfflineMixin],
   setup(_, ctx) {
     const store = ctx.root.$store;
-
-    onMounted(() => fbStart());
 
     const state = reactive({
       isGoTopBtn: false,
