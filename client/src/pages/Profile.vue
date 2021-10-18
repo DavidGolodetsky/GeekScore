@@ -4,7 +4,7 @@
     <the-title title="Profile" icon="account-details-outline" />
     <div v-if="isUsername" class="d-flex mb-4">
       <span class="mr-3">Username:</span>
-      <span>{{ user.username }}</span>
+      <span>{{ user.user.username }}</span>
     </div>
     <div v-if="winRates && Object.keys(winRates).length" class="mb-7">
       <h3 class="mb-3">Win rates</h3>
