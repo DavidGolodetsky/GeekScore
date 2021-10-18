@@ -7,7 +7,7 @@
       <span>{{ user.username }}</span>
     </div>
     <!-- TODO:remove winRates if none -->
-    <div v-if="winRates" class="mb-7">
+    <div v-if="winRates && Object.keys(winRates).length > 0" class="mb-7">
       <h3 class="mb-3">Win rates</h3>
       <ol class="columns">
         <li v-for="(rate, game) in winRates" :key="game">
@@ -32,8 +32,8 @@ export default defineComponent({
     const store = ctx.root.$store
     const user = store.state.user
 
-    const isUsername = computed(() => store.state.user.user?.username)
-    const winRates = computed(() => store.state.user.winRates)
+    const isUsername = computed(() => user.user?.username)
+    const winRates = computed(() => user.winRates)
 
     const loadWinRates = () => store.dispatch('user/loadWinRates')
 
