@@ -6,8 +6,7 @@
       <span class="mr-3">Username:</span>
       <span>{{ user.username }}</span>
     </div>
-    <!-- TODO:remove winRates if none -->
-    <div v-if="winRates && Object.keys(winRates).length > 0" class="mb-7">
+    <div v-if="Object.keys(winRates).length" class="mb-7">
       <h3 class="mb-3">Win rates</h3>
       <ol class="columns">
         <li v-for="(rate, game) in winRates" :key="game">
@@ -20,8 +19,8 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, computed, onMounted } from '@vue/composition-api'
-import TheTitle from '../components/TheTitle.vue'
+import { defineComponent, computed, onMounted } from '@vue/composition-api';
+import TheTitle from '../components/TheTitle.vue';
 
 export default defineComponent({
   name: 'Profile',
@@ -29,23 +28,23 @@ export default defineComponent({
     TheTitle
   },
   setup(_, ctx) {
-    const store = ctx.root.$store
-    const user = store.state.user
+    const store = ctx.root.$store;
+    const user = store.state.user;
 
-    const isUsername = computed(() => user.user?.username)
-    const winRates = computed(() => user.winRates)
+    const isUsername = computed(() => user.user?.username);
+    const winRates = computed(() => user.winRates);
 
-    const loadWinRates = () => store.dispatch('user/loadWinRates')
+    const loadWinRates = () => store.dispatch('user/loadWinRates');
 
     onMounted(() => {
-      loadWinRates()
-    })
+      loadWinRates();
+    });
 
     return {
       user,
       winRates,
       isUsername
-    }
+    };
   }
-})
+});
 </script>
