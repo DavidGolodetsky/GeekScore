@@ -28,7 +28,7 @@
     </v-timeline>
     <div class="row_center">
       <v-btn
-        class="submit-btn"
+        class="submit-btn mb-10"
         ripple
         type="submit"
         :to="{ name: loggedInUser ? 'games' : 'signIn' }"
@@ -36,22 +36,29 @@
         {{ loggedInUser ? 'Games' : 'Sign In' }}
       </v-btn>
     </div>
+    <div class="row_center">
+      <p class="version-message">
+        This version is under construction now. You can play around with new
+        features, but for a more reliable experience please visit
+        <a class="link" href="https://geekscore.netlify.app/"> GeekScore 0.1</a>
+      </p>
+    </div>
   </section>
 </template>
 
 <script lang="ts">
-import { defineComponent, computed, ComputedRef } from '@vue/composition-api'
-import { DemoStep, User } from '@/types'
+import { defineComponent, computed, ComputedRef } from '@vue/composition-api';
+import { DemoStep, User } from '@/types';
 
 export default defineComponent({
   name: 'Home',
   setup(_, ctx) {
     // TODO:rewrite with useStore later
-    const store = ctx.root.$store
+    const store = ctx.root.$store;
 
     const loggedInUser: ComputedRef<User> = computed(
       () => store.state.user.user
-    )
+    );
 
     const demoSteps: DemoStep[] = [
       {
@@ -81,14 +88,20 @@ export default defineComponent({
         color: 'success',
         icon: 'chart-bar'
       }
-    ]
+    ];
 
     // TODO:figure out how to use map helpers with vuex
 
     return {
       loggedInUser,
       demoSteps
-    }
+    };
   }
-})
+});
 </script>
+
+<style scoped>
+.version-message {
+  max-width: 500px;
+}
+</style>
