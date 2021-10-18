@@ -3,7 +3,7 @@
     <TheHeader />
     <v-main>
       <v-container class="app-container">
-        <TheAlert v-if="isAlert" v-bind="{alertType, alertText}" />
+        <TheAlert v-if="isAlert" v-bind="{ alertType, alertText }" />
         <transition name="slide" mode="out-in">
           <router-view />
         </transition>
@@ -35,12 +35,12 @@ import {
   watch,
   computed,
   onMounted
-} from '@vue/composition-api'
-import TheHeader from '@/components/TheHeader.vue'
-import TheFooter from '@/components/TheFooter.vue'
-import TheAlert from '@/components/TheAlert.vue'
+} from '@vue/composition-api';
+import TheHeader from '@/components/TheHeader.vue';
+import TheFooter from '@/components/TheFooter.vue';
+import TheAlert from '@/components/TheAlert.vue';
 // import { VueOfflineMixin } from 'vue-offline';
-import { setupFb } from '@/auth'
+import { fbStart } from '@/auth';
 // TODO: load async
 // const TheAlert = defineAsyncComponent(() => import('@/components/TheAlert.vue'))
 
@@ -54,9 +54,9 @@ export default defineComponent({
   // TODO: composition-api with mixins?
   // mixins: [VueOfflineMixin],
   setup(_, ctx) {
-    const store = ctx.root.$store
+    const store = ctx.root.$store;
 
-    onMounted(() => setupFb())
+    onMounted(() => fbStart());
 
     const state = reactive({
       isGoTopBtn: false,
@@ -67,38 +67,38 @@ export default defineComponent({
         offset: 0,
         easing: 'easeInOutCubic'
       }
-    })
+    });
 
-    const isLoading = computed(() => store.getters['loading'])
+    const isLoading = computed(() => store.getters['loading']);
 
-    const error = computed(() => store.getters['error'])
+    const error = computed(() => store.getters['error']);
 
-    const isAlert = computed(() => state.isOffline || error.value)
+    const isAlert = computed(() => state.isOffline || error.value);
 
-    const setError = () => store.dispatch('setError')
+    const setError = () => store.dispatch('setError');
 
-    watch(isAlert, (val) => {
+    watch(isAlert, val => {
       if (val) {
-        setTimeout(() => setError(), 10000)
+        setTimeout(() => setError(), 10000);
       }
-    })
+    });
 
     const offlineMessage =
-      'Geek Score is offline. Some features might be disabled'
+      'Geek Score is offline. Some features might be disabled';
 
-    const alertType = computed(() => (state.isOffline ? 'warning' : 'error'))
+    const alertType = computed(() => (state.isOffline ? 'warning' : 'error'));
 
     const alertText = computed(() =>
       state.isOffline ? offlineMessage : error.value.message
-    )
+    );
 
     const onScroll = () => {
-      if (window.pageYOffset > 500) return (state.isGoTopBtn = true)
+      if (window.pageYOffset > 500) return (state.isGoTopBtn = true);
 
       if (state.isGoTopBtn && window.pageYOffset < 500) {
-        state.isGoTopBtn = false
+        state.isGoTopBtn = false;
       }
-    }
+    };
 
     return {
       alertType,
@@ -107,9 +107,9 @@ export default defineComponent({
       onScroll,
       isLoading,
       ...toRefs(state)
-    }
+    };
   }
-})
+});
 </script>
 
 <style scoped lang="scss">

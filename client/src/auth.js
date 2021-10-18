@@ -1,8 +1,8 @@
-import firebase from 'firebase/app'
-import 'firebase/auth'
-import { auth } from 'firebaseui'
-import store from '@/store'
-import router from '@/router'
+import firebase from 'firebase/app';
+import 'firebase/auth';
+import { auth } from 'firebaseui';
+import store from '@/store';
+import router from '@/router';
 
 const firebaseConfig = {
   apiKey: 'AIzaSyAscgoXoqL2LOk84LfNxq1BCu-JnFwyNug',
@@ -12,13 +12,13 @@ const firebaseConfig = {
   storageBucket: 'geekstat-v.appspot.com',
   messagingSenderId: '748797302864',
   appId: '1:748797302864:web:1f23f4bb7d8b8698461955'
-}
+};
 
-firebase.initializeApp(firebaseConfig)
+firebase.initializeApp(firebaseConfig);
 firebase.auth().onAuthStateChanged(user => {
-  if (!user) return
-  store.dispatch('user/autoSignIn', user)
-})
+  if (!user) return;
+  store.dispatch('user/autoSignIn', user);
+});
 
 const uiConfig = {
   signInFlow: 'popup',
@@ -29,15 +29,15 @@ const uiConfig = {
   callbacks: {
     signInSuccessWithAuthResult: () => router.push({ name: 'games' }),
     uiShown() {
-      document.getElementById('loader').style.display = 'none'
+      document.getElementById('loader').style.display = 'none';
     }
   }
-}
+};
 
-const ui = new auth.AuthUI(firebase.auth())
+const ui = new auth.AuthUI(firebase.auth());
 
 export const fbStart = () => {
-  ui.start('#firebaseui-auth-container', uiConfig)
-}
+  ui.start('#firebaseui-auth-container', uiConfig);
+};
 
-export default firebase
+export default firebase;
