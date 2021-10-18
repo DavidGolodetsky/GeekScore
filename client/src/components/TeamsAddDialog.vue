@@ -5,7 +5,7 @@
     button-text="Add team"
     @submit="submitTeam"
   >
-    <v-tabs v-model="currentTab" @change="resetSelectedTeam">
+    <v-tabs v-model="currentTab" @change="reset">
       <v-tabs-slider color="secondary" />
       <v-tab v-for="(tab, i) in tabs" :key="i" :href="`#tab-${i}`">
         <span class="mt-2">{{ tab }}</span>
@@ -17,26 +17,28 @@
           v-model="selectedTeam"
           prepend-icon="mdi-account-multiple-plus-outline"
           :items="filteredTeams"
-          :rules="selectedTeam ? selectRules : []"
+          :rules="currentTab === 'tab-0' ? selectRules : []"
           item-text="name"
           item-value="_id"
           label="Team"
+          autofocus
         />
       </v-tab-item>
       <v-tab-item value="tab-1">
         <v-text-field
           v-model.trim="name"
           clearable
-          :rules="nameRules"
+          :rules="currentTab === 'tab-1' ? nameRules : []"
           prepend-icon="mdi-account-group-outline"
           label="Name"
-          @input="isUniqueTeam"
+          autofocus
         />
         <v-select
           prepend-icon="mdi-account-multiple-plus-outline"
           :items="numberOfPlayers"
-          :rules="selectRules"
+          :rules="currentTab === 'tab-1' ? selectRules : []"
           label="Number of players"
+          autofocus
           @change="setPlayers"
         />
         <span>
@@ -47,9 +49,10 @@
             :readonly="player.isMe"
             :clearable="!player.isMe"
             prepend-icon="mdi-account-outline"
-            :rules="playerRules"
+            :rules="currentTab === 'tab-1' && !player.isMe ? playerRules : []"
             :label="`Player #${i + 1}`"
-            @input="isUniqueName"
+            @input="updatePlayers"
+            autofocus
           />
         </span>
         <v-switch
@@ -64,9 +67,12 @@
 </template>
 
 <script>
+import { getNames, generateNumberOfPlayers } from "@/use/common";
 import { requiredField, standardField, uniqueField } from '@/use/validations'
 import { mapActions, mapGetters, mapState } from 'vuex'
 import { computed } from '@vue/composition-api'
+
+
 
 export default {
   name: 'TeamsAddDialog',
@@ -77,24 +83,24 @@ export default {
     }
   },
   data() {
+
     return {
       name: '',
       coop: false,
       players: [],
-      nameRules: [...standardField, requiredField, uniqueField],
+      nameRules: [...standardField, requiredField],
       playerRules: [...standardField, requiredField],
       selectRules: [requiredField],
       selectedTeam: null,
       currentTab: null,
       tabs: ['Select team', 'Create New'],
-      // Generates number of players from 1 to N
-      numberOfPlayers: Array(8)
-        .join(0)
-        .split(0)
-        .map((v, i) => i + 1)
+      numberOfPlayers: generateNumberOfPlayers()
     }
   },
   setup(props, ctx) {
+
+    const uniqueRule = (list, isOnly) => [field => uniqueField(field, getNames(list), isOnly)]
+
     const store = ctx.root.$store
 
     const getGameTeams = () => store.getters['teams/getGameTeams'](props.gameId)
@@ -102,7 +108,8 @@ export default {
     const gameTeams = computed(() => (props.gameId ? getGameTeams() : null))
 
     return {
-      gameTeams
+      gameTeams,
+      uniqueRule
     }
   },
   computed: {
@@ -135,12 +142,10 @@ export default {
   methods: {
     ...mapActions('teams', ['createTeam', 'updateTeam']),
     setInitialPlayer() {
+      this.nameRules = [...this.nameRules, ...this.uniqueRule(this.teams, true)]
       if (!this.user?.username) return
       const name = this.user.username ? this.user.username : 'Me'
       this.players.push({ name })
-    },
-    resetSelectedTeam() {
-      if (this.selectedTeam) this.selectedTeam = ''
     },
     setPlayers($ev) {
       let myName = this.user.username ? this.user.username : 'Me'
@@ -151,22 +156,21 @@ export default {
       }
       if ($ev === 1) this.coop = true
     },
-    isUniqueName($ev) {
-      let duplicatedPlayerName = this.players.filter(
-        player => player.name === $ev
-      )
-      // set variable to determine which rule will be used: unique-field-rule or required-field-rule
-      const playerLastRules = (duplicatedPlayerName.length > 1) ? 'This field should be unique' : requiredField
-      // update the last part of player-rules
-      this.playerRules[Object.keys(this.playerRules).length-1] = playerLastRules
-    },
-    isUniqueTeam($ev) {
-      const teamNames = this.teams.map((t) => {return t.name})
-      const uniqueRule = uniqueField($ev, teamNames)
-      this.nameRules[Object.keys(this.nameRules).length-1] = uniqueRule
+    updatePlayers($ev) {
+      this.playerRules = [...this.playerRules, ...this.uniqueRule(this.players)]
     },
     submitTeam() {
+      if(this.name || this.selectedTeam) {
       this.selectedTeam ? this.addExistingTeam() : this.createNewTeam()
+      }
+      this.reset()
+    },
+    reset() {
+    this.team = null
+    this.name = ''
+    this.numberOfPlayers = generateNumberOfPlayers()
+    this.selectedTeam = null
+    this.setInitialPlayer()
     },
     createNewTeam() {
       const team = {

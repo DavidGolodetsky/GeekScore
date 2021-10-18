@@ -37,10 +37,11 @@ export const linkField = (v: string) => {
   return v ? condition || message : true
 }
 
-export const uniqueField = (v: string, list: any) => {
-  const condition = !list?.includes(v)
-  const message = `The name ${v} already exists.`
-  return v ? condition || message : true
+export const uniqueField = (v: string, list:[], isOnly?: boolean) => {
+  const found = list?.filter((name:string) => name === v)
+  const condition = isOnly ? found?.length >= 1 : found?.length > 1
+  const message = 'This field should be unique'
+  return v ? !condition || message : true
 }
 
 export const standardField = [tooLongField, tooShortField, onlyWhitespaces]

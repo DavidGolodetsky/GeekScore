@@ -17,6 +17,7 @@
 </template>
 
 <script lang="ts">
+import { getNames } from "@/use/common";
 import { standardField, requiredField, uniqueField } from '@/use/validations'
 import { defineComponent, reactive, toRefs } from '@vue/composition-api'
 
@@ -33,12 +34,8 @@ export default defineComponent({
 
     const store = ctx.root.$store
 
-    const getTeamNmes = () => {
-      return store.state.teams.teams?.map((t: any) => {return t.name});
-    }
-
     const checkUnique = (v: any) => {
-      return v !== team.value.name ? uniqueField(v, getTeamNmes()) : true
+      return v !== team.value.name ? uniqueField(v, getNames(store.state.teams.teams), true) : true
     }
 
     const state = reactive({

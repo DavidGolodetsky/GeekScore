@@ -18,20 +18,18 @@
 
 <script lang="ts">
 import { Game } from '@/types'
+import { getNames } from "@/use/common";
 import { defineComponent, reactive, toRefs } from '@vue/composition-api'
 import { standardField, requiredField, uniqueField } from '@/use/validations'
+
 
 export default defineComponent({
   name: 'GamesAddDialog',
   setup(_, ctx) {
     const store = ctx.root.$store
 
-    const getGameNames = () => {
-      return store.state.games.games?.map((g: Game) => {return g.name});
-    }
-
     const checkUnique = (v: any) => {
-      return uniqueField(v, getGameNames())
+      return uniqueField(v, getNames(store.state.games.games), true)
     }
 
     const state = reactive({
