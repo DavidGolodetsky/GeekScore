@@ -16,10 +16,11 @@
         :headers="tableHeaders"
         :items="rounds"
         :search="search"
-        single-expand
+        :single-expand="true"
         :items-per-page="5"
         :expanded.sync="expanded"
         show-expand
+        item-key="_id"
         class="app-table elevation-1"
       >
         <template #expanded-item="{ item, headers }">
