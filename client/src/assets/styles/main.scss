@@ -1,4 +1,4 @@
-@import "./_variables";
+@import './_variables';
 
 [v-cloak] {
   display: none;
@@ -79,9 +79,9 @@ a {
     background-color: $lightgrey;
   }
 
-  .theme--light.v-tabs-items {
-    background-color: transparent;
-  }
+  // .theme--light.v-tabs-items {
+  //   background-color: transparent;
+  // }
 
   .theme--light .v-tabs > .v-tabs-bar {
     background-color: $lightgrey;
@@ -144,6 +144,13 @@ a {
   font-size: 22px;
   font-weight: 600;
   text-shadow: 2px -2px 0px #000;
+}
+
+canvas {
+  &#bar-chart,
+  &#line-chart {
+    background-color: $lightgrey;
+  }
 }
 
 // animations

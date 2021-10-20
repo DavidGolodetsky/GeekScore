@@ -40,4 +40,6 @@ export const fbStart = () => {
   ui.start('#firebaseui-auth-container', uiConfig);
 };
 
+export const setupFb = () => {};
+
 export default firebase;

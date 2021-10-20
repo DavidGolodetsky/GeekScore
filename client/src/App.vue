@@ -31,6 +31,7 @@ import {
   defineComponent,
   // defineAsyncComponent,
   reactive,
+  onMounted,
   toRefs,
   watch,
   computed
@@ -38,6 +39,7 @@ import {
 import TheHeader from '@/components/TheHeader.vue';
 import TheFooter from '@/components/TheFooter.vue';
 import TheAlert from '@/components/TheAlert.vue';
+import { setupFb } from '@/auth';
 // import { VueOfflineMixin } from 'vue-offline';
 // TODO: load async
 // const TheAlert = defineAsyncComponent(() => import('@/components/TheAlert.vue'))
@@ -64,6 +66,8 @@ export default defineComponent({
         easing: 'easeInOutCubic'
       }
     });
+
+    onMounted(() => setupFb());
 
     const isLoading = computed(() => store.getters['loading']);
 

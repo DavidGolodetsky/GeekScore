@@ -1,6 +1,6 @@
 <template>
-  <section class="the-table">
-    <v-card class="mb-4">
+  <section class="rounds-table">
+    <v-card>
       <v-card-title class="table-title">
         <v-spacer class="d-none d-sm-flex" />
         <v-text-field
@@ -28,8 +28,8 @@
             <div v-if="item.comment">Comment: {{ item.comment }}</div>
           </td>
         </template>
-        <template #item[action]="{ item }">
-          <rounds-edit-dialog :round="item" />
+        <template #item.action="{ item }">
+          <RoundsEditDialog :round="item" />
         </template>
       </v-data-table>
     </v-card>
@@ -37,7 +37,7 @@
 </template>
 
 <script>
-import RoundsEditDialog from '@/components/RoundsEditDialog.vue'
+import RoundsEditDialog from '@/components/RoundsEditDialog.vue';
 
 export default {
   name: 'RoundsTable',
@@ -60,10 +60,10 @@ export default {
       search: '',
       expanded: [],
       tableHeaders: []
-    }
+    };
   },
   created() {
-    this.cookHeaders()
+    this.cookHeaders();
   },
   methods: {
     cookHeaders() {
@@ -73,23 +73,23 @@ export default {
           : { text: 'Tie', value: 'tie' },
         { text: 'Date', value: 'date' },
         { text: 'Actions', value: 'action', sortable: false }
-      ]
-      if (!this.team.coop) this.countPlayers()
-      this.tableHeaders.push(...fields)
+      ];
+      if (!this.team.coop) this.countPlayers();
+      this.tableHeaders.push(...fields);
     },
     countPlayers() {
       const players = this.team.players.map(player => ({
         text: player.name,
         value: player.name.toLowerCase()
-      }))
-      this.tableHeaders.push(...players)
+      }));
+      this.tableHeaders.push(...players);
     }
   }
-}
+};
 </script>
 
 <style scoped lang="scss">
-.the-table {
+.rounds-table {
   .app-table,
   .table-title {
     background-color: $lightgrey;
