@@ -2,13 +2,11 @@
 
 A PWA for board games fans. It allows you to store your games, creates teams, and collect statistics.
 
-Check out the first stable version: https://geekscore.netlify.app
-
 <img src="https://i.ibb.co/GFyt0c3/Screenshot-at-Sep-19-11-21-40.png" width=240><img src="https://i.ibb.co/c38dqdM/Phone-Screenshot-2.png" width=240>
 
 <img src="https://i.ibb.co/9rqvSrP/Phone-Screenshot-3.png" width=240><img src="https://i.ibb.co/CWrw6vc/Phone-Screenshot-4.png" width=240><img src="https://i.ibb.co/LxyqVmm/Phone-Screenshot-5.png" width=240>
 
-This is the second version of the app, build with MEVN stack, vue-composition-api, and Typescript. The first one was using Firebase as a backend.
+This is the second version of the app, build with MEVN stack, vue-composition-api, and Typescript. The first one was using Firebase as a backend could be found here: https://geekscore.netlify.app
 (If you want to learn more about the project's path here is an [article](https://davidgo.netlify.app/blog/geek-score.html) on my blog)
 
 ## For contributors:
