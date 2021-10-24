@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<coverage generated="1635085139317" clover="3.2.0">
+  <project timestamp="1635085139317" name="All files">
+    <metrics statements="14" coveredstatements="7" conditionals="3" coveredconditionals="0" methods="7" coveredmethods="3" elements="24" coveredelements="10" complexity="0" loc="14" ncloc="14" packages="2" files="2" classes="2"/>
+    <package name="components">
+      <metrics statements="4" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="0"/>
+      <file name="TheFooter.vue" path="/Users/lc/Documents/projects/GeekScore-2/client/src/components/TheFooter.vue">
+        <metrics statements="4" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="0"/>
+        <line num="33" count="1" type="stmt"/>
+        <line num="38" count="0" type="stmt"/>
+        <line num="39" count="0" type="stmt"/>
+        <line num="41" count="0" type="stmt"/>
+      </file>
+    </package>
+    <package name="use">
+      <metrics statements="10" coveredstatements="6" conditionals="3" coveredconditionals="0" methods="6" coveredmethods="3"/>
+      <file name="common.ts" path="/Users/lc/Documents/projects/GeekScore-2/client/src/use/common.ts">
+        <metrics statements="10" coveredstatements="6" conditionals="3" coveredconditionals="0" methods="6" coveredmethods="3"/>
+        <line num="3" count="1" type="cond" truecount="0" falsecount="1"/>
+        <line num="5" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="6" count="0" type="stmt"/>
+        <line num="10" count="1" type="stmt"/>
+        <line num="11" count="1" type="stmt"/>
+        <line num="14" count="2" type="stmt"/>
+        <line num="15" count="2" type="stmt"/>
+        <line num="18" count="1" type="stmt"/>
+        <line num="19" count="0" type="stmt"/>
+        <line num="20" count="0" type="stmt"/>
+      </file>
+    </package>
+  </project>
+</coverage>
