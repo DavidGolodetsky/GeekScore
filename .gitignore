@@ -5,6 +5,7 @@ node_modules
 package-lock.json
 /*/yarn.lock
 yarn.lock
+coverage
 
 # local env files
 .env.local
