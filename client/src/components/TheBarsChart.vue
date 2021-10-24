@@ -1,10 +1,18 @@
-<script>
-import { Bar } from 'vue-chartjs';
+<template>
+  <BarChart :chart-data="chartData" />
+</template>
 
-export default {
+<script lang="ts">
+import { defineComponent, computed, toRefs } from '@vue/composition-api';
+import { BarChart } from 'vue-chart-3'
+import { Chart, ChartData, ChartOptions, registerables } from "chart.js";
+import { Round, Player } from '@/types';
+
+Chart.register(...registerables);
+
+export default defineComponent({
   name: 'TheBarsChart',
-  // TODO:refactor
-  extends: Bar,
+  components: { BarChart },
   props: {
     team: {
       type: Object,
@@ -15,68 +23,52 @@ export default {
       required: true
     }
   },
-  computed: {
-    chartdata() {
-      return {
-        labels: this.team.coop ? ['Victories', 'Defeats'] : this.getPlayers(),
-        datasets: [
-          {
-            label: 'Victories',
-            backgroundColor: '#ec8506',
-            data: this.team.coop ? this.getCoopStat() : this.getPlayersStat()
-          }
-        ]
-      };
-    }
-  },
-  watch: {
-    rounds() {
-      this.updateChart();
-    }
-  },
-  mounted() {
-    this.setChart();
-  },
-  methods: {
-    updateChart() {
-      if (!this.$data._chart) return;
-      this.$data._chart.data = this.chartdata;
-      this.$data._chart.update();
-    },
-    setChart() {
-      this.renderChart(this.chartdata, {
-        responsive: true,
-        maintainAspectRatio: false
-      });
-    },
-    getCoopStat() {
-      let victories = null;
-      let defeats = null;
-      Object.values(this.rounds).forEach(round => {
+  setup(props) {
+    const { rounds, team }: any = toRefs(props);
+
+    const getCoopStat = () => {
+      let victories: any = null;
+      let defeats: any = null;
+      Object.values(rounds.value).forEach((round: any) => {
         round.result === 'VICTORY' ? victories++ : defeats++;
       });
       const data = [victories, defeats];
       let top = Math.round(Math.max.apply(null, data) + 10 / 10) + 5;
       return [victories, defeats, 0, top];
-    },
-    getPlayersStat() {
-      const players = this.getPlayers();
-      const data = players.map(player => {
-        let playerRes = 0;
-        let formattedPlayer = player.toLowerCase();
-        Object.keys(this.rounds).forEach(round => {
-          if (this.rounds[round][formattedPlayer]) playerRes++;
+    };
+
+    function getPlayers() {
+      return team.value.players.map((player: Player) => player.name);
+    };
+
+    function getPlayersStat() {
+      const players: string[] = getPlayers();
+      const data: any = players.map((player: string) => {
+        let playerRes: number = 0;
+        let formattedPlayer: string = player.toLowerCase();
+        Object.keys(rounds.value).forEach((round: string) => {
+          if (rounds.value[round][formattedPlayer]) playerRes++;
         });
         return playerRes;
       });
 
-      let top = Math.ceil(Math.max.apply(null, data) / 10) * 10;
+      let top: number = Math.ceil(Math.max.apply(null, data) / 10) * 10;
 
       return [...data, 0, top];
-    },
-    getPlayers() {
-      return this.team.players.map(player => player.name);
-    }
-  }
-};
+    };
+
+    const chartData = computed<ChartData<'bar'>>(() => ({
+      labels: team.value.coop ? ['Victories', 'Defeats'] : getPlayers(),
+      datasets: [
+        {
+          label: 'Victories',
+          backgroundColor: '#ec8506',
+          data: team.value.coop ? getCoopStat() : getPlayersStat()
+        }
+      ]
+    }))
+
+    return { chartData };
+  },
+})
 </script>
