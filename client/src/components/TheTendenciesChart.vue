@@ -3,11 +3,12 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, computed } from '@vue/composition-api';
+import { defineComponent, computed, toRefs } from '@vue/composition-api';
 import { LineChart } from 'vue-chart-3'
 import { Chart, ChartData, ChartOptions, registerables } from "chart.js";
+import { Round, Player } from '@/types';
 
-Chart.register(...registerables)
+Chart.register(...registerables);
 
 export default defineComponent({
   name: 'TheTendenciesChart',
@@ -23,22 +24,23 @@ export default defineComponent({
     }
   },
   setup(props) {
+    const { rounds, team }: any = toRefs(props);
     const playersStat = computed(() => {
-      const groupedByDate: any = props.rounds.reduce((r: any, a: any) => {
+      const groupedByDate: any = rounds.value.reduce((r: any, a: Round) => {
         const month = new Date(a.date).toLocaleString('default', { month: 'short' })
         r[month] = r[month] || [];
         r[month].push(a);
         return r;
       }, Object.create(null));
 
-      const players: any = props.team.players.map((player: any) => player.name.toLowerCase());
+      const players: string[] = team.value.players.map((player: Player) => player.name.toLowerCase());
 
-      const stat = []
+      const stat = [];
 
       for (let date in groupedByDate) {
         const dateObject: any = { date }
-        players.forEach((player: any) => {
-          const playerRes: any = groupedByDate[date].filter((round: any) => round.winner === player)
+        players.forEach((player: string) => {
+          const playerRes: any = groupedByDate[date].filter((round: Round) => round.winner === player)
           dateObject[player] = playerRes.length
         })
         stat.push(dateObject)
@@ -49,7 +51,7 @@ export default defineComponent({
     const chartData = computed<ChartData<'line'>>(() => ({
       // TODO:refactor that horror
       labels: playersStat.value.map((data: any) => data.date),
-      datasets: props.team.players.map((player: any) => {
+      datasets: team.value.players.map((player: Player) => {
         const victories: number[] = playersStat.value.map((data: any) => data[player.name.toLowerCase()])
         let top: number = Math.round(Math.max.apply(null, victories) + 10 / 10) + 5;
         const r = (min: number, max: number) => Math.floor(Math.random() * (max - min + 1) + min)
