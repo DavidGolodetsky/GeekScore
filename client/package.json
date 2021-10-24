@@ -14,7 +14,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-push": "npm test & npm run editorconfig"
+      "pre-push": "npm test"
     }
   },
   "dependencies": {
