@@ -1,4 +1,4 @@
-import { generateNumberOfPlayers } from '../../use/common';
+import { generateNumberOfPlayers } from '@/use/common';
 
 describe('common composable tests', () => {
   it('number of players generated', async () => {
