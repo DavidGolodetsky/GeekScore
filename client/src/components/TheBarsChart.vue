@@ -5,8 +5,8 @@
 <script lang="ts">
 import { defineComponent, computed, toRefs } from '@vue/composition-api';
 import { BarChart } from 'vue-chart-3'
-import { Chart, ChartData, ChartOptions, registerables } from "chart.js";
-import { Round, Player } from '@/types';
+import { Chart, ChartData, registerables } from "chart.js";
+import { Player } from '@/types';
 
 Chart.register(...registerables);
 
