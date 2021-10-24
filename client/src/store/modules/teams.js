@@ -15,9 +15,9 @@ export default {
       state.teams = payload
     },
     UPDATE_TEAM(state, payload) {
-      const team = state.teams.find(team => team._id === payload._id)
-      state.teams = state.teams.filter(team => team._id !== payload._id)
-      state.teams.push({ ...team, ...payload })
+      const updatedTeam = state.teams.find(team => team._id === payload._id)
+      state.teams = state.teams.filter(item => item._id !== payload._id)
+      state.teams.push({ ...updatedTeam, ...payload })
     },
     DELETE_TEAM(state, payload) {
       const teams = state.teams.filter(team => team._id !== payload)
@@ -80,13 +80,18 @@ export default {
   getters: {
     getTeam(state) {
       return teamId => {
-        if (state.teams) return state.teams.find(team => team._id === teamId)
+        if (state.teams) {
+          return state.teams.find(team => team._id === teamId)
+        }
+        return null
       }
     },
     getGameTeams(state) {
       return gameId => {
-        if (state.teams)
+        if (state.teams) {
           return state.teams.filter(team => team.games.includes(gameId))
+        }
+        return []
       }
     }
   }

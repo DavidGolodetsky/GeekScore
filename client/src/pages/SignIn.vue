@@ -16,7 +16,7 @@ export default defineComponent({
     const formProps: AuthForm = {
       title: 'Sign In',
       icon: 'login',
-      redirectText: "Don't have account yet?",
+      redirectText: "Don't have account-outline yet?",
       redirectLink: { name: 'signUp' },
       redirectLinkText: 'Sign Up'
     }

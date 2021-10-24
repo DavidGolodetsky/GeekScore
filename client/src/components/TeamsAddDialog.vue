@@ -3,9 +3,9 @@
     activator-icon="plus"
     header="Add team"
     button-text="Add team"
-    :submit-logic="onSubmit"
+    @submit="submitTeam"
   >
-    <v-tabs v-model="currentTab" @change="resetSelectedTeam">
+    <v-tabs v-model="currentTab" @change="resetForm">
       <v-tabs-slider color="secondary" />
       <v-tab v-for="(tab, i) in tabs" :key="i" :href="`#tab-${i}`">
         <span class="mt-2">{{ tab }}</span>
@@ -15,9 +15,10 @@
       <v-tab-item value="tab-0">
         <v-select
           v-model="selectedTeam"
-          prepend-icon="mdi-account-multiple-plus"
-          :items="teams"
-          :rules="selectedTeam ? selectRules : []"
+          prepend-icon="mdi-account-multiple-plus-outline"
+          autofocus
+          :items="filteredTeams"
+          :rules="isSelectTeamTab ? selectRules : []"
           item-text="name"
           item-value="_id"
           label="Team"
@@ -27,14 +28,15 @@
         <v-text-field
           v-model.trim="name"
           clearable
-          :rules="nameRules"
-          prepend-icon="mdi-account-group"
+          autofocus
+          :rules="isSelectTeamTab ? [] : nameRules"
+          prepend-icon="mdi-account-group-outline"
           label="Name"
         />
         <v-select
-          prepend-icon="mdi-account-multiple-plus"
+          prepend-icon="mdi-account-multiple-plus-outline"
           :items="numberOfPlayers"
-          :rules="selectRules"
+          :rules="isSelectTeamTab ? [] : selectRules"
           label="Number of players"
           @change="setPlayers"
         />
@@ -45,10 +47,10 @@
             v-model.trim="player.name"
             :readonly="player.isMe"
             :clearable="!player.isMe"
-            prepend-icon="mdi-account"
-            :rules="playerRules"
+            prepend-icon="mdi-account-outline"
+            :rules="isSelectTeamTab && player.isMe ? [] : playerRules"
             :label="`Player #${i + 1}`"
-            @input="isUniqueName"
+            @input="updatePlayers"
           />
         </span>
         <v-switch
@@ -63,8 +65,10 @@
 </template>
 
 <script>
-import { requiredField, standardField } from '@/use/validations'
-import { mapActions, mapGetters, mapState } from 'vuex'
+import { getNames, generateNumberOfPlayers } from '@/use/common';
+import { requiredField, standardField, uniqueField } from '@/use/validations';
+import { mapActions, mapGetters, mapState } from 'vuex';
+import { computed } from '@vue/composition-api';
 
 export default {
   name: 'TeamsAddDialog',
@@ -85,12 +89,25 @@ export default {
       selectedTeam: null,
       currentTab: null,
       tabs: ['Select team', 'Create New'],
-      // Generates number of players from 1 to N
-      numberOfPlayers: Array(8)
-        .join(0)
-        .split(0)
-        .map((v, i) => i + 1)
-    }
+      numberOfPlayers: generateNumberOfPlayers()
+    };
+  },
+  setup(props, ctx) {
+    const uniqueRule = (list, isOnly) => [
+      field => uniqueField(field, getNames(list), isOnly)
+    ];
+
+    const store = ctx.root.$store;
+
+    const getGameTeams = () =>
+      store.getters['teams/getGameTeams'](props.gameId);
+
+    const gameTeams = computed(() => (props.gameId ? getGameTeams() : null));
+
+    return {
+      gameTeams,
+      uniqueRule
+    };
   },
   computed: {
     ...mapState('user', ['user']),
@@ -99,44 +116,54 @@ export default {
     ...mapGetters('games', ['getGame']),
     ...mapGetters('teams', ['getTeam']),
     game() {
-      return this.games ?? this.getGame(this.gameId)
+      return this.games ?? this.getGame(this.gameId);
     },
     isCoop() {
-      return this.game ? this.game.coop || this.coop : null
+      return this.game ? this.game.coop || this.coop : null;
+    },
+    isSelectTeamTab() {
+      return this.currentTab === 'tab-0';
+    },
+    filteredTeams() {
+      let teamNames =
+        this.gameTeams &&
+        this.gameTeams.map(team => {
+          return team.name;
+        });
+
+      return this.teams
+        ? this.teams.filter(item => !teamNames.includes(item.name))
+        : [];
     }
-  },
-  created() {
-    this.setInitialPlayer()
   },
   methods: {
     ...mapActions('teams', ['createTeam', 'updateTeam']),
-    setInitialPlayer() {
-      if (!this.user?.username) return
-      const name = this.user.username ? this.user.username : 'Me'
-      this.players.push({ name })
-    },
-    resetSelectedTeam() {
-      if (this.selectedTeam) this.selectedTeam = ''
-    },
     setPlayers($ev) {
-      let myName = this.user.username ? this.user.username : 'Me'
-      this.players = [{ name: myName, isMe: true }]
+      let myName = this.user?.username ? this.user.username : 'Me';
+      this.players = [{ name: myName, isMe: true }];
       for (let i = 1; i < $ev; i++) {
-        let player = { name: '' }
-        this.players.push(player)
+        let player = { name: '' };
+        this.players.push(player);
       }
-      if ($ev === 1) this.coop = true
+      if ($ev === 1) this.coop = true;
     },
-    isUniqueName($ev) {
-      let duplicatedPlayerName = this.players.filter(
-        player => player.name === $ev
-      )
-      const isDuplicated =
-        duplicatedPlayerName.length < 2 || 'This field should be unique'
-      this.playerRules = [...this.playerRules, isDuplicated]
+    updatePlayers() {
+      this.playerRules = [
+        ...this.playerRules,
+        ...this.uniqueRule(this.players)
+      ];
     },
-    onSubmit() {
-      this.selectedTeam ? this.addExistingTeam() : this.createNewTeam()
+    submitTeam() {
+      if (this.name || this.selectedTeam) {
+        this.selectedTeam ? this.addExistingTeam() : this.createNewTeam();
+      }
+      this.resetForm();
+    },
+    resetForm() {
+      this.team = null;
+      this.name = '';
+      this.numberOfPlayers = generateNumberOfPlayers();
+      this.selectedTeam = null;
     },
     createNewTeam() {
       const team = {
@@ -145,17 +172,17 @@ export default {
         name: this.name,
         coop: this.isCoop,
         players: this.players
-      }
-      this.createTeam(team)
+      };
+      this.createTeam(team);
     },
     addExistingTeam() {
-      const team = this.getTeam(this.selectedTeam)
+      const team = this.getTeam(this.selectedTeam);
       const payload = {
         _id: this.selectedTeam,
         games: [...team.games, this.gameId]
-      }
-      this.updateTeam(payload)
+      };
+      this.updateTeam(payload);
     }
   }
-}
+};
 </script>

@@ -1,10 +1,10 @@
 <template>
   <BaseDialog
-    activator-icon="pencil"
+    activator-icon="pencil-outline"
     color="#607d8b"
     header="Edit round info"
     simple
-    :submit-logic="onSubmit"
+    @submit="submitRound"
   >
     <v-switch
       v-model="toDelete"
@@ -16,28 +16,28 @@
 </template>
 
 <script>
-import { mapActions } from "vuex";
+import { mapActions } from 'vuex'
 
 export default {
-  name: "RoundsEditDialog",
+  name: 'RoundsEditDialog',
   props: {
     round: {
       type: Object,
       required: true
     }
   },
-  data () {
+  data() {
     return {
       toDelete: false
-    };
+    }
   },
   methods: {
-    ...mapActions("rounds", ["deleteRound"]),
-    onSubmit () {
+    ...mapActions('rounds', ['deleteRound']),
+    submitRound() {
       if (this.toDelete) {
         this.deleteRound(this.round._id)
       }
     }
   }
-};
+}
 </script>

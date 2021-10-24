@@ -1,5 +1,5 @@
 <template>
-  <section class="team-details">
+  <section class="team-details mb-4">
     <the-title
       title="Rounds"
       icon="sword-cross"
@@ -38,14 +38,14 @@ import {
   onUnmounted,
   ComputedRef,
   toRefs
-} from '@vue/composition-api'
-import TheTitle from '@/components/TheTitle.vue'
-import RoundsTable from '@/components/RoundsTable.vue'
-import TheBarsChart from '@/components/TheBarsChart.vue'
-import TheTendenciesChart from '@/components/TheTendenciesChart.vue'
-import roundsModule from '@/store/modules/rounds'
-import { Game, Round, Team } from '@/types'
-import { Store } from 'vuex'
+} from '@vue/composition-api';
+import TheTitle from '@/components/TheTitle.vue';
+import RoundsTable from '@/components/RoundsTable.vue';
+import TheBarsChart from '@/components/TheBarsChart.vue';
+import TheTendenciesChart from '@/components/TheTendenciesChart.vue';
+import roundsModule from '@/store/modules/rounds';
+import { Game, Round, Team } from '@/types';
+import { Store } from 'vuex';
 
 // TODO:refactor
 export default defineComponent({
@@ -63,64 +63,77 @@ export default defineComponent({
     }
   },
   setup(props, ctx) {
-    const { teamId }: any = toRefs(props)
+    const { teamId }: any = toRefs(props);
 
-    const store = ctx.root.$store
-    const route = ctx.root.$route
+    const store = ctx.root.$store;
+    const route = ctx.root.$route;
 
-    loadRoundsData(store)
+    loadRoundsData(store);
 
-    const currentTab = 'tab-0'
-    const gameId = route.query.gameId
-    const tabs = [
-      {
-        name: 'Table',
-        icon: 'table-large',
-        component: 'rounds-table'
-      },
-      {
-        name: 'Statistics',
-        icon: 'chart-bar',
-        component: 'the-bars-chart'
-      },
-      {
-        name: 'Tendencies',
-        icon: 'chart-line',
-        component: 'the-tendencies-chart'
-      }
-    ]
+    const currentTab = 'tab-0';
+    const gameId = route.query.gameId;
 
-    const games: ComputedRef<Game[]> = computed(() => store.state.games)
+    const games: ComputedRef<Game[]> = computed(() => store.state.games);
     const getGame: ComputedRef<Game> = computed(() =>
       store.getters['games/getGame'](gameId)
-    )
+    );
     const game: ComputedRef<Game | null> = computed(() =>
       games ? getGame.value : null
-    )
+    );
 
-    const teams: ComputedRef<Team[]> = computed(() => store.state.teams)
+    const teams: ComputedRef<Team[]> = computed(() => store.state.teams);
     const getTeams: ComputedRef<Team> = computed(() =>
       store.getters['teams/getTeam'](teamId.value)
-    )
+    );
     const team: ComputedRef<Team | null> = computed(() =>
       teams ? getTeams.value : null
-    )
+    );
 
-    const gameTeam = computed(() => game && team)
+    const gameTeam = computed(() => game && team);
 
     const rounds: ComputedRef<Round[]> = computed(() => {
-      const query = { teamId: teamId.value, gameId: gameId }
-      const rounds: Round[] = store.getters['rounds/getRounds'](query)
+      const query = { teamId: teamId.value, gameId: gameId };
+      const rounds: Round[] = store.getters['rounds/getRounds'](query);
       if (rounds) {
-        rounds.forEach((round: any) => (round[round.winner] = 'VICTORY'))
+        rounds.forEach((round: any) => (round[round.winner] = 'VICTORY'));
       }
 
-      return rounds
-    })
+      return rounds;
+    });
 
-    const showTable = computed(() => gameTeam && rounds.value?.length)
+    const tabs = computed(() => {
+      const tabsToShow = [
+        {
+          name: 'Table',
+          icon: 'table-large',
+          component: 'rounds-table'
+        },
+        {
+          name: 'Statistics',
+          icon: 'chart-bar',
+          component: 'the-bars-chart'
+        }
+      ];
+      const roundsMonths = rounds.value.map(
+        (round: any) => round.date && new Date(round.date).getMonth()
+      );
 
-    onUnmounted(() => store.dispatch('setBackTitle'))
+      const hasRoundsInDifferentMonths = new Set(roundsMonths).size > 1;
+
+      if (hasRoundsInDifferentMonths) {
+        tabsToShow.push({
+          name: 'Tendencies',
+          icon: 'chart-line',
+          component: 'the-tendencies-chart'
+        });
+      }
+
+      return tabsToShow;
+    });
+
+    const showTable = computed(() => gameTeam && rounds.value?.length);
+
+    onUnmounted(() => store.dispatch('setBackTitle'));
 
     watch(
       teams,
@@ -129,14 +142,14 @@ export default defineComponent({
           store.dispatch(
             'setBackTitle',
             `${team.value.name}: ${game.value.name}`
-          )
+          );
         }
       },
       {
         immediate: true,
         deep: true
       }
-    )
+    );
 
     return {
       currentTab,
@@ -147,13 +160,13 @@ export default defineComponent({
       gameTeam,
       rounds,
       showTable
-    }
+    };
   }
-})
+});
 
 const loadRoundsData = (store: Store<any>) => {
-  const isRounds = store.hasModule('rounds')
-  isRounds || store.registerModule('rounds', roundsModule)
-  store.dispatch('rounds/loadRounds')
-}
+  const isRounds = store.hasModule('rounds');
+  isRounds || store.registerModule('rounds', roundsModule);
+  store.dispatch('rounds/loadRounds');
+};
 </script>

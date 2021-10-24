@@ -1,5 +1,5 @@
  # Create image based on the latest node version
-FROM node:latest
+FROM node:lts-alpine@sha256:a251de4db0e0632446c0ba62adbe1e37ff148a53732e4574d2ed0f5462cc4407
 
 # Create a directory where our app will be placed
 RUN mkdir -p /app

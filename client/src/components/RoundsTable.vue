@@ -1,6 +1,6 @@
 <template>
-  <section class="the-table">
-    <v-card class="mb-4">
+  <section class="rounds-table">
+    <v-card>
       <v-card-title class="table-title">
         <v-spacer class="d-none d-sm-flex" />
         <v-text-field
@@ -13,26 +13,24 @@
         />
       </v-card-title>
       <v-data-table
-        :headers="headers"
+        :headers="tableHeaders"
         :items="rounds"
         :search="search"
-        single-expand
+        :single-expand="true"
         :items-per-page="5"
         :expanded.sync="expanded"
         show-expand
+        item-key="_id"
         class="app-table elevation-1"
       >
         <template #expanded-item="{ item, headers }">
           <td :colspan="headers.length">
-            <div
-              v-if="item.turn"
-              class="turn"
-            >First turn: {{ item.turn }}</div>
+            <div v-if="item.turn" class="turn">First turn: {{ item.turn }}</div>
             <div v-if="item.comment">Comment: {{ item.comment }}</div>
           </td>
         </template>
         <template #item.action="{ item }">
-          <rounds-edit-dialog :round="item" />
+          <RoundsEditDialog :round="item" />
         </template>
       </v-data-table>
     </v-card>
@@ -40,10 +38,10 @@
 </template>
 
 <script>
-import RoundsEditDialog from "@/components/RoundsEditDialog.vue";
+import RoundsEditDialog from '@/components/RoundsEditDialog.vue';
 
 export default {
-  name: "RoundsTable",
+  name: 'RoundsTable',
   // TODO:refactor
   components: {
     RoundsEditDialog
@@ -58,41 +56,41 @@ export default {
       required: true
     }
   },
-  data () {
+  data() {
     return {
-      search: "",
+      search: '',
       expanded: [],
-      headers: []
+      tableHeaders: []
     };
   },
-  created () {
+  created() {
     this.cookHeaders();
   },
   methods: {
-    cookHeaders () {
+    cookHeaders() {
       const fields = [
         this.team.coop
-          ? { text: "Result", value: "result" }
-          : { text: "Tie", value: "tie" },
-        { text: "Date", value: "date" },
-        { text: "Actions", value: "action", sortable: false }
+          ? { text: 'Result', value: 'result' }
+          : { text: 'Tie', value: 'tie' },
+        { text: 'Date', value: 'date' },
+        { text: 'Actions', value: 'action', sortable: false }
       ];
       if (!this.team.coop) this.countPlayers();
-      this.headers.push(...fields);
+      this.tableHeaders.push(...fields);
     },
-    countPlayers () {
+    countPlayers() {
       const players = this.team.players.map(player => ({
         text: player.name,
         value: player.name.toLowerCase()
       }));
-      this.headers.push(...players);
+      this.tableHeaders.push(...players);
     }
   }
 };
 </script>
 
 <style scoped lang="scss">
-.the-table {
+.rounds-table {
   .app-table,
   .table-title {
     background-color: $lightgrey;

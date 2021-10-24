@@ -9,14 +9,14 @@ const localVue = createLocalVue()
 localVue.use(Vuetify)
 
 describe('Components: TheFooter', () => {
-  let wrapper
+  let wrapper = null
   beforeEach(() => {
     wrapper = shallowMount(TheFooter, {
       localVue
     })
   })
 
-  test('it should render copy footer', () => {
+  it('it should render copy footer', () => {
     expect(wrapper.find('[data-test-copy]').text()).toBe('©  2020 — Geek Score')
   })
 })

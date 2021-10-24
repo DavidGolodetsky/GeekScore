@@ -13,29 +13,17 @@
         >
           <v-icon dark>mdi-{{ activatorIcon }}</v-icon>
         </v-btn>
-        <label
-          :for="`activator_${activatorText}`"
-          class="label_text"
-        >{{
-      activatorText
-    }}</label>
+        <label :for="`activator_${activatorText}`" class="label_text">{{
+          activatorText
+        }}</label>
       </slot>
     </div>
-    <v-dialog
-      v-model="dialog"
-      max-width="600"
-    >
+    <v-dialog v-model="dialog" max-width="600">
       <v-card class="BaseDialog">
         <v-card-title>
           <h3 class="app-headline">{{ header }}</h3>
           <v-spacer />
-          <v-btn
-            small
-            aria-label="Close modal"
-            fab
-            text
-            @click="close"
-          >
+          <v-btn small aria-label="Close modal" fab text @click="close">
             <v-icon dark>mdi-close</v-icon>
           </v-btn>
         </v-card-title>
@@ -58,13 +46,15 @@
                 class="mr-2"
                 outlined
                 @click="close"
-              >Cancel</v-btn>
+                >Cancel</v-btn
+              >
               <v-btn
                 color="secondary darken-1"
                 outlined
                 type="submit"
                 :disabled="!valid"
-              >Submit</v-btn>
+                >Submit</v-btn
+              >
             </slot>
           </v-card-actions>
         </v-form>
@@ -73,51 +63,47 @@
   </section>
 </template>
 
-<script>
-export default {
-  name: "BaseDialog",
-  // TODO:refactor
+<script lang="ts">
+import { defineComponent, ref } from '@vue/composition-api'
+
+export default defineComponent({
+  name: 'BaseDialog',
   props: {
     activatorIcon: {
       type: String,
-      default: "",
+      default: ''
     },
     header: {
       type: String,
-      required: true,
+      required: true
     },
     color: {
       type: String,
-      default: "secondary",
-    },
-    submitLogic: {
-      type: Function,
-      default: () => { },
+      default: 'secondary'
     },
     activatorText: {
       type: String,
-      default: "",
+      default: ''
     },
     simple: {
-      type: Boolean,
-    },
+      type: Boolean
+    }
   },
-  data () {
-    return {
-      dialog: false,
-      valid: false,
-    };
-  },
-  methods: {
-    onSubmit () {
-      this.submitLogic();
-      this.close();
-    },
-    close () {
-      this.dialog = false;
-    },
-  },
-};
+  setup(_, ctx) {
+    const dialog = ref(false)
+    const valid = ref(false)
+
+    const close = () => {
+      dialog.value = false
+    }
+    const onSubmit = () => {
+      ctx.emit('submit')
+      close()
+    }
+
+    return { dialog, valid, onSubmit, close }
+  }
+})
 </script>
 
 <style scoped lang="scss">

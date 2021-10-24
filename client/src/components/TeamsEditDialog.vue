@@ -1,18 +1,24 @@
 <template>
   <BaseDialog
-    activator-icon="pencil"
+    activator-icon="pencil-outline"
     color="#fff"
     header="Edit team info"
     simple
-    :submit-logic="onSubmit"
+    @submit="submitTeam"
   >
     <v-text-field v-model="name" clearable :rules="nameRules" label="Name" />
-    <v-switch v-model="toDelete" label="Delete team" color="error" hide-details />
+    <v-switch
+      v-model="toDelete"
+      label="Delete team"
+      color="error"
+      hide-details
+    />
   </BaseDialog>
 </template>
 
 <script lang="ts">
-import { standardField, requiredField } from '@/use/validations'
+import { getNames } from "@/use/common";
+import { standardField, requiredField, uniqueField } from '@/use/validations'
 import { defineComponent, reactive, toRefs } from '@vue/composition-api'
 
 export default defineComponent({
@@ -28,10 +34,14 @@ export default defineComponent({
 
     const store = ctx.root.$store
 
+    const checkUnique = (v: any) => {
+      return v !== team.value.name ? uniqueField(v, getNames(store.state.teams.teams), true) : true
+    }
+
     const state = reactive({
       name: team.value.name,
       toDelete: false,
-      nameRules: [...standardField, requiredField]
+      nameRules: [...standardField, requiredField, checkUnique]
     })
 
     const updateTeam = () => {
@@ -43,13 +53,13 @@ export default defineComponent({
       store.dispatch('teams/updateTeam', teamPayload)
     }
 
-    const onSubmit = () => {
+    const submitTeam = () => {
       if (!state.toDelete) return updateTeam()
       store.dispatch('teams/deleteTeam', team.value._id)
     }
 
     return {
-      onSubmit,
+      submitTeam,
       ...toRefs(state)
     }
   }
