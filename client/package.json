@@ -9,7 +9,7 @@
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint --fix",
     "release": "standard-version",
-    "test": "vue-cli-service test:unit",
+    "test": "vue-cli-service test:unit --collectCoverage",
     "editorconfig": "editorconfig-checker"
   },
   "husky": {
