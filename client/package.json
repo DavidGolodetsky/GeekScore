@@ -20,7 +20,7 @@
   "dependencies": {
     "@vue/composition-api": "^1.0.0-beta.22",
     "axios": "^0.21.1",
-    "chart.js": "^2.9.3",
+    "chart.js": "^3.4.0",
     "core-js": "^3.4.4",
     "editorconfig-checker": "^3.3.0",
     "eslint": "^6.8.0",
@@ -32,6 +32,7 @@
     "standard-version": "^9.0.0",
     "sw-precache": "^5.2.1",
     "vue": "^2.6.12",
+    "vue-chart-3": "^0.5.8",
     "vue-chartjs": "^3.5.1",
     "vue-gtag": "^1.16.1",
     "vue-meta": "^2.3.3",
