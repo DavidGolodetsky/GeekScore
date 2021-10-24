@@ -162,7 +162,7 @@ export default {
     resetForm() {
       this.team = null;
       this.name = '';
-      this.numberOfPlayers = generateNumberOfPlayers();
+      this.numberOfPlayers = generateNumberOfPlayers(8);
       this.selectedTeam = null;
     },
     createNewTeam() {

@@ -3,7 +3,7 @@
   "version": "0.2.0",
   "private": true,
   "description": "A PWA for board games fans. It allows you to store your games, create teams and collect statistics.",
-  "author": "dvdgld",
+  "author": "Dav.id",
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
@@ -14,7 +14,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-push": "npm run editorconfig"
+      "pre-push": "npm editorconfig & npm test"
     }
   },
   "dependencies": {
