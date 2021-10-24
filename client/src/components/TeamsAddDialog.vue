@@ -89,7 +89,7 @@ export default {
       selectedTeam: null,
       currentTab: null,
       tabs: ['Select team', 'Create New'],
-      numberOfPlayers: generateNumberOfPlayers()
+      numberOfPlayers: generateNumberOfPlayers(8)
     };
   },
   setup(props, ctx) {
