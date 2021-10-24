@@ -1,22 +1,22 @@
-// import { shallowMount, createLocalVue } from '@vue/test-utils';
-// import Vuetify from 'vuetify';
-// import Vue from 'vue';
-// import TheFooter from '@/components/TheFooter';
+import { shallowMount, createLocalVue } from '@vue/test-utils';
+import Vuetify from 'vuetify';
+import Vue from 'vue';
+import TheFooter from '@/components/TheFooter';
 
-// Vue.use(Vuetify);
+Vue.use(Vuetify);
 
-// const localVue = createLocalVue();
-// localVue.use(Vuetify);
+const localVue = createLocalVue();
+localVue.use(Vuetify);
 
-// describe('Components: TheFooter', () => {
-//   let wrapper = null;
-//   beforeEach(() => {
-//     wrapper = shallowMount(TheFooter, {
-//       localVue
-//     });
-//   });
+describe('Components: TheFooter', () => {
+  let wrapper = null;
+  beforeEach(() => {
+    wrapper = shallowMount(TheFooter, {
+      localVue
+    });
+  });
 
-//   it('it should render copy footer', () => {
-//     expect(wrapper.find('[data-test-copy]').text()).toBe('©');
-//   });
-// });
+  it('it should render copy footer', () => {
+    expect(wrapper.find('[data-test-copy]').text()).toBe('©');
+  });
+});
