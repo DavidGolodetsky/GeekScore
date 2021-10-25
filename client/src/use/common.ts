@@ -11,7 +11,6 @@ export const generateNumberOfPlayers = (numberOfPlayers: number) => {
   const players = Array(numberOfPlayers)
     .join(',')
     .split(',');
-  console.log(players.map((v, i) => i + 1));
   return players.map((v, i) => i + 1);
 };
 

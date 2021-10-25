@@ -4,8 +4,8 @@
 
 <script lang="ts">
 import { defineComponent, computed, toRefs } from '@vue/composition-api';
-import { BarChart } from 'vue-chart-3'
-import { Chart, ChartData, registerables } from "chart.js";
+import { BarChart } from 'vue-chart-3';
+import { Chart, ChartData, registerables } from 'chart.js';
 import { Player } from '@/types';
 
 Chart.register(...registerables);
@@ -39,7 +39,7 @@ export default defineComponent({
 
     function getPlayers() {
       return team.value.players.map((player: Player) => player.name);
-    };
+    }
 
     function getPlayersStat() {
       const players: string[] = getPlayers();
@@ -55,7 +55,7 @@ export default defineComponent({
       let top: number = Math.ceil(Math.max.apply(null, data) / 10) * 10;
 
       return [...data, 0, top];
-    };
+    }
 
     const chartData = computed<ChartData<'bar'>>(() => ({
       labels: team.value.coop ? ['Victories', 'Defeats'] : getPlayers(),
@@ -66,9 +66,9 @@ export default defineComponent({
           data: team.value.coop ? getCoopStat() : getPlayersStat()
         }
       ]
-    }))
+    }));
 
     return { chartData };
-  },
-})
+  }
+});
 </script>
