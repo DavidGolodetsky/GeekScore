@@ -1,7 +1,7 @@
 import {requiredField, tooLongField, tooShortField, onlyWhitespaces, emailField, shortPassword, linkField, uniqueField } from '@/use/validations';
 
 describe('validation tests', () => {
-  let response;
+  let response = null;
 
   it('requiredField', () => {
     response = requiredField('test');
