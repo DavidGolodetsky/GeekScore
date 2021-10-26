@@ -24,10 +24,10 @@ OR
 
 ### How to contribute?
 
-0. If you're about to work on a particular issue, ask for an assignment to notify other developers that you're working on that
-1. Fork the repo
-2. Clone your fork to the local machine
-3. Create your branch, and a pull request
+1. If you're about to work on a particular issue, ask for an assignment to notify other developers that you're working on that
+2. Fork the repo
+3. Clone your fork to the local machine
+4. Create your branch, and a pull request
 
 ### How to start up the project?
 
