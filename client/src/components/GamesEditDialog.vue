@@ -32,10 +32,10 @@
 </template>
 
 <script>
-import { standardField, requiredField, linkField } from '@/use/validations'
-import { mapActions } from 'vuex'
+import { standardField, requiredField, linkField } from '@/use/validations';
+import { defineComponent, ref } from '@vue/composition-api';
 
-export default {
+export default defineComponent({
   name: 'GamesEditDialog',
   props: {
     game: {
@@ -43,62 +43,63 @@ export default {
       required: true
     }
   },
-  data() {
-    return {
-      toDelete: false,
-      fields: {
-        name: {
-          label: 'Name',
-          icon: 'dice-multiple-outline',
-          value: this.game.name,
-          rules: [...standardField, requiredField]
-        },
-        bggURL: {
-          label: 'Board geek game URL',
-          icon: 'cards-outline',
-          // TODO:refactor
-          value: this.game.bggURL === undefined ? '' : this.game.bggURL,
-          rules: [linkField]
-        },
-        melodiceURL: {
-          label: 'Melodice URL',
-          icon: 'music-outline',
-          value:
-            this.game.melodiceURL === undefined ? '' : this.game.melodiceURL,
-          rules: [linkField]
-        },
-        rulesURL: {
-          label: 'Rules URL',
-          icon: 'book-open-variant-outline',
-          value: this.game.rulesURL === undefined ? '' : this.game.rulesURL,
-          rules: [linkField]
-        },
-        imageUrl: {
-          label: 'Image URL',
-          icon: 'image-outline',
-          value: this.game.imageUrl === undefined ? '' : this.game.imageUrl,
-          rules: [linkField]
-        }
+  setup(props, ctx) {
+    const store = ctx.root.$store;
+    const toDelete = ref(false);
+    const fields = ref({
+      name: {
+        label: 'Name',
+        icon: 'dice-multiple-outline',
+        value: props.game.name,
+        rules: [...standardField, requiredField]
+      },
+      bggURL: {
+        label: 'Board geek game URL',
+        icon: 'cards-outline',
+        // TODO:refactor
+        value: props.game.bggURL === undefined ? '' : props.game.bggURL,
+        rules: [linkField]
+      },
+      melodiceURL: {
+        label: 'Melodice URL',
+        icon: 'music-outline',
+        value:
+          props.game.melodiceURL === undefined ? '' : props.game.melodiceURL,
+        rules: [linkField]
+      },
+      rulesURL: {
+        label: 'Rules URL',
+        icon: 'book-open-variant-outline',
+        value: props.game.rulesURL === undefined ? '' : props.game.rulesURL,
+        rules: [linkField]
+      },
+      imageUrl: {
+        label: 'Image URL',
+        icon: 'image-outline',
+        value: props.game.imageUrl === undefined ? '' : props.game.imageUrl,
+        rules: [linkField]
       }
-    }
-  },
-  methods: {
-    ...mapActions('games', ['updateGame', 'deleteGame']),
-    submitGame() {
-      if (this.toDelete) return this.deleteGame(this.game._id)
-      this.updateTheGame()
-    },
-    updateTheGame() {
+    });
+
+    const submitGame = () => {
+      if (toDelete.value)
+        return store.dispatch('games/deleteGame', props.game._id);
+      updateTheGame();
+    };
+
+    const updateTheGame = () => {
       const game = {
-        _id: this.game._id,
-        name: this.fields.name.value,
-        bggURL: this.fields.bggURL.value,
-        melodiceURL: this.fields.melodiceURL.value,
-        rulesURL: this.fields.rulesURL.value,
-        imageUrl: this.fields.imageUrl.value
-      }
-      this.updateGame(game)
-    }
+        _id: props.game._id,
+        name: fields.value.name.value,
+        bggURL: fields.value.bggURL.value,
+        melodiceURL: fields.value.melodiceURL.value,
+        rulesURL: fields.value.rulesURL.value,
+        imageUrl: fields.value.imageUrl.value
+      };
+      return store.dispatch('games/updateGame', game);
+    };
+
+    return { toDelete, fields, submitGame, updateTheGame };
   }
-}
+});
 </script>
