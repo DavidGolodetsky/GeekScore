@@ -33,7 +33,7 @@
 
 <script>
 import { standardField, requiredField, linkField } from '@/use/validations';
-import { defineComponent, ref } from '@vue/composition-api';
+import { defineComponent, ref, toRefs, reactive } from '@vue/composition-api';
 
 export default defineComponent({
   name: 'GamesEditDialog',
@@ -46,57 +46,58 @@ export default defineComponent({
   setup(props, ctx) {
     const store = ctx.root.$store;
     const toDelete = ref(false);
-    const fields = ref({
+    const { game } = toRefs(props);
+    const fields = reactive({
       name: {
         label: 'Name',
         icon: 'dice-multiple-outline',
-        value: props.game.name,
+        value: game.value.name,
         rules: [...standardField, requiredField]
       },
       bggURL: {
         label: 'Board geek game URL',
         icon: 'cards-outline',
         // TODO:refactor
-        value: props.game.bggURL === undefined ? '' : props.game.bggURL,
+        value: game.value.bggURL === undefined ? '' : game.value.bggURL,
         rules: [linkField]
       },
       melodiceURL: {
         label: 'Melodice URL',
         icon: 'music-outline',
         value:
-          props.game.melodiceURL === undefined ? '' : props.game.melodiceURL,
+          game.value.melodiceURL === undefined ? '' : game.value.melodiceURL,
         rules: [linkField]
       },
       rulesURL: {
         label: 'Rules URL',
         icon: 'book-open-variant-outline',
-        value: props.game.rulesURL === undefined ? '' : props.game.rulesURL,
+        value: game.value.rulesURL === undefined ? '' : game.value.rulesURL,
         rules: [linkField]
       },
       imageUrl: {
         label: 'Image URL',
         icon: 'image-outline',
-        value: props.game.imageUrl === undefined ? '' : props.game.imageUrl,
+        value: game.value.imageUrl === undefined ? '' : game.value.imageUrl,
         rules: [linkField]
       }
     });
 
     const submitGame = () => {
       if (toDelete.value)
-        return store.dispatch('games/deleteGame', props.game._id);
+        return store.dispatch('games/deleteGame', game.value._id);
       updateTheGame();
     };
 
     const updateTheGame = () => {
-      const game = {
-        _id: props.game._id,
-        name: fields.value.name.value,
-        bggURL: fields.value.bggURL.value,
-        melodiceURL: fields.value.melodiceURL.value,
-        rulesURL: fields.value.rulesURL.value,
-        imageUrl: fields.value.imageUrl.value
+      const updatedGame = {
+        _id: game.value._id,
+        name: fields.name.value,
+        bggURL: fields.bggURL.value,
+        melodiceURL: fields.melodiceURL.value,
+        rulesURL: fields.rulesURL.value,
+        imageUrl: fields.imageUrl.value
       };
-      return store.dispatch('games/updateGame', game);
+      return store.dispatch('games/updateGame', updatedGame);
     };
 
     return { toDelete, fields, submitGame, updateTheGame };
