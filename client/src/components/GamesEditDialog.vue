@@ -32,7 +32,7 @@
 </template>
 
 <script>
-import { standardField, requiredField, linkField } from '@/use/validations';
+import { standardField, requiredField, linkField, uniqueField } from '@/use/validations';
 import { defineComponent, ref, toRefs, reactive } from '@vue/composition-api';
 
 export default defineComponent({
@@ -47,12 +47,20 @@ export default defineComponent({
     const store = ctx.root.$store;
     const toDelete = ref(false);
     const { game } = toRefs(props);
+
+    const getGameNames = () => {
+      return store.state.games.games?.map((g: Game) => {return g.name});
+    }
+    const checkUnique = (v: any) => {
+      return uniqueField(v, getGameNames())
+    }
+
     const fields = reactive({
       name: {
         label: 'Name',
         icon: 'dice-multiple-outline',
         value: game.value.name,
-        rules: [...standardField, requiredField]
+        rules: [...standardField, requiredField, checkUnique]
       },
       bggURL: {
         label: 'Board geek game URL',
