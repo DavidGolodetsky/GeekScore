@@ -32,9 +32,7 @@ export default defineComponent({
 
     const gamesNames = computed(() => store.getters['games/getGamesNames']());
 
-    const checkUnique = (v: any) => {
-      return uniqueField(v, gamesNames.value, true);
-    };
+    const checkUnique = (v: string) => uniqueField(v, gamesNames.value, true);
 
     const state = reactive({
       name: '',
