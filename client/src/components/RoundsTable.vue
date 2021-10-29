@@ -38,13 +38,11 @@
 </template>
 
 <script>
-import RoundsEditDialog from '@/components/RoundsEditDialog.vue';
-
 export default {
   name: 'RoundsTable',
   // TODO:refactor
   components: {
-    RoundsEditDialog
+    RoundsEditDialog: () => import('@/components/RoundsEditDialog.vue')
   },
   props: {
     team: {

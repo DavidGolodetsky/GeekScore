@@ -20,12 +20,11 @@
 
 <script lang="ts">
 import { defineComponent, computed, onMounted } from '@vue/composition-api';
-import TheTitle from '../components/TheTitle.vue';
 
 export default defineComponent({
   name: 'Profile',
   components: {
-    TheTitle
+    TheTitle: () => import('@/components/TheTitle.vue')
   },
   setup(_, ctx) {
     const store = ctx.root.$store;

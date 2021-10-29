@@ -30,18 +30,15 @@ import {
   watchEffect,
   onBeforeUnmount,
   toRefs
-} from '@vue/composition-api'
-import TheTitle from '@/components/TheTitle.vue'
-import TheCardsList from '@/components/TheCardsList.vue'
-// TODO:load aync
-import TeamsEditDialog from '@/components/TeamsEditDialog.vue'
+} from '@vue/composition-api';
 
 export default defineComponent({
   name: 'Game',
   components: {
-    TheTitle,
-    TeamsEditDialog,
-    TheCardsList
+    TheTitle: () => import('@/components/TheTitle.vue'),
+    TheCardsList: () => import('@/components/TheCardsList.vue'),
+    // TODO:lazy load when edit is clicked
+    TeamsEditDialog: () => import('@/components/TeamsEditDialog.vue')
   },
   props: {
     gameId: {
@@ -50,71 +47,72 @@ export default defineComponent({
     }
   },
   setup(props, ctx) {
-    const { gameId }: any = toRefs(props)
+    const { gameId }: any = toRefs(props);
 
-    const store = ctx.root.$store
+    const store = ctx.root.$store;
 
-    const allTeams = computed(() => store.state.teams.teams)
+    const allTeams = computed(() => store.state.teams.teams);
 
-    const allGames = computed(() => store.state.games.games)
+    const allGames = computed(() => store.state.games.games);
 
-    const loadGames = () => store.dispatch('games/loadGames')
+    const loadGames = () => store.dispatch('games/loadGames');
 
-    const loadWinRate = () => store.dispatch('games/loadWinRate', gameId.value)
+    const loadWinRate = () => store.dispatch('games/loadWinRate', gameId.value);
 
-    const loadTeams = () => store.dispatch('teams/loadTeams')
+    const loadTeams = () => store.dispatch('teams/loadTeams');
 
     const loadData = () => {
-      allTeams?.value ?? loadTeams()
-      allGames?.value ?? loadGames()
-      loadWinRate()
-    }
+      allTeams?.value ?? loadTeams();
+      allGames?.value ?? loadGames();
+      loadWinRate();
+    };
 
-    loadData()
+    loadData();
 
-    const winRate = computed(() => store.state.games.winRate)
+    const winRate = computed(() => store.state.games.winRate);
 
-    const getGameTeams = () => store.getters['teams/getGameTeams'](gameId.value)
+    const getGameTeams = () =>
+      store.getters['teams/getGameTeams'](gameId.value);
 
-    const gameTeams = computed(() => (allTeams?.value ? getGameTeams() : null))
+    const gameTeams = computed(() => (allTeams?.value ? getGameTeams() : null));
 
-    const getGame = () => store.getters['games/getGame'](gameId.value)
+    const getGame = () => store.getters['games/getGame'](gameId.value);
 
     const teamRoute = computed(() => ({
       name: 'team',
       params: { teamId: '' },
       query: { gameId: gameId.value }
-    }))
+    }));
 
-    const updateTeam = (team: any) => store.dispatch('teams/updateTeam', team)
+    const updateTeam = (team: any) => store.dispatch('teams/updateTeam', team);
 
     const toggleFavoriteTeam = (teamInfo: any) => {
       const team = {
         ...teamInfo,
         gameId: gameId.value
-      }
-      updateTeam(team)
-    }
+      };
+      updateTeam(team);
+    };
 
     const setBackTitle = (backTitle?: string) =>
-      store.dispatch('setBackTitle', backTitle)
+      store.dispatch('setBackTitle', backTitle);
 
-    onBeforeUnmount(() => setBackTitle())
+    onBeforeUnmount(() => setBackTitle());
 
     watchEffect(() => {
-      if (!allGames.value) return
-      const { name: gameName } = getGame()
-      setBackTitle(gameName)
-    })
+      if (!allGames.value) return;
+      const { name: gameName } = getGame();
+      setBackTitle(gameName);
+    });
 
     return {
       winRate,
       gameTeams,
       teamRoute,
       toggleFavoriteTeam
-    }
+    };
   }
-})
+});
 </script>
 
 <style lang="scss">

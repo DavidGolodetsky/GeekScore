@@ -3,14 +3,13 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from '@vue/composition-api'
-import TheLoginForm from '@/components/TheLoginForm.vue'
-import { AuthForm } from '@/types'
+import { defineComponent } from '@vue/composition-api';
+import { AuthForm } from '@/types';
 
 export default defineComponent({
   name: 'SignIn',
   components: {
-    TheLoginForm
+    TheLoginForm: () => import('@/components/TheLoginForm.vue')
   },
   setup() {
     const formProps: AuthForm = {
@@ -19,11 +18,11 @@ export default defineComponent({
       redirectText: "Don't have account-outline yet?",
       redirectLink: { name: 'signUp' },
       redirectLinkText: 'Sign Up'
-    }
+    };
 
     return {
       formProps
-    }
+    };
   }
-})
+});
 </script>

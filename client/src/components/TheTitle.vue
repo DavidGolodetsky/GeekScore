@@ -1,16 +1,13 @@
 <script lang="ts">
-import { defineComponent } from '@vue/composition-api'
-import GamesAddDialog from '@/components/GamesAddDialog.vue'
-import TeamsAddDialog from '@/components/TeamsAddDialog.vue'
-import RoundsAddDialog from '@/components/RoundsAddDialog.vue'
-import { VIcon } from 'vuetify/lib'
+import { defineComponent } from '@vue/composition-api';
+import { VIcon } from 'vuetify/lib';
 
 export default defineComponent({
   name: 'TheTitle',
   components: {
-    GamesAddDialog,
-    TeamsAddDialog,
-    RoundsAddDialog
+    GamesAddDialog: () => import('@/components/GamesAddDialog.vue'),
+    TeamsAddDialog: () => import('@/components/TeamsAddDialog.vue'),
+    RoundsAddDialog: () => import('@/components/RoundsAddDialog.vue')
   },
   props: {
     title: {
@@ -28,12 +25,12 @@ export default defineComponent({
     props: {
       type: Object,
       default() {
-        return {}
+        return {};
       }
     }
   },
   render(h) {
-    let template
+    let template;
     if (this.component === '') {
       template = h(
         'div',
@@ -67,7 +64,7 @@ export default defineComponent({
             ]
           )
         ]
-      )
+      );
     }
     template = h(
       'div',
@@ -107,9 +104,9 @@ export default defineComponent({
           }
         })
       ]
-    )
+    );
 
-    return template
+    return template;
   }
-})
+});
 </script>

@@ -12,7 +12,9 @@ Chart.register(...registerables);
 
 export default defineComponent({
   name: 'TheBarsChart',
-  components: { BarChart },
+  components: {
+    BarChart
+  },
   props: {
     team: {
       type: Object,

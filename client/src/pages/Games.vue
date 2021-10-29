@@ -20,30 +20,27 @@
 
 <script lang="ts">
 import { defineComponent, computed } from '@vue/composition-api';
-import TheTitle from '@/components/TheTitle.vue';
-import GamesEditDialog from '@/components/GamesEditDialog.vue';
-import TheCardsList from '@/components/TheCardsList.vue';
 import { Game } from '@/types';
 
 export default defineComponent({
   name: 'Games',
   components: {
-    TheTitle,
-    GamesEditDialog,
-    TheCardsList
+    TheTitle: () => import('@/components/TheTitle.vue'),
+    TheCardsList: () => import('@/components/TheCardsList.vue'),
+    // TODO:lazy load when edit is clicked
+    GamesEditDialog: () => import('@/components/GamesEditDialog.vue')
   },
-  setup(_, ctx) {
-    const store = ctx.root.$store;
-
-    const games = computed(() => store.state.games.games);
+  setup(_, { root: { $store } }) {
+    const games = computed(() => $store.state.games.games);
 
     const isLoadGames = () => games?.value ?? loadGames();
 
-    const loadGames = () => store.dispatch('games/loadGames');
+    const loadGames = () => $store.dispatch('games/loadGames');
 
     isLoadGames();
 
-    const updateGame = (game: Game) => store.dispatch('games/updateGame', game);
+    const updateGame = (game: Game) =>
+      $store.dispatch('games/updateGame', game);
 
     const gameRoute = {
       name: 'game',

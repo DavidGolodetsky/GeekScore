@@ -54,82 +54,81 @@ import {
   ref,
   watch,
   onUnmounted
-} from '@vue/composition-api'
-import ToolsClockFields from './ToolsClockFields.vue'
-import { vibrate } from '../use/common'
+} from '@vue/composition-api';
+import { vibrate } from '../use/common';
 
 export default defineComponent({
   name: 'ToolsTimerDialog',
   components: {
-    ToolsClockFields
+    ToolsClockFields: () => import('@/components/ToolsClockFields.vue')
   },
   setup() {
-    const tabs = reactive(['Timer', 'Countdown'])
-    const currentTab = ref('tab-0')
-    const hours = ref(0)
-    const minutes = ref(0)
-    const seconds = ref(0)
-    const pause = ref(true)
-    let playInterval: any = null
+    const tabs = reactive(['Timer', 'Countdown']);
+    const currentTab = ref('tab-0');
+    const hours = ref(0);
+    const minutes = ref(0);
+    const seconds = ref(0);
+    const pause = ref(true);
+    let playInterval: any = null;
 
     const timerMethod = () => {
-      seconds.value++
+      seconds.value++;
       if (seconds.value > 59) {
-        seconds.value = 0
-        minutes.value++
+        seconds.value = 0;
+        minutes.value++;
         if (minutes.value > 59) {
-          minutes.value = 0
-          hours.value++
+          minutes.value = 0;
+          hours.value++;
         }
       }
-    }
+    };
 
     const countdownMethod = () => {
-      seconds.value--
+      seconds.value--;
       if (hours.value === 0 && minutes.value === 0 && seconds.value <= 0) {
-        stopTimer()
-        vibrate()
+        stopTimer();
+        vibrate();
       } else {
         if (seconds.value < 0) {
-          seconds.value = 59
-          minutes.value >= 1 ? minutes.value-- : (minutes.value = 0)
+          seconds.value = 59;
+          minutes.value >= 1 ? minutes.value-- : (minutes.value = 0);
           if (minutes.value <= 0 && hours.value > 0) {
-            minutes.value = 59
-            hours.value >= 1 ? hours.value-- : (hours.value = 0)
+            minutes.value = 59;
+            hours.value >= 1 ? hours.value-- : (hours.value = 0);
           }
         }
       }
-    }
+    };
 
     const playPauseTimer = () => {
-      pause.value = !pause.value
+      pause.value = !pause.value;
 
       if (!pause.value) {
         playInterval = setInterval(() => {
-          currentTab.value === 'tab-0' ? timerMethod() : countdownMethod()
-        }, 1000)
+          currentTab.value === 'tab-0' ? timerMethod() : countdownMethod();
+        }, 1000);
       } else {
-        clearInterval(playInterval)
+        clearInterval(playInterval);
       }
-    }
+    };
 
     const stopTimer = () => {
-      pause.value = true
-      hours.value = 0
-      minutes.value = 0
-      seconds.value = 0
-      clearInterval(playInterval)
-    }
+      pause.value = true;
+      hours.value = 0;
+      minutes.value = 0;
+      seconds.value = 0;
+      clearInterval(playInterval);
+    };
 
     watch(currentTab, (value, oldValue) => {
       if (value !== oldValue) {
-        stopTimer()
+        stopTimer();
       }
-    })
+    });
 
     onUnmounted(() => {
-      stopTimer()
-    })
+      stopTimer();
+    });
 
     return {
       hours,
@@ -140,7 +139,7 @@ export default defineComponent({
       tabs,
       currentTab,
       playPauseTimer
-    }
+    };
   }
-})
+});
 </script>

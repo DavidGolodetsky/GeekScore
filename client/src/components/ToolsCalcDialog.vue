@@ -27,17 +27,16 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from '@vue/composition-api'
-import ToolsCalc from '@/components/ToolsCalc.vue'
-import { ToolsDialogTab } from '@/types'
+import { defineComponent, ref } from '@vue/composition-api';
+import { ToolsDialogTab } from '@/types';
 
 export default defineComponent({
   name: 'ToolsDialog',
   components: {
-    ToolsCalc
+    ToolsCalc: () => import('@/components/ToolsCalc.vue')
   },
   setup() {
-    const currentTab = ref(null)
+    const currentTab = ref(null);
     const tabs: ToolsDialogTab[] = [
       {
         name: 'Select Calculator',
@@ -47,11 +46,11 @@ export default defineComponent({
         name: 'Create New',
         component: 'tools-calc'
       }
-    ]
+    ];
     return {
       currentTab,
       tabs
-    }
+    };
   }
-})
+});
 </script>

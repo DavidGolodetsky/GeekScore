@@ -39,22 +39,18 @@ import {
   ComputedRef,
   toRefs
 } from '@vue/composition-api';
-import TheTitle from '@/components/TheTitle.vue';
-import RoundsTable from '@/components/RoundsTable.vue';
-import TheBarsChart from '@/components/TheBarsChart.vue';
-import TheTendenciesChart from '@/components/TheTendenciesChart.vue';
 import roundsModule from '@/store/modules/rounds';
 import { Game, Round, Team } from '@/types';
 import { Store } from 'vuex';
 
-// TODO:refactor
 export default defineComponent({
   name: 'Team',
   components: {
-    TheBarsChart,
-    RoundsTable,
-    TheTitle,
-    TheTendenciesChart
+    RoundsTable: () => import('@/components/RoundsTable.vue'),
+    TheTitle: () => import('@/components/TheTitle.vue'),
+    // TODO:async load with dynamic components
+    TheBarsChart: () => import('@/components/TheBarsChart.vue'),
+    TheTendenciesChart: () => import('@/components/TheTendenciesChart.vue')
   },
   props: {
     teamId: {
@@ -62,28 +58,25 @@ export default defineComponent({
       required: true
     }
   },
-  setup(props, ctx) {
+  setup(props, { root: { $store, $route } }) {
     const { teamId }: any = toRefs(props);
 
-    const store = ctx.root.$store;
-    const route = ctx.root.$route;
-
-    loadRoundsData(store);
+    loadRoundsData($store);
 
     const currentTab = 'tab-0';
-    const gameId = route.query.gameId;
+    const gameId = $route.query.gameId;
 
-    const games: ComputedRef<Game[]> = computed(() => store.state.games);
+    const games: ComputedRef<Game[]> = computed(() => $store.state.games);
     const getGame: ComputedRef<Game> = computed(() =>
-      store.getters['games/getGame'](gameId)
+      $store.getters['games/getGame'](gameId)
     );
     const game: ComputedRef<Game | null> = computed(() =>
       games ? getGame.value : null
     );
 
-    const teams: ComputedRef<Team[]> = computed(() => store.state.teams);
+    const teams: ComputedRef<Team[]> = computed(() => $store.state.teams);
     const getTeams: ComputedRef<Team> = computed(() =>
-      store.getters['teams/getTeam'](teamId.value)
+      $store.getters['teams/getTeam'](teamId.value)
     );
     const team: ComputedRef<Team | null> = computed(() =>
       teams ? getTeams.value : null
@@ -93,7 +86,7 @@ export default defineComponent({
 
     const rounds: ComputedRef<Round[]> = computed(() => {
       const query = { teamId: teamId.value, gameId: gameId };
-      const rounds: Round[] = store.getters['rounds/getRounds'](query);
+      const rounds: Round[] = $store.getters['rounds/getRounds'](query);
       if (rounds) {
         rounds.forEach((round: any) => (round[round.winner] = 'VICTORY'));
       }
@@ -133,13 +126,13 @@ export default defineComponent({
 
     const showTable = computed(() => gameTeam && rounds.value?.length);
 
-    onUnmounted(() => store.dispatch('setBackTitle'));
+    onUnmounted(() => $store.dispatch('setBackTitle'));
 
     watch(
       teams,
       val => {
         if (val && !!game.value && !!team.value) {
-          store.dispatch(
+          $store.dispatch(
             'setBackTitle',
             `${team.value.name}: ${game.value.name}`
           );
