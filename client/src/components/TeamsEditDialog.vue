@@ -17,9 +17,13 @@
 </template>
 
 <script lang="ts">
-import { getNames } from "@/use/common";
-import { standardField, requiredField, uniqueField } from '@/use/validations'
-import { defineComponent, reactive, toRefs } from '@vue/composition-api'
+import { standardField, requiredField, uniqueField } from '@/use/validations';
+import {
+  defineComponent,
+  reactive,
+  computed,
+  toRefs
+} from '@vue/composition-api';
 
 export default defineComponent({
   name: 'TeamsEditDialog',
@@ -30,38 +34,42 @@ export default defineComponent({
     }
   },
   setup(props, ctx) {
-    const { team }: any = toRefs(props)
+    const { team }: any = toRefs(props);
 
-    const store = ctx.root.$store
+    const store = ctx.root.$store;
+
+    const teamsNames = computed(() => store.getters['games/getTeamsNames']());
 
     const checkUnique = (v: any) => {
-      return v !== team.value.name ? uniqueField(v, getNames(store.state.teams.teams), true) : true
-    }
+      return v !== team.value.name
+        ? uniqueField(v, teamsNames.value, true)
+        : true;
+    };
 
     const state = reactive({
       name: team.value.name,
       toDelete: false,
       nameRules: [...standardField, requiredField, checkUnique]
-    })
+    });
 
     const updateTeam = () => {
       const teamPayload = {
         _id: team.value._id,
         gameId: team.value.gameId,
         name: state.name
-      }
-      store.dispatch('teams/updateTeam', teamPayload)
-    }
+      };
+      store.dispatch('teams/updateTeam', teamPayload);
+    };
 
     const submitTeam = () => {
-      if (!state.toDelete) return updateTeam()
-      store.dispatch('teams/deleteTeam', team.value._id)
-    }
+      if (!state.toDelete) return updateTeam();
+      store.dispatch('teams/deleteTeam', team.value._id);
+    };
 
     return {
       submitTeam,
       ...toRefs(state)
-    }
+    };
   }
-})
+});
 </script>

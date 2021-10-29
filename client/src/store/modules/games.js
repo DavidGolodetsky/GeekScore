@@ -105,6 +105,9 @@ export default {
         }
         return null;
       };
+    },
+    getGamesNames(state) {
+      return () => state.games?.map(game => game.name);
     }
   }
 };

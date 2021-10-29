@@ -31,9 +31,20 @@
   </BaseDialog>
 </template>
 
-<script>
-import { standardField, requiredField, linkField, uniqueField } from '@/use/validations';
-import { defineComponent, ref, toRefs, reactive } from '@vue/composition-api';
+<script lang="ts">
+import {
+  standardField,
+  requiredField,
+  linkField,
+  uniqueField
+} from '@/use/validations';
+import {
+  defineComponent,
+  ref,
+  computed,
+  toRefs,
+  reactive
+} from '@vue/composition-api';
 
 export default defineComponent({
   name: 'GamesEditDialog',
@@ -48,12 +59,9 @@ export default defineComponent({
     const toDelete = ref(false);
     const { game } = toRefs(props);
 
-    const getGameNames = () => {
-      return store.state.games.games?.map((g: Game) => {return g.name});
-    }
-    const checkUnique = (v: any) => {
-      return uniqueField(v, getGameNames())
-    }
+    const gamesNames = computed(() => store.getters['games/getGamesNames']());
+
+    const checkUnique = (v: string) => uniqueField(v, gamesNames.value, true);
 
     const fields = reactive({
       name: {

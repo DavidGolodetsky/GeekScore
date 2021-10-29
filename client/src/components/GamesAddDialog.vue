@@ -17,8 +17,12 @@
 </template>
 
 <script lang="ts">
-import { getNames } from '@/use/common';
-import { defineComponent, reactive, toRefs } from '@vue/composition-api';
+import {
+  defineComponent,
+  reactive,
+  computed,
+  toRefs
+} from '@vue/composition-api';
 import { standardField, requiredField, uniqueField } from '@/use/validations';
 
 export default defineComponent({
@@ -26,8 +30,10 @@ export default defineComponent({
   setup(_, ctx) {
     const store = ctx.root.$store;
 
+    const gamesNames = computed(() => store.getters['games/getGamesNames']());
+
     const checkUnique = (v: any) => {
-      return uniqueField(v, getNames(store.state.games.games), true);
+      return uniqueField(v, gamesNames.value, true);
     };
 
     const state = reactive({

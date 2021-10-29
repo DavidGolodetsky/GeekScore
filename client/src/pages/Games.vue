@@ -19,11 +19,11 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, computed } from '@vue/composition-api'
-import TheTitle from '@/components/TheTitle.vue'
-import GamesEditDialog from '@/components/GamesEditDialog.vue'
-import TheCardsList from '@/components/TheCardsList.vue'
-import { Game } from '@/types'
+import { defineComponent, computed } from '@vue/composition-api';
+import TheTitle from '@/components/TheTitle.vue';
+import GamesEditDialog from '@/components/GamesEditDialog.vue';
+import TheCardsList from '@/components/TheCardsList.vue';
+import { Game } from '@/types';
 
 export default defineComponent({
   name: 'Games',
@@ -33,31 +33,30 @@ export default defineComponent({
     TheCardsList
   },
   setup(_, ctx) {
-    const store = ctx.root.$store
+    const store = ctx.root.$store;
 
-    const games = computed(() => store.state.games.games)
+    const games = computed(() => store.state.games.games);
 
-    const isLoadGames = () => games?.value ?? loadGames()
+    const isLoadGames = () => games?.value ?? loadGames();
 
-    const loadGames = () => store.dispatch('games/loadGames')
+    const loadGames = () => store.dispatch('games/loadGames');
 
-    isLoadGames()
+    isLoadGames();
 
-    // TODO: add types
-    const updateGame = (game: Game) => store.dispatch('games/updateGame', game)
+    const updateGame = (game: Game) => store.dispatch('games/updateGame', game);
 
     const gameRoute = {
       name: 'game',
       params: { gameId: '' }
-    }
+    };
 
-    const toggleFavoriteGame = (game: Game) => updateGame(game)
+    const toggleFavoriteGame = (game: Game) => updateGame(game);
 
     return {
       gameRoute,
       games,
       toggleFavoriteGame
-    }
+    };
   }
-})
+});
 </script>
