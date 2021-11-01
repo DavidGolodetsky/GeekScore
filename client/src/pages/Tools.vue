@@ -10,14 +10,14 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from '@vue/composition-api'
-import TheTitle from '@/components/TheTitle.vue'
-import ToolsDiceDialog from '@/components/ToolsDiceDialog.vue'
-import ToolsTimerDialog from '@/components/ToolsTimerDialog.vue'
+import { defineComponent } from '@vue/composition-api';
+import TheTitle from '@/components/TheTitle.vue';
+import ToolsDiceDialog from '@/components/ToolsDiceDialog.vue';
+import ToolsTimerDialog from '@/components/ToolsTimerDialog.vue';
 // import ToolsCalcDialog from "@/components/ToolsCalcDialog";
 
 export default defineComponent({
-  name: 'Tools',
+  name: 'ToolsPage',
   components: {
     TheTitle,
     ToolsDiceDialog,
@@ -29,10 +29,10 @@ export default defineComponent({
       'tools-dice-dialog',
       'tools-timer-dialog'
       // 'tools-calc-dialog'
-    ]
+    ];
     return {
       tools
-    }
+    };
   }
-})
+});
 </script>

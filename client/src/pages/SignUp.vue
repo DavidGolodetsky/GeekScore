@@ -7,7 +7,7 @@ import { defineComponent } from '@vue/composition-api';
 import { AuthForm } from '@/types';
 
 export default defineComponent({
-  name: 'SignUp',
+  name: 'SignUpPage',
   components: {
     TheLoginForm: () => import('@/components/TheLoginForm.vue')
   },

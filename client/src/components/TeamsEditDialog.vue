@@ -33,12 +33,10 @@ export default defineComponent({
       required: true
     }
   },
-  setup(props, ctx) {
+  setup(props, { root: { $store } }) {
     const { team }: any = toRefs(props);
 
-    const store = ctx.root.$store;
-
-    const teamsNames = computed(() => store.getters['games/getTeamsNames']());
+    const teamsNames = computed(() => $store.getters['games/getTeamsNames']());
 
     const checkUnique = (v: any) => {
       return v !== team.value.name
@@ -58,12 +56,12 @@ export default defineComponent({
         gameId: team.value.gameId,
         name: state.name
       };
-      store.dispatch('teams/updateTeam', teamPayload);
+      $store.dispatch('teams/updateTeam', teamPayload);
     };
 
     const submitTeam = () => {
       if (!state.toDelete) return updateTeam();
-      store.dispatch('teams/deleteTeam', team.value._id);
+      $store.dispatch('teams/deleteTeam', team.value._id);
     };
 
     return {

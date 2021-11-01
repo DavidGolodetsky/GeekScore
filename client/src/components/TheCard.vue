@@ -78,7 +78,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, computed, toRefs } from '@vue/composition-api'
+import { defineComponent, computed, toRefs } from '@vue/composition-api';
 
 export default defineComponent({
   name: 'TheCard',
@@ -95,19 +95,19 @@ export default defineComponent({
       type: Boolean
     }
   },
-  setup(props, ctx) {
-    const { cardInfo, cardRoute }: any = toRefs(props)
+  setup(props, { emit }) {
+    const { cardInfo, cardRoute }: any = toRefs(props);
 
     const additionalLinks = computed(() => {
-      const links = []
-      const { bggURL, rulesURL, melodiceURL } = cardInfo.value
+      const links = [];
+      const { bggURL, rulesURL, melodiceURL } = cardInfo.value;
       if (bggURL) {
         const linkInfo = {
           href: bggURL,
           name: 'Board game geek',
           icon: 'cards'
-        }
-        links.push(linkInfo)
+        };
+        links.push(linkInfo);
       }
       if (rulesURL) {
         const linkInfo = {
@@ -115,52 +115,52 @@ export default defineComponent({
           name: 'Rules',
           icon: 'book-open-variant',
           download: true
-        }
-        links.push(linkInfo)
+        };
+        links.push(linkInfo);
       }
       if (melodiceURL) {
         const linkInfo = {
           href: melodiceURL,
           name: 'Melodice',
           icon: 'music'
-        }
-        links.push(linkInfo)
+        };
+        links.push(linkInfo);
       }
-      return links
-    })
+      return links;
+    });
 
     const getImagePath = (extension = 'jpg') => {
-      const { imageUrl, teams } = cardInfo.value
-      if (!imageUrl) return require(`@/assets/img/team.${extension}`)
-      if (teams) return require(`@/assets/img/game.${extension}`)
-      return imageUrl
-    }
+      const { imageUrl, teams } = cardInfo.value;
+      if (!imageUrl) return require(`@/assets/img/team.${extension}`);
+      if (teams) return require(`@/assets/img/game.${extension}`);
+      return imageUrl;
+    };
 
     const formattedRoute = computed(() => {
-      const route = { ...cardRoute.value }
+      const route = { ...cardRoute.value };
       route.params = {
         [Object.keys(cardRoute.value.params)[0]]: cardInfo.value._id
-      }
-      return route
-    })
+      };
+      return route;
+    });
 
     const toggleFavorite = () => {
-      const favorite = !cardInfo.value.favorite
+      const favorite = !cardInfo.value.favorite;
       const data = {
         favorite,
         _id: cardInfo.value._id
-      }
-      ctx.emit('favorite', data)
-    }
+      };
+      emit('favorite', data);
+    };
 
     return {
       additionalLinks,
       formattedRoute,
       getImagePath,
       toggleFavorite
-    }
+    };
   }
-})
+});
 </script>
 
 <style lang="scss" scoped>

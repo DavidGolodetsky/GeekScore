@@ -64,7 +64,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from '@vue/composition-api'
+import { defineComponent, ref } from '@vue/composition-api';
 
 export default defineComponent({
   name: 'BaseDialog',
@@ -89,21 +89,21 @@ export default defineComponent({
       type: Boolean
     }
   },
-  setup(_, ctx) {
-    const dialog = ref(false)
-    const valid = ref(false)
+  setup(_, { emit }) {
+    const dialog = ref(false);
+    const valid = ref(false);
 
     const close = () => {
-      dialog.value = false
-    }
+      dialog.value = false;
+    };
     const onSubmit = () => {
-      ctx.emit('submit')
-      close()
-    }
+      emit('submit');
+      close();
+    };
 
-    return { dialog, valid, onSubmit, close }
+    return { dialog, valid, onSubmit, close };
   }
-})
+});
 </script>
 
 <style scoped lang="scss">

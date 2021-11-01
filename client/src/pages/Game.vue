@@ -33,7 +33,7 @@ import {
 } from '@vue/composition-api';
 
 export default defineComponent({
-  name: 'Game',
+  name: 'GamePage',
   components: {
     TheTitle: () => import('@/components/TheTitle.vue'),
     TheCardsList: () => import('@/components/TheCardsList.vue'),
@@ -46,20 +46,19 @@ export default defineComponent({
       required: true
     }
   },
-  setup(props, ctx) {
+  setup(props, { root: { $store } }) {
     const { gameId }: any = toRefs(props);
 
-    const store = ctx.root.$store;
+    const allTeams = computed(() => $store.state.teams.teams);
 
-    const allTeams = computed(() => store.state.teams.teams);
+    const allGames = computed(() => $store.state.games.games);
 
-    const allGames = computed(() => store.state.games.games);
+    const loadGames = () => $store.dispatch('games/loadGames');
 
-    const loadGames = () => store.dispatch('games/loadGames');
+    const loadWinRate = () =>
+      $store.dispatch('games/loadWinRate', gameId.value);
 
-    const loadWinRate = () => store.dispatch('games/loadWinRate', gameId.value);
-
-    const loadTeams = () => store.dispatch('teams/loadTeams');
+    const loadTeams = () => $store.dispatch('teams/loadTeams');
 
     const loadData = () => {
       allTeams?.value ?? loadTeams();
@@ -69,14 +68,14 @@ export default defineComponent({
 
     loadData();
 
-    const winRate = computed(() => store.state.games.winRate);
+    const winRate = computed(() => $store.state.games.winRate);
 
     const getGameTeams = () =>
-      store.getters['teams/getGameTeams'](gameId.value);
+      $store.getters['teams/getGameTeams'](gameId.value);
 
     const gameTeams = computed(() => (allTeams?.value ? getGameTeams() : null));
 
-    const getGame = () => store.getters['games/getGame'](gameId.value);
+    const getGame = () => $store.getters['games/getGame'](gameId.value);
 
     const teamRoute = computed(() => ({
       name: 'team',
@@ -84,7 +83,7 @@ export default defineComponent({
       query: { gameId: gameId.value }
     }));
 
-    const updateTeam = (team: any) => store.dispatch('teams/updateTeam', team);
+    const updateTeam = (team: any) => $store.dispatch('teams/updateTeam', team);
 
     const toggleFavoriteTeam = (teamInfo: any) => {
       const team = {
@@ -95,7 +94,7 @@ export default defineComponent({
     };
 
     const setBackTitle = (backTitle?: string) =>
-      store.dispatch('setBackTitle', backTitle);
+      $store.dispatch('setBackTitle', backTitle);
 
     onBeforeUnmount(() => setBackTitle());
 

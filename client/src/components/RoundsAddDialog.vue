@@ -75,11 +75,10 @@
 </template>
 
 <script>
-import { requiredField } from '@/use/validations'
-import { mapActions, mapGetters, mapState } from 'vuex'
+import { requiredField } from '@/use/validations';
+import { mapActions, mapGetters, mapState } from 'vuex';
 export default {
   name: 'RoundsAddDialog',
-  // TODO:refactor
   props: {
     teamId: {
       type: String,
@@ -98,26 +97,26 @@ export default {
       result: null,
       date: new Date().toISOString().substr(0, 10),
       resultRules: [requiredField]
-    }
+    };
   },
   computed: {
     ...mapState('teams', ['teams']),
     ...mapGetters('teams', ['getTeam']),
     team() {
-      return this.teams ? this.getTeam(this.teamId) : null
+      return this.teams ? this.getTeam(this.teamId) : null;
     },
     resultOptions() {
-      if (!this.team) return null
-      if (this.team.coop) return ['Victory', 'Defeat']
-      const options = this.team.players.map(player => player.name)
-      return [...options, 'Tie']
+      if (!this.team) return null;
+      if (this.team.coop) return ['Victory', 'Defeat'];
+      const options = this.team.players.map(player => player.name);
+      return [...options, 'Tie'];
     }
   },
   methods: {
     ...mapActions('rounds', ['createRound']),
     submitRound() {
-      const round = this.cookRound()
-      this.createRound(round)
+      const round = this.cookRound();
+      this.createRound(round);
     },
     cookRound() {
       const round = {
@@ -127,11 +126,10 @@ export default {
         teamId: this.teamId,
         comment: this.comment,
         winner: this.result.toLowerCase()
-      }
-      if (this.team.coop) round.result = this.result.toUpperCase()
-      // TODO: highlight result, maybe with icon, not VICTORY
-      return round
+      };
+      if (this.team.coop) round.result = this.result.toUpperCase();
+      return round;
     }
   }
-}
+};
 </script>

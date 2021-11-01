@@ -39,25 +39,24 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from '@vue/composition-api'
-import { emailField, requiredField } from '../use/validations'
+import { defineComponent, ref } from '@vue/composition-api';
+import { emailField, requiredField } from '../use/validations';
 
 export default defineComponent({
-  name: 'ResetPassword',
-  setup(_, ctx) {
-    const store = ctx.root.$store
-    const valid = ref(false)
-    const isResetPasswordDone = ref(false)
-    const email = ref('')
-    const EmailRules = [requiredField, emailField]
+  name: 'ResetPasswordPage',
+  setup(_, { root: { $store } }) {
+    const valid = ref(false);
+    const isResetPasswordDone = ref(false);
+    const email = ref('');
+    const EmailRules = [requiredField, emailField];
 
     const resetPassword = (email: string) =>
-      store.dispatch('user/resetPassword', email)
+      $store.dispatch('user/resetPassword', email);
 
     const onSubmit = async () => {
-      await resetPassword(email.value)
-      isResetPasswordDone.value = true
-    }
+      await resetPassword(email.value);
+      isResetPasswordDone.value = true;
+    };
 
     return {
       valid,
@@ -65,7 +64,7 @@ export default defineComponent({
       EmailRules,
       isResetPasswordDone,
       onSubmit
-    }
+    };
   }
-})
+});
 </script>

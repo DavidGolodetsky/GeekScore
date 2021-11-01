@@ -63,30 +63,26 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, computed } from '@vue/composition-api'
+import { defineComponent, ref, computed } from '@vue/composition-api';
 
 export default defineComponent({
   name: 'TheHeader',
 
-  setup(_, ctx) {
-    const store = ctx.root.$store
+  setup(_, { root: { $store, $route } }) {
+    const user = computed(() => $store.state.user.user);
 
-    const route = ctx.root.$route
+    const backTitle = computed(() => $store.getters['backTitle']);
 
-    const user = computed(() => store.state.user.user)
+    const isSideNav = ref(false);
 
-    const backTitle = computed(() => store.getters['backTitle'])
-
-    const isSideNav = ref(false)
-
-    const logout = () => store.dispatch('user/logout')
+    const logout = () => $store.dispatch('user/logout');
 
     const onLogout = () => {
-      if (route.fullPath === '/') {
-        isSideNav.value = false
+      if ($route.fullPath === '/') {
+        isSideNav.value = false;
       }
-      logout()
-    }
+      logout();
+    };
 
     const navItems = [
       {
@@ -104,7 +100,7 @@ export default defineComponent({
         icon: 'account-details-outline',
         link: '/profile'
       }
-    ]
+    ];
 
     return {
       isSideNav,
@@ -112,9 +108,9 @@ export default defineComponent({
       user,
       navItems,
       onLogout
-    }
+    };
   }
-})
+});
 </script>
 
 <style scoped lang="scss">

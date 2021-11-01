@@ -38,7 +38,6 @@
         </v-icon>
         {{ pause ? 'Play' : 'Pause' }}
       </v-btn>
-      <!-- TODO:Stop rename to Reset. Add Stop btn -->
       <v-btn color="secondary darken-1" outlined @click="stopTimer">
         <v-icon dark> mdi-stop </v-icon>
         Stop

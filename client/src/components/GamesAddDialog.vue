@@ -27,10 +27,8 @@ import { standardField, requiredField, uniqueField } from '@/use/validations';
 
 export default defineComponent({
   name: 'GamesAddDialog',
-  setup(_, ctx) {
-    const store = ctx.root.$store;
-
-    const gamesNames = computed(() => store.getters['games/getGamesNames']());
+  setup(_, { root: { $store } }) {
+    const gamesNames = computed(() => $store.getters['games/getGamesNames']());
 
     const checkUnique = (v: string) => uniqueField(v, gamesNames.value, true);
 
@@ -45,7 +43,7 @@ export default defineComponent({
         coop: state.coop,
         name: state.name
       };
-      store.dispatch('games/createGame', game);
+      $store.dispatch('games/createGame', game);
     };
 
     const submitGame = () => {

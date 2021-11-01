@@ -23,7 +23,7 @@ import { defineComponent, computed } from '@vue/composition-api';
 import { Game } from '@/types';
 
 export default defineComponent({
-  name: 'Games',
+  name: 'GamesPage',
   components: {
     TheTitle: () => import('@/components/TheTitle.vue'),
     TheCardsList: () => import('@/components/TheCardsList.vue'),

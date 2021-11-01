@@ -51,13 +51,10 @@ import { defineComponent, computed, ComputedRef } from '@vue/composition-api';
 import { DemoStep, User } from '@/types';
 
 export default defineComponent({
-  name: 'Home',
-  setup(_, ctx) {
-    // TODO:rewrite with useStore later
-    const store = ctx.root.$store;
-
+  name: 'HomePage',
+  setup(_, { root: { $store } }) {
     const loggedInUser: ComputedRef<User> = computed(
-      () => store.state.user.user
+      () => $store.state.user.user
     );
 
     const demoSteps: DemoStep[] = [
@@ -89,8 +86,6 @@ export default defineComponent({
         icon: 'chart-bar'
       }
     ];
-
-    // TODO:figure out how to use map helpers with vuex
 
     return {
       loggedInUser,

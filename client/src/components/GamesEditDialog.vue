@@ -54,12 +54,11 @@ export default defineComponent({
       required: true
     }
   },
-  setup(props, ctx) {
-    const store = ctx.root.$store;
+  setup(props, { root: { $store } }) {
     const toDelete = ref(false);
     const { game } = toRefs(props);
 
-    const gamesNames = computed(() => store.getters['games/getGamesNames']());
+    const gamesNames = computed(() => $store.getters['games/getGamesNames']());
 
     const checkUnique = (v: string) => uniqueField(v, gamesNames.value, true);
 
@@ -73,7 +72,6 @@ export default defineComponent({
       bggURL: {
         label: 'Board geek game URL',
         icon: 'cards-outline',
-        // TODO:refactor
         value: game.value.bggURL === undefined ? '' : game.value.bggURL,
         rules: [linkField]
       },
@@ -100,7 +98,7 @@ export default defineComponent({
 
     const submitGame = () => {
       if (toDelete.value)
-        return store.dispatch('games/deleteGame', game.value._id);
+        return $store.dispatch('games/deleteGame', game.value._id);
       updateTheGame();
     };
 
@@ -113,7 +111,7 @@ export default defineComponent({
         rulesURL: fields.rulesURL.value,
         imageUrl: fields.imageUrl.value
       };
-      return store.dispatch('games/updateGame', updatedGame);
+      return $store.dispatch('games/updateGame', updatedGame);
     };
 
     return { toDelete, fields, submitGame, updateTheGame };

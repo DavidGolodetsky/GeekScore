@@ -44,7 +44,7 @@ import { Game, Round, Team } from '@/types';
 import { Store } from 'vuex';
 
 export default defineComponent({
-  name: 'Team',
+  name: 'TeamPage',
   components: {
     RoundsTable: () => import('@/components/RoundsTable.vue'),
     TheTitle: () => import('@/components/TheTitle.vue'),

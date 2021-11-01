@@ -93,15 +93,15 @@ import {
   computed,
   reactive,
   toRefs
-} from '@vue/composition-api'
-import { fbStart } from '@/auth'
+} from '@vue/composition-api';
+import { fbStart } from '@/auth';
 import {
   emailField,
   standardField,
   requiredField,
   shortPassword,
   tooLongField
-} from '@/use/validations'
+} from '@/use/validations';
 
 export default defineComponent({
   name: 'TheLoginForm',
@@ -111,37 +111,36 @@ export default defineComponent({
       required: true
     }
   },
-  setup(props, ctx) {
-    const store = ctx.root.$store
+  setup(props, { root: { $store } }) {
     const formData = reactive({
       email: '',
       password: '',
       username: '',
       confirmPassword: ''
-    })
-    const showPassword = ref(false)
-    const valid = ref(false)
-    const EmailRules = [requiredField, emailField, tooLongField]
-    const passwordRules = [...standardField, requiredField, shortPassword]
+    });
+    const showPassword = ref(false);
+    const valid = ref(false);
+    const EmailRules = [requiredField, emailField, tooLongField];
+    const passwordRules = [...standardField, requiredField, shortPassword];
 
     const comparePasswords = computed(() => {
       return (
         formData.password === formData.confirmPassword ||
         'Passwords do not match'
-      )
-    })
+      );
+    });
 
     const onSubmit = () => {
       if (props.formProps.signUp) {
-        store.dispatch('user/signUpUser', formData)
+        $store.dispatch('user/signUpUser', formData);
       } else {
-        store.dispatch('user/signInUser', formData)
+        $store.dispatch('user/signInUser', formData);
       }
-    }
+    };
 
     onMounted(() => {
-      fbStart()
-    })
+      fbStart();
+    });
 
     return {
       ...toRefs(formData),
@@ -151,9 +150,9 @@ export default defineComponent({
       EmailRules,
       passwordRules,
       comparePasswords
-    }
+    };
   }
-})
+});
 </script>
 
 <style scoped lang="scss">

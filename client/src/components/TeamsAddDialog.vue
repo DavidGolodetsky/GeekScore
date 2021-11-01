@@ -92,17 +92,17 @@ export default {
       numberOfPlayers: generateNumberOfPlayers(8)
     };
   },
-  setup(props, ctx) {
+  setup(props, { root: { $store } }) {
+    const { gameId } = toRefs(props);
+
     const uniqueRule = (list, isOnly) => [
       field => uniqueField(field, getNames(list), isOnly)
     ];
 
-    const store = ctx.root.$store;
-
     const getGameTeams = () =>
-      store.getters['teams/getGameTeams'](props.gameId);
+      $store.getters['teams/getGameTeams'](gameId.value);
 
-    const gameTeams = computed(() => (props.gameId ? getGameTeams() : null));
+    const gameTeams = computed(() => (gameId.value ? getGameTeams() : null));
 
     return {
       gameTeams,

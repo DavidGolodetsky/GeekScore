@@ -1,6 +1,5 @@
 <template>
   <section>
-    <!-- TODO:add cta to update profile info -->
     <the-title title="Profile" icon="account-details-outline" />
     <div v-if="isUsername" class="d-flex mb-4">
       <span class="mr-3">Username:</span>
@@ -22,18 +21,17 @@
 import { defineComponent, computed, onMounted } from '@vue/composition-api';
 
 export default defineComponent({
-  name: 'Profile',
+  name: 'ProfilePage',
   components: {
     TheTitle: () => import('@/components/TheTitle.vue')
   },
-  setup(_, ctx) {
-    const store = ctx.root.$store;
-    const user = store.state.user;
+  setup(_, { root: { $store } }) {
+    const user = $store.state.user;
 
     const isUsername = computed(() => user.user?.username);
     const winRates = computed(() => user.winRates);
 
-    const loadWinRates = () => store.dispatch('user/loadWinRates');
+    const loadWinRates = () => $store.dispatch('user/loadWinRates');
 
     onMounted(() => {
       loadWinRates();

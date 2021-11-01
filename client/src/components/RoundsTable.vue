@@ -40,7 +40,6 @@
 <script>
 export default {
   name: 'RoundsTable',
-  // TODO:refactor
   components: {
     RoundsEditDialog: () => import('@/components/RoundsEditDialog.vue')
   },

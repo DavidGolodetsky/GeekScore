@@ -57,7 +57,6 @@ export default defineComponent({
     });
 
     const chartData = computed<ChartData<'line'>>(() => ({
-      // TODO:refactor that horror
       labels: playersStat.value.map((data: any) => data.date),
       datasets: team.value.players.map((player: Player) => {
         const victories: number[] = playersStat.value.map(
