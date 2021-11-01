@@ -68,7 +68,7 @@
 import { getNames, generateNumberOfPlayers } from '@/use/common';
 import { requiredField, standardField, uniqueField } from '@/use/validations';
 import { mapActions, mapGetters, mapState } from 'vuex';
-import { computed } from '@vue/composition-api';
+import { computed, toRefs } from '@vue/composition-api';
 
 export default {
   name: 'TeamsAddDialog',

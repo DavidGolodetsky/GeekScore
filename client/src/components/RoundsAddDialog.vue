@@ -74,10 +74,11 @@
   </section>
 </template>
 
-<script>
+<script lang="ts">
 import { requiredField } from '@/use/validations';
-import { mapActions, mapGetters, mapState } from 'vuex';
-export default {
+import { defineComponent, ref, computed, toRefs } from '@vue/composition-api';
+
+export default defineComponent({
   name: 'RoundsAddDialog',
   props: {
     teamId: {
@@ -89,47 +90,55 @@ export default {
       required: true
     }
   },
-  data() {
-    return {
-      datepicker: false,
-      comment: '',
-      turn: '',
-      result: null,
-      date: new Date().toISOString().substr(0, 10),
-      resultRules: [requiredField]
-    };
-  },
-  computed: {
-    ...mapState('teams', ['teams']),
-    ...mapGetters('teams', ['getTeam']),
-    team() {
-      return this.teams ? this.getTeam(this.teamId) : null;
-    },
-    resultOptions() {
-      if (!this.team) return null;
-      if (this.team.coop) return ['Victory', 'Defeat'];
-      const options = this.team.players.map(player => player.name);
+  setup(props, { root: { $store } }) {
+    const { teamId, gameId }: any = toRefs(props);
+    const datepicker = ref(false);
+    const comment = ref('');
+    const turn = ref('');
+    const result = ref(null);
+    const date = ref(new Date().toISOString().substr(0, 10));
+    const resultRules = ref([requiredField]);
+
+    const team = computed(() => {
+      return $store.state['teams']
+        ? $store.getters['teams/getTeam'](teamId.value)
+        : null;
+    });
+
+    const resultOptions = computed(() => {
+      if (!team) return null;
+      if (team['coop']) return ['Victory', 'Defeat'];
+      const options = team['players'].map(player => player.name);
       return [...options, 'Tie'];
-    }
-  },
-  methods: {
-    ...mapActions('rounds', ['createRound']),
-    submitRound() {
-      const round = this.cookRound();
-      this.createRound(round);
-    },
-    cookRound() {
+    });
+
+    const submitRound = () => {
+      const round = cookRound();
+      return $store.dispatch('rounds/creatRound', round);
+    };
+
+    const cookRound = () => {
       const round = {
-        date: this.date,
-        turn: this.turn,
-        gameId: this.gameId,
-        teamId: this.teamId,
-        comment: this.comment,
-        winner: this.result.toLowerCase()
+        date: date.value,
+        turn: turn.value,
+        gameId: gameId.value,
+        teamId: teamId.value,
+        comment: comment.value,
+        winner: result.value.toLowerCase()
       };
-      if (this.team.coop) round.result = this.result.toUpperCase();
+      if (team['coop']) round['result'] = result.value.toUpperCase();
       return round;
-    }
+    };
+
+    return {
+      submitRound,
+      resultRules,
+      resultOptions,
+      team,
+      datepicker,
+      date,
+      comment
+    };
   }
-};
+});
 </script>
