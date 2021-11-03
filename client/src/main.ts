@@ -14,9 +14,11 @@ Vue.config.productionTip = isDev;
 Vue.config.performance = isDev;
 
 Vue.config.errorHandler = (err, vm, info) => {
+  // eslint-disable-next-line no-console
   console.error(err, vm, info);
 };
 
+// eslint-disable-next-line no-console
 Vue.prototype.$log = console.log;
 
 Vue.use(VueCompositionAPI);

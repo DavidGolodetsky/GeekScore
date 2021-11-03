@@ -70,7 +70,7 @@ export default defineComponent({
         rules: [...standardField, requiredField, checkUnique]
       },
       bggURL: {
-        label: 'Board geek game URL',
+        label: 'BoardGameGeek URL',
         icon: 'cards-outline',
         value: game.value.bggURL === undefined ? '' : game.value.bggURL,
         rules: [linkField]

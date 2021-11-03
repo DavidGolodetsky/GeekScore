@@ -17,6 +17,7 @@ module.exports = {
     'vue/html-closing-bracket-newline': 0,
     'vue/html-indent': 0,
     'linebreak-style': ['error', 'unix'],
+    'no-console': 1,
 
     // TypeScript
     '@typescript-eslint/explicit-function-return-type': 'off',
@@ -42,4 +43,4 @@ module.exports = {
       }
     }
   ]
-}
+};
