@@ -18,12 +18,7 @@
 
 <script lang="ts">
 import { standardField, requiredField, uniqueField } from '@/use/validations';
-import {
-  defineComponent,
-  reactive,
-  computed,
-  toRefs
-} from '@vue/composition-api';
+import { defineComponent, computed, toRefs, ref } from '@vue/composition-api';
 
 export default defineComponent({
   name: 'TeamsEditDialog',
@@ -44,29 +39,31 @@ export default defineComponent({
         : true;
     };
 
-    const state = reactive({
-      name: team.value.name,
-      toDelete: false,
-      nameRules: [...standardField, requiredField, checkUnique]
-    });
+    const nameRules = ref([...standardField, requiredField, checkUnique]);
+
+    const toDelete = ref(false);
+
+    const name = ref(team.value.name);
 
     const updateTeam = () => {
       const teamPayload = {
         _id: team.value._id,
         gameId: team.value.gameId,
-        name: state.name
+        name: name.value
       };
       $store.dispatch('teams/updateTeam', teamPayload);
     };
 
     const submitTeam = () => {
-      if (!state.toDelete) return updateTeam();
+      if (!toDelete.value) return updateTeam();
       $store.dispatch('teams/deleteTeam', team.value._id);
     };
 
     return {
       submitTeam,
-      ...toRefs(state)
+      nameRules,
+      toDelete,
+      name
     };
   }
 });

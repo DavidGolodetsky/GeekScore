@@ -10,7 +10,7 @@
         <v-col cols="6">
           <v-radio-group
             v-model="result"
-            :rules="resultRules"
+            :rules="[requiredField]"
             label="Result:"
             class="mb-4"
           >
@@ -58,7 +58,7 @@
           </template>
           <v-date-picker
             v-model="date"
-            :max="today"
+            :max="todayDate"
             @input="datepicker = false"
           />
         </v-menu>
@@ -78,10 +78,18 @@
   </section>
 </template>
 
-<script>
+<script lang="ts">
+import {
+  defineComponent,
+  reactive,
+  ref,
+  computed,
+  toRefs
+} from '@vue/composition-api';
 import { requiredField } from '@/use/validations';
-import { mapActions, mapGetters, mapState } from 'vuex';
-export default {
+import { Player } from '@/types';
+
+export default defineComponent({
   name: 'RoundsAddDialog',
   props: {
     teamId: {
@@ -93,48 +101,59 @@ export default {
       required: true
     }
   },
-  data() {
-    return {
-      datepicker: false,
+  setup(props, { root: { $store } }) {
+    const { teamId, gameId }: any = toRefs(props);
+
+    const todayDate = ref(new Date().toISOString().substr(0, 10));
+
+    const datepicker = ref(false);
+
+    const form = reactive({
       comment: '',
       turn: '',
       result: null,
-      today: new Date().toISOString().substr(0, 10),
-      date: this.today,
-      resultRules: [requiredField]
-    };
-  },
-  computed: {
-    ...mapState('teams', ['teams']),
-    ...mapGetters('teams', ['getTeam']),
-    team() {
-      return this.teams ? this.getTeam(this.teamId) : null;
-    },
-    resultOptions() {
-      if (!this.team) return null;
-      if (this.team.coop) return ['Victory', 'Defeat'];
-      const options = this.team.players.map(player => player.name);
+      date: todayDate.value
+    });
+
+    const teams = computed(() => $store.state.teams.teams);
+    const getTeam = () => $store.getters['teams/getTeam'](teamId.value);
+    const team = computed(() => (teams.value ? getTeam() : null));
+
+    const resultOptions = computed(() => {
+      if (!team.value) return null;
+      if (team.value.coop) return ['Victory', 'Defeat'];
+      const options = team.value.players.map((player: Player) => player.name);
       return [...options, 'Tie'];
-    }
-  },
-  methods: {
-    ...mapActions('rounds', ['createRound']),
-    submitRound() {
-      const round = this.cookRound();
-      this.createRound(round);
-    },
-    cookRound() {
+    });
+
+    const getRoundPayload = () => {
+      const { turn, date, comment, result } = form;
       const round = {
-        date: this.date,
-        turn: this.turn,
-        gameId: this.gameId,
-        teamId: this.teamId,
-        comment: this.comment,
-        winner: this.result.toLowerCase()
+        turn,
+        date,
+        comment,
+        gameId: gameId.value,
+        teamId: teamId.value,
+        winner: result.toLowerCase()
       };
-      if (this.team.coop) round.result = this.result.toUpperCase();
+      if (team.value.coop) round.result = result.toUpperCase();
       return round;
-    }
+    };
+
+    const submitRound = () => {
+      const round = getRoundPayload();
+      $store.dispatch('rounds/createRound', round);
+    };
+
+    return {
+      todayDate,
+      datepicker,
+      requiredField,
+      submitRound,
+      resultOptions,
+      team,
+      ...toRefs(form)
+    };
   }
-};
+});
 </script>
