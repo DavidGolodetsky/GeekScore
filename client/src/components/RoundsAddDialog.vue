@@ -56,7 +56,11 @@
               v-on="on"
             />
           </template>
-          <v-date-picker v-model="date" @input="datepicker = false" />
+          <v-date-picker
+            v-model="date"
+            :max="today"
+            @input="datepicker = false"
+          />
         </v-menu>
       </v-row>
       <v-row>
@@ -95,7 +99,8 @@ export default {
       comment: '',
       turn: '',
       result: null,
-      date: new Date().toISOString().substr(0, 10),
+      today: new Date().toISOString().substr(0, 10),
+      date: this.today,
       resultRules: [requiredField]
     };
   },
