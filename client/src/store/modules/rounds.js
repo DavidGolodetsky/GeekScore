@@ -21,7 +21,6 @@ export default {
   },
   actions: {
     async createRound({ commit }, payload) {
-      console.log(payload);
       try {
         const user = localStorage.getItem('userId');
         const roundPayload = {

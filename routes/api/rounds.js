@@ -3,7 +3,8 @@ const Round = require("../../models/round");
 const router = express.Router();
 
 router.post("/", async (req, res) => {
-  const { date, gameId, teamId, user, result, comment, winner } = req.body;
+  const { date, gameId, teamId, user, result, comment, winner, turn } =
+    req.body;
   const round = new Round({
     date,
     user,
@@ -12,6 +13,7 @@ router.post("/", async (req, res) => {
     result,
     winner,
     comment,
+    turn,
   });
   try {
     const newRound = await round.save();
