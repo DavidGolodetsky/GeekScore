@@ -87,7 +87,7 @@ import {
   toRefs
 } from '@vue/composition-api';
 import { requiredField } from '@/use/validations';
-import { Player } from '@/types';
+import { Player, Round, RoundForm } from '@/types';
 
 export default defineComponent({
   name: 'RoundsAddDialog',
@@ -102,7 +102,7 @@ export default defineComponent({
     }
   },
   setup(props, { root: { $store } }) {
-    const { teamId, gameId }: any = toRefs(props);
+    const { teamId, gameId } = toRefs(props);
 
     const todayDate = ref(new Date().toISOString().substr(0, 10));
 
@@ -111,7 +111,7 @@ export default defineComponent({
     const form = reactive({
       comment: '',
       turn: '',
-      result: null,
+      result: '',
       date: todayDate.value
     });
 
@@ -120,23 +120,22 @@ export default defineComponent({
     const team = computed(() => (teams.value ? getTeam() : null));
 
     const resultOptions = computed(() => {
-      if (!team.value) return null;
       if (team.value.coop) return ['Victory', 'Defeat'];
       const options = team.value.players.map((player: Player) => player.name);
       return [...options, 'Tie'];
     });
 
     const getRoundPayload = () => {
-      const { turn, date, comment, result } = form;
-      const round = {
+      const { turn, date, comment, result }: RoundForm = form;
+      const round: Round = {
         turn,
         date,
         comment,
         gameId: gameId.value,
         teamId: teamId.value,
-        winner: result.toLowerCase()
+        winner: result!.toLowerCase()
       };
-      if (team.value.coop) round.result = result.toUpperCase();
+      if (team.value.coop) round.result = result!.toUpperCase();
       return round;
     };
 
