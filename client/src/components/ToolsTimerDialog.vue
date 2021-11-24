@@ -47,13 +47,7 @@
 </template>
 
 <script lang="ts">
-import {
-  defineComponent,
-  reactive,
-  ref,
-  watch,
-  onUnmounted
-} from '@vue/composition-api';
+import { defineComponent, ref, watch, onUnmounted } from '@vue/composition-api';
 import { vibrate } from '../use/common';
 
 export default defineComponent({
@@ -62,7 +56,7 @@ export default defineComponent({
     ToolsClockFields: () => import('@/components/ToolsClockFields.vue')
   },
   setup() {
-    const tabs = reactive(['Timer', 'Countdown']);
+    const tabs = ref(['Timer', 'Countdown']);
     const currentTab = ref('tab-0');
     const hours = ref(0);
     const minutes = ref(0);

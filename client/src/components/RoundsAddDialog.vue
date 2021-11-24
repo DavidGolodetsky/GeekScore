@@ -9,7 +9,7 @@
       <v-row>
         <v-col cols="6">
           <v-radio-group
-            v-model="result"
+            v-model="form.result"
             :rules="[requiredField]"
             label="Result:"
             class="mb-4"
@@ -25,7 +25,7 @@
         <v-col v-if="!team.coop" cols="6">
           <v-radio-group
             v-if="team.players.length > 1"
-            v-model="turn"
+            v-model="form.turn"
             label="First turn:"
             class="mb-4"
           >
@@ -49,7 +49,7 @@
         >
           <template #activator="{ on }">
             <v-text-field
-              v-model="date"
+              v-model="form.date"
               label="Date"
               prepend-icon="mdi-calendar-outline"
               readonly
@@ -57,7 +57,7 @@
             />
           </template>
           <v-date-picker
-            v-model="date"
+            v-model="form.date"
             :max="todayDate"
             @input="datepicker = false"
           />
@@ -65,7 +65,7 @@
       </v-row>
       <v-row>
         <v-textarea
-          v-model.trim="comment"
+          v-model.trim="form.comment"
           class="comment"
           label="Comment"
           auto-grow
@@ -79,13 +79,7 @@
 </template>
 
 <script lang="ts">
-import {
-  defineComponent,
-  reactive,
-  ref,
-  computed,
-  toRefs
-} from '@vue/composition-api';
+import { defineComponent, ref, computed, toRefs } from '@vue/composition-api';
 import { requiredField } from '@/use/validations';
 import { Player, Round, RoundForm } from '@/types';
 
@@ -108,7 +102,7 @@ export default defineComponent({
 
     const datepicker = ref(false);
 
-    const form = reactive({
+    const form = ref({
       comment: '',
       turn: '',
       result: '',
@@ -126,7 +120,7 @@ export default defineComponent({
     });
 
     const getRoundPayload = () => {
-      const { turn, date, comment, result }: RoundForm = form;
+      const { turn, date, comment, result }: RoundForm = form.value;
       const round: Round = {
         turn,
         date,
@@ -151,7 +145,7 @@ export default defineComponent({
       submitRound,
       resultOptions,
       team,
-      ...toRefs(form)
+      form
     };
   }
 });

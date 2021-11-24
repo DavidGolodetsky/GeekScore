@@ -30,9 +30,8 @@
 import {
   defineComponent,
   // defineAsyncComponent,
-  reactive,
   onMounted,
-  toRefs,
+  ref,
   watch,
   computed
 } from '@vue/composition-api';
@@ -56,15 +55,14 @@ export default defineComponent({
   setup(_, ctx) {
     const store = ctx.root.$store;
 
-    const state = reactive({
-      isGoTopBtn: false,
-      // TODO: remove after VueOfflineMixin is fixed
-      isOffline: false,
-      GoTopBtnOtions: {
-        duration: 300,
-        offset: 0,
-        easing: 'easeInOutCubic'
-      }
+    const isGoTopBtn = ref(false);
+
+    const isOffline = ref(false);
+
+    const GoTopBtnOtions = ref({
+      duration: 300,
+      offset: 0,
+      easing: 'easeInOutCubic'
     });
 
     onMounted(() => setupFb());
@@ -73,7 +71,7 @@ export default defineComponent({
 
     const error = computed(() => store.getters['error']);
 
-    const isAlert = computed(() => state.isOffline || error.value);
+    const isAlert = computed(() => isOffline.value || error.value);
 
     const setError = () => store.dispatch('setError');
 
@@ -86,17 +84,17 @@ export default defineComponent({
     const offlineMessage =
       'Geek Score is offline. Some features might be disabled';
 
-    const alertType = computed(() => (state.isOffline ? 'warning' : 'error'));
+    const alertType = computed(() => (isOffline.value ? 'warning' : 'error'));
 
     const alertText = computed(() =>
-      state.isOffline ? offlineMessage : error.value.message
+      isOffline.value ? offlineMessage : error.value.message
     );
 
     const onScroll = () => {
-      if (window.pageYOffset > 500) return (state.isGoTopBtn = true);
+      if (window.pageYOffset > 500) return (isGoTopBtn.value = true);
 
-      if (state.isGoTopBtn && window.pageYOffset < 500) {
-        state.isGoTopBtn = false;
+      if (isGoTopBtn.value && window.pageYOffset < 500) {
+        isGoTopBtn.value = false;
       }
     };
 
@@ -106,7 +104,9 @@ export default defineComponent({
       isAlert,
       onScroll,
       isLoading,
-      ...toRefs(state)
+      isGoTopBtn,
+      isOffline,
+      GoTopBtnOtions
     };
   }
 });

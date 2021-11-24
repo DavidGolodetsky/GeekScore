@@ -24,25 +24,25 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, reactive, toRefs } from '@vue/composition-api'
+import { defineComponent, ref } from '@vue/composition-api';
 
 export default defineComponent({
   name: 'ToolsCalc',
   setup() {
-    const state = reactive({
-      selectedOperator: '+',
-      operators: ['+', '-'],
-      fields: 1
-    })
+    const selectedOperator = ref('+');
+    const operators = ref(['+', '-']);
+    const fields = ref(1);
 
-    const addField = () => state.fields++
+    const addField = () => fields.value++;
 
     return {
       addField,
-      ...toRefs(state)
-    }
+      selectedOperator,
+      operators,
+      fields
+    };
   }
-})
+});
 </script>
 
 <style lang="scss" scoped>

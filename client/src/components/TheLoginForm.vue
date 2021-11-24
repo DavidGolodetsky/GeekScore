@@ -20,7 +20,7 @@
             <span class="or">OR</span>
           </div>
           <v-text-field
-            v-model.trim="email"
+            v-model.trim="form.email"
             clearable
             label="Email"
             type="email"
@@ -29,14 +29,14 @@
           />
           <v-text-field
             v-if="formProps.signUp"
-            v-model.trim="username"
+            v-model.trim="form.username"
             clearable
             label="Username"
             type="text"
             prepend-icon="mdi-account-outline"
           />
           <v-text-field
-            v-model.trim="password"
+            v-model.trim="password.password"
             :type="showPassword ? 'text' : 'password'"
             label="Password"
             autocomplite="on"
@@ -49,7 +49,7 @@
           />
           <v-text-field
             v-if="formProps.signUp"
-            v-model.trim="confirmPassword"
+            v-model.trim="form.confirmPassword"
             :type="showPassword ? 'text' : 'password'"
             label="Confirm password"
             prepend-icon="mdi-lock-outline"
@@ -90,9 +90,7 @@ import {
   defineComponent,
   ref,
   onMounted,
-  computed,
-  reactive,
-  toRefs
+  computed
 } from '@vue/composition-api';
 import { fbStart } from '@/auth';
 import {
@@ -112,7 +110,7 @@ export default defineComponent({
     }
   },
   setup(props, { root: { $store } }) {
-    const formData = reactive({
+    const form = ref({
       email: '',
       password: '',
       username: '',
@@ -125,16 +123,16 @@ export default defineComponent({
 
     const comparePasswords = computed(() => {
       return (
-        formData.password === formData.confirmPassword ||
+        form.value.password === form.value.confirmPassword ||
         'Passwords do not match'
       );
     });
 
     const onSubmit = () => {
       if (props.formProps.signUp) {
-        $store.dispatch('user/signUpUser', formData);
+        $store.dispatch('user/signUpUser', form.value);
       } else {
-        $store.dispatch('user/signInUser', formData);
+        $store.dispatch('user/signInUser', form.value);
       }
     };
 
@@ -143,13 +141,13 @@ export default defineComponent({
     });
 
     return {
-      ...toRefs(formData),
       showPassword,
       valid,
       onSubmit,
       EmailRules,
       passwordRules,
-      comparePasswords
+      comparePasswords,
+      form
     };
   }
 });

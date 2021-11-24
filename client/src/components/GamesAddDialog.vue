@@ -17,12 +17,7 @@
 </template>
 
 <script lang="ts">
-import {
-  defineComponent,
-  reactive,
-  computed,
-  toRefs
-} from '@vue/composition-api';
+import { defineComponent, computed, ref } from '@vue/composition-api';
 import { standardField, requiredField, uniqueField } from '@/use/validations';
 
 export default defineComponent({
@@ -32,28 +27,29 @@ export default defineComponent({
 
     const checkUnique = (v: string) => uniqueField(v, gamesNames.value, true);
 
-    const state = reactive({
-      name: '',
-      coop: false,
-      nameRules: [...standardField, requiredField, checkUnique]
-    });
+    const name = ref('');
+
+    const coop = ref(false);
+    const nameRules = ref([...standardField, requiredField, checkUnique]);
 
     const createGame = () => {
       const game = {
-        coop: state.coop,
-        name: state.name
+        coop: coop.value,
+        name: name.value
       };
       $store.dispatch('games/createGame', game);
     };
 
     const submitGame = () => {
       createGame();
-      state.name = '';
+      name.value = '';
     };
 
     return {
       submitGame,
-      ...toRefs(state)
+      nameRules,
+      name,
+      coop
     };
   }
 });

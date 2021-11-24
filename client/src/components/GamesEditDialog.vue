@@ -38,13 +38,7 @@ import {
   linkField,
   uniqueField
 } from '@/use/validations';
-import {
-  defineComponent,
-  ref,
-  computed,
-  toRefs,
-  reactive
-} from '@vue/composition-api';
+import { defineComponent, ref, computed, toRefs } from '@vue/composition-api';
 
 export default defineComponent({
   name: 'GamesEditDialog',
@@ -62,7 +56,7 @@ export default defineComponent({
 
     const checkUnique = (v: string) => uniqueField(v, gamesNames.value, true);
 
-    const fields = reactive({
+    const fields = ref({
       name: {
         label: 'Name',
         icon: 'dice-multiple-outline',
@@ -103,13 +97,14 @@ export default defineComponent({
     };
 
     const updateTheGame = () => {
+      const { name, bggURL, melodiceURL, rulesURL, imageUrl } = fields.value;
       const updatedGame = {
         _id: game.value._id,
-        name: fields.name.value,
-        bggURL: fields.bggURL.value,
-        melodiceURL: fields.melodiceURL.value,
-        rulesURL: fields.rulesURL.value,
-        imageUrl: fields.imageUrl.value
+        name: name.value,
+        bggURL: bggURL.value,
+        melodiceURL: melodiceURL.value,
+        rulesURL: rulesURL.value,
+        imageUrl: imageUrl.value
       };
       return $store.dispatch('games/updateGame', updatedGame);
     };

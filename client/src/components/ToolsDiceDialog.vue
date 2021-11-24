@@ -48,23 +48,23 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, reactive, ref } from '@vue/composition-api'
+import { defineComponent, ref } from '@vue/composition-api';
 
 export default defineComponent({
   name: 'ToolsDiceDialog',
 
   setup() {
-    const show = ref(true)
-    const totalValue = ref(0)
-    const fields = reactive({
+    const show = ref(true);
+    const totalValue = ref(0);
+    const fields = ref({
       diceSide: {
         label: 'Dice Sides',
         model: 3,
         func: (type: string) => {
-          if (type === 'plus' && fields.diceSide.model < 20) {
-            fields.diceSide.model++
-          } else if (type === 'minus' && fields.diceSide.model > 3) {
-            fields.diceSide.model--
+          if (type === 'plus' && fields.value.diceSide.model < 20) {
+            fields.value.diceSide.model++;
+          } else if (type === 'minus' && fields.value.diceSide.model > 3) {
+            fields.value.diceSide.model--;
           }
         }
       },
@@ -72,35 +72,35 @@ export default defineComponent({
         label: 'Number of dices',
         model: 1,
         func: (type: string) => {
-          if (type === 'plus' && fields.rollNumber.model < 10) {
-            fields.rollNumber.model++
-          } else if (type === 'minus' && fields.rollNumber.model > 1) {
-            fields.rollNumber.model--
+          if (type === 'plus' && fields.value.rollNumber.model < 10) {
+            fields.value.rollNumber.model++;
+          } else if (type === 'minus' && fields.value.rollNumber.model > 1) {
+            fields.value.rollNumber.model--;
           }
         }
       }
-    })
+    });
 
     const rollDice = () => {
-      show.value = !show.value
+      show.value = !show.value;
       totalValue.value =
-        fields.rollNumber.model +
+        fields.value.rollNumber.model +
         Math.floor(
           Math.random() *
-            (fields.diceSide.model * fields.rollNumber.model -
-              fields.rollNumber.model +
+            (fields.value.diceSide.model * fields.value.rollNumber.model -
+              fields.value.rollNumber.model +
               1)
-        )
-    }
+        );
+    };
 
     return {
       show,
       totalValue,
       fields,
       rollDice
-    }
+    };
   }
-})
+});
 </script>
 
 <style scoped lang="scss">
