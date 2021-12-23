@@ -15,10 +15,10 @@
   </BaseDialog>
 </template>
 
-<script>
-import { toRefs, ref } from '@vue/composition-api';
+<script lang="ts">
+import { defineComponent, toRefs, ref } from '@vue/composition-api';
 
-export default {
+export default defineComponent({
   name: 'RoundsEditDialog',
   props: {
     round: {
@@ -27,7 +27,7 @@ export default {
     }
   },
   setup(props, { root: { $store } }) {
-    const { round } = toRefs(props);
+    const { round }: any = toRefs(props);
 
     const toDelete = ref(false);
 
@@ -41,5 +41,5 @@ export default {
       toDelete
     };
   }
-};
+});
 </script>

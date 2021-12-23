@@ -37,8 +37,11 @@
   </section>
 </template>
 
-<script>
-export default {
+<script lang="ts">
+import { defineComponent, ref, toRefs } from '@vue/composition-api';
+import { Player } from '@/types';
+
+export default defineComponent({
   name: 'RoundsTable',
   components: {
     RoundsEditDialog: () => import('@/components/RoundsEditDialog.vue')
@@ -53,37 +56,40 @@ export default {
       required: true
     }
   },
-  data() {
-    return {
-      search: '',
-      expanded: [],
-      tableHeaders: []
+  setup(props) {
+    const { team } = toRefs(props);
+
+    const tableHeaders: any = ref([]);
+
+    const countPlayers = () => {
+      const players = team.value.players.map((player: Player) => ({
+        text: player.name,
+        value: player.name.toLowerCase()
+      }));
+      tableHeaders.value.push(...players);
     };
-  },
-  created() {
-    this.cookHeaders();
-  },
-  methods: {
-    cookHeaders() {
+
+    const cookHeaders = () => {
       const fields = [
-        this.team.coop
+        team.value.coop
           ? { text: 'Result', value: 'result' }
           : { text: 'Tie', value: 'tie' },
         { text: 'Date', value: 'date' },
         { text: 'Actions', value: 'action', sortable: false }
       ];
-      if (!this.team.coop) this.countPlayers();
-      this.tableHeaders.push(...fields);
-    },
-    countPlayers() {
-      const players = this.team.players.map(player => ({
-        text: player.name,
-        value: player.name.toLowerCase()
-      }));
-      this.tableHeaders.push(...players);
-    }
+      if (!team.value.coop) countPlayers();
+      tableHeaders.value.push(...fields);
+    };
+
+    cookHeaders();
+
+    const search = ref('');
+
+    const expanded = ref([]);
+
+    return { search, expanded, tableHeaders };
   }
-};
+});
 </script>
 
 <style scoped lang="scss">

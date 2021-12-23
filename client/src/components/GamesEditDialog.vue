@@ -49,8 +49,9 @@ export default defineComponent({
     }
   },
   setup(props, { root: { $store } }) {
-    const toDelete = ref(false);
     const { game } = toRefs(props);
+
+    const toDelete = ref(false);
 
     const gamesNames = computed(() => $store.getters['games/getGamesNames']());
 
