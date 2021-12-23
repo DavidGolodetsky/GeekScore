@@ -16,7 +16,7 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex'
+import { toRefs, ref } from '@vue/composition-api';
 
 export default {
   name: 'RoundsEditDialog',
@@ -26,18 +26,20 @@ export default {
       required: true
     }
   },
-  data() {
+  setup(props, { root: { $store } }) {
+    const { round } = toRefs(props);
+
+    const toDelete = ref(false);
+
+    const submitRound = () => {
+      if (!toDelete.value) return;
+      $store.dispatch('rounds/deleteRound', round.value._id);
+    };
+
     return {
-      toDelete: false
-    }
-  },
-  methods: {
-    ...mapActions('rounds', ['deleteRound']),
-    submitRound() {
-      if (this.toDelete) {
-        this.deleteRound(this.round._id)
-      }
-    }
+      submitRound,
+      toDelete
+    };
   }
-}
+};
 </script>

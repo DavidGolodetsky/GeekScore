@@ -36,7 +36,7 @@
             prepend-icon="mdi-account-outline"
           />
           <v-text-field
-            v-model.trim="password.password"
+            v-model.trim="form.password"
             :type="showPassword ? 'text' : 'password'"
             label="Password"
             autocomplite="on"
