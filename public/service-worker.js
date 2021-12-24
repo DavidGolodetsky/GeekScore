@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/precache-manifest.a09cf26a38d238c7dc5f0d0e3540d74f.js"
+  "/precache-manifest.28e5a83aad137e8a3f65091accd991bb.js"
 );
 
 workbox.core.setCacheNameDetails({prefix: "geek-score"});
