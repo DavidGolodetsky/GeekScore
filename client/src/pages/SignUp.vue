@@ -1,10 +1,10 @@
 <template>
-  <the-login-form :form-props="formProps" />
+  <TheLoginForm :form-props="formProps" />
 </template>
 
 <script lang="ts">
-import { defineComponent } from '@vue/composition-api';
 import { AuthForm } from '@/types';
+import { defineComponent } from '@vue/composition-api';
 
 export default defineComponent({
   name: 'SignUpPage',

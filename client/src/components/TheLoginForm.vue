@@ -1,12 +1,7 @@
 <template>
   <section class="the-login-form mt-12">
     <v-card raised outlined dark class="auth-card">
-      <v-form
-        ref="form"
-        v-model="valid"
-        lazy-validation
-        @submit.prevent="onSubmit"
-      >
+      <v-form v-model="valid" lazy-validation @submit.prevent="onSubmit">
         <div class="d-flex align-items-center">
           <v-icon class="mr-3">{{ `mdi-${formProps.icon}` }}</v-icon>
           <h3 class="app-headline">{{ formProps.title }}</h3>
@@ -25,7 +20,7 @@
             label="Email"
             type="email"
             prepend-icon="mdi-email-outline"
-            :rules="EmailRules"
+            :rules="emailRules"
           />
           <v-text-field
             v-if="formProps.signUp"
@@ -90,7 +85,8 @@ import {
   defineComponent,
   ref,
   onMounted,
-  computed
+  computed,
+  toRefs
 } from '@vue/composition-api';
 import { fbStart } from '@/auth';
 import {
@@ -110,6 +106,8 @@ export default defineComponent({
     }
   },
   setup(props, { root: { $store } }) {
+    const { formProps } = toRefs(props);
+
     const form = ref({
       email: '',
       password: '',
@@ -118,18 +116,17 @@ export default defineComponent({
     });
     const showPassword = ref(false);
     const valid = ref(false);
-    const EmailRules = [requiredField, emailField, tooLongField];
-    const passwordRules = [...standardField, requiredField, shortPassword];
+    const emailRules = ref([requiredField, emailField, tooLongField]);
+    const passwordRules = ref([...standardField, requiredField, shortPassword]);
 
-    const comparePasswords = computed(() => {
-      return (
+    const comparePasswords = computed(
+      () =>
         form.value.password === form.value.confirmPassword ||
         'Passwords do not match'
-      );
-    });
+    );
 
     const onSubmit = () => {
-      if (props.formProps.signUp) {
+      if (formProps.value.signUp) {
         $store.dispatch('user/signUpUser', form.value);
       } else {
         $store.dispatch('user/signInUser', form.value);
@@ -144,7 +141,7 @@ export default defineComponent({
       showPassword,
       valid,
       onSubmit,
-      EmailRules,
+      emailRules,
       passwordRules,
       comparePasswords,
       form

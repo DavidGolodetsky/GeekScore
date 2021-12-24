@@ -14,7 +14,7 @@
     <v-tabs-items v-model="currentTab" class="pt-4 px-4">
       <v-tab-item value="tab-0">
         <v-select
-          v-model="selectedTeam"
+          v-model="selectedTeamId"
           prepend-icon="mdi-account-multiple-plus-outline"
           autofocus
           :items="filteredTeams"
@@ -64,13 +64,13 @@
   </BaseDialog>
 </template>
 
-<script>
+<script lang="ts">
+import { defineComponent, computed, toRefs, ref } from '@vue/composition-api';
 import { getNames, generateNumberOfPlayers } from '@/use/common';
 import { requiredField, standardField, uniqueField } from '@/use/validations';
-import { mapActions, mapGetters, mapState } from 'vuex';
-import { computed, toRefs } from '@vue/composition-api';
+import { Team } from '@/types';
 
-export default {
+export default defineComponent({
   name: 'TeamsAddDialog',
   props: {
     gameId: {
@@ -78,111 +78,120 @@ export default {
       required: true
     }
   },
-  data() {
-    return {
-      name: '',
-      coop: false,
-      players: [],
-      nameRules: [...standardField, requiredField],
-      playerRules: [...standardField, requiredField],
-      selectRules: [requiredField],
-      selectedTeam: null,
-      currentTab: null,
-      tabs: ['Select team', 'Create New'],
-      numberOfPlayers: generateNumberOfPlayers(8)
-    };
-  },
   setup(props, { root: { $store } }) {
     const { gameId } = toRefs(props);
 
-    const uniqueRule = (list, isOnly) => [
-      field => uniqueField(field, getNames(list), isOnly)
+    const name = ref('');
+    const coop = ref(false);
+    const players: any = ref([]);
+    const nameRules = ref([...standardField, requiredField]);
+    const playerRules = ref([...standardField, requiredField]);
+    const selectRules = ref([requiredField]);
+    const selectedTeamId = ref(null);
+    const currentTab = ref(null);
+    const tabs = ref(['Select team', 'Create New']);
+    const numberOfPlayers = ref(generateNumberOfPlayers(8));
+
+    const uniqueRule = (list: any, isOnly: boolean) => [
+      (field: any) => uniqueField(field, getNames(list), isOnly)
     ];
 
     const getGameTeams = () =>
       $store.getters['teams/getGameTeams'](gameId.value);
 
+    const getGame = (gameId: string) => $store.getters['games/getGame'](gameId);
+    const getTeam = (teamId: string) => $store.getters['teams/getTeam'](teamId);
+
     const gameTeams = computed(() => (gameId.value ? getGameTeams() : null));
+
+    const games = computed(() => $store.state.games.games);
+    const user = computed(() => $store.state.user.user);
+    const teams = computed(() => $store.state.teams.teams);
+
+    const game = computed(() => games.value ?? getGame(gameId.value));
+
+    const isSelectTeamTab = computed(() => currentTab.value === 'tab-0');
+
+    const isCoop = computed(() => {
+      if (!game.value) return null;
+      return game.value.coop || coop.value;
+    });
+
+    const filteredTeams = computed(() => {
+      let teamNames = gameTeams.value?.map((team: Team) => team.name);
+      return teams.value
+        ? teams.value.filter((t: Team) => !teamNames.includes(t.name))
+        : [];
+    });
+
+    const setPlayers = ($ev: any) => {
+      if ($ev === 1) coop.value = true;
+      let myName = user.value?.username ? user.value.username : 'Me';
+      players.value = [{ name: myName, isMe: true }];
+      for (let i = 1; i < $ev; i++) {
+        let player = { name: '' };
+        players.value.push(player);
+      }
+    };
+
+    const updatePlayers = () => {
+      // @ts-ignore
+      playerRules.value = [...playerRules.value, ...uniqueRule(players.value)];
+    };
+
+    const resetForm = () => {
+      name.value = '';
+      numberOfPlayers.value = generateNumberOfPlayers(8);
+      selectedTeamId.value = null;
+    };
+
+    const createNewTeam = () => {
+      const team = {
+        games: [gameId.value],
+        gameName: game.value.name,
+        name: name.value,
+        coop: isCoop.value,
+        players: players.value
+      };
+      $store.dispatch('teams/createTeam', team);
+    };
+
+    const addExistingTeam = () => {
+      const team = getTeam(selectedTeamId.value!);
+      const payload = {
+        _id: selectedTeamId.value,
+        games: [...team.games, gameId.value]
+      };
+      $store.dispatch('teams/updateTeam', payload);
+    };
+
+    const submitTeam = () => {
+      if (name.value || selectedTeamId.value) {
+        selectedTeamId.value ? addExistingTeam() : createNewTeam();
+      }
+      resetForm();
+    };
 
     return {
       gameTeams,
-      uniqueRule
+      uniqueRule,
+      isSelectTeamTab,
+      submitTeam,
+      updatePlayers,
+      setPlayers,
+      filteredTeams,
+      nameRules,
+      playerRules,
+      selectRules,
+      tabs,
+      name,
+      coop,
+      players,
+      selectedTeamId,
+      currentTab,
+      resetForm,
+      numberOfPlayers
     };
-  },
-  computed: {
-    ...mapState('user', ['user']),
-    ...mapState('games', ['games']),
-    ...mapState('teams', ['teams']),
-    ...mapGetters('games', ['getGame']),
-    ...mapGetters('teams', ['getTeam']),
-    game() {
-      return this.games ?? this.getGame(this.gameId);
-    },
-    isCoop() {
-      return this.game ? this.game.coop || this.coop : null;
-    },
-    isSelectTeamTab() {
-      return this.currentTab === 'tab-0';
-    },
-    filteredTeams() {
-      let teamNames =
-        this.gameTeams &&
-        this.gameTeams.map(team => {
-          return team.name;
-        });
-
-      return this.teams
-        ? this.teams.filter(item => !teamNames.includes(item.name))
-        : [];
-    }
-  },
-  methods: {
-    ...mapActions('teams', ['createTeam', 'updateTeam']),
-    setPlayers($ev) {
-      let myName = this.user?.username ? this.user.username : 'Me';
-      this.players = [{ name: myName, isMe: true }];
-      for (let i = 1; i < $ev; i++) {
-        let player = { name: '' };
-        this.players.push(player);
-      }
-      if ($ev === 1) this.coop = true;
-    },
-    updatePlayers() {
-      this.playerRules = [
-        ...this.playerRules,
-        ...this.uniqueRule(this.players)
-      ];
-    },
-    submitTeam() {
-      if (this.name || this.selectedTeam) {
-        this.selectedTeam ? this.addExistingTeam() : this.createNewTeam();
-      }
-      this.resetForm();
-    },
-    resetForm() {
-      this.team = null;
-      this.name = '';
-      this.numberOfPlayers = generateNumberOfPlayers(8);
-      this.selectedTeam = null;
-    },
-    createNewTeam() {
-      const team = {
-        games: [this.gameId],
-        gameName: this.game.name,
-        name: this.name,
-        coop: this.isCoop,
-        players: this.players
-      };
-      this.createTeam(team);
-    },
-    addExistingTeam() {
-      const team = this.getTeam(this.selectedTeam);
-      const payload = {
-        _id: this.selectedTeam,
-        games: [...team.games, this.gameId]
-      };
-      this.updateTeam(payload);
-    }
   }
-};
+});
 </script>
