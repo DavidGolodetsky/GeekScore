@@ -164,7 +164,6 @@ export default defineComponent({
       };
       $store.dispatch('teams/updateTeam', payload);
     };
-
     const submitTeam = () => {
       if (name.value || selectedTeamId.value) {
         selectedTeamId.value ? addExistingTeam() : createNewTeam();
