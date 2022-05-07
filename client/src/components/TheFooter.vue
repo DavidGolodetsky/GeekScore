@@ -1,48 +1,38 @@
 <template>
-  <v-footer
-    class="the-footer"
-    padless
-  >
-    <v-layout
-      primary
-      white--text
-    >
+  <v-footer class="the-footer" padless>
+    <v-layout primary white--text>
       <v-container>
-        <span
-          class="mr-6"
-          data-test-copy
-        >&copy; {{ copyright }}</span>
-        <a
-          class="link"
-          href="https://github.com/DavidGolodetsky/GeekScore-2"
-          rel="noopener noreferrer"
-          target="_blank"
-        >
-          <span class="mr-2">Repo</span>
-          <v-icon
-            size="18"
-            dark
-          >mdi-code-tags</v-icon>
-        </a>
+        <span class="mr-6" data-test-copy>&copy; {{ copyright }}</span>
+        <div>
+          By
+          <a
+            class="link"
+            href="https://twitter.com/dvdgld"
+            rel="noopener noreferrer"
+            target="_blank"
+          >
+            <span class="mr-2">@dvdgld</span>
+          </a>
+        </div>
       </v-container>
     </v-layout>
   </v-footer>
 </template>
 
 <script lang="ts">
-import { defineComponent } from '@vue/composition-api'
+import { defineComponent } from '@vue/composition-api';
 
 export default defineComponent({
   name: 'TheFooter',
   setup() {
-    const currentYear = new Date().getFullYear()
-    const copyright = `2020 - ${currentYear}`
+    const currentYear = new Date().getFullYear();
+    const copyright = `2020 - ${currentYear}`;
 
     return {
       copyright
-    }
+    };
   }
-})
+});
 </script>
 
 <style scoped lang="scss">
